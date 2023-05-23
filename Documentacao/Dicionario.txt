@@ -1,0 +1,45 @@
+DICIONÁRIO (Linguagem Ubíqua)
+
+Atores
+- Cliente:
+- Garçon:
+- Caixa:
+- Chef de Cozinha:
+- Cozinheiro:
+
+Objetos de Trabalho
+* Físicos:
+- Mesa: Uma mesa é um móvel com uma superfície plana e horizontal, geralmente apoiada em pernas ou suportes, projetado para permitir que as pessoas coloquem objetos sobre ela. É um item comumente utilizado em casas, escritórios, escolas, restaurantes e vários outros ambientes.
+
+- Cardápio:
+- Pedido:
+- Livro de Estoque:
+- Calculadora:
+- Livro Caixa:
+- Pedido Faturado:
+- Lista de Pratos:
+- Livro de Receitas:
+- Estoque de Ingredientes:
+- Fogão:
+- Prato Feito:
+- Bebida:
+- Pedido Pronto e Faturado:
+- Pagamento:
+- Nota Fiscal e Troco:
+
+* Interações:
+- Pedido Falado:
+- Alarme de Pronto:
+- Campainha de Garçon:
+
+
+
+
+
+
+
+
+
+
+
+
