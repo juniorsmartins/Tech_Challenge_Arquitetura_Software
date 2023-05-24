@@ -13,9 +13,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.envers.Audited;
 
 import java.io.Serializable;
+import java.util.UUID;
 
+@Audited
 @Entity
 @Table(name = "clientes")
 @Builder
@@ -35,9 +38,15 @@ public final class Cliente implements Serializable {
   private Long id;
 
   @Column(name = "codigo", nullable = false)
-  private String codigo;
+  private UUID codigo;
 
   @Column(name = "nome", length = 100, nullable = false)
   private String nome;
+
+  @Column(name = "cpf", nullable = false)
+  private String cpf;
+
+  @Column(name = "email", length = 100, nullable = false)
+  private String email;
 }
 
