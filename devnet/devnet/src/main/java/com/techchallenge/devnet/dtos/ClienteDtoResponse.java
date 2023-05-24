@@ -1,4 +1,17 @@
 package com.techchallenge.devnet.dtos;
 
-public class ClienteDtoResponse {
-}
+import jakarta.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.br.CPF;
+
+public record ClienteDtoResponse(
+
+  String codigo,
+
+  String nome,
+
+  String cpf,
+
+  String email
+) { }
+
