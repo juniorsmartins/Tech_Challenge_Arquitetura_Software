@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.model;
+package com.techchallenge.devnet.modelos;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,12 +13,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.hibernate.envers.Audited;
 
 import java.io.Serializable;
 import java.util.UUID;
 
-@Audited
 @Entity
 @Table(name = "clientes")
 @Builder
@@ -28,6 +29,9 @@ import java.util.UUID;
 @Setter
 @ToString
 @EqualsAndHashCode(of = {"id"})
+@Audited
+@SQLDelete(sql = "UPDATE clientes SET deletado = true WHERE id = ?")
+@Where(clause = "deletado = false")
 public final class Cliente implements Serializable {
 
   private static final long serialVersionUID = 1L;
@@ -48,5 +52,8 @@ public final class Cliente implements Serializable {
 
   @Column(name = "email", length = 100, nullable = false)
   private String email;
+
+  @Column(name = "deleted", columnDefinition = "boolean default false", nullable = false)
+  private Boolean deletado;
 }
 
