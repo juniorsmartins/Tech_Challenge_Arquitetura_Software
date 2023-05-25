@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.controladores;
+package com.techchallenge.devnet.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

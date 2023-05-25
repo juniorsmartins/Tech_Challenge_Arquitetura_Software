@@ -1,9 +1,8 @@
 package com.techchallenge.devnet.dtos;
 
-import jakarta.validation.constraints.NotBlank;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.br.CPF;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public record ClienteDtoResponse(
 
   String codigo,
