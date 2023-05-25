@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.modelos;
+package com.techchallenge.devnet.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
