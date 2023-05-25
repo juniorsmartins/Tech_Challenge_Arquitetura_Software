@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.controladores;
+package com.techchallenge.devnet.controllers;
 
 import com.techchallenge.devnet.dtos.ClienteDtoRequest;
 import com.techchallenge.devnet.dtos.ClienteDtoResponse;

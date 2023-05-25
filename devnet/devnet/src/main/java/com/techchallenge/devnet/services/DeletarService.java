@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.servicos;
+package com.techchallenge.devnet.services;
 
 import org.springframework.stereotype.Service;
 

@@ -1,8 +1,8 @@
-package com.techchallenge.devnet.controladores;
+package com.techchallenge.devnet.controllers;
 
 import com.techchallenge.devnet.dtos.ClienteDtoRequest;
 import com.techchallenge.devnet.dtos.ClienteDtoResponse;
-import com.techchallenge.devnet.filtros.ClienteFiltro;
+import com.techchallenge.devnet.filters.ClienteFiltro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
