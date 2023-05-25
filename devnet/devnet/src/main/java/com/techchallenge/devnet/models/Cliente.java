@@ -41,19 +41,19 @@ public final class Cliente implements Serializable {
   @Column(name = "id")
   private Long id;
 
-  @Column(name = "codigo", nullable = false)
+  @Column(name = "codigo")
   private UUID codigo;
 
-  @Column(name = "nome", length = 100, nullable = false)
+  @Column(name = "nome", length = 100)
   private String nome;
 
-  @Column(name = "cpf", nullable = false)
+  @Column(name = "cpf")
   private String cpf;
 
-  @Column(name = "email", length = 100, nullable = false)
+  @Column(name = "email", length = 100)
   private String email;
 
-  @Column(name = "deleted", columnDefinition = "boolean default false", nullable = false)
+  @Column(name = "deleted")
   private Boolean deletado;
 }
 
