@@ -30,9 +30,7 @@ import java.util.UUID;
 @ToString
 @EqualsAndHashCode(of = {"id"})
 @Audited
-@SQLDelete(sql = "UPDATE clientes SET deletado = true WHERE id = ?")
-@Where(clause = "deletado = false")
-public final class Cliente implements Serializable {
+public final class Cliente extends AuditoriaBaseDataJpa implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
