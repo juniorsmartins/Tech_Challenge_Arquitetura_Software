@@ -2,6 +2,8 @@ package com.techchallenge.devnet.dtos;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.time.Instant;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record ClienteDtoResponse(
 
@@ -11,6 +13,10 @@ public record ClienteDtoResponse(
 
   String cpf,
 
-  String email
+  String email,
+
+  Instant dataHoraCadastro,
+
+  Instant dataHoraAtualizacao
 ) { }
 
