@@ -12,36 +12,26 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.Instant;
+import java.time.OffsetDateTime;
 
 @RestControllerAdvice
 public final class TratadorDeExceptions extends ResponseEntityExceptionHandler {
 
-  @ExceptionHandler(value = HttpMediaTypeNotSupportedException.class)
-  public ResponseEntity<RetornoDeErro> tratarHttpMediaTypeNotSupportedException() {
-
-    var httpStatus = HttpStatus.UNSUPPORTED_MEDIA_TYPE;
-    var tipoDeErroEnum = TipoDeErroEnum.MIDIA_NAO_SUPORTADA; // suporta apenas requisição em Json
-    var detalhe = MensagemPadrao.MIDIA_NAO_SUPORTADA;
-
-    var retornoDeErro = criarMensagemParaRetornarErro(httpStatus, tipoDeErroEnum, detalhe).build();
-
-    return ResponseEntity
-      .status(httpStatus)
-      .body(retornoDeErro);
-  }
-  
+  // Tratamento de exceção personalizada
   @ExceptionHandler(value = RegraDeNegocioVioladaException.class)
-  public ResponseEntity<RetornoDeErro> regraDeNegocioViolada(RegraDeNegocioVioladaException regraViolada, WebRequest webRequest) {
-
+  public ResponseEntity<Object> tratarRegraDeNegocioViolada(RegraDeNegocioVioladaException regraViolada,
+                                                                   WebRequest webRequest) {
     var httpStatus = HttpStatus.CONFLICT;
     var tipoDeErroEnum = TipoDeErroEnum.REGRA_NEGOCIO_VIOLADA;
     var detalhe = regraViolada.getMessage();
 
     var retornoDeErro = this.criarMensagemParaRetornarErro(httpStatus, tipoDeErroEnum, detalhe).build();
 
-    return null;
+
+    return super.handleExceptionInternal(regraViolada, retornoDeErro, new HttpHeaders(), httpStatus, webRequest);
   }
 
+  // Método para construção da mensagem de retorno
   private RetornoDeErro.RetornoDeErroBuilder criarMensagemParaRetornarErro(HttpStatusCode httpStatusCode,
                                                                TipoDeErroEnum tipoDeErroEnum, String detalhe) {
     return RetornoDeErro.builder()
@@ -53,25 +43,28 @@ public final class TratadorDeExceptions extends ResponseEntityExceptionHandler {
       .dataHoraErro(Instant.now());
   }
 
+  // Sobrescrição de um método comum de ResponseEntityExceptionHandler. Esse método é chamado por vários outros métodos
+  // de tratamento de exceção. Então, ao personalizá-lo, nós interferimos nas respostas de retorno de erro de vários
+  // métodos do sistema (ResponseEntityExceptionHandler).
   @Override
   protected  ResponseEntity<Object> handleExceptionInternal(Exception exception, Object body, HttpHeaders headers,
                                                             HttpStatusCode status, WebRequest webRequest) {
+    if (body == null) {
+      body = RetornoDeErro.builder()
+        .status(status.value())
+        .detalhe(HttpStatus.valueOf(status.value()).getReasonPhrase()) // Devolve uma descrição sobre o status retornado na resposta
+        .dataHoraErro(Instant.now())
+        .build();
 
-//    if (body == null) {
-//      body = RetornoDeErro.builder()
-//        .status(status.value())
-//        .
-//        .tipoDeErro(HttpStatus.valueOf(status.value()).getReasonPhrase()) // Devolve uma descrição sobre o status retornado na resposta
-//        .dataHora(OffsetDateTime.now())
-//        .build();
-//
-//    } else if (body instanceof String) {
-//      body = RetornoDeErro.builder()
-//        .codigoHttp(status.value())
-//        .tipoDeErro(body.toString())
-//        .dataHora(OffsetDateTime.now())
-//        .build();
-//    }
+      return super.handleExceptionInternal(exception, body, headers, status, webRequest);
+    } else if (body instanceof String) {
+
+      body = RetornoDeErro.builder()
+        .status(status.value())
+        .detalhe(body.toString())
+        .dataHoraErro(Instant.now())
+        .build();
+    }
 
     return super.handleExceptionInternal(exception, body, headers, status, webRequest);
   }
