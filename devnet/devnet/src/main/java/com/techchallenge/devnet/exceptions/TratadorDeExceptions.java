@@ -5,22 +5,36 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.Instant;
-import java.time.OffsetDateTime;
 
 @RestControllerAdvice
 public final class TratadorDeExceptions extends ResponseEntityExceptionHandler {
 
+  @ExceptionHandler(value = HttpMediaTypeNotSupportedException.class)
+  public ResponseEntity<RetornoDeErro> tratarHttpMediaTypeNotSupportedException() {
+
+    var httpStatus = HttpStatus.UNSUPPORTED_MEDIA_TYPE;
+    var tipoDeErroEnum = TipoDeErroEnum.MIDIA_NAO_SUPORTADA; // suporta apenas requisição em Json
+    var detalhe = MensagemPadrao.MIDIA_NAO_SUPORTADA;
+
+    var retornoDeErro = criarMensagemParaRetornarErro(httpStatus, tipoDeErroEnum, detalhe).build();
+
+    return ResponseEntity
+      .status(httpStatus)
+      .body(retornoDeErro);
+  }
+  
   @ExceptionHandler(value = RegraDeNegocioVioladaException.class)
   public ResponseEntity<RetornoDeErro> regraDeNegocioViolada(RegraDeNegocioVioladaException regraViolada, WebRequest webRequest) {
 
     var httpStatus = HttpStatus.CONFLICT;
-    var tipoDeErroEnum = TipoDeErroEnum.REGRA_VIOLADA;
+    var tipoDeErroEnum = TipoDeErroEnum.REGRA_NEGOCIO_VIOLADA;
     var detalhe = regraViolada.getMessage();
 
     var retornoDeErro = this.criarMensagemParaRetornarErro(httpStatus, tipoDeErroEnum, detalhe).build();
@@ -29,9 +43,7 @@ public final class TratadorDeExceptions extends ResponseEntityExceptionHandler {
   }
 
   private RetornoDeErro.RetornoDeErroBuilder criarMensagemParaRetornarErro(HttpStatusCode httpStatusCode,
-                                                                           TipoDeErroEnum tipoDeErroEnum,
-                                                                           String detalhe) {
-
+                                                               TipoDeErroEnum tipoDeErroEnum, String detalhe) {
     return RetornoDeErro.builder()
       .tipo(tipoDeErroEnum.getCaminho())
       .titulo(tipoDeErroEnum.getTitulo())
@@ -39,7 +51,6 @@ public final class TratadorDeExceptions extends ResponseEntityExceptionHandler {
       .detalhe(detalhe)
 //      .instancia()
       .dataHoraErro(Instant.now());
-
   }
 
   @Override

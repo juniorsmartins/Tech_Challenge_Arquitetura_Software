@@ -5,7 +5,8 @@ import lombok.Getter;
 @Getter
 public enum TipoDeErroEnum {
 
-  REGRA_VIOLADA("Regra de Negócio Violada", "/regra-de-negocio-violada");
+  REGRA_NEGOCIO_VIOLADA("Regra de Negócio Violada.", "/regra-de-negocio-violada"),
+  MIDIA_NAO_SUPORTADA("Tipo de mídia não suportada.", "/midia-nao-suportada");
 
   private String titulo;
 
