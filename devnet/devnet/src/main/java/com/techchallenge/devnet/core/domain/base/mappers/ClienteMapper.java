@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.core.application.mappers;
+package com.techchallenge.devnet.core.domain.base.mappers;
 
 import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoResponse;

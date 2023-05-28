@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.core.domain.entities;
 
-import com.techchallenge.devnet.core.domain.base.AuditoriaBaseDataJpa;
+import com.techchallenge.devnet.core.domain.base.auditoria.AuditoriaBaseDataJpa;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.core.domain.base;
+package com.techchallenge.devnet.core.domain.base.auditoria;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;

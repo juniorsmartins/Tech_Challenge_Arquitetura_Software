@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.core.application.use_case.assertions_concern;
+package com.techchallenge.devnet.core.domain.base.assertions_concern;
 
 import com.techchallenge.devnet.core.domain.entities.Cliente;
 
