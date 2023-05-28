@@ -52,7 +52,25 @@ Portanto, nesse contexto, abaixo segue a narrativa do negócio. Ela foi escrita 
 
 <img src=Documentacao/DevNet-EscopoAtualAndDominioPuro_2023-05-28.png>
 
+> Domínio:
 
+<img src=Documentacao/DevNet-DiagramaDeDomínios.png>
+
+
+### Documentação de Desenvolvimento do Projeto
+
+> Ferramentas:
+
+1. Intellij Idea (programação);
+2. Maven (gerenciamento de dependências);
+3. Git e GitHub (versionamento);
+4. Postman (testes manuais);
+5. StarUML (Diagramas);
+6. Egon.io (Linguagem Pictográfica);
+7. Miro (Event Storming);
+8. ChatGPT (pesquisa);
+9. YouTube (pesquisa);
+10. Google (pesquisa);
 
 
 
