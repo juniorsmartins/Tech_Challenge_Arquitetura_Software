@@ -9,9 +9,9 @@ Descrição: ...
 
 ```
 1. Documentação de Arquitetura do Projeto
-    1. Domínio (Subdomínio Principal, Subdomínio Genérico e Subdomínio de Suporte);
-    2. Linguagem Ubíqua;
-    3. Linguagem Pictográfica (Domain Storytelling);
+    1. Linguagem Pictográfica (Domain Storytelling);
+    2. Domínio (Subdomínio Principal, Subdomínio Genérico e Subdomínio de Suporte);
+    3. Linguagem Ubíqua;
     4. Event Storming;
     5. Bounded Context e Context Maps;
 ```
@@ -32,5 +32,12 @@ Descrição: ...
 
 ### Documentação de Arquitetura do Projeto
 
-> Domínio
+```
+> Linguagem Pictográfica
+```
+![DevNet]([https://github.com/images/logo.png](https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/DevNet-EscopoAtualAndDominioPuro_2023-05-28.png))
+
+
+
+
 
