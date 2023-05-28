@@ -15,11 +15,20 @@ Descrição: ...
     4. Event Storming;
     5. Bounded Context e Context Maps;
 ```
+
+```
 2. Documentação de Desenvolvimento do Projeto;
     1. Diagramas;
     2. Subitem 2
+```
+
+```
 3. Documentação de Infraestrutura do Projeto;
+```
+
+```
 4. Documentação de Utilização do Projeto;
+```
 
 ### Documentação de Arquitetura do Projeto
 
