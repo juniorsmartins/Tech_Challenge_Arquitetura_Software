@@ -7,7 +7,7 @@ Descrição: ...
 
 ## ÍNDICE
 
-1. Documentação de Arquitetura do Projeto;
+1. Documentação de Arquitetura do Projeto
   1. Domínio (Subdomínio Principal, Subdomínio Genérico e Subdomínio de Suporte);
   2. Linguagem Ubíqua;
   3. Linguagem Pictográfica (Domain Storytelling);
