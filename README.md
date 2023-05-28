@@ -21,7 +21,8 @@ Descrição: aplicação desenvolvida para compor nota no processo avaliativo da
 
 2. Documentação de Desenvolvimento do Projeto;
     1. Diagramas;
-    2. Subitem 2
+    2. Ferramentas;
+    3.
 
 3. Documentação de Infraestrutura do Projeto;
 
@@ -50,11 +51,11 @@ Por outro lado, o "Domínio Digitalizado" é a representação das informações
 
 Portanto, nesse contexto, abaixo segue a narrativa do negócio. Ela foi escrita em Linguagem Pictográfica, no "Escopo Atual" e no "Domínio Puro". Trata-se da forma presente e analógica de como funciona a lanchonete objeto do software. 
 
-<img src=Documentacao/DevNet-EscopoAtualAndDominioPuro_2023-05-28.png>
+<img width=400 src=Documentacao/DevNet-EscopoAtualAndDominioPuro_2023-05-28.png>
 
 > Domínio:
 
-<img src=Documentacao/DevNet-DiagramaDeDomínios.png>
+<img width=400 src=Documentacao/DevNet-DiagramaDeDomínios.png>
 
 
 ### Documentação de Desenvolvimento do Projeto
