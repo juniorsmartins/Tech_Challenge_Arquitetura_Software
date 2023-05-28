@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driven.infra.repositories;
 
-import com.techchallenge.devnet.core.domain.ports_repositories.PoliticaClienteRepository;
+import com.techchallenge.devnet.core.application.ports.PoliticaClienteRepository;
 import com.techchallenge.devnet.core.domain.entities.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

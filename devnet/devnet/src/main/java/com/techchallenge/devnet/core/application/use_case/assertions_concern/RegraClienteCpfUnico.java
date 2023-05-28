@@ -1,8 +1,8 @@
 package com.techchallenge.devnet.core.application.use_case.assertions_concern;
 
-import com.techchallenge.devnet.core.exceptions.http_409.RegraClienteCpfUnicoException;
+import com.techchallenge.devnet.core.application.exceptions.http_409.RegraClienteCpfUnicoException;
 import com.techchallenge.devnet.core.domain.entities.Cliente;
-import com.techchallenge.devnet.core.domain.ports_repositories.PoliticaClienteRepository;
+import com.techchallenge.devnet.core.application.ports.PoliticaClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

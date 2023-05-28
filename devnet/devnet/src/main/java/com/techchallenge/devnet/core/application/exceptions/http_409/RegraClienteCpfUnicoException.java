@@ -1,6 +1,6 @@
-package com.techchallenge.devnet.core.exceptions.http_409;
+package com.techchallenge.devnet.core.application.exceptions.http_409;
 
-import com.techchallenge.devnet.core.exceptions.MensagemPadrao;
+import com.techchallenge.devnet.core.application.exceptions.MensagemPadrao;
 
 public final class RegraClienteCpfUnicoException extends RegraDeNegocioVioladaException {
 

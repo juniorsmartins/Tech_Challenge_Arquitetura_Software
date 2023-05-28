@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.core.exceptions;
+package com.techchallenge.devnet.core.application.exceptions;
 
 import lombok.Getter;
 

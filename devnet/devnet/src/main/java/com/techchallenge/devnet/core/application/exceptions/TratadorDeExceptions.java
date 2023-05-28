@@ -1,6 +1,6 @@
-package com.techchallenge.devnet.core.exceptions;
+package com.techchallenge.devnet.core.application.exceptions;
 
-import com.techchallenge.devnet.core.exceptions.http_409.RegraDeNegocioVioladaException;
+import com.techchallenge.devnet.core.application.exceptions.http_409.RegraDeNegocioVioladaException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;

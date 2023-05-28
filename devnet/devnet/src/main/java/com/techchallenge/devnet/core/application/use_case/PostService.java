@@ -2,9 +2,9 @@ package com.techchallenge.devnet.core.application.use_case;
 
 import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoResponse;
-import com.techchallenge.devnet.adapter.driver.mappers.ClienteMapper;
+import com.techchallenge.devnet.core.application.mappers.ClienteMapper;
 import com.techchallenge.devnet.core.domain.entities.Cliente;
-import com.techchallenge.devnet.core.domain.ports_repositories.PoliticaClienteRepository;
+import com.techchallenge.devnet.core.application.ports.PoliticaClienteRepository;
 import com.techchallenge.devnet.core.application.use_case.assertions_concern.RegrasNegocioCliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

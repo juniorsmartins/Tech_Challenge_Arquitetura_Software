@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.core.domain.ports_repositories;
+package com.techchallenge.devnet.core.application.ports;
 
 import com.techchallenge.devnet.core.domain.value_objects.ClienteFiltro;
 import com.techchallenge.devnet.core.domain.entities.Cliente;
