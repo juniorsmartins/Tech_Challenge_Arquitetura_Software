@@ -1,11 +1,15 @@
 # Tech_Challenge
 
+```
 Nome: Tech-Challenge-DevNet;
+
 Data de Início: 05/2023;
 Previsão de Término: 06/2023;
-Descrição: ...
 
-## ÍNDICE
+Descrição: aplicação desenvolvida para compor nota no processo avaliativo da pós-graduação em Arquitetura de Software na Fiap/Alura. A qual visa construir simulacro de app para uma Lanchonete, nomeada DevNet. 
+```
+
+## Índice
 
 ```
 1. Documentação de Arquitetura do Projeto
