@@ -4,6 +4,7 @@ import com.techchallenge.devnet.adapter.driven.infra.repositories.jpa.ClienteRep
 import com.techchallenge.devnet.core.application.ports.IClienteRepository;
 import com.techchallenge.devnet.core.domain.entities.Cliente;
 import com.techchallenge.devnet.core.domain.value_objects.ClienteFiltro;
+import com.techchallenge.devnet.core.domain.value_objects.ClienteSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,19 +19,19 @@ public class ClienteGetRepositoryImpl implements IClienteRepository.GetRepositor
   private ClienteRepositoryJpa repositoryJpa;
 
   @Override
-  public Page<Cliente> pesquisar(ClienteFiltro filtro, Pageable paginacao) {
+  public Page<Cliente> pesquisar(final ClienteFiltro filtro, final Pageable paginacao) {
 
-    return null;
+    return this.repositoryJpa.findAll(ClienteSpecification.consultaDinamica(filtro), paginacao);
   }
 
   @Override
-  public Optional<Cliente> consultarPorId(Long id) {
+  public Optional<Cliente> consultarPorId(final Long id) {
 
     return this.repositoryJpa.findById(id);
   }
 
   @Override
-  public Optional<Cliente> consultarPorCpf(String cpf) {
+  public Optional<Cliente> consultarPorCpf(final String cpf) {
 
     return this.repositoryJpa.findByCpf(cpf);
   }

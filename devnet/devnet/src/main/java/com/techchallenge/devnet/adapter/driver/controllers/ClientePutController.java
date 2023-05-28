@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -21,14 +20,14 @@ import java.util.UUID;
 public final class ClientePutController implements IClienteController.PutController {
 
   @Autowired
-  private IClienteService.AtualizarService atualizarService;
+  private IClienteService.AtualizarService service;
 
   @Override
   public ResponseEntity<ClienteDtoResponse> atualizar(@PathVariable(name = "id") final Long clienteId,
                                                       @RequestBody @Valid final ClienteDtoRequest dtoRequest) {
 
     var response = Optional.of(dtoRequest)
-      .map(dto -> this.atualizarService.atualizar(clienteId, dto))
+      .map(dto -> this.service.atualizar(clienteId, dto))
       .orElseThrow();
 
     return ResponseEntity

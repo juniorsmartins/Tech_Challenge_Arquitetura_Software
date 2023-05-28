@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.core.domain.entities;
 
-import com.techchallenge.devnet.core.domain.base.auditoria.AuditoriaBaseDataJpa;
+import com.techchallenge.devnet.core.domain.base.auditoria.AuditoriaDataJpa;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,7 +28,7 @@ import java.io.Serializable;
 @ToString
 @EqualsAndHashCode(of = {"id"})
 @Audited
-public final class Cliente extends AuditoriaBaseDataJpa implements PoliticaEntity, Serializable {
+public final class Cliente extends AuditoriaDataJpa implements PoliticaEntity, Serializable {
 
   private static final long serialVersionUID = 1L;
 
@@ -45,8 +45,5 @@ public final class Cliente extends AuditoriaBaseDataJpa implements PoliticaEntit
 
   @Column(name = "email", length = 100)
   private String email;
-
-  @Column(name = "deleted")
-  private Boolean deletado;
 }
 

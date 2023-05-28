@@ -18,13 +18,13 @@ import org.springframework.web.util.UriComponentsBuilder;
 public final class ClientePostController implements IClienteController.PostController {
 
   @Autowired
-  private IClienteService.CadastrarService cadastrarService;
+  private IClienteService.CadastrarService service;
 
   @Override
   public ResponseEntity<ClienteDtoResponse> cadastrar(@RequestBody @Valid final ClienteDtoRequest dtoRequest,
                                                       final UriComponentsBuilder uriComponentsBuilder) {
 
-    var response = this.cadastrarService.cadastrar(dtoRequest);
+    var response = this.service.cadastrar(dtoRequest);
 
     return ResponseEntity
       .created(uriComponentsBuilder

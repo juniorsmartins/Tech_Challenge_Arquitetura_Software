@@ -34,7 +34,6 @@ public class ClientePostService implements IClienteService.CadastrarService {
       .map(entidade -> {
         this.regrasDeNegocio.forEach(regra -> regra.executarRegrasDeNegocio(entidade));
 
-        entidade.setDeletado(false);
         return entidade;
       })
       .map(entidade -> this.repository.salvar(entidade))
