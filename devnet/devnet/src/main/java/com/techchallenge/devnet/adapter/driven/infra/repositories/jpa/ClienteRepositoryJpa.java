@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.adapter.driven.infra.repositories;
+package com.techchallenge.devnet.adapter.driven.infra.repositories.jpa;
 
 import com.techchallenge.devnet.core.domain.entities.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
