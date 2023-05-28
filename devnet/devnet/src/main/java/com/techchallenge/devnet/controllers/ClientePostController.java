@@ -15,10 +15,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Slf4j
 @RestController
 @RequestMapping(path = "/v1/clientes")
-public final class ClientePostController implements PoliticaController.PostController {
+public final class ClientePostController implements PoliticaController.PostController<ClienteDtoRequest, ClienteDtoResponse> {
 
   @Autowired
-  private PoliticaService.CadastrarService cadastrarService;
+  private PoliticaService.CadastrarService<ClienteDtoRequest, ClienteDtoResponse> cadastrarService;
 
   @Override
   public ResponseEntity<ClienteDtoResponse> cadastrar(@RequestBody @Valid final ClienteDtoRequest dtoRequest,
@@ -29,7 +29,7 @@ public final class ClientePostController implements PoliticaController.PostContr
     return ResponseEntity
       .created(uriComponentsBuilder
         .path("/v1/clientes/{id}")
-        .buildAndExpand(response.codigo())
+        .buildAndExpand(response)
         .toUri())
       .body(response);
   }

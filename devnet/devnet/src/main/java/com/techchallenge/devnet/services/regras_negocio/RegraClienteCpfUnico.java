@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public final class RegraClienteCpfUnico implements RegrasNegocioCliente<Cliente> {
+public final class RegraClienteCpfUnico implements RegrasNegocioCliente {
 
   @Autowired
   private PoliticaRepository.ClienteConsultarRepository consultarRepository;
@@ -15,8 +15,8 @@ public final class RegraClienteCpfUnico implements RegrasNegocioCliente<Cliente>
   @Override
   public void executarRegrasDeNegocio(Cliente entidade) {
 
-    var existeCpfIgual = this.consultarRepository.consultarPorCodigo(entidade.getCodigo())
-      .filter(cliente -> !entidade.getId().equals(cliente.getId()))
+    var existeCpfIgual = this.consultarRepository.consultarPorCpf(entidade.getCpf())
+      .filter(cliente -> !cliente.getId().equals(entidade.getId()))
       .isPresent();
 
     if (existeCpfIgual) {

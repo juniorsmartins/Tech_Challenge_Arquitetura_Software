@@ -2,6 +2,8 @@ package com.techchallenge.devnet.controllers;
 
 import com.techchallenge.devnet.dtos.ClienteDtoRequest;
 import com.techchallenge.devnet.dtos.ClienteDtoResponse;
+import com.techchallenge.devnet.dtos.PoliticaDtoRequest;
+import com.techchallenge.devnet.dtos.PoliticaDtoResponse;
 import com.techchallenge.devnet.filters.ClienteFiltro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,9 +18,9 @@ import java.util.UUID;
 
 public interface PoliticaController {
 
-  interface PostController {
+  interface PostController<T extends PoliticaDtoRequest, R extends PoliticaDtoResponse> {
     @PostMapping
-    ResponseEntity<ClienteDtoResponse> cadastrar(ClienteDtoRequest dtoRequest, UriComponentsBuilder uri);
+    ResponseEntity<R> cadastrar(T dtoRequest, UriComponentsBuilder uri);
   }
 
   interface PutController {

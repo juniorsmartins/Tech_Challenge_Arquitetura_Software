@@ -2,6 +2,7 @@ package com.techchallenge.devnet.repositories;
 
 import com.techchallenge.devnet.filters.ClienteFiltro;
 import com.techchallenge.devnet.models.Cliente;
+import com.techchallenge.devnet.models.PoliticaEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -10,8 +11,8 @@ import java.util.UUID;
 
 public interface PoliticaRepository {
 
-  interface ClienteSalvarRepository {
-    Cliente salvar(Cliente cliente);
+  interface ClienteSalvarRepository<E extends PoliticaEntity> {
+    E salvar(E entidade);
   }
 
   interface ClientePesquisarRepository {
@@ -23,7 +24,9 @@ public interface PoliticaRepository {
   }
 
   interface ClienteConsultarRepository {
-    Optional<Cliente> consultarPorCodigo(UUID codigo);
+    Optional<Cliente> consultarPorId(Long id);
+
+    Optional<Cliente> consultarPorCpf(String cpf);
   }
 }
 

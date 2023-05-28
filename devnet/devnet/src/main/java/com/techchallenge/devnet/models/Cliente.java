@@ -30,7 +30,7 @@ import java.util.UUID;
 @ToString
 @EqualsAndHashCode(of = {"id"})
 @Audited
-public final class Cliente extends AuditoriaBaseDataJpa implements Serializable {
+public final class Cliente extends AuditoriaBaseDataJpa implements PoliticaEntity, Serializable {
 
   private static final long serialVersionUID = 1L;
 
@@ -38,9 +38,6 @@ public final class Cliente extends AuditoriaBaseDataJpa implements Serializable 
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
   private Long id;
-
-  @Column(name = "codigo")
-  private UUID codigo;
 
   @Column(name = "nome", length = 100)
   private String nome;

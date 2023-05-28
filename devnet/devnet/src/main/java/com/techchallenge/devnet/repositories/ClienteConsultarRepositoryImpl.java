@@ -15,9 +15,15 @@ public class ClienteConsultarRepositoryImpl implements PoliticaRepository.Client
   private ClienteRepositoryJpa repositoryJpa;
 
   @Override
-  public Optional<Cliente> consultarPorCodigo(UUID codigo) {
+  public Optional<Cliente> consultarPorId(Long id) {
 
-    return this.repositoryJpa.findByCodigo(codigo);
+    return this.repositoryJpa.findById(id);
+  }
+
+  @Override
+  public Optional<Cliente> consultarPorCpf(String cpf) {
+
+    return this.repositoryJpa.findByCpf(cpf);
   }
 }
 

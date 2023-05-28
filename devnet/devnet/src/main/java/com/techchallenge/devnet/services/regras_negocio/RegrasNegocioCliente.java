@@ -1,7 +1,9 @@
 package com.techchallenge.devnet.services.regras_negocio;
 
-public interface RegrasNegocioCliente<E> {
+import com.techchallenge.devnet.models.Cliente;
 
-  void executarRegrasDeNegocio(E entidade);
+public interface RegrasNegocioCliente {
+
+  void executarRegrasDeNegocio(Cliente cliente);
 }
 

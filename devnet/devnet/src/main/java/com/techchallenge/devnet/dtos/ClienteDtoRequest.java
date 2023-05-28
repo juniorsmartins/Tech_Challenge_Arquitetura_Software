@@ -18,5 +18,5 @@ public record ClienteDtoRequest(
   @NotBlank
   @Length(max = 100)
   String email
-) { }
+) implements PoliticaDtoRequest { }
 

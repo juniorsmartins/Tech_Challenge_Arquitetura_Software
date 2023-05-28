@@ -7,7 +7,7 @@ import java.time.Instant;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record ClienteDtoResponse(
 
-  String codigo,
+  Long id,
 
   String nome,
 
@@ -18,5 +18,5 @@ public record ClienteDtoResponse(
   Instant dataHoraCadastro,
 
   Instant dataHoraAtualizacao
-) { }
+) implements PoliticaDtoResponse { }
 
