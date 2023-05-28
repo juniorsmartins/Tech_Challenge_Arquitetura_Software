@@ -1,1 +1,24 @@
 # Tech_Challenge
+
+Nome: Tech-Challenge-DevNet;
+Data de Início: 05/2023;
+Previsão de Término: 06/2023;
+Descrição: ...
+
+## ÍNDICE
+
+1. Documentação de Arquitetura do Projeto;
+  a. Domínio (Subdomínio Principal, Subdomínio Genérico e Subdomínio de Suporte);
+  b. Linguagem Ubíqua;
+  c. Linguagem Pictográfica (Domain Storytelling);
+  d. Event Storming;
+  e. Bounded Context e Context Maps;
+2. Documentação de Desenvolvimento do Projeto;
+  a. Diagramas;
+3. Documentação de Infraestrutura do Projeto;
+4. Documentação de Utilização do Projeto;
+
+### Documentação de Arquitetura do Projeto
+
+> Domínio
+
