@@ -1,8 +1,8 @@
-package com.techchallenge.devnet.core.application.use_case.assertions_concern;
+package com.techchallenge.devnet.core.domain.base.assertions_concern;
 
-import com.techchallenge.devnet.core.application.exceptions.http_409.RegraClienteCpfUnicoException;
+import com.techchallenge.devnet.core.domain.base.exceptions.http_409.RegraClienteCpfUnicoException;
 import com.techchallenge.devnet.core.domain.entities.Cliente;
-import com.techchallenge.devnet.core.application.ports.PoliticaClienteRepository;
+import com.techchallenge.devnet.core.application.ports.IClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public final class RegraClienteCpfUnico implements RegrasNegocioCliente {
 
   @Autowired
-  private PoliticaClienteRepository.ClienteConsultarRepository consultarRepository;
+  private IClienteRepository.GetRepository consultarRepository;
 
   @Override
   public void executarRegrasDeNegocio(Cliente entidade) {

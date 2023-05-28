@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.core.application.exceptions;
+package com.techchallenge.devnet.core.domain.base.exceptions;
 
 public final class MensagemPadrao {
 

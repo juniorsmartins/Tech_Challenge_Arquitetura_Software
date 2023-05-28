@@ -16,16 +16,16 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.UUID;
 
-public interface PoliticaController {
+public interface IClienteController {
 
-  interface PostController<T extends PoliticaDtoRequest, R extends PoliticaDtoResponse> {
+  interface PostController {
     @PostMapping
-    ResponseEntity<R> cadastrar(T dtoRequest, UriComponentsBuilder uri);
+    ResponseEntity<ClienteDtoResponse> cadastrar(ClienteDtoRequest dtoRequest, UriComponentsBuilder uri);
   }
 
   interface PutController {
     @PutMapping(path = "/{id}")
-    ResponseEntity<ClienteDtoResponse> atualizar(UUID id, ClienteDtoRequest dtoRequest);
+    ResponseEntity<ClienteDtoResponse> atualizar(Long id, ClienteDtoRequest dtoRequest);
   }
 
   interface GetController {
@@ -35,7 +35,7 @@ public interface PoliticaController {
 
   interface DeleteController {
     @DeleteMapping(path = "/{id}")
-    ResponseEntity<?> deletarPorId(UUID id);
+    ResponseEntity<?> deletarPorId(Long id);
   }
 }
 

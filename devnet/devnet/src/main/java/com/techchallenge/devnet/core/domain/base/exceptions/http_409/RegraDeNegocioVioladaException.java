@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.core.application.exceptions.http_409;
+package com.techchallenge.devnet.core.domain.base.exceptions.http_409;
 
 public abstract class RegraDeNegocioVioladaException extends RuntimeException {
 
