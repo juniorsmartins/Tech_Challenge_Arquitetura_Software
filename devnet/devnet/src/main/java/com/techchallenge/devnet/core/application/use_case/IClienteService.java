@@ -10,14 +10,14 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.UUID;
 
-public interface PoliticaService {
+public interface IClienteService {
 
-  interface CadastrarService<T extends PoliticaDtoRequest, R extends PoliticaDtoResponse> {
-    R cadastrar(T dtoRequest);
+  interface CadastrarService {
+    ClienteDtoResponse cadastrar(ClienteDtoRequest dtoRequest);
   }
 
   interface AtualizarService {
-    ClienteDtoResponse atualizar(UUID id, ClienteDtoRequest dtoRequest);
+    ClienteDtoResponse atualizar(Long id, ClienteDtoRequest dtoRequest);
   }
 
   interface PesquisarService {
@@ -25,7 +25,7 @@ public interface PoliticaService {
   }
 
   interface DeletarService {
-    void deletar(UUID id);
+    void deletar(Long id);
   }
 }
 
