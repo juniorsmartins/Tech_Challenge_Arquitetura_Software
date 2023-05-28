@@ -35,7 +35,7 @@ public interface IClienteController {
 
   interface DeleteController {
     @DeleteMapping(path = "/{id}")
-    ResponseEntity<?> deletarPorId(UUID id);
+    ResponseEntity<?> deletarPorId(Long id);
   }
 }
 

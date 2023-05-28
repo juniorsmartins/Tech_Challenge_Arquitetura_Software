@@ -25,7 +25,7 @@ public interface IClienteService {
   }
 
   interface DeletarService {
-    void deletar(UUID id);
+    void deletar(Long id);
   }
 }
 

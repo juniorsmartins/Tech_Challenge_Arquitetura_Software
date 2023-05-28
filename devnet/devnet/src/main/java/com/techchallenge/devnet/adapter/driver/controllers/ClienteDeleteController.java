@@ -1,6 +1,8 @@
 package com.techchallenge.devnet.adapter.driver.controllers;
 
+import com.techchallenge.devnet.core.application.use_case.IClienteService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,10 +15,17 @@ import java.util.UUID;
 @RequestMapping(path = "/v1/clientes")
 public final class ClienteDeleteController implements IClienteController.DeleteController {
 
-  @Override
-  public ResponseEntity<?> deletarPorId(@PathVariable(name = "id") UUID clienteId) {
+  @Autowired
+  private IClienteService.DeletarService deletarService;
 
-    return null;
+  @Override
+  public ResponseEntity<?> deletarPorId(@PathVariable(name = "id") final Long clienteId) {
+
+    this.deletarService.deletar(clienteId);
+
+    return ResponseEntity
+      .noContent()
+      .build();
   }
 }
 
