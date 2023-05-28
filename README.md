@@ -35,7 +35,7 @@ Descrição: ...
 ```
 > Linguagem Pictográfica
 ```
-![DevNet]([https://github.com/images/logo.png](https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/DevNet-EscopoAtualAndDominioPuro_2023-05-28.png))
+![DevNet]([Documentacao/DevNet-EscopoAtualAndDominioPuro_2023-05-28.png))
 
 
 
