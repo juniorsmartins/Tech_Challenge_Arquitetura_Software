@@ -53,6 +53,7 @@ Portanto, nesse contexto, abaixo segue a narrativa do negócio. Ela foi escrita 
 
 <img width=800 src=Documentacao/DevNet-EscopoAtualAndDominioPuro_2023-05-28.png>
 
+
 > Domínio:
 
 No Domain-Driven Design (DDD), o termo "Domínio" refere-se ao conhecimento especializado de um determinado problema de negócio e às regras que governam esse problema. É a área específica de conhecimento em que um software está sendo desenvolvido.
@@ -68,6 +69,12 @@ Subdomínio Genérico (Generic Subdomain): O subdomínio genérico é composto p
 Subdomínio de Suporte (Supporting Subdomain): O subdomínio de suporte engloba funcionalidades e serviços de apoio que são necessários para o funcionamento do sistema, mas não são o cerne do negócio. Isso inclui recursos como autenticação, autorização, logging, geração de relatórios, entre outros. O subdomínio de suporte é responsável por fornecer funcionalidades transversais e infraestruturais, garantindo a segurança, o desempenho e a manutenção adequada do sistema.
 
 <img width=800 src=Documentacao/DevNet-DiagramaDeDomínios.png>
+
+
+> Linguagem Ubíqua:
+
+
+> Event Storming:
 
 
 ### Documentação de Desenvolvimento do Projeto
