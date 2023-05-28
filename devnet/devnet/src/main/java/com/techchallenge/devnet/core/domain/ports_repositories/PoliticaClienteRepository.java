@@ -1,14 +1,14 @@
-package com.techchallenge.devnet.core.application.ports;
+package com.techchallenge.devnet.core.domain.ports_repositories;
 
-import com.techchallenge.devnet.core.domain.filters.ClienteFiltro;
-import com.techchallenge.devnet.core.domain.Cliente;
-import com.techchallenge.devnet.core.domain.PoliticaEntity;
+import com.techchallenge.devnet.core.domain.value_objects.ClienteFiltro;
+import com.techchallenge.devnet.core.domain.entities.Cliente;
+import com.techchallenge.devnet.core.domain.entities.PoliticaEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.Optional;
 
-public interface PoliticaRepository {
+public interface PoliticaClienteRepository {
 
   interface ClienteSalvarRepository<E extends PoliticaEntity> {
     E salvar(E entidade);

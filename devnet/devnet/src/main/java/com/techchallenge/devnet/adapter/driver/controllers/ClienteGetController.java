@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.adapter.driver.controllers;
 
 import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoResponse;
-import com.techchallenge.devnet.core.domain.filters.ClienteFiltro;
+import com.techchallenge.devnet.core.domain.value_objects.ClienteFiltro;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.core.application.services;
+package com.techchallenge.devnet.core.application.use_case;
 
 import org.springframework.stereotype.Service;
 

@@ -2,7 +2,7 @@ package com.techchallenge.devnet.adapter.driver.controllers;
 
 import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoResponse;
-import com.techchallenge.devnet.core.application.services.PoliticaService;
+import com.techchallenge.devnet.core.application.use_case.PoliticaService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -4,7 +4,7 @@ import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoResponse;
 import com.techchallenge.devnet.adapter.driver.dtos.PoliticaDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.PoliticaDtoResponse;
-import com.techchallenge.devnet.core.domain.filters.ClienteFiltro;
+import com.techchallenge.devnet.core.domain.value_objects.ClienteFiltro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
