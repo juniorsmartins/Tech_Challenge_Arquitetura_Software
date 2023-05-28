@@ -2,7 +2,7 @@ package com.techchallenge.devnet.adapter.driver.controllers;
 
 import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoResponse;
-import com.techchallenge.devnet.core.application.use_case.PoliticaService;
+import com.techchallenge.devnet.core.application.use_case.IClienteService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +15,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Slf4j
 @RestController
 @RequestMapping(path = "/v1/clientes")
-public final class ClientePostController implements PoliticaController.PostController<ClienteDtoRequest, ClienteDtoResponse> {
+public final class ClientePostController implements IClienteController.PostController {
 
   @Autowired
-  private PoliticaService.CadastrarService<ClienteDtoRequest, ClienteDtoResponse> cadastrarService;
+  private IClienteService.CadastrarService cadastrarService;
 
   @Override
   public ResponseEntity<ClienteDtoResponse> cadastrar(@RequestBody @Valid final ClienteDtoRequest dtoRequest,

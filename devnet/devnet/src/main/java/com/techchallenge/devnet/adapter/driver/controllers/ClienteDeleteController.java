@@ -11,7 +11,7 @@ import java.util.UUID;
 @Slf4j
 @RestController
 @RequestMapping(path = "/v1/clientes")
-public final class ClienteDeleteController implements PoliticaController.DeleteController {
+public final class ClienteDeleteController implements IClienteController.DeleteController {
 
   @Override
   public ResponseEntity<?> deletarPorId(@PathVariable(name = "id") UUID clienteId) {

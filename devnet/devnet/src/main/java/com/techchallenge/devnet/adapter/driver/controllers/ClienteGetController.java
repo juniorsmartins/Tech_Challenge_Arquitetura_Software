@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping(path = "/v1/clientes")
-public final class ClienteGetController implements PoliticaController.GetController {
+public final class ClienteGetController implements IClienteController.GetController {
 
   @Override
   public ResponseEntity<Page<ClienteDtoResponse>> pesquisar(final ClienteFiltro filtro,

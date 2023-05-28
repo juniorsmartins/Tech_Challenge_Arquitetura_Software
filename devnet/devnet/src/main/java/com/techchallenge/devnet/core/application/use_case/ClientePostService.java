@@ -3,27 +3,29 @@ package com.techchallenge.devnet.core.application.use_case;
 import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoResponse;
 import com.techchallenge.devnet.core.domain.base.mappers.ClienteMapper;
-import com.techchallenge.devnet.core.domain.entities.Cliente;
-import com.techchallenge.devnet.core.application.ports.PoliticaClienteRepository;
+import com.techchallenge.devnet.core.application.ports.IClienteRepository;
 import com.techchallenge.devnet.core.domain.base.assertions_concern.RegrasNegocioCliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PostService implements PoliticaService.CadastrarService<ClienteDtoRequest, ClienteDtoResponse> {
+public class ClientePostService implements IClienteService.CadastrarService {
 
   @Autowired
   private ClienteMapper mapper;
 
   @Autowired
-  private PoliticaClienteRepository.ClienteSalvarRepository<Cliente> repository;
+  private IClienteRepository.PostRepository repository;
 
   @Autowired
   private List<RegrasNegocioCliente> regrasDeNegocio;
 
+  @Transactional
   @Override
   public ClienteDtoResponse cadastrar(final ClienteDtoRequest dtoRequest) {
 

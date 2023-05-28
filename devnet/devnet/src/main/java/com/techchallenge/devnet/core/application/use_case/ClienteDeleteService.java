@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 @Service
-public class DeletarService implements PoliticaService.DeletarService {
+public class ClienteDeleteService implements IClienteService.DeletarService {
 
   @Override
   public void deletar(UUID id) {

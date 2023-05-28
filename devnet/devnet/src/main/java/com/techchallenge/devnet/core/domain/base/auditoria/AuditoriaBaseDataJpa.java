@@ -6,6 +6,7 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.envers.Audited;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -25,7 +26,7 @@ public abstract class AuditoriaBaseDataJpa implements Serializable {
   @Column(name = "data_hora_cadastro", updatable = false)
   private Instant dataHoraCadastro = Instant.now();
 
-  @LastModifiedDate
+  @UpdateTimestamp
   @Column(name = "data_hora_atualizacao")
   private Instant dataHoraAtualizacao = Instant.now();
 }

@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PesquisarService implements PoliticaService.PesquisarService {
+public class ClienteGetService implements IClienteService.PesquisarService {
 
   @Override
   public Page<ClienteDtoResponse> pesquisar(ClienteFiltro filtro, Pageable paginacao) {
