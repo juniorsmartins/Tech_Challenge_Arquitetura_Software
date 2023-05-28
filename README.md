@@ -8,13 +8,14 @@ Descrição: ...
 ## ÍNDICE
 
 1. Documentação de Arquitetura do Projeto
-  1. Domínio (Subdomínio Principal, Subdomínio Genérico e Subdomínio de Suporte);
-  2. Linguagem Ubíqua;
-  3. Linguagem Pictográfica (Domain Storytelling);
-  4. Event Storming;
-  5. Bounded Context e Context Maps;
+    1. Domínio (Subdomínio Principal, Subdomínio Genérico e Subdomínio de Suporte);
+    2. Linguagem Ubíqua;
+    3. Linguagem Pictográfica (Domain Storytelling);
+    4. Event Storming;
+    5. Bounded Context e Context Maps;
 2. Documentação de Desenvolvimento do Projeto;
-  a. Diagramas;
+    1. Diagramas;
+    2. Subitem 2
 3. Documentação de Infraestrutura do Projeto;
 4. Documentação de Utilização do Projeto;
 
