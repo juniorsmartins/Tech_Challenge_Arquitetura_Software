@@ -21,7 +21,8 @@ Descrição: aplicação desenvolvida para compor nota no processo avaliativo da
 
 2. Documentação de Desenvolvimento do Projeto;
     1. Diagramas;
-    2. Subitem 2
+    2. Ferramentas;
+    3.
 
 3. Documentação de Infraestrutura do Projeto;
 
@@ -50,9 +51,46 @@ Por outro lado, o "Domínio Digitalizado" é a representação das informações
 
 Portanto, nesse contexto, abaixo segue a narrativa do negócio. Ela foi escrita em Linguagem Pictográfica, no "Escopo Atual" e no "Domínio Puro". Trata-se da forma presente e analógica de como funciona a lanchonete objeto do software. 
 
-<img src=Documentacao/DevNet-EscopoAtualAndDominioPuro_2023-05-28.png>
+<img width=800 src=Documentacao/DevNet-EscopoAtualAndDominioPuro_2023-05-28.png>
 
 
+> Domínio:
+
+No Domain-Driven Design (DDD), o termo "Domínio" refere-se ao conhecimento especializado de um determinado problema de negócio e às regras que governam esse problema. É a área específica de conhecimento em que um software está sendo desenvolvido.
+
+Os subdomínios são partes delimitadas e autônomas do domínio geral do sistema. Eles representam áreas ou aspectos distintos dentro do domínio que possuem seus próprios conceitos, regras e comportamentos. Os subdomínios são identificados durante a análise e a modelagem do domínio e ajudam a organizar o sistema de forma mais clara e modular.
+
+Existem três tipos comuns de subdomínios:
+
+Subdomínio Principal (Core Subdomain): O subdomínio principal contém os principais conceitos, regras e processos centrais do negócio. É a parte central e crítica do domínio, que possui alto valor estratégico para a organização. O subdomínio principal geralmente concentra a maior parte do esforço de modelagem e implementação, pois é onde as funcionalidades principais e únicas do sistema estão localizadas.
+
+Subdomínio Genérico (Generic Subdomain): O subdomínio genérico é composto por conceitos e regras mais comuns e amplamente aplicáveis, que podem ser encontrados em vários sistemas ou setores de negócio. Esses conceitos são considerados mais gerais e abrangentes, não possuindo diferenciais competitivos significativos para a organização. O subdomínio genérico normalmente é menos complexo e requer menos esforço de modelagem, pois pode ser atendido por soluções prontas ou padrões estabelecidos.
+
+Subdomínio de Suporte (Supporting Subdomain): O subdomínio de suporte engloba funcionalidades e serviços de apoio que são necessários para o funcionamento do sistema, mas não são o cerne do negócio. Isso inclui recursos como autenticação, autorização, logging, geração de relatórios, entre outros. O subdomínio de suporte é responsável por fornecer funcionalidades transversais e infraestruturais, garantindo a segurança, o desempenho e a manutenção adequada do sistema.
+
+<img width=800 src=Documentacao/DevNet-DiagramaDeDomínios.png>
+
+
+> Linguagem Ubíqua:
+
+
+> Event Storming:
+
+
+### Documentação de Desenvolvimento do Projeto
+
+> Ferramentas:
+
+1. Intellij Idea (programação);
+2. Maven (gerenciamento de dependências);
+3. Git e GitHub (versionamento);
+4. Postman (testes manuais);
+5. StarUML (Diagramas);
+6. Egon.io (Linguagem Pictográfica);
+7. Miro (Event Storming);
+8. ChatGPT (pesquisa);
+9. YouTube (pesquisa);
+10. Google (pesquisa);
 
 
 
