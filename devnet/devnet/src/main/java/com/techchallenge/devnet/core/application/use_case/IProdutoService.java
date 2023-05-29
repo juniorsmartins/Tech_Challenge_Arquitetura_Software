@@ -12,6 +12,10 @@ public interface IProdutoService {
     ProdutoDtoResponse cadastrar(ProdutoDtoRequest dtoRequest);
   }
 
+  interface AtualizarService {
+    ProdutoDtoResponse atualizar(Long id, ProdutoDtoRequest dtoRequest);
+  }
+
   interface PesquisarService {
     Page<ProdutoDtoResponse> pesquisar(ProdutoFiltro filtro, Pageable paginacao);
   }

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.util.UriComponentsBuilder;
 
 public interface IProdutoController {
@@ -16,6 +17,11 @@ public interface IProdutoController {
   interface PostController {
     @PostMapping
     ResponseEntity<ProdutoDtoResponse> cadastrar(ProdutoDtoRequest dtoRequest, UriComponentsBuilder uri);
+  }
+
+  interface PutController {
+    @PutMapping(path = "/{id}")
+    ResponseEntity<ProdutoDtoResponse> atualizar(Long id, ProdutoDtoRequest dtoRequest);
   }
 
   interface GetController {
