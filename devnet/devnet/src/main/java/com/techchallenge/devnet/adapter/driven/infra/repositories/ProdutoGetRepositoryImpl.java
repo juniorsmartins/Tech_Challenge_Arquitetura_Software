@@ -4,6 +4,7 @@ import com.techchallenge.devnet.adapter.driven.infra.repositories.jpa.ProdutoRep
 import com.techchallenge.devnet.core.application.ports.IProdutoRepository;
 import com.techchallenge.devnet.core.domain.entities.Produto;
 import com.techchallenge.devnet.core.domain.value_objects.ProdutoFiltro;
+import com.techchallenge.devnet.core.domain.value_objects.ProdutoSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,7 +21,7 @@ public class ProdutoGetRepositoryImpl implements IProdutoRepository.GetRepositor
   @Override
   public Page<Produto> pesquisar(ProdutoFiltro filtro, Pageable paginacao) {
 
-    return null;
+    return this.repositoryJpa.findAll(ProdutoSpecification.consultaDinamica(filtro), paginacao);
   }
 
   @Override
