@@ -8,5 +8,9 @@ public interface IProdutoService {
   interface CadastrarService {
     ProdutoDtoResponse cadastrar(ProdutoDtoRequest dtoRequest);
   }
+
+  interface DeletarService {
+    void deletar(Long id);
+  }
 }
 
