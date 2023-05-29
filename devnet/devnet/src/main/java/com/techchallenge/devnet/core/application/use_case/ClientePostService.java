@@ -2,12 +2,11 @@ package com.techchallenge.devnet.core.application.use_case;
 
 import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoResponse;
-import com.techchallenge.devnet.core.domain.base.mappers.ClienteMapper;
+import com.techchallenge.devnet.core.domain.base.mappers.IClienteMapper;
 import com.techchallenge.devnet.core.application.ports.IClienteRepository;
 import com.techchallenge.devnet.core.domain.base.assertions_concern.RegrasNegocioCliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -17,7 +16,7 @@ import java.util.Optional;
 public class ClientePostService implements IClienteService.CadastrarService {
 
   @Autowired
-  private ClienteMapper mapper;
+  private IClienteMapper mapper;
 
   @Autowired
   private IClienteRepository.PostRepository repository;
@@ -30,14 +29,14 @@ public class ClientePostService implements IClienteService.CadastrarService {
   public ClienteDtoResponse cadastrar(final ClienteDtoRequest dtoRequest) {
 
     return Optional.of(dtoRequest)
-      .map(dto -> this.mapper.converteDtoRequestParaEntidade(dto))
-      .map(entidade -> {
-        this.regrasDeNegocio.forEach(regra -> regra.executarRegrasDeNegocio(entidade));
+      .map(dto -> this.mapper.converterDtoRequestParaEntidade(dto))
+      .map(cliente -> {
+        this.regrasDeNegocio.forEach(regra -> regra.executarRegrasDeNegocio(cliente));
 
-        return entidade;
+        return cliente;
       })
-      .map(entidade -> this.repository.salvar(entidade))
-      .map(entidade -> this.mapper.converteEntidadeParaDtoResponse(entidade))
+      .map(cliente -> this.repository.salvar(cliente))
+      .map(cliente -> this.mapper.converterEntidadeParaDtoResponse(cliente))
       .orElseThrow();
   }
 }

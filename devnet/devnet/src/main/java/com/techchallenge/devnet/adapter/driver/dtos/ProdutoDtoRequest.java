@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 
 public record ProdutoDtoRequest(
 
-  @NotBlank
+  @NotNull
   @Enumerated(EnumType.STRING)
   ECategoria categoria,
 

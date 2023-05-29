@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface IClienteRepository {
 
   interface PostRepository {
-    Cliente salvar(Cliente entidade);
+    Cliente salvar(Cliente cliente);
   }
 
   interface GetRepository {
