@@ -1,6 +1,7 @@
 package com.techchallenge.devnet.core.domain.entities;
 
 import com.techchallenge.devnet.core.domain.base.auditoria.AuditoriaDataJpa;
+import com.techchallenge.devnet.core.domain.entities.enums.ECategoria;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,9 +18,10 @@ import lombok.ToString;
 import org.hibernate.envers.Audited;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Entity
-@Table(name = "clientes")
+@Table(name = "produtos")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,7 +30,7 @@ import java.io.Serializable;
 @ToString
 @EqualsAndHashCode(of = {"id"})
 @Audited
-public final class Cliente extends AuditoriaDataJpa implements Serializable {
+public final class Produto extends AuditoriaDataJpa implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
@@ -37,13 +39,16 @@ public final class Cliente extends AuditoriaDataJpa implements Serializable {
   @Column(name = "id")
   private Long id;
 
+  @Column(name = "categoria", length = 50, nullable = false)
+  private ECategoria categoria;
+
   @Column(name = "nome", length = 100, nullable = false)
   private String nome;
 
-  @Column(name = "cpf", nullable = false)
-  private String cpf;
+  @Column(name = "descricao", length = 250, nullable = false)
+  private String descricao;
 
-  @Column(name = "email", length = 100, nullable = false)
-  private String email;
+  @Column(name = "preco", nullable = false)
+  private BigDecimal preco;
 }
 
