@@ -12,10 +12,11 @@ public record ClienteDtoRequest(
 
   @NotBlank
   @CPF
+  @Length(max = 14)
   String cpf,
 
   @NotBlank
   @Length(max = 100)
   String email
-) implements PoliticaDtoRequest { }
+) { }
 

@@ -2,7 +2,7 @@ package com.techchallenge.devnet.core.application.use_case;
 
 import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoResponse;
 import com.techchallenge.devnet.core.application.ports.IClienteRepository;
-import com.techchallenge.devnet.core.domain.base.mappers.ClienteMapper;
+import com.techchallenge.devnet.core.domain.base.mappers.IClienteMapper;
 import com.techchallenge.devnet.core.domain.value_objects.ClienteFiltro;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,7 +19,7 @@ public class ClienteGetService implements IClienteService.PesquisarService {
   private IClienteRepository.GetRepository repository;
 
   @Autowired
-  private ClienteMapper mapper;
+  private IClienteMapper mapper;
 
   @Transactional(readOnly = true)
   @Override

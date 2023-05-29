@@ -13,7 +13,7 @@ public class ClientePostRepositoryImpl implements IClienteRepository.PostReposit
   private ClienteRepositoryJpa jpa;
 
   @Override
-  public Cliente salvar(Cliente cliente) {
+  public Cliente salvar(final Cliente cliente) {
 
     return this.jpa.save(cliente);
   }
