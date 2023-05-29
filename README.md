@@ -31,7 +31,7 @@ Descrição: aplicação desenvolvida para compor nota no processo avaliativo da
 
 ### Documentação de Arquitetura do Projeto
 
-> Linguagem Pictográfica:
+#### Linguagem Pictográfica:
 
 A Linguagem Pictográfica do Domain Storytelling é uma abordagem visual utilizada no contexto do Domain-Driven Design (DDD) para auxiliar na compreensão e comunicação de conceitos complexos do domínio de um software.
 
@@ -54,7 +54,7 @@ Portanto, nesse contexto, abaixo segue a narrativa do negócio. Ela foi escrita 
 <img width=800 src=Documentacao/DevNet-EscopoAtualAndDominioPuro_2023-05-28.png>
 
 
-> Domínio:
+#### Domínio
 
 No Domain-Driven Design (DDD), o termo "Domínio" refere-se ao conhecimento especializado de um determinado problema de negócio e às regras que governam esse problema. É a área específica de conhecimento em que um software está sendo desenvolvido.
 
@@ -71,10 +71,14 @@ Subdomínio de Suporte (Supporting Subdomain): O subdomínio de suporte engloba 
 <img width=800 src=Documentacao/DevNet-DiagramaDeDomínios.png>
 
 
-> Linguagem Ubíqua:
+#### Linguagem Ubíqua:
 
 
-> Event Storming:
+#### Event Storming:
+
+> Gestão de Clientes
+
+<img width=600 src=Documentacao/EventStorming-CadastroDeClientes.png>
 
 
 ### Documentação de Desenvolvimento do Projeto
