@@ -40,7 +40,7 @@ public final class Cliente extends AuditoriaDataJpa implements Serializable {
   @Column(name = "nome", length = 100, nullable = false)
   private String nome;
 
-  @Column(name = "cpf", nullable = false)
+  @Column(name = "cpf", length = 14, nullable = false, unique = true)
   private String cpf;
 
   @Column(name = "email", length = 100, nullable = false)
