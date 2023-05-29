@@ -20,7 +20,7 @@ public final class TratadorDeExceptions extends ResponseEntityExceptionHandler {
   public ResponseEntity<Object> tratarRegraDeNegocioViolada(RegraDeNegocioVioladaException regraViolada,
                                                                    WebRequest webRequest) {
     var httpStatus = HttpStatus.CONFLICT;
-    var tipoDeErroEnum = TipoDeErroEnum.REGRA_NEGOCIO_VIOLADA;
+    var tipoDeErroEnum = ETipoDeErro.REGRA_NEGOCIO_VIOLADA;
     var detalhe = regraViolada.getMessage();
 
     var retornoDeErro = this.criarMensagemParaRetornarErro(httpStatus, tipoDeErroEnum, detalhe).build();
@@ -31,7 +31,7 @@ public final class TratadorDeExceptions extends ResponseEntityExceptionHandler {
 
   // Método para construção da mensagem de retorno
   private RetornoDeErro.RetornoDeErroBuilder criarMensagemParaRetornarErro(HttpStatusCode httpStatusCode,
-                                                               TipoDeErroEnum tipoDeErroEnum, String detalhe) {
+                                                                           ETipoDeErro tipoDeErroEnum, String detalhe) {
     return RetornoDeErro.builder()
       .tipo(tipoDeErroEnum.getCaminho())
       .titulo(tipoDeErroEnum.getTitulo())

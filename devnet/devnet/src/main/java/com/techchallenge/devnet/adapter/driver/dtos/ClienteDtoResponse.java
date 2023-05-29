@@ -18,5 +18,5 @@ public record ClienteDtoResponse(
   Instant dataHoraCadastro,
 
   Instant dataHoraAtualizacao
-) implements PoliticaDtoResponse { }
+) { }
 

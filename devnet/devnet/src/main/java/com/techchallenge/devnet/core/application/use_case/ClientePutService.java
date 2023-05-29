@@ -3,21 +3,18 @@ package com.techchallenge.devnet.core.application.use_case;
 import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoResponse;
 import com.techchallenge.devnet.core.application.ports.IClienteRepository;
-import com.techchallenge.devnet.core.domain.base.mappers.ClienteMapper;
+import com.techchallenge.devnet.core.domain.base.mappers.IClienteMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-import java.util.UUID;
-
 @Service
 public class ClientePutService implements IClienteService.AtualizarService {
 
   @Autowired
-  private ClienteMapper mapper;
+  private IClienteMapper mapper;
 
   @Autowired
   private IClienteRepository.GetRepository repository;
@@ -31,7 +28,7 @@ public class ClientePutService implements IClienteService.AtualizarService {
         BeanUtils.copyProperties(dtoRequest, cliente, "id");
         return cliente;
       })
-      .map(cliente -> this.mapper.converteEntidadeParaDtoResponse(cliente))
+      .map(cliente -> this.mapper.converterEntidadeParaDtoResponse(cliente))
       .orElseThrow();
   }
 }
