@@ -83,7 +83,20 @@ Subdomínio de Suporte (Supporting Subdomain): O subdomínio de suporte engloba 
 
 ### Documentação de Desenvolvimento do Projeto
 
-> Ferramentas:
+#### Tecnologias:
+
+1. Java (17 LTS);
+2. Spring Boot 3.1.0;
+3. PostgreSQL;
+4. Bean Validation;
+5. Spring Data JPA;
+6. Hibernate Envers;
+7. MapStruct;
+8. Commons Lang3;
+9. Lombok;
+10. DevTools;
+
+#### Ferramentas:
 
 1. Intellij Idea (programação);
 2. Maven (gerenciamento de dependências);
@@ -95,6 +108,4 @@ Subdomínio de Suporte (Supporting Subdomain): O subdomínio de suporte engloba 
 8. ChatGPT (pesquisa);
 9. YouTube (pesquisa);
 10. Google (pesquisa);
-
-
 
