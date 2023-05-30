@@ -68,7 +68,7 @@ Subdomínio Genérico (Generic Subdomain): O subdomínio genérico é composto p
 
 Subdomínio de Suporte (Supporting Subdomain): O subdomínio de suporte engloba funcionalidades e serviços de apoio que são necessários para o funcionamento do sistema, mas não são o cerne do negócio. Isso inclui recursos como autenticação, autorização, logging, geração de relatórios, entre outros. O subdomínio de suporte é responsável por fornecer funcionalidades transversais e infraestruturais, garantindo a segurança, o desempenho e a manutenção adequada do sistema.
 
-<img width=800 src=Documentacao/DevNet-DiagramaDeDomínios.png>
+<img width=600 src=Documentacao/DevNet-DiagramaDeDomínios.png>
 
 
 #### Linguagem Ubíqua:
