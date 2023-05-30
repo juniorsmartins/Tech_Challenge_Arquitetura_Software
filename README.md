@@ -76,6 +76,12 @@ Subdomínio de Suporte (Supporting Subdomain): O subdomínio de suporte engloba 
 
 #### Event Storming:
 
+No contexto do Domain-Driven Design (DDD), Event Storming é uma técnica de modelagem colaborativa e visual que visa explorar e entender o domínio de um sistema por meio da identificação de eventos de domínio significativos. É uma ferramenta poderosa para capturar conhecimento compartilhado e colaborar com as partes interessadas, incluindo especialistas de domínio, desenvolvedores e outros membros da equipe.
+
+O Event Storming é realizado em uma sessão de workshop envolvendo todas as partes interessadas relevantes. Durante a sessão, os participantes mapeiam o fluxo de eventos do sistema em um quadro branco ou em uma parede usando notas adesivas coloridas. Essas notas adesivas representam eventos de domínio, com cada evento capturando uma mudança de estado significativa dentro do domínio. Os eventos são organizados sequencialmente para criar um fluxo de eventos que reflete as interações e as regras de negócio do sistema.
+
+Além dos eventos, o Event Storming também pode incluir outras informações relevantes, como comandos, agregados, políticas, restrições e outras anotações que ajudam a capturar o conhecimento do domínio e a compreensão do sistema.
+
 > Gestão de Clientes
 
 <img width=600 src=Documentacao/EventStorming-CadastroDeClientes.png>
@@ -83,6 +89,10 @@ Subdomínio de Suporte (Supporting Subdomain): O subdomínio de suporte engloba 
 > Gestão de Cardápio (produtos)
 
 <img width=600 src=Documentacao/EventStorming-CadastroDeProdutos.png>
+
+> Gestão de Pedidos
+
+<img width=600 src=Documentacao/EventStorming-CadastroDePedidosII.png>
 
 
 ### Documentação de Desenvolvimento do Projeto
