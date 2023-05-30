@@ -73,6 +73,14 @@ Subdomínio de Suporte (Supporting Subdomain): O subdomínio de suporte engloba 
 
 #### Linguagem Ubíqua:
 
+A Linguagem Ubíqua (Ubiquitous Language) é um conceito fundamental que envolve o uso de uma linguagem comum e compartilhada entre todos os membros de uma equipe, incluindo especialistas de domínio, desenvolvedores, analistas e demais envolvidos no desenvolvimento de software.
+
+A Linguagem Ubíqua é essencial para garantir uma comunicação efetiva e precisa entre todas as partes envolvidas no projeto, eliminando ambiguidades e mal-entendidos. Ela busca estabelecer um vocabulário comum que reflita as nuances e os conceitos do domínio em questão.
+
+Ao adotar uma Linguagem Ubíqua, os termos técnicos e de negócio são definidos de forma colaborativa, levando em consideração a compreensão dos especialistas de domínio. Essa linguagem compartilhada é utilizada tanto na documentação do projeto quanto nas conversas diárias entre os membros da equipe.
+
+A Linguagem Ubíqua permeia todos os artefatos do projeto, incluindo o código-fonte, os testes, a documentação e até mesmo as discussões em reuniões. Ela ajuda a alinhar a visão do domínio entre todas as partes interessadas e permite que o modelo de domínio seja expresso de forma clara e concisa em todo o processo de desenvolvimento.
+
 
 #### Event Storming:
 
