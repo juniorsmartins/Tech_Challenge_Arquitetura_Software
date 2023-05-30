@@ -80,6 +80,10 @@ Subdomínio de Suporte (Supporting Subdomain): O subdomínio de suporte engloba 
 
 <img width=600 src=Documentacao/EventStorming-CadastroDeClientes.png>
 
+> Gestão de Cardápio (produtos)
+
+<img width=600 src=Documentacao/EventStorming-CadastroDeProdutos.png>
+
 
 ### Documentação de Desenvolvimento do Projeto
 
