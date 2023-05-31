@@ -6,6 +6,9 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public final class ClienteSpecification {
 
@@ -20,8 +23,12 @@ public final class ClienteSpecification {
       }
 
       if (ObjectUtils.isNotEmpty(filtro.getNome())) {
-        predicados.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("nome")),
-          "%".concat(filtro.getNome().toLowerCase()).concat("%")));
+        var nomes = Arrays.asList(filtro.getNome().split(","));
+        List<Predicate> nomePredicates = nomes.stream()
+          .map(nome -> criteriaBuilder.like(criteriaBuilder.lower(root.get("nome")), "%" + nome.toLowerCase() + "%"))
+          .collect(Collectors.toList());
+
+        predicados.add(criteriaBuilder.or(nomePredicates.toArray(new Predicate[0])));
       }
 
       if (ObjectUtils.isNotEmpty(filtro.getCpf())) {
