@@ -73,8 +73,22 @@ Subdomínio de Suporte (Supporting Subdomain): O subdomínio de suporte engloba 
 
 #### Linguagem Ubíqua:
 
+A Linguagem Ubíqua (Ubiquitous Language) é um conceito fundamental que envolve o uso de uma linguagem comum e compartilhada entre todos os membros de uma equipe, incluindo especialistas de domínio, desenvolvedores, analistas e demais envolvidos no desenvolvimento de software.
+
+A Linguagem Ubíqua é essencial para garantir uma comunicação efetiva e precisa entre todas as partes envolvidas no projeto, eliminando ambiguidades e mal-entendidos. Ela busca estabelecer um vocabulário comum que reflita as nuances e os conceitos do domínio em questão.
+
+Ao adotar uma Linguagem Ubíqua, os termos técnicos e de negócio são definidos de forma colaborativa, levando em consideração a compreensão dos especialistas de domínio. Essa linguagem compartilhada é utilizada tanto na documentação do projeto quanto nas conversas diárias entre os membros da equipe.
+
+A Linguagem Ubíqua permeia todos os artefatos do projeto, incluindo o código-fonte, os testes, a documentação e até mesmo as discussões em reuniões. Ela ajuda a alinhar a visão do domínio entre todas as partes interessadas e permite que o modelo de domínio seja expresso de forma clara e concisa em todo o processo de desenvolvimento.
+
 
 #### Event Storming:
+
+No contexto do Domain-Driven Design (DDD), Event Storming é uma técnica de modelagem colaborativa e visual que visa explorar e entender o domínio de um sistema por meio da identificação de eventos de domínio significativos. É uma ferramenta poderosa para capturar conhecimento compartilhado e colaborar com as partes interessadas, incluindo especialistas de domínio, desenvolvedores e outros membros da equipe.
+
+O Event Storming é realizado em uma sessão de workshop envolvendo todas as partes interessadas relevantes. Durante a sessão, os participantes mapeiam o fluxo de eventos do sistema em um quadro branco ou em uma parede usando notas adesivas coloridas. Essas notas adesivas representam eventos de domínio, com cada evento capturando uma mudança de estado significativa dentro do domínio. Os eventos são organizados sequencialmente para criar um fluxo de eventos que reflete as interações e as regras de negócio do sistema.
+
+Além dos eventos, o Event Storming também pode incluir outras informações relevantes, como comandos, agregados, políticas, restrições e outras anotações que ajudam a capturar o conhecimento do domínio e a compreensão do sistema.
 
 > Gestão de Clientes
 
@@ -83,6 +97,10 @@ Subdomínio de Suporte (Supporting Subdomain): O subdomínio de suporte engloba 
 > Gestão de Cardápio (produtos)
 
 <img width=600 src=Documentacao/EventStorming-CadastroDeProdutos.png>
+
+> Gestão de Pedidos
+
+<img width=600 src=Documentacao/EventStorming-CadastroDePedidosII.png>
 
 
 ### Documentação de Desenvolvimento do Projeto
