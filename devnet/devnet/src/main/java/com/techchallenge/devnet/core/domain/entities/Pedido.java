@@ -10,6 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -47,10 +48,7 @@ public final class Pedido extends AuditoriaDataJpa implements Serializable {
   @JoinColumn(name = "cliente_cpf", nullable = true, referencedColumnName = "cpf")
   private Cliente cliente;
 
-  @ManyToMany
-  @JoinTable(name = "pedido_produto",
-  joinColumns = @JoinColumn(name = "pedido_id", nullable = false),
-  inverseJoinColumns = @JoinColumn(name = "produto_id", nullable = false))
-  private Set<Produto> produtos = new HashSet<>();
+  @OneToMany(mappedBy = "pedido")
+  private Set<Item> itens = new HashSet<>();
 }
 
