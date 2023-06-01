@@ -92,6 +92,8 @@ Além dos eventos, o Event Storming também pode incluir outras informações re
 
 > Gestão de Clientes
 
+Responsável por Cadastrar, Atualizar, Pesquisar e Deletar Clientes na base de dados.
+
 <img width=600 src=Documentacao/EventStorming-CadastroDeClientes.png>
 
 > Gestão de Cardápio (produtos)
