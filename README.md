@@ -102,7 +102,7 @@ Responsável por Cadastrar, Atualizar, Pesquisar e Deletar Clientes na base de d
 
 > Gestão de Pedidos
 
-<img width=600 src=Documentacao/EventStorming-CadastroDePedidosII.png>
+<img width=600 src=Documentacao/EventStorming-CadastroDePedidosIII.png>
 
 
 ### Documentação de Desenvolvimento do Projeto
