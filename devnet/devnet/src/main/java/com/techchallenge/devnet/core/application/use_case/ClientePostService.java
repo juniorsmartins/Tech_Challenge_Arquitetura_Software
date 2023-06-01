@@ -29,14 +29,14 @@ public class ClientePostService implements IClienteService.CadastrarService {
   public ClienteDtoResponse cadastrar(final ClienteDtoRequest dtoRequest) {
 
     return Optional.of(dtoRequest)
-      .map(dto -> this.mapper.converterDtoRequestParaEntidade(dto))
+      .map(this.mapper::converterDtoRequestParaEntidade)
       .map(cliente -> {
         this.regrasDeNegocio.forEach(regra -> regra.executarRegrasDeNegocio(cliente));
 
         return cliente;
       })
-      .map(cliente -> this.repository.salvar(cliente))
-      .map(cliente -> this.mapper.converterEntidadeParaDtoResponse(cliente))
+      .map(this.repository::salvar)
+      .map(this.mapper::converterEntidadeParaDtoResponse)
       .orElseThrow();
   }
 }

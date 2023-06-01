@@ -23,7 +23,6 @@ public final class ClientePostController implements IClienteController.PostContr
   @Override
   public ResponseEntity<ClienteDtoResponse> cadastrar(@RequestBody @Valid final ClienteDtoRequest dtoRequest,
                                                       final UriComponentsBuilder uriComponentsBuilder) {
-
     var response = this.service.cadastrar(dtoRequest);
 
     return ResponseEntity

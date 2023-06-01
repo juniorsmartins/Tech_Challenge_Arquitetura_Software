@@ -19,7 +19,7 @@ public final class ClienteDeleteController implements IClienteController.DeleteC
   private IClienteService.DeletarService deletarService;
 
   @Override
-  public ResponseEntity<?> deletarPorId(@PathVariable(name = "id") final Long clienteId) {
+  public ResponseEntity<Object> deletarPorId(@PathVariable(name = "id") final Long clienteId) {
 
     this.deletarService.deletar(clienteId);
 

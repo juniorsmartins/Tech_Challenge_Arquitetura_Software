@@ -16,7 +16,7 @@ public interface IClienteController {
 
   interface PostController {
     @PostMapping
-    ResponseEntity<ClienteDtoResponse> cadastrar(ClienteDtoRequest dtoRequest, UriComponentsBuilder uri);
+    ResponseEntity<ClienteDtoResponse> cadastrar(ClienteDtoRequest dtoRequest, UriComponentsBuilder uriComponentsBuilder);
   }
 
   interface PutController {
@@ -31,7 +31,7 @@ public interface IClienteController {
 
   interface DeleteController {
     @DeleteMapping(path = "/{id}")
-    ResponseEntity<?> deletarPorId(Long id);
+    ResponseEntity<Object> deletarPorId(Long id);
   }
 }
 

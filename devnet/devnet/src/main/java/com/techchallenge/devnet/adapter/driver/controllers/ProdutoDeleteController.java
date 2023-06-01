@@ -17,7 +17,7 @@ public final class ProdutoDeleteController implements IProdutoController.DeleteC
   private IProdutoService.DeletarService deletarService;
 
   @Override
-  public ResponseEntity<?> deletePorId(@PathVariable(name = "id") final Long produtoId) {
+  public ResponseEntity<Object> deletePorId(@PathVariable(name = "id") final Long produtoId) {
 
     this.deletarService.deletar(produtoId);
 

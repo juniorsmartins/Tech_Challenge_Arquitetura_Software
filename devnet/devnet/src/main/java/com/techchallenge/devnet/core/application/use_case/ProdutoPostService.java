@@ -25,9 +25,9 @@ public class ProdutoPostService implements IProdutoService.CadastrarService {
   public ProdutoDtoResponse cadastrar(final ProdutoDtoRequest dtoRequest) {
 
     return Optional.of(dtoRequest)
-      .map(dto -> this.mapper.converterDtoRequestParaEntidade(dto))
-      .map(produto -> this.repository.salvar(produto))
-      .map(produto -> this.mapper.converterEntidadeParaDtoResponse(produto))
+      .map(this.mapper::converterDtoRequestParaEntidade)
+      .map(this.repository::salvar)
+      .map(this.mapper::converterEntidadeParaDtoResponse)
       .orElseThrow();
   }
 }
