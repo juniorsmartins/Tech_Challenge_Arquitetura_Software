@@ -2,6 +2,7 @@ package com.techchallenge.devnet.core.domain.entities;
 
 import com.techchallenge.devnet.core.domain.entities.chave.ItemPedidoId;
 import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,29 +31,23 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(of = {"pedido", "produto"})
 @Audited
-@IdClass(ItemPedidoId.class)
 public final class ItemPedido implements Serializable {
 
   public static final long serialVersionUID = 1L;
 
-  @EqualsAndHashCode.Include
-  @Id
-  @Column(name = "pedido_id")
-  private Long pedidoId;
+  @EmbeddedId
+  private ItemPedidoId id;
 
-  @EqualsAndHashCode.Include
-  @Id
-  @Column(name = "produto_id")
-  private Long produtoId;
-
-  @ManyToOne(optional = false)
-  @JoinColumn(name = "pedido_id", insertable = false, updatable = false)
+  @ManyToOne
+  @MapsId("pedidoId")
+  @JoinColumn(name = "pedido_id")
   private Pedido pedido;
 
-  @ManyToOne(optional = false)
-  @JoinColumn(name = "produto_id", insertable = false, updatable = false)
+  @ManyToOne
+  @MapsId("produtoId")
+  @JoinColumn(name = "produto_id")
   private Produto produto;
 
   @Column(name = "quantidade")

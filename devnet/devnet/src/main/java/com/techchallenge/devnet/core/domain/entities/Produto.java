@@ -10,6 +10,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -24,6 +25,7 @@ import org.hibernate.envers.Audited;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -58,7 +60,7 @@ public final class Produto extends AuditoriaDataJpa implements Serializable {
   @Column(name = "preco", nullable = false)
   private BigDecimal preco;
 
-  @OneToMany(mappedBy = "produto", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-  private Set<ItemPedido> itens = new HashSet<>();
+  @OneToMany(mappedBy = "produto")
+  private Set<ItemPedido> itens;
 }
 
