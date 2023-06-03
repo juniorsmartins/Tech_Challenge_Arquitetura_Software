@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.adapter.driver.controllers;
 
-import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoRequest;
-import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoResponse;
+import com.techchallenge.devnet.adapter.driver.dtos.request.ClienteDtoRequest;
+import com.techchallenge.devnet.adapter.driver.dtos.response.ClienteDtoResponse;
 import com.techchallenge.devnet.core.application.use_case.IClienteService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +28,7 @@ public final class ClientePostController implements IClienteController.PostContr
     return ResponseEntity
       .created(uriComponentsBuilder
         .path("/v1/clientes/{id}")
-        .buildAndExpand(response.id())
+        .buildAndExpand(response.getId())
         .toUri())
       .body(response);
   }

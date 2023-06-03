@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.adapter.driver.controllers;
 
-import com.techchallenge.devnet.adapter.driver.dtos.ProdutoDtoRequest;
-import com.techchallenge.devnet.adapter.driver.dtos.ProdutoDtoResponse;
+import com.techchallenge.devnet.adapter.driver.dtos.request.ProdutoDtoRequest;
+import com.techchallenge.devnet.adapter.driver.dtos.response.ProdutoDtoResponse;
 import com.techchallenge.devnet.core.application.use_case.IProdutoService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;

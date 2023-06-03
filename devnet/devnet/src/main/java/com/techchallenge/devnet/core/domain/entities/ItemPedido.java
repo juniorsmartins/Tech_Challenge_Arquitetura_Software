@@ -1,11 +1,12 @@
 package com.techchallenge.devnet.core.domain.entities;
 
-import com.techchallenge.devnet.core.domain.base.auditoria.AuditoriaDataJpa;
+import com.techchallenge.devnet.core.domain.entities.chave.ItemPedidoId;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -28,26 +29,32 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(of = {"id"})
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Audited
-public final class Item extends AuditoriaDataJpa implements Serializable {
+@IdClass(ItemPedidoId.class)
+public final class ItemPedido implements Serializable {
 
   public static final long serialVersionUID = 1L;
 
+  @EqualsAndHashCode.Include
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id")
-  private Long id;
+  @Column(name = "pedido_id")
+  private Long pedidoId;
 
-  @ManyToOne
-  @JoinColumn(name = "pedido_id", nullable = false)
+  @EqualsAndHashCode.Include
+  @Id
+  @Column(name = "produto_id")
+  private Long produtoId;
+
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "pedido_id", insertable = false, updatable = false)
   private Pedido pedido;
 
-  @ManyToOne
-  @JoinColumn(name = "produto_id", nullable = false)
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "produto_id", insertable = false, updatable = false)
   private Produto produto;
 
-  @Column(name = "quantidade", nullable = false)
+  @Column(name = "quantidade")
   private int quantidade;
 }
 

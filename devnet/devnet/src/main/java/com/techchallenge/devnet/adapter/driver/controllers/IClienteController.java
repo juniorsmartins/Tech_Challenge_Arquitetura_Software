@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.adapter.driver.controllers;
 
-import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoRequest;
-import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoResponse;
+import com.techchallenge.devnet.adapter.driver.dtos.request.ClienteDtoRequest;
+import com.techchallenge.devnet.adapter.driver.dtos.response.ClienteDtoResponse;
 import com.techchallenge.devnet.core.domain.value_objects.ClienteFiltro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

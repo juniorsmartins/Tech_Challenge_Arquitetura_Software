@@ -1,10 +1,11 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver.dtos.PedidoDtoRequest;
-import com.techchallenge.devnet.adapter.driver.dtos.PedidoDtoResponse;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.techchallenge.devnet.adapter.driver.dtos.request.PedidoDtoRequest;
+import com.techchallenge.devnet.adapter.driver.dtos.response.PedidoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.IPedidoRepository;
-import com.techchallenge.devnet.core.domain.base.mappers.IClienteMapper;
-import com.techchallenge.devnet.core.domain.base.mappers.IPedidoMapper;
+import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
+import com.techchallenge.devnet.core.domain.entities.Pedido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +16,7 @@ import java.util.Optional;
 public class PedidoPostService implements IPedidoService.CadastrarService {
 
   @Autowired
-  private IPedidoMapper mapper;
+  private IMapper mapper;
 
   @Autowired
   private IPedidoRepository.PostRepository repository;
@@ -25,9 +26,13 @@ public class PedidoPostService implements IPedidoService.CadastrarService {
   public PedidoDtoResponse cadastrar(final PedidoDtoRequest dtoRequest) {
 
     return Optional.of(dtoRequest)
-      .map(dto -> this.mapper.converterDtoRequestParaEntidade(dto))
+      .map(dto -> this.mapper.converterDtoRequestParaEntidade(dto, Pedido.class))
+//      .map(pedido -> {
+//        pedido.getItens().forEach(item -> item.setPedido(pedido));
+//        return pedido;
+//      })
       .map(this.repository::salvar)
-      .map(this.mapper::converterEntidadeParaDtoResponse)
+      .map(pedido -> this.mapper.converterEntidadeParaDtoResponse(pedido, PedidoDtoResponse.class))
       .orElseThrow();
   }
 }

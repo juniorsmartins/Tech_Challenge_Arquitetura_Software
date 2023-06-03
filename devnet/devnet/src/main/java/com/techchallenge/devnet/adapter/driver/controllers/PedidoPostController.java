@@ -1,7 +1,8 @@
 package com.techchallenge.devnet.adapter.driver.controllers;
 
-import com.techchallenge.devnet.adapter.driver.dtos.PedidoDtoRequest;
-import com.techchallenge.devnet.adapter.driver.dtos.PedidoDtoResponse;
+import com.techchallenge.devnet.adapter.driver.dtos.request.PedidoDtoRequest;
+import com.techchallenge.devnet.adapter.driver.dtos.response.PedidoDtoResponse;
+import com.techchallenge.devnet.adapter.driver.dtos.request.ClienteDtoRequest;
 import com.techchallenge.devnet.core.application.use_case.IPedidoService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +29,7 @@ public final class PedidoPostController implements IPedidoController.PostControl
     return ResponseEntity
       .created(uriComponentsBuilder
         .path("/v1/pedidos/{id}")
-        .buildAndExpand(response.id())
+        .buildAndExpand(response.getId())
         .toUri())
       .body(response);
   }

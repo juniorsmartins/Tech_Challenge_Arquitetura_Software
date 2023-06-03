@@ -1,8 +1,9 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoResponse;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.techchallenge.devnet.adapter.driver.dtos.response.ClienteDtoResponse;
 import com.techchallenge.devnet.core.application.ports.IClienteRepository;
-import com.techchallenge.devnet.core.domain.base.mappers.IClienteMapper;
+import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
 import com.techchallenge.devnet.core.domain.value_objects.ClienteFiltro;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,7 +20,7 @@ public class ClienteGetService implements IClienteService.PesquisarService {
   private IClienteRepository.GetRepository repository;
 
   @Autowired
-  private IClienteMapper mapper;
+  private IMapper mapper;
 
   @Transactional(readOnly = true)
   @Override
@@ -27,7 +28,7 @@ public class ClienteGetService implements IClienteService.PesquisarService {
 
     return Optional.of(filtro)
       .map(parametrosDePesquisa -> this.repository.pesquisar(parametrosDePesquisa, paginacao))
-      .map(paginaClientes -> this.mapper.converterPaginaDeEntidadesParaPaginaDeDtosResponse(paginaClientes))
+      .map(paginaClientes -> this.mapper.converterPaginaDeEntidadeParaPaginaDtoResponse(paginaClientes, ClienteDtoResponse.class))
       .orElseThrow();
   }
 }
