@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driver.controllers;
 
-import com.techchallenge.devnet.adapter.driver.dtos.ProdutoDtoResponse;
+import com.techchallenge.devnet.adapter.driver.dtos.response.ProdutoDtoResponse;
 import com.techchallenge.devnet.core.application.use_case.IProdutoService;
 import com.techchallenge.devnet.core.domain.value_objects.ProdutoFiltro;
 import lombok.extern.slf4j.Slf4j;

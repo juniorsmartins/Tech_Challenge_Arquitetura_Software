@@ -1,9 +1,10 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver.dtos.ProdutoDtoRequest;
-import com.techchallenge.devnet.adapter.driver.dtos.ProdutoDtoResponse;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.techchallenge.devnet.adapter.driver.dtos.request.ProdutoDtoRequest;
+import com.techchallenge.devnet.adapter.driver.dtos.response.ProdutoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.IProdutoRepository;
-import com.techchallenge.devnet.core.domain.base.mappers.IProdutoMapper;
+import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProdutoPutService implements IProdutoService.AtualizarService {
 
   @Autowired
-  private IProdutoMapper mapper;
+  private IMapper mapper;
 
   @Autowired
   private IProdutoRepository.GetRepository repository;
@@ -28,7 +29,7 @@ public class ProdutoPutService implements IProdutoService.AtualizarService {
         BeanUtils.copyProperties(dtoRequest, produto, "id");
         return produto;
       })
-      .map(produto -> this.mapper.converterEntidadeParaDtoResponse(produto))
+      .map(produto -> this.mapper.converterEntidadeParaDtoResponse(produto, ProdutoDtoResponse.class))
       .orElseThrow();
   }
 }

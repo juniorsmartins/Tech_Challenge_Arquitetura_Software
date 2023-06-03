@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.adapter.driver.dtos;
+package com.techchallenge.devnet.adapter.driver.dtos.request;
 
 import com.techchallenge.devnet.core.domain.entities.enums.ECategoria;
 import jakarta.persistence.EnumType;
@@ -6,26 +6,34 @@ import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public record ProdutoDtoRequest(
+@Getter
+@Setter
+public final class ProdutoDtoRequest implements Serializable {
+
+  private static final long serialVersionUID = 1L;
 
   @NotNull
   @Enumerated(EnumType.STRING)
-  ECategoria categoria,
+  private ECategoria categoria;
 
   @NotBlank
   @Length(max = 100)
-  String nome,
+  private String nome;
 
   @NotBlank
   @Length(max = 250)
-  String descricao,
+  private String descricao;
 
   @NotNull
   @PositiveOrZero
-  BigDecimal preco
-) { }
+  private BigDecimal preco;
+}
 

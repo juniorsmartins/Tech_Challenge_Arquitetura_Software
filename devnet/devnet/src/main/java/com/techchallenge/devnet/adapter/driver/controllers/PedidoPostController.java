@@ -1,8 +1,9 @@
 package com.techchallenge.devnet.adapter.driver.controllers;
 
+import com.techchallenge.devnet.adapter.driver.dtos.request.PedidoDtoRequest;
+import com.techchallenge.devnet.adapter.driver.dtos.response.PedidoDtoResponse;
 import com.techchallenge.devnet.adapter.driver.dtos.request.ClienteDtoRequest;
-import com.techchallenge.devnet.adapter.driver.dtos.response.ClienteDtoResponse;
-import com.techchallenge.devnet.core.application.use_case.IClienteService;
+import com.techchallenge.devnet.core.application.use_case.IPedidoService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,20 +15,20 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @Slf4j
 @RestController
-@RequestMapping(path = "/v1/clientes")
-public final class ClientePostController implements IClienteController.PostController {
+@RequestMapping(path = "/v1/pedidos")
+public final class PedidoPostController implements IPedidoController.PostController {
 
   @Autowired
-  private IClienteService.CadastrarService service;
+  private IPedidoService.CadastrarService service;
 
   @Override
-  public ResponseEntity<ClienteDtoResponse> cadastrar(@RequestBody @Valid final ClienteDtoRequest dtoRequest,
-                                                      final UriComponentsBuilder uriComponentsBuilder) {
+  public ResponseEntity<PedidoDtoResponse> cadastrar(@RequestBody @Valid final PedidoDtoRequest dtoRequest,
+                                                     final UriComponentsBuilder uriComponentsBuilder) {
     var response = this.service.cadastrar(dtoRequest);
 
     return ResponseEntity
       .created(uriComponentsBuilder
-        .path("/v1/clientes/{id}")
+        .path("/v1/pedidos/{id}")
         .buildAndExpand(response.getId())
         .toUri())
       .body(response);

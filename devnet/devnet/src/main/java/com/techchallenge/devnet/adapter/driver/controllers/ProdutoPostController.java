@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.adapter.driver.controllers;
 
-import com.techchallenge.devnet.adapter.driver.dtos.ProdutoDtoRequest;
-import com.techchallenge.devnet.adapter.driver.dtos.ProdutoDtoResponse;
+import com.techchallenge.devnet.adapter.driver.dtos.request.ProdutoDtoRequest;
+import com.techchallenge.devnet.adapter.driver.dtos.response.ProdutoDtoResponse;
 import com.techchallenge.devnet.core.application.use_case.IProdutoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public final class ProdutoPostController implements IProdutoController.PostContr
     return ResponseEntity
       .created(uriComponentsBuilder
         .path("/v1/produtos/{id}")
-        .buildAndExpand(response.id())
+        .buildAndExpand(response.getId())
         .toUri())
       .body(response);
   }

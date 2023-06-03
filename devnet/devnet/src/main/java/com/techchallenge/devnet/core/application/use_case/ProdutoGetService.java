@@ -1,8 +1,10 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver.dtos.ProdutoDtoResponse;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.techchallenge.devnet.adapter.driver.dtos.response.ClienteDtoResponse;
+import com.techchallenge.devnet.adapter.driver.dtos.response.ProdutoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.IProdutoRepository;
-import com.techchallenge.devnet.core.domain.base.mappers.IProdutoMapper;
+import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
 import com.techchallenge.devnet.core.domain.value_objects.ProdutoFiltro;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,7 +21,7 @@ public class ProdutoGetService implements IProdutoService.PesquisarService {
   private IProdutoRepository.GetRepository repository;
 
   @Autowired
-  private IProdutoMapper mapper;
+  private IMapper mapper;
 
   @Transactional(readOnly = true)
   @Override
@@ -27,7 +29,7 @@ public class ProdutoGetService implements IProdutoService.PesquisarService {
 
     return Optional.of(filtro)
       .map(parametrosDePesquisa -> this.repository.pesquisar(parametrosDePesquisa, paginacao))
-      .map(paginaProdutos -> this.mapper.converterPaginaDeEntidadesParaPaginaDeDtosResponse(paginaProdutos))
+      .map(paginaProdutos -> this.mapper.converterPaginaDeEntidadeParaPaginaDtoResponse(paginaProdutos, ProdutoDtoResponse.class))
       .orElseThrow();
   }
 }
