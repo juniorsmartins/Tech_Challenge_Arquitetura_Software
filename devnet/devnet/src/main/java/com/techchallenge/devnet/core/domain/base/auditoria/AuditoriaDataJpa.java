@@ -12,6 +12,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.OffsetDateTime;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
@@ -22,10 +23,10 @@ public abstract class AuditoriaDataJpa implements Serializable {
 
   @CreatedDate
   @Column(name = "data_hora_cadastro", updatable = false)
-  private Instant dataHoraCadastro = Instant.now();
+  private OffsetDateTime dataHoraCadastro = OffsetDateTime.now();
 
   @UpdateTimestamp
   @Column(name = "data_hora_atualizacao")
-  private Instant dataHoraAtualizacao = Instant.now();
+  private OffsetDateTime dataHoraAtualizacao = OffsetDateTime.now();
 }
 

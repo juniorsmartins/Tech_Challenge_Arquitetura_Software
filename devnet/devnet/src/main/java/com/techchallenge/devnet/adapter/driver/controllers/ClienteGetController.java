@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driver.controllers;
 
-import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoResponse;
+import com.techchallenge.devnet.adapter.driver.dtos.response.ClienteDtoResponse;
 import com.techchallenge.devnet.core.application.use_case.IClienteService;
 import com.techchallenge.devnet.core.domain.value_objects.ClienteFiltro;
 import lombok.extern.slf4j.Slf4j;

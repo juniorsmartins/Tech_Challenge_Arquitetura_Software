@@ -2,6 +2,7 @@ package com.techchallenge.devnet.core.domain.entities;
 
 import com.techchallenge.devnet.core.domain.base.auditoria.AuditoriaDataJpa;
 import com.techchallenge.devnet.core.domain.entities.enums.ECategoria;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -9,6 +10,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,6 +24,9 @@ import org.hibernate.envers.Audited;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "produtos")
@@ -53,5 +59,8 @@ public final class Produto extends AuditoriaDataJpa implements Serializable {
 
   @Column(name = "preco", nullable = false)
   private BigDecimal preco;
+
+//  @OneToMany(mappedBy = "produto")
+//  private Set<ItemPedido> itensPedido = new HashSet<>();
 }
 

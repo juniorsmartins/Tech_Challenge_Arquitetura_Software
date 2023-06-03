@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.adapter.driver.controllers;
 
-import com.techchallenge.devnet.adapter.driver.dtos.ProdutoDtoRequest;
-import com.techchallenge.devnet.adapter.driver.dtos.ProdutoDtoResponse;
+import com.techchallenge.devnet.adapter.driver.dtos.request.ProdutoDtoRequest;
+import com.techchallenge.devnet.adapter.driver.dtos.response.ProdutoDtoResponse;
 import com.techchallenge.devnet.core.domain.value_objects.ProdutoFiltro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +16,7 @@ public interface IProdutoController {
 
   interface PostController {
     @PostMapping
-    ResponseEntity<ProdutoDtoResponse> cadastrar(ProdutoDtoRequest dtoRequest, UriComponentsBuilder uri);
+    ResponseEntity<ProdutoDtoResponse> cadastrar(ProdutoDtoRequest dtoRequest, UriComponentsBuilder uriComponentsBuilder);
   }
 
   interface PutController {
@@ -31,7 +31,7 @@ public interface IProdutoController {
 
   interface DeleteController {
     @DeleteMapping(path = "/{id}")
-    ResponseEntity<?> deletePorId(Long id);
+    ResponseEntity<Object> deletePorId(Long id);
   }
 }
 

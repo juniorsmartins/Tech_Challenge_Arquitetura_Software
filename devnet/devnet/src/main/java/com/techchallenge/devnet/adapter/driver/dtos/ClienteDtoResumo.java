@@ -1,15 +1,18 @@
 package com.techchallenge.devnet.adapter.driver.dtos;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import jakarta.validation.constraints.NotBlank;
-import org.hibernate.validator.constraints.br.CPF;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.time.Instant;
+import java.io.Serializable;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public record ClienteDtoResumo(
+@Getter
+@Setter
+public final class ClienteDtoResumo implements Serializable {
 
-  @CPF
-  String cpf
-) { }
+  @NotNull
+  @Positive
+  private Long id;
+}
 

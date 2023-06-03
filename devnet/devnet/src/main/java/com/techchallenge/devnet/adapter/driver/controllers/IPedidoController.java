@@ -1,8 +1,9 @@
 package com.techchallenge.devnet.adapter.driver.controllers;
 
+import com.techchallenge.devnet.adapter.driver.dtos.request.PedidoDtoRequest;
+import com.techchallenge.devnet.adapter.driver.dtos.response.PedidoDtoResponse;
 import com.techchallenge.devnet.adapter.driver.dtos.request.ClienteDtoRequest;
-import com.techchallenge.devnet.adapter.driver.dtos.response.ClienteDtoResponse;
-import com.techchallenge.devnet.core.domain.value_objects.ClienteFiltro;
+import com.techchallenge.devnet.core.domain.value_objects.PedidoFiltro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -12,21 +13,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.util.UriComponentsBuilder;
 
-public interface IClienteController {
+public interface IPedidoController {
 
   interface PostController {
     @PostMapping
-    ResponseEntity<ClienteDtoResponse> cadastrar(ClienteDtoRequest dtoRequest, UriComponentsBuilder uriComponentsBuilder);
+    ResponseEntity<PedidoDtoResponse> cadastrar(PedidoDtoRequest dtoRequest, UriComponentsBuilder uriComponentsBuilder);
   }
 
   interface PutController {
     @PutMapping(path = "/{id}")
-    ResponseEntity<ClienteDtoResponse> atualizar(Long id, ClienteDtoRequest dtoRequest);
+    ResponseEntity<PedidoDtoResponse> atualizar(Long id, PedidoDtoRequest dtoRequest);
   }
 
   interface GetController {
     @GetMapping
-    ResponseEntity<Page<ClienteDtoResponse>> pesquisar(ClienteFiltro filtro, Pageable paginacao);
+    ResponseEntity<Page<PedidoDtoResponse>> pesquisar(PedidoFiltro filtro, Pageable paginacao);
   }
 
   interface DeleteController {

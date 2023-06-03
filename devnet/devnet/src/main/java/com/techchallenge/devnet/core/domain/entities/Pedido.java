@@ -1,8 +1,10 @@
 package com.techchallenge.devnet.core.domain.entities;
 
 import com.techchallenge.devnet.core.domain.base.auditoria.AuditoriaDataJpa;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -45,10 +47,10 @@ public final class Pedido extends AuditoriaDataJpa implements Serializable {
   private Long id;
 
   @ManyToOne
-  @JoinColumn(name = "cliente_cpf", nullable = true, referencedColumnName = "cpf")
+  @JoinColumn(name = "usuario_id", referencedColumnName = "id")
   private Cliente cliente;
 
-  @OneToMany(mappedBy = "pedido")
-  private Set<Item> itens = new HashSet<>();
+  @OneToMany(mappedBy = "pedido", cascade = {CascadeType.ALL})
+  private Set<ItemPedido> itensPedido = new HashSet<>();
 }
 
