@@ -17,5 +17,11 @@ public class PedidoPostRepository implements IPedidoRepository.PostRepository {
 
     return this.jpa.save(pedido);
   }
+
+  @Override
+  public void flush() {
+
+    this.jpa.flush();
+  }
 }
 

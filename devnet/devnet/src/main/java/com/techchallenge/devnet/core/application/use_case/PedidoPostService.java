@@ -27,10 +27,11 @@ public class PedidoPostService implements IPedidoService.CadastrarService {
 
     return Optional.of(dtoRequest)
       .map(dto -> this.mapper.converterDtoRequestParaEntidade(dto, Pedido.class))
-//      .map(pedido -> {
-//        pedido.getItens().forEach(item -> item.setPedido(pedido));
-//        return pedido;
-//      })
+      .map(pedido -> {
+        pedido.getItensPedido().forEach(item -> item.setPedido(pedido));
+        this.repository.flush();
+        return pedido;
+      })
       .map(this.repository::salvar)
       .map(pedido -> this.mapper.converterEntidadeParaDtoResponse(pedido, PedidoDtoResponse.class))
       .orElseThrow();

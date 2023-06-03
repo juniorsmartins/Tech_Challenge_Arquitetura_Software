@@ -3,6 +3,7 @@ package com.techchallenge.devnet.adapter.driver.dtos.request;
 import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoResumo;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,7 +21,8 @@ public final class PedidoDtoRequest implements Serializable {
   private ClienteDtoResumo cliente;
 
   @NotNull
+  @Size(min = 1)
   @Valid
-  private Set<ItemPedidoDtoRequest> itens;
+  private Set<ItemPedidoDtoRequest> itensPedido;
 }
 

@@ -16,7 +16,6 @@ public final class ItemPedidoDtoRequest implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  @JsonIgnore
   private PedidoDtoRequest pedido;
 
   @NotNull

@@ -19,7 +19,7 @@ public final class PedidoDtoResponse implements Serializable {
 
   private ClienteDtoResponse cliente;
 
-  private Set<ItemPedidoDtoResponse> itens;
+  private Set<ItemPedidoDtoResponse> itensPedido;
 
   private OffsetDateTime dataHoraCadastro;
 

@@ -11,6 +11,8 @@ public interface IPedidoRepository {
 
   interface PostRepository {
     Pedido salvar(Pedido pedido);
+
+    void flush();
   }
 
   interface GetRepository {

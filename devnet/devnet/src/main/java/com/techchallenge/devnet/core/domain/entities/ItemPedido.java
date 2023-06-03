@@ -31,23 +31,22 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(of = {"pedido", "produto"})
+@EqualsAndHashCode(of = {"id"})
 @Audited
 public final class ItemPedido implements Serializable {
 
   public static final long serialVersionUID = 1L;
 
-  @EmbeddedId
-  private ItemPedidoId id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
   @ManyToOne
-  @MapsId("pedidoId")
-  @JoinColumn(name = "pedido_id")
+  @JoinColumn(name = "pedido_id", referencedColumnName = "id", nullable = false)
   private Pedido pedido;
 
   @ManyToOne
-  @MapsId("produtoId")
-  @JoinColumn(name = "produto_id")
+  @JoinColumn(name = "produto_id", referencedColumnName = "id", nullable = false)
   private Produto produto;
 
   @Column(name = "quantidade")

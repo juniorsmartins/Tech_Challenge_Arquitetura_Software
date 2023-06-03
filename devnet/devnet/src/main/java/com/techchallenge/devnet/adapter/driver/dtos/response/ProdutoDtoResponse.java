@@ -30,7 +30,7 @@ public final class ProdutoDtoResponse implements Serializable {
   private BigDecimal preco;
 
   @JsonIgnore
-  private Set<ItemPedido> itens;
+  private Set<ItemPedido> itensPedido;
 
   private OffsetDateTime dataHoraCadastro;
 
