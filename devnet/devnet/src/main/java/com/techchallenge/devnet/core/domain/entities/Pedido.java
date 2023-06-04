@@ -2,6 +2,7 @@ package com.techchallenge.devnet.core.domain.entities;
 
 import com.techchallenge.devnet.core.domain.base.auditoria.AuditoriaDataJpa;
 import com.techchallenge.devnet.core.domain.entities.enums.FormaPagamentoEnum;
+import com.techchallenge.devnet.core.domain.entities.enums.StatusPedidoEnum;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,7 @@ import lombok.ToString;
 import org.hibernate.envers.Audited;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -38,6 +40,10 @@ public final class Pedido extends AuditoriaDataJpa implements Serializable {
   @Column(name = "id")
   private Long id;
 
+  @Enumerated(EnumType.STRING)
+  @Column(name = "status_pedido", nullable = false)
+  private StatusPedidoEnum statusPedido;
+
   @ManyToOne
   @JoinColumn(name = "usuario_id", referencedColumnName = "id", nullable = false)
   private Cliente cliente;
@@ -48,5 +54,18 @@ public final class Pedido extends AuditoriaDataJpa implements Serializable {
   @Enumerated(EnumType.STRING)
   @Column(name = "forma_pagamento", nullable = false)
   private FormaPagamentoEnum formaPagamento;
+
+  @Column(name = "preco_total")
+  private BigDecimal precoTotal;
+
+  public void calcularPrecoTotal() {
+    this.getItensPedido().forEach(ItemPedido::calcularPrecoParcial);
+
+    var total = this.getItensPedido().stream()
+      .map(ItemPedido::getPrecoParcial)
+      .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+    this.setPrecoTotal(total);
+  }
 }
 

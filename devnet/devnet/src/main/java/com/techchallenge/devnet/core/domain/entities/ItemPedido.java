@@ -22,6 +22,7 @@ import lombok.ToString;
 import org.hibernate.envers.Audited;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "itens")
@@ -51,5 +52,15 @@ public final class ItemPedido implements Serializable {
 
   @Column(name = "quantidade")
   private int quantidade;
+
+  @Column(name = "preco_parcial")
+  private BigDecimal precoParcial;
+
+  public void calcularPrecoParcial() {
+    var precoUnitario = this.produto.getPreco();
+    var quantidade = this.quantidade;
+
+    this.setPrecoParcial(precoUnitario.multiply(new BigDecimal(quantidade)));
+  }
 }
 
