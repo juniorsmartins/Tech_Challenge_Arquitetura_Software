@@ -7,15 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class PedidoPostRepository implements IPedidoRepository.PostRepository {
+public class PedidoDeleteRepository implements IPedidoRepository.DeleteRepository {
 
   @Autowired
-  private PedidoRepositoryJpa jpa;
+  private PedidoRepositoryJpa repositoryJpa;
 
   @Override
-  public Pedido salvar(final Pedido pedido) {
+  public void deletar(Pedido pedido) {
 
-    return this.jpa.save(pedido);
+    this.repositoryJpa.delete(pedido);
   }
 }
 

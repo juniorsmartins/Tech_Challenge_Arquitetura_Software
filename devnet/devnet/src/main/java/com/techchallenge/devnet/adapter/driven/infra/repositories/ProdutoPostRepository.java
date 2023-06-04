@@ -7,15 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ProdutoDeleteRepositoryImpl implements IProdutoRepository.DeleteRepository {
+public class ProdutoPostRepository implements IProdutoRepository.PostRepository {
 
   @Autowired
-  private ProdutoRepositoryJpa repositoryJpa;
+  private ProdutoRepositoryJpa jpa;
 
   @Override
-  public void deletar(final Produto produto) {
+  public Produto salvar(final Produto produto) {
 
-    this.repositoryJpa.delete(produto);
+    return this.jpa.save(produto);
   }
 }
-

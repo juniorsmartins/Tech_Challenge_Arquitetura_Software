@@ -1,6 +1,7 @@
 package com.techchallenge.devnet.core.application.use_case;
 
 import com.techchallenge.devnet.core.application.ports.IProdutoRepository;
+import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,7 @@ public class ProdutoDeleteService implements IProdutoService.DeletarService {
         this.deleteRepository.deletar(produto);
         return true;
       })
-      .orElseThrow();
+      .orElseThrow(() -> new ProdutoNaoEncontradoException(id));
   }
 }
 
