@@ -1,8 +1,6 @@
 package com.techchallenge.devnet.adapter.driver.dtos.response;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.techchallenge.devnet.core.domain.entities.ItemPedido;
 import com.techchallenge.devnet.core.domain.entities.enums.ECategoria;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +8,6 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -28,9 +25,6 @@ public final class ProdutoDtoResponse implements Serializable {
   private String descricao;
 
   private BigDecimal preco;
-
-  @JsonIgnore
-  private Set<ItemPedido> itensPedido;
 
   private OffsetDateTime dataHoraCadastro;
 

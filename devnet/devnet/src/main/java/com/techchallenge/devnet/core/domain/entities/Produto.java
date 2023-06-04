@@ -59,8 +59,5 @@ public final class Produto extends AuditoriaDataJpa implements Serializable {
 
   @Column(name = "preco", nullable = false)
   private BigDecimal preco;
-
-//  @OneToMany(mappedBy = "produto")
-//  private Set<ItemPedido> itensPedido = new HashSet<>();
 }
 

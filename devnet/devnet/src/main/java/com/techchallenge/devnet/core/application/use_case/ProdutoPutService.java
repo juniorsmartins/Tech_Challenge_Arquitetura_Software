@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.techchallenge.devnet.adapter.driver.dtos.request.ProdutoDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.response.ProdutoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.IProdutoRepository;
+import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class ProdutoPutService implements IProdutoService.AtualizarService {
         return produto;
       })
       .map(produto -> this.mapper.converterEntidadeParaDtoResponse(produto, ProdutoDtoResponse.class))
-      .orElseThrow();
+      .orElseThrow(() -> new ProdutoNaoEncontradoException(id));
   }
 }
 

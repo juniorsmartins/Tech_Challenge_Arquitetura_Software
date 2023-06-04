@@ -13,13 +13,13 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public class ProdutoGetRepositoryImpl implements IProdutoRepository.GetRepository {
+public class ProdutoGetRepository implements IProdutoRepository.GetRepository {
 
   @Autowired
   private ProdutoRepositoryJpa repositoryJpa;
 
   @Override
-  public Page<Produto> pesquisar(ProdutoFiltro filtro, Pageable paginacao) {
+  public Page<Produto> pesquisar(final ProdutoFiltro filtro, final Pageable paginacao) {
 
     return this.repositoryJpa.findAll(ProdutoSpecification.consultaDinamica(filtro), paginacao);
   }
