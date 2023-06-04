@@ -5,6 +5,7 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.envers.Audited;
 import org.springframework.data.annotation.CreatedDate;
@@ -21,7 +22,7 @@ import java.time.OffsetDateTime;
 @Setter
 public abstract class AuditoriaDataJpa implements Serializable {
 
-  @CreatedDate
+  @CreationTimestamp
   @Column(name = "data_hora_cadastro", updatable = false)
   private OffsetDateTime dataHoraCadastro = OffsetDateTime.now();
 

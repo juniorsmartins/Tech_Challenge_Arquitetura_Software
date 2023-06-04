@@ -1,11 +1,14 @@
 package com.techchallenge.devnet.adapter.driver.dtos.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoResumo;
+import com.techchallenge.devnet.core.domain.entities.enums.FormaPagamentoEnum;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -17,9 +20,11 @@ public final class PedidoDtoResponse implements Serializable {
 
   private Long id;
 
-  private ClienteDtoResponse cliente;
+  private ClienteDtoResumo cliente;
 
-  private Set<ItemPedidoDtoResponse> itensPedido;
+  private List<ItemPedidoDtoResponse> itensPedido;
+
+  private FormaPagamentoEnum formaPagamento;
 
   private OffsetDateTime dataHoraCadastro;
 

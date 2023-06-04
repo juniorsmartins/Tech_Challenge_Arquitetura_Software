@@ -1,6 +1,5 @@
 package com.techchallenge.devnet.adapter.driver.dtos.request;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.techchallenge.devnet.adapter.driver.dtos.ProdutoDtoResumo;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -15,8 +14,6 @@ import java.io.Serializable;
 public final class ItemPedidoDtoRequest implements Serializable {
 
   private static final long serialVersionUID = 1L;
-
-  private PedidoDtoRequest pedido;
 
   @NotNull
   @Valid
