@@ -9,5 +9,7 @@ public final class MensagemPadrao {
   public static final String CLIENTE_NAO_ENCONTRADO = "O Cliente, com id %s, não foi encontrado!";
 
   public static final String PRODUTO_NAO_ENCONTRADO = "O Produto, com id %s, não foi encontrado!";
+
+  public static final String PEDIDO_NAO_ENCONTRADO = "O Pedido, com id %s, não foi encontrado!";
 }
 

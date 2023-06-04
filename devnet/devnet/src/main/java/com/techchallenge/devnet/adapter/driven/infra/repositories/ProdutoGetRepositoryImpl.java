@@ -19,7 +19,7 @@ public class ProdutoGetRepositoryImpl implements IProdutoRepository.GetRepositor
   private ProdutoRepositoryJpa repositoryJpa;
 
   @Override
-  public Page<Produto> pesquisar(ProdutoFiltro filtro, Pageable paginacao) {
+  public Page<Produto> pesquisar(final ProdutoFiltro filtro, final Pageable paginacao) {
 
     return this.repositoryJpa.findAll(ProdutoSpecification.consultaDinamica(filtro), paginacao);
   }
