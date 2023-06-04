@@ -6,6 +6,8 @@ import com.techchallenge.devnet.adapter.driver.dtos.response.PedidoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.IClienteRepository;
 import com.techchallenge.devnet.core.application.ports.IPedidoRepository;
 import com.techchallenge.devnet.core.application.ports.IProdutoRepository;
+import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ClienteNaoEncontradoException;
+import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
 import com.techchallenge.devnet.core.domain.entities.ItemPedido;
 import com.techchallenge.devnet.core.domain.entities.Pedido;
@@ -44,7 +46,7 @@ public class PedidoPostService implements IPedidoService.CadastrarService {
         var idCliente = pedido.getCliente().getId();
 
         var cliente = this.clienteRepository.consultarPorId(idCliente)
-          .orElseThrow();
+          .orElseThrow(() -> new ClienteNaoEncontradoException(idCliente));
 
         pedido.setCliente(cliente);
         return pedido;
@@ -54,11 +56,10 @@ public class PedidoPostService implements IPedidoService.CadastrarService {
           var idProduto = item.getProduto().getId();
 
           var produto = this.produtoRepository.consultarPorId(idProduto)
-            .orElseThrow();
+            .orElseThrow(() -> new ProdutoNaoEncontradoException(idProduto));
 
           item.setProduto(produto);
         });
-
          return pedido;
       })
       .map(pedido -> {
