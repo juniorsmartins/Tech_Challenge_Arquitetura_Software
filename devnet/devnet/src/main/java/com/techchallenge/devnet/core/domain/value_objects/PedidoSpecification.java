@@ -22,13 +22,21 @@ public final class PedidoSpecification {
         predicados.add(criteriaBuilder.equal(root.get("id"), filtro.getId()));
       }
 
+      if (ObjectUtils.isNotEmpty(filtro.getStatusPedido())) {
+        predicados.add(criteriaBuilder.equal(root.get("statusPedido"), filtro.getStatusPedido()));
+      }
+
       if (ObjectUtils.isNotEmpty(filtro.getCliente())) {
         var cpfs = Arrays.asList(filtro.getCliente().split(","));
         List<Predicate> cpfPredicates = cpfs.stream()
-          .map(cpf -> criteriaBuilder.like(root.get("cpf"), "%" + cpf + "%"))
+          .map(cpf -> criteriaBuilder.like(root.get("cliente").get("cpf"), "%" + cpf + "%"))
           .collect(Collectors.toList());
 
         predicados.add(criteriaBuilder.or(cpfPredicates.toArray(new Predicate[0])));
+      }
+
+      if (ObjectUtils.isNotEmpty(filtro.getFormaPagamento())) {
+        predicados.add(criteriaBuilder.equal(root.get("formaPagamento"), filtro.getFormaPagamento()));
       }
 
       return criteriaBuilder.and(predicados.toArray(new Predicate[0]));
