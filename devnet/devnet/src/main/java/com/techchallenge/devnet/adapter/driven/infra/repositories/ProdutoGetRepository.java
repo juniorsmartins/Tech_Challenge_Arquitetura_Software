@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public class ProdutoGetRepositoryImpl implements IProdutoRepository.GetRepository {
+public class ProdutoGetRepository implements IProdutoRepository.GetRepository {
 
   @Autowired
   private ProdutoRepositoryJpa repositoryJpa;
