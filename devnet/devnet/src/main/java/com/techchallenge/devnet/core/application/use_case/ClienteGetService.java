@@ -1,6 +1,5 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.techchallenge.devnet.adapter.driver.dtos.response.ClienteDtoResponse;
 import com.techchallenge.devnet.core.application.ports.IClienteRepository;
 import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
@@ -24,7 +23,7 @@ public class ClienteGetService implements IClienteService.PesquisarService {
 
   @Transactional(readOnly = true)
   @Override
-  public Page<ClienteDtoResponse> pesquisar(ClienteFiltro filtro, Pageable paginacao) {
+  public Page<ClienteDtoResponse> pesquisar(final ClienteFiltro filtro, final Pageable paginacao) {
 
     return Optional.of(filtro)
       .map(parametrosDePesquisa -> this.repository.pesquisar(parametrosDePesquisa, paginacao))

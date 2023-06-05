@@ -1,6 +1,5 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.techchallenge.devnet.adapter.driver.dtos.request.ProdutoDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.response.ProdutoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.IProdutoRepository;

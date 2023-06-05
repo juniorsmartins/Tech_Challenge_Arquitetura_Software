@@ -1,6 +1,5 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.techchallenge.devnet.adapter.driver.dtos.request.ClienteDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.response.ClienteDtoResponse;
 import com.techchallenge.devnet.core.application.ports.IClienteRepository;
@@ -9,6 +8,7 @@ import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
 import com.techchallenge.devnet.core.domain.entities.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -26,7 +26,7 @@ public class ClientePostService implements IClienteService.CadastrarService {
   @Autowired
   private List<RegrasNegocioCliente> regrasDeNegocio;
 
-  @Transactional
+  @Transactional(isolation = Isolation.SERIALIZABLE)
   @Override
   public ClienteDtoResponse cadastrar(final ClienteDtoRequest dtoRequest) {
 
