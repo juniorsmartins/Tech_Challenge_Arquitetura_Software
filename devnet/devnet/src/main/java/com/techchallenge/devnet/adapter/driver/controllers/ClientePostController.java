@@ -14,7 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @Slf4j
 @RestController
-@RequestMapping(path = "/v1/clientes")
+@RequestMapping(path = "/api/v1/clientes")
 public final class ClientePostController implements IClienteController.PostController {
 
   @Autowired
@@ -27,7 +27,7 @@ public final class ClientePostController implements IClienteController.PostContr
 
     return ResponseEntity
       .created(uriComponentsBuilder
-        .path("/v1/clientes/{id}")
+        .path("/api/v1/clientes/{id}")
         .buildAndExpand(response.getId())
         .toUri())
       .body(response);
