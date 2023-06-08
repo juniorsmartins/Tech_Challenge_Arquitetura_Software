@@ -52,19 +52,19 @@ public final class Pedido extends AuditoriaDataJpa implements Serializable {
   @Column(name = "status_pedido", nullable = false)
   private StatusPedidoEnum statusPedido;
 
-  @ManyToOne
-  @JoinColumn(name = "usuario_id", referencedColumnName = "id", nullable = false)
-  private Cliente cliente;
-
-  @OneToMany(mappedBy = "pedido", cascade = {CascadeType.ALL})
-  private List<ItemPedido> itensPedido = new ArrayList<>();
-
   @Enumerated(EnumType.STRING)
   @Column(name = "forma_pagamento", nullable = false)
   private FormaPagamentoEnum formaPagamento;
 
   @Column(name = "preco_total")
   private BigDecimal precoTotal;
+
+  @ManyToOne
+  @JoinColumn(name = "usuario_id", referencedColumnName = "id", nullable = false)
+  private Cliente cliente;
+
+  @OneToMany(mappedBy = "pedido", cascade = {CascadeType.ALL})
+  private List<ItemPedido> itensPedido = new ArrayList<>();
 
   public void calcularPrecoTotal() {
     this.getItensPedido().forEach(ItemPedido::calcularPrecoParcial);

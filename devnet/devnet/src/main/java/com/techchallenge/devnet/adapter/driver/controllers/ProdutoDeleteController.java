@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping(path = "/v1/produtos")
+@RequestMapping(path = "/api/v1/produtos")
 public final class ProdutoDeleteController implements IProdutoController.DeleteController {
 
   @Autowired

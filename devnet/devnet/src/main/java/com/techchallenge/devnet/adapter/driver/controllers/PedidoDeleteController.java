@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping(path = "/v1/pedidos")
+@RequestMapping(path = "/api/v1/pedidos")
 public final class PedidoDeleteController implements IPedidoController.DeleteController {
 
   @Autowired

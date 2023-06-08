@@ -2,7 +2,6 @@ package com.techchallenge.devnet.adapter.driver.controllers;
 
 import com.techchallenge.devnet.adapter.driver.dtos.request.PedidoDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.response.PedidoDtoResponse;
-import com.techchallenge.devnet.adapter.driver.dtos.request.ClienteDtoRequest;
 import com.techchallenge.devnet.core.application.use_case.IPedidoService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @Slf4j
 @RestController
-@RequestMapping(path = "/v1/pedidos")
+@RequestMapping(path = "/api/v1/pedidos")
 public final class PedidoPostController implements IPedidoController.PostController {
 
   @Autowired
@@ -28,7 +27,7 @@ public final class PedidoPostController implements IPedidoController.PostControl
 
     return ResponseEntity
       .created(uriComponentsBuilder
-        .path("/v1/pedidos/{id}")
+        .path("/api/v1/pedidos/{id}")
         .buildAndExpand(response.getId())
         .toUri())
       .body(response);

@@ -8,11 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.UUID;
-
 @Slf4j
 @RestController
-@RequestMapping(path = "/v1/clientes")
+@RequestMapping(path = "/api/v1/clientes")
 public final class ClienteDeleteController implements IClienteController.DeleteController {
 
   @Autowired

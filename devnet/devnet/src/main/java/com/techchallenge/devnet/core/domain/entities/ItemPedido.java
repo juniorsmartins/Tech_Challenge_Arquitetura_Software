@@ -21,7 +21,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "itens")
+@Table(name = "itens_pedido")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -38,6 +38,12 @@ public final class ItemPedido implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @Column(name = "quantidade")
+  private int quantidade;
+
+  @Column(name = "preco_parcial")
+  private BigDecimal precoParcial;
+
   @ManyToOne
   @JoinColumn(name = "pedido_id", referencedColumnName = "id", nullable = false)
   private Pedido pedido;
@@ -45,12 +51,6 @@ public final class ItemPedido implements Serializable {
   @ManyToOne
   @JoinColumn(name = "produto_id", referencedColumnName = "id", nullable = false)
   private Produto produto;
-
-  @Column(name = "quantidade")
-  private int quantidade;
-
-  @Column(name = "preco_parcial")
-  private BigDecimal precoParcial;
 
   public void calcularPrecoParcial() {
     var precoUnitario = this.produto.getPreco();
