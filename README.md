@@ -21,8 +21,10 @@ Descrição: aplicação desenvolvida para compor nota no processo avaliativo da
 
 2. Documentação de Desenvolvimento do Projeto;
     1. Diagramas;
-    2. Ferramentas;
-    3.
+    2. Tecnologias;
+    3. Funcionalidades;
+    4. Ferramentas;
+    5.
 
 3. Documentação de Infraestrutura do Projeto;
 
@@ -109,15 +111,31 @@ Além dos eventos, o Event Storming também pode incluir outras informações re
 #### Tecnologias:
 
 1. Java (17 LTS);
-2. Spring Boot 3.1.0;
+2. Spring Boot (v3.1.0);
 3. PostgreSQL;
 4. Bean Validation;
 5. Spring Data JPA;
 6. Hibernate Envers;
-7. MapStruct;
+7. Model Mapper (v3.1.1);
 8. Commons Lang3;
 9. Lombok;
 10. DevTools;
+
+### Funcionalidades: 
+
+> - [x] Cadastrar Cliente;
+> - [x] Atualizar Cliente;
+> - [x] Pesquisar Cliente;
+> - [x] Deletar Cliente;
+> - [x] Cadastrar Produto;
+> - [x] Atualizar Produto;
+> - [x] Pesquisar Produto;
+> - [x] Deletar Produto;
+> - [x] Cadastrar Pedido;
+> - [ ] Atualizar Pedido;
+> - [x] Pesquisar Pedido;
+> - [x] Deletar Pedido;
+
 
 #### Ferramentas:
 
