@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
-@RequestMapping(path = "/v1/produtos")
+@RequestMapping(path = "/api/v1/produtos")
 public final class ProdutoPostController implements IProdutoController.PostController {
 
   @Autowired
@@ -25,7 +25,7 @@ public final class ProdutoPostController implements IProdutoController.PostContr
 
     return ResponseEntity
       .created(uriComponentsBuilder
-        .path("/v1/produtos/{id}")
+        .path("/api/v1/produtos/{id}")
         .buildAndExpand(response.getId())
         .toUri())
       .body(response);

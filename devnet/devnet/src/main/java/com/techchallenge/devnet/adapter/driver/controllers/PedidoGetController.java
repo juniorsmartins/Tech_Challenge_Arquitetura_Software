@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @Slf4j
 @RestController
-@RequestMapping(path = "/v1/pedidos")
+@RequestMapping(path = "/api/v1/pedidos")
 public final class PedidoGetController implements IPedidoController.GetController {
 
   @Autowired

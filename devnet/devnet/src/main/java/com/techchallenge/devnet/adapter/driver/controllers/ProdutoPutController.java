@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @Slf4j
 @RestController
-@RequestMapping(path = "/v1/produtos")
+@RequestMapping(path = "/api/v1/produtos")
 public final class ProdutoPutController implements IProdutoController.PutController {
 
   @Autowired
