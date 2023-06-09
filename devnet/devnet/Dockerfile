@@ -1,18 +1,9 @@
-FROM adoptopenjdk:17-jdk-hotspot AS build
-RUN mkdir -p /src/tech
-WORKDIR /src/tech
-COPY . .
-RUN mvn package -DskipTests
+FROM maven:3.9.2-eclipse-temurin-17
 
-FROM adoptopenjdk:17-jre-hotspot
-WORKDIR /src/tech
-COPY --from=build target/devnet-0.0.1-SNAPSHOT.jar /src/tech/devnet.jar
+LABEL maintainer="Junior Martins"
 
-ENV SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/techchallenge
-ENV SPRING_DATASOURCE_USERNAME=postgres
-ENV SPRING_DATASOURCE_PASSWORD=postgres
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} /src/tech/devnet.jar
 
-CMD ["java", "-jar", "/src/tech/devnet.jar"]
-
-EXPOSE 8081
+ENTRYPOINT ["java", "-jar", "/src/tech/devnet.jar"]
 
