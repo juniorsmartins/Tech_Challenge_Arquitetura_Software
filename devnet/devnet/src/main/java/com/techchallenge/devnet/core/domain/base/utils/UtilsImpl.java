@@ -12,16 +12,16 @@ import org.springframework.stereotype.Service;
 public final class UtilsImpl implements IUtils {
 
   @Autowired
-  private IClienteRepository.GetRepository clienteRepository;
+  private IClienteRepository.GetRepository clienteGetRepository;
 
   @Autowired
-  private IProdutoRepository.GetRepository produtoRepository;
+  private IProdutoRepository.GetRepository produtoGetRepository;
 
   @Override
   public Pedido confirmarCliente(Pedido pedido) {
 
     var idCliente = pedido.getCliente().getId();
-    var cliente = this.clienteRepository.consultarPorId(idCliente)
+    var cliente = this.clienteGetRepository.consultarPorId(idCliente)
       .orElseThrow(() -> new ClienteNaoEncontradoException(idCliente));
     pedido.setCliente(cliente);
 
@@ -33,10 +33,11 @@ public final class UtilsImpl implements IUtils {
 
     pedido.getItensPedido().forEach(item -> {
       var idProduto = item.getProduto().getId();
-      var produto = this.produtoRepository.consultarPorId(idProduto)
+      var produto = this.produtoGetRepository.consultarPorId(idProduto)
         .orElseThrow(() -> new ProdutoNaoEncontradoException(idProduto));
       item.setProduto(produto);
     });
+
     pedido.calcularPrecoTotal();
     return pedido;
   }

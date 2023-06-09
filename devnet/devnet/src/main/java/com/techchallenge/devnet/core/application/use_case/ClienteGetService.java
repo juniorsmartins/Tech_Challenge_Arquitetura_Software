@@ -16,17 +16,17 @@ import java.util.Optional;
 public class ClienteGetService implements IClienteService.PesquisarService {
 
   @Autowired
-  private IClienteRepository.GetRepository repository;
+  private IMapper mapper;
 
   @Autowired
-  private IMapper mapper;
+  private IClienteRepository.GetRepository clienteGetRepository;
 
   @Transactional(readOnly = true)
   @Override
   public Page<ClienteDtoResponse> pesquisar(final ClienteFiltro filtro, final Pageable paginacao) {
 
     return Optional.of(filtro)
-      .map(parametrosDePesquisa -> this.repository.pesquisar(parametrosDePesquisa, paginacao))
+      .map(parametrosDePesquisa -> this.clienteGetRepository.pesquisar(parametrosDePesquisa, paginacao))
       .map(paginaClientes -> this.mapper.converterPaginaDeEntidadeParaPaginaDtoResponse(paginaClientes, ClienteDtoResponse.class))
       .orElseThrow();
   }

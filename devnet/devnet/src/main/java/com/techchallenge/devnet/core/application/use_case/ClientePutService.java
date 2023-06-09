@@ -1,6 +1,5 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.techchallenge.devnet.adapter.driver.dtos.request.ClienteDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.response.ClienteDtoResponse;
 import com.techchallenge.devnet.core.application.ports.IClienteRepository;
@@ -19,13 +18,13 @@ public class ClientePutService implements IClienteService.AtualizarService {
   private IMapper mapper;
 
   @Autowired
-  private IClienteRepository.GetRepository repository;
+  private IClienteRepository.GetRepository clienteGetRepository;
 
   @Transactional(isolation = Isolation.SERIALIZABLE)
   @Override
   public ClienteDtoResponse atualizar(final Long id, final ClienteDtoRequest dtoRequest) {
 
-    return this.repository.consultarPorId(id)
+    return this.clienteGetRepository.consultarPorId(id)
       .map(cliente -> {
         BeanUtils.copyProperties(dtoRequest, cliente, "id");
         return cliente;

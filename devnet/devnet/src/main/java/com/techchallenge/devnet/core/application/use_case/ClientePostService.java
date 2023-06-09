@@ -21,7 +21,7 @@ public class ClientePostService implements IClienteService.CadastrarService {
   private IMapper mapper;
 
   @Autowired
-  private IClienteRepository.PostRepository repository;
+  private IClienteRepository.PostRepository clientePostRepository;
 
   @Autowired
   private List<RegrasNegocioCliente> regrasDeNegocio;
@@ -37,7 +37,7 @@ public class ClientePostService implements IClienteService.CadastrarService {
 
         return cliente;
       })
-      .map(this.repository::salvar)
+      .map(this.clientePostRepository::salvar)
       .map(cliente -> this.mapper.converterEntidadeParaDtoResponse(cliente, ClienteDtoResponse.class))
       .orElseThrow();
   }

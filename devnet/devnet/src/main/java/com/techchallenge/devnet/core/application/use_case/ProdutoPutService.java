@@ -18,13 +18,13 @@ public class ProdutoPutService implements IProdutoService.AtualizarService {
   private IMapper mapper;
 
   @Autowired
-  private IProdutoRepository.GetRepository repository;
+  private IProdutoRepository.GetRepository produtoGetRepository;
 
   @Transactional(isolation = Isolation.SERIALIZABLE)
   @Override
   public ProdutoDtoResponse atualizar(final Long id, final ProdutoDtoRequest dtoRequest) {
 
-    return this.repository.consultarPorId(id)
+    return this.produtoGetRepository.consultarPorId(id)
       .map(produto -> {
         BeanUtils.copyProperties(dtoRequest, produto, "id");
         return produto;

@@ -26,16 +26,16 @@ public class PedidoPutService implements IPedidoService.AtualizarService {
   private IMapper mapper;
 
   @Autowired
-  private IPedidoRepository.GetRepository repository;
+  private IPedidoRepository.GetRepository pedidoGetRepository;
 
   @Autowired
-  private IClienteRepository.GetRepository clienteRepository;
+  private IClienteRepository.GetRepository clienteGetRepository;
 
   @Autowired
-  private IProdutoRepository.GetRepository produtoRepository;
+  private IProdutoRepository.GetRepository produtoGetRepository;
 
   @Autowired
-  private IItemPedidoRepository.DeleteRepository itemPedidoRepository;
+  private IItemPedidoRepository.DeleteRepository itemPedidoDeleteRepository;
 
   @Autowired
   private IUtils utils;
@@ -51,9 +51,9 @@ public class PedidoPutService implements IPedidoService.AtualizarService {
       .map(pedido -> {
         pedido.setStatusPedido(StatusPedidoEnum.CRIADO);
 
-        var pedidoDoBanco = this.repository.consultarPorId(id)
+        var pedidoDoBanco = this.pedidoGetRepository.consultarPorId(id)
           .map(order -> {
-            order.getItensPedido().forEach(item -> this.itemPedidoRepository.deletar(item));
+            order.getItensPedido().forEach(item -> this.itemPedidoDeleteRepository.deletar(item));
             return order;
           })
           .orElseThrow(() -> new PedidoNaoEncontradoException(id));
