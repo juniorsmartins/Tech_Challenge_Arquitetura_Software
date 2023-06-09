@@ -11,18 +11,18 @@ import org.springframework.transaction.annotation.Transactional;
 public class PedidoDeleteService implements IPedidoService.DeletarService {
 
   @Autowired
-  private IPedidoRepository.GetRepository getRepository;
+  private IPedidoRepository.GetRepository pedidoGetRepository;
 
   @Autowired
-  private IPedidoRepository.DeleteRepository deleteRepository;
+  private IPedidoRepository.DeleteRepository pedidoDeleteRepository;
 
   @Transactional(isolation = Isolation.SERIALIZABLE)
   @Override
   public void deletar(final Long id) {
 
-    this.getRepository.consultarPorId(id)
+    this.pedidoGetRepository.consultarPorId(id)
       .map(pedido -> {
-        this.deleteRepository.deletar(pedido);
+        this.pedidoDeleteRepository.deletar(pedido);
         return true;
       })
       .orElseThrow(() -> new PedidoNaoEncontradoException(id));

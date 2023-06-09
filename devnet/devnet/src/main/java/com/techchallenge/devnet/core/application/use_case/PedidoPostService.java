@@ -22,13 +22,13 @@ public class PedidoPostService implements IPedidoService.CadastrarService {
   private IMapper mapper;
 
   @Autowired
-  private IPedidoRepository.PostRepository repository;
+  private IPedidoRepository.PostRepository pedidoPostRepository;
 
   @Autowired
-  private IClienteRepository.GetRepository clienteRepository;
+  private IClienteRepository.GetRepository clienteGetRepository;
 
   @Autowired
-  private IProdutoRepository.GetRepository produtoRepository;
+  private IProdutoRepository.GetRepository produtoGetRepository;
 
   @Autowired
   private IUtils utils;
@@ -47,7 +47,7 @@ public class PedidoPostService implements IPedidoService.CadastrarService {
         pedido.calcularPrecoTotal();
         return pedido;
       })
-      .map(this.repository::salvar)
+      .map(this.pedidoPostRepository::salvar)
       .map(pedido -> this.mapper.converterEntidadeParaDtoResponse(pedido, PedidoDtoResponse.class))
       .orElseThrow();
   }

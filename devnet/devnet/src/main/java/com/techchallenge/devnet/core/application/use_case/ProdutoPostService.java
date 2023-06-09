@@ -1,6 +1,5 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.techchallenge.devnet.adapter.driver.dtos.request.ProdutoDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.response.ProdutoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.IProdutoRepository;
@@ -20,7 +19,7 @@ public class ProdutoPostService implements IProdutoService.CadastrarService {
   private IMapper mapper;
 
   @Autowired
-  private IProdutoRepository.PostRepository repository;
+  private IProdutoRepository.PostRepository produtoPostRepository;
 
   @Transactional(isolation = Isolation.SERIALIZABLE)
   @Override
@@ -28,7 +27,7 @@ public class ProdutoPostService implements IProdutoService.CadastrarService {
 
     return Optional.of(dtoRequest)
       .map(dto -> this.mapper.converterDtoRequestParaEntidade(dto, Produto.class))
-      .map(this.repository::salvar)
+      .map(this.produtoPostRepository::salvar)
       .map(produto -> this.mapper.converterEntidadeParaDtoResponse(produto, ProdutoDtoResponse.class))
       .orElseThrow();
   }
