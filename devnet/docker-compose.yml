@@ -23,15 +23,14 @@ services:
       - pg-data:/var/lib/postgresql/data
 
   devnet:
-    image: 951778/devnet
+    image: 957817/devnet
     restart: always
     container_name: devnet
     build:
       context: ./devnet
     working_dir: /devnet
-    depends_on:
-      - db
     environment:
+      - TZ=UTC
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/techchallenge
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
@@ -39,6 +38,11 @@ services:
     ports:
       - 80:80
     command: mvn spring-boot:run
+    depends_on:
+      - db
+    networks:
+      - devnet-network
+
 
 volumes:
   pg-data:
