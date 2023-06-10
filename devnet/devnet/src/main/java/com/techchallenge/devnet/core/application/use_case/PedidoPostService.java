@@ -42,7 +42,7 @@ public class PedidoPostService implements IPedidoService.CadastrarService {
       .map(this.utils::confirmarCliente)
       .map(this.utils::confirmarProdutos)
       .map(pedido -> {
-        pedido.setStatusPedido(StatusPedidoEnum.CRIADO);
+        pedido.setStatusPedido(StatusPedidoEnum.RECEBIDO);
         pedido.getItensPedido().forEach(item -> item.setPedido(pedido));
         pedido.calcularPrecoTotal();
         return pedido;
