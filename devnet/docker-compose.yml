@@ -1,0 +1,48 @@
+version: '3.9'
+
+services:
+
+  db:
+    image: postgres:latest
+    restart: always
+    container_name: db
+    environment:
+      - LC_ALL=C.UTF-8
+      - POSTGRES_DB=techchallenge
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_ROOT_HOST='%'
+      - POSTGRES_TCP_PORT=5432
+    ports:
+      - 5432:5432
+    expose:
+      - 5432
+    networks:
+      - devnet-network
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+
+  devnet:
+    image: 951778/devnet
+    restart: always
+    container_name: devnet
+    build:
+      context: ./devnet
+    working_dir: /devnet
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/techchallenge
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
+    ports:
+      - 80:80
+    command: mvn spring-boot:run
+
+volumes:
+  pg-data:
+
+networks:
+  devnet-network:
+    driver: bridge
