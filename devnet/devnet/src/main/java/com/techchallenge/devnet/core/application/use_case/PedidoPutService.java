@@ -49,7 +49,7 @@ public class PedidoPutService implements IPedidoService.AtualizarService {
       .map(this.utils::confirmarCliente)
       .map(this.utils::confirmarProdutos)
       .map(pedido -> {
-        pedido.setStatusPedido(StatusPedidoEnum.CRIADO);
+        pedido.setStatusPedido(StatusPedidoEnum.RECEBIDO);
 
         var pedidoDoBanco = this.pedidoGetRepository.consultarPorId(id)
           .map(order -> {

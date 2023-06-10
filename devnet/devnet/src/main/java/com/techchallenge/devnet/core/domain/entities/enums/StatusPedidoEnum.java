@@ -5,10 +5,11 @@ import lombok.Getter;
 @Getter
 public enum StatusPedidoEnum {
 
-  CRIADO,
-  CONFIRMADO,
+  RECEBIDO,
+  PAGO,
   PREPARACAO,
-  ENTREGUE,
+  PRONTO,
+  FINALIZADO,
   CANCELADO;
 }
 
