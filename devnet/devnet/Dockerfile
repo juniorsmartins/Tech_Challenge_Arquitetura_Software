@@ -1,9 +1,19 @@
-FROM maven:3.9.2-eclipse-temurin-17
+FROM eclipse-temurin:17.0.7_7-jdk-jammy
+RUN apt-get update
 
-LABEL maintainer="Junior Martins"
+MAINTAINER "Junior Martins"
 
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} /src/tech/devnet.jar
+WORKDIR /tech/challenge
+COPY target/devnet.jar .
 
-ENTRYPOINT ["java", "-jar", "/src/tech/devnet.jar"]
+ENV TZ=UTC
+ENV SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/mydatabase?serverTimezone=UTC
+ENV SPRING_DATASOURCE_USERNAME=postgres
+ENV SPRING_DATASOURCE_PASSWORD=postgres
+
+EXPOSE 8081
+
+CMD ["java", "-jar", "devnet.jar"]
+
+
 
