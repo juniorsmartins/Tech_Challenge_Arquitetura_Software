@@ -1,7 +1,8 @@
 FROM eclipse-temurin:17.0.7_7-jdk-jammy
 
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} devnet.jar
+WORKDIR /tech/challenge
 
-ENTRYPOINT ["java", "-jar", "/devnet.jar"]
+COPY target/devnet-0.0.1.jar devnet.jar
+
+ENTRYPOINT ["java", "-jar", "/tech/challenge/devnet.jar"]
 
