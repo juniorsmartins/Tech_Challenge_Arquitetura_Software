@@ -1,7 +1,6 @@
 version: '3.9'
 
 services:
-
   db:
     image: postgres:latest
     restart: always
@@ -11,42 +10,47 @@ services:
       - POSTGRES_DB=techchallenge
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_ROOT_HOST='%'
-      - POSTGRES_TCP_PORT=5432
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
     ports:
       - 5432:5432
     expose:
       - 5432
     networks:
-      - devnet-network
+      - rede-internet
     volumes:
       - pg-data:/var/lib/postgresql/data
 
   devnet:
-    image: 957817/devnet
+    image: devnet:0.0.1
     restart: always
     container_name: devnet
     build:
       context: ./devnet
+      dockerfile: Dockerfile
     working_dir: /devnet
     environment:
-      - TZ=UTC
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/techchallenge
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=postgres
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
+      TZ: UTC
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: techchallenge
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/techchallenge
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
     ports:
-      - 80:80
+      - 8080:8080
+    expose:
+      - 8080
     command: mvn spring-boot:run
     depends_on:
       - db
     networks:
-      - devnet-network
-
+      - rede-internet
 
 volumes:
   pg-data:
 
 networks:
-  devnet-network:
+  rede-internet:
     driver: bridge
