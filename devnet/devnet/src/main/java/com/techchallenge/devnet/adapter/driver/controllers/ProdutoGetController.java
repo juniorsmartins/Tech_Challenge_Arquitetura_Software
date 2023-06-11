@@ -3,7 +3,6 @@ package com.techchallenge.devnet.adapter.driver.controllers;
 import com.techchallenge.devnet.adapter.driver.dtos.response.ProdutoDtoResponse;
 import com.techchallenge.devnet.core.application.use_case.IProdutoService;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
-import com.techchallenge.devnet.core.domain.value_objects.ClienteFiltro;
 import com.techchallenge.devnet.core.domain.value_objects.ProdutoFiltro;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -34,9 +33,9 @@ public final class ProdutoGetController implements IProdutoController.GetControl
   @Autowired
   private IProdutoService.PesquisarService service;
 
-  @Operation(summary = "Pesquisar Cliente", description = "Este recurso permite consultar Cliente por diversas propriedades com retorno paginado.")
+  @Operation(summary = "Pesquisar Produto", description = "Este recurso permite consultar Produto por diversas propriedades com retorno paginado.")
   @ApiResponses(value = {
-    @ApiResponse(responseCode = "200", description = "OK - requisição bem sucedida e com retorno.", content = {@Content(mediaType = "application/json", array = @ArraySchema(minItems = 1, schema = @Schema(implementation = ClienteFiltro.class), uniqueItems = true))}),
+    @ApiResponse(responseCode = "200", description = "OK - requisição bem sucedida e com retorno.", content = {@Content(mediaType = "application/json", array = @ArraySchema(minItems = 1, schema = @Schema(implementation = ProdutoFiltro.class), uniqueItems = true))}),
     @ApiResponse(responseCode = "400", description = "Bad Request - requisição mal feita.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))}),
     @ApiResponse(responseCode = "401", description = "Unauthorized: cliente não autenticado.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))}),
     @ApiResponse(responseCode = "403", description = "Forbidden - cliente autenticado, mas sem autorização para acessar recurso.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))}),
