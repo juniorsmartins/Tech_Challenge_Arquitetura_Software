@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
@@ -8,18 +9,17 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.1.0</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/> 
 	</parent>
 
 	<groupId>com.tech-challenge</groupId>
 	<artifactId>devnet</artifactId>
 	<version>0.0.1</version>
 	<name>devnet</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Desafio de pós-graguação (pós-tech) em Arquitetura de Software na Fiap/Alura.</description>
 
 	<properties>
 		<java.version>17</java.version>
-		<org.projectlombok.version>1.18.28</org.projectlombok.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -85,6 +85,14 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
+		</dependency>
+
+
+		<!-- Documentação -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.7.0</version>
 		</dependency>
 
 
