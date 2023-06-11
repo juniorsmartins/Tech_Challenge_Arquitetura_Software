@@ -9,5 +9,5 @@ public class DevnetApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DevnetApplication.class, args);
 	}
-
 }
+
