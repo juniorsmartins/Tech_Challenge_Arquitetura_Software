@@ -1,8 +1,6 @@
 package com.techchallenge.devnet.adapter.driver.controllers;
 
 import com.techchallenge.devnet.DevnetApplication;
-import com.techchallenge.devnet.adapter.driven.infra.repositories.jpa.ClienteRepositoryJpa;
-import com.techchallenge.devnet.utils.CriadorDeObjetos;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -23,7 +21,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @AutoConfigureMockMvc
 @ExtendWith(SpringExtension.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class ClienteDeleteControllerIntegrationTest {
+class ClienteGetControllerIntegrationTest {
 
   public static final String END_POINT = "/api/v1/clientes";
 
@@ -32,23 +30,16 @@ class ClienteDeleteControllerIntegrationTest {
   @Autowired
   private MockMvc mockMvc;
 
-  @Autowired
-  private ClienteRepositoryJpa clienteRepositoryJpa;
-
   @Test
   @Order(1)
-  @DisplayName("Deletar - http 204")
-  void deveRetornarHttp204_quandoDeletar() throws Exception {
+  @DisplayName("Pesquisar - http 200")
+  void deveRetornarHttp200_quandoPesquisarTodos() throws Exception {
 
-    var entidade = CriadorDeObjetos.gerarClienteBuilder()
-      .build();
-    entidade = this.clienteRepositoryJpa.save(entidade);
-
-    this.mockMvc.perform(MockMvcRequestBuilders.delete(END_POINT.concat("/") + entidade.getId())
+    this.mockMvc.perform(MockMvcRequestBuilders.get(END_POINT)
         .contentType(MediaType.APPLICATION_JSON)
         .characterEncoding(UTF8)
         .accept(MediaType.APPLICATION_JSON))
-      .andExpect(MockMvcResultMatchers.status().isNoContent())
+      .andExpect(MockMvcResultMatchers.status().isOk())
       .andDo(MockMvcResultHandlers.print());
   }
 }
