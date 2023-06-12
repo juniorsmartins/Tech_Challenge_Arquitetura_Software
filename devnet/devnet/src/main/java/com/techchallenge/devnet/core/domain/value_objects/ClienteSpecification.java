@@ -19,7 +19,12 @@ public final class ClienteSpecification {
       var predicados = new ArrayList<Predicate>();
 
       if (ObjectUtils.isNotEmpty(filtro.getId())) {
-        predicados.add(criteriaBuilder.equal(root.get("id"), filtro.getId()));
+        var ids = Arrays.asList(filtro.getId().split(","));
+        List<Predicate> idPredicates = ids.stream()
+          .map(id -> criteriaBuilder.equal(root.get("id"), id))
+          .collect(Collectors.toList());
+
+        predicados.add(criteriaBuilder.or(idPredicates.toArray(new Predicate[0])));
       }
 
       if (ObjectUtils.isNotEmpty(filtro.getNome())) {
@@ -32,8 +37,12 @@ public final class ClienteSpecification {
       }
 
       if (ObjectUtils.isNotEmpty(filtro.getCpf())) {
-        predicados.add(criteriaBuilder.like(root.get("cpf"),
-          "%".concat(filtro.getCpf()).concat("%")));
+        var cpfs = Arrays.asList(filtro.getCpf().split(","));
+        List<Predicate> cpfPredicates = cpfs.stream()
+          .map(cpf -> criteriaBuilder.like(root.get("cpf"), "%" + cpf + "%"))
+          .collect(Collectors.toList());
+
+        predicados.add(criteriaBuilder.or(cpfPredicates.toArray(new Predicate[0])));
       }
 
       if (ObjectUtils.isNotEmpty(filtro.getEmail())) {
