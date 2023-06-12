@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public final class ClienteFiltro {
 
-  private Long id;
+  private String id;
 
   private String nome;
 

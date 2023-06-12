@@ -18,8 +18,17 @@ public final class ClienteSpecification {
 
       var predicados = new ArrayList<Predicate>();
 
+//      if (ObjectUtils.isNotEmpty(filtro.getId())) {
+//        predicados.add(criteriaBuilder.equal(root.get("id"), filtro.getId()));
+//      }
+
       if (ObjectUtils.isNotEmpty(filtro.getId())) {
-        predicados.add(criteriaBuilder.equal(root.get("id"), filtro.getId()));
+        var ids = Arrays.asList(filtro.getId().split(","));
+        List<Predicate> idPredicates = ids.stream()
+          .map(id -> criteriaBuilder.equal(root.get("id"), id))
+          .collect(Collectors.toList());
+
+        predicados.add(criteriaBuilder.or(idPredicates.toArray(new Predicate[0])));
       }
 
       if (ObjectUtils.isNotEmpty(filtro.getNome())) {
