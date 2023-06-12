@@ -1,9 +1,6 @@
 package com.techchallenge.devnet.adapter.driver.controllers;
 
 import com.techchallenge.devnet.DevnetApplication;
-import com.techchallenge.devnet.adapter.driven.infra.repositories.jpa.ClienteRepositoryJpa;
-import com.techchallenge.devnet.utils.CriadorDeObjetos;
-import com.techchallenge.devnet.utils.Utilitarios;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -24,53 +21,26 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @AutoConfigureMockMvc
 @ExtendWith(SpringExtension.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class ClientePostControllerIntegrationTest {
+class ProdutoGetControllerIntegrationTest {
 
-  public static final String END_POINT = "/api/v1/clientes";
+  public static final String END_POINT = "/api/v1/produtos";
 
   public static final String UTF8 = "UTF-8";
 
   @Autowired
   private MockMvc mockMvc;
 
-  @Autowired
-  private ClienteRepositoryJpa clienteRepositoryJpa;
-
   @Test
   @Order(1)
-  @DisplayName("Cadastrar - http 201")
-  void deveRetornarHttp201_quandoCadastrar() throws Exception {
+  @DisplayName("Pesquisar - http 200")
+  void deveRetornarHttp200_quandoPesquisarTodos() throws Exception {
 
-    var dtoRequest = CriadorDeObjetos.gerarClienteDtoRequestBuilder()
-      .build();
-
-    this.mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+    this.mockMvc.perform(MockMvcRequestBuilders.get(END_POINT)
         .contentType(MediaType.APPLICATION_JSON)
         .characterEncoding(UTF8)
-        .content(Utilitarios.converterObjetoParaJson(dtoRequest))
         .accept(MediaType.APPLICATION_JSON))
-      .andExpect(MockMvcResultMatchers.status().isCreated())
-      .andDo(MockMvcResultHandlers.print());
-  }
-
-  @Test
-  @Order(5)
-  @DisplayName("Cadastrar - http 400 por CPF falso")
-  void deveRetornarHttp400_quandoCadastrarComCpfFalso() throws Exception {
-
-    var cpfFalso = "11122233380";
-    var dtoRequest = CriadorDeObjetos.gerarClienteDtoRequestBuilder()
-      .cpf(cpfFalso)
-      .build();
-
-    this.mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
-        .contentType(MediaType.APPLICATION_JSON)
-        .characterEncoding(UTF8)
-        .content(Utilitarios.converterObjetoParaJson(dtoRequest))
-        .accept(MediaType.APPLICATION_JSON))
-      .andExpect(MockMvcResultMatchers.status().isBadRequest())
+      .andExpect(MockMvcResultMatchers.status().isOk())
       .andDo(MockMvcResultHandlers.print());
   }
 }
-
 

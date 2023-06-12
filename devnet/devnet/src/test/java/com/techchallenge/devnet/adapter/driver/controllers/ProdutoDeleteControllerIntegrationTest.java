@@ -1,9 +1,8 @@
 package com.techchallenge.devnet.adapter.driver.controllers;
 
 import com.techchallenge.devnet.DevnetApplication;
-import com.techchallenge.devnet.adapter.driven.infra.repositories.jpa.ClienteRepositoryJpa;
+import com.techchallenge.devnet.adapter.driven.infra.repositories.jpa.ProdutoRepositoryJpa;
 import com.techchallenge.devnet.utils.CriadorDeObjetos;
-import com.techchallenge.devnet.utils.Utilitarios;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -20,13 +19,15 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest(classes = DevnetApplication.class)
 @AutoConfigureMockMvc
 @ExtendWith(SpringExtension.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class ClientePutControllerIntegrationTest {
+class ProdutoDeleteControllerIntegrationTest {
 
-  public static final String END_POINT = "/api/v1/clientes";
+  public static final String END_POINT = "/api/v1/produtos";
 
   public static final String UTF8 = "UTF-8";
 
@@ -34,43 +35,35 @@ class ClientePutControllerIntegrationTest {
   private MockMvc mockMvc;
 
   @Autowired
-  private ClienteRepositoryJpa clienteRepositoryJpa;
+  private ProdutoRepositoryJpa produtoRepositoryJpa;
 
   @Test
   @Order(1)
-  @DisplayName("Atualizar - http 200")
-  void deveRetornarHttp200_quandoAtualizar() throws Exception {
+  @DisplayName("Deletar - http 204")
+  void deveRetornarHttp204_quandoDeletar() throws Exception {
 
-    var entidade = CriadorDeObjetos.gerarClienteBuilder()
+    var entidade = CriadorDeObjetos.gerarProdutoBuilder()
       .build();
-    entidade = this.clienteRepositoryJpa.save(entidade);
+    entidade = this.produtoRepositoryJpa.save(entidade);
 
-    var dtoRequest = CriadorDeObjetos.gerarClienteDtoRequestBuilder()
-      .build();
-
-    this.mockMvc.perform(MockMvcRequestBuilders.put(END_POINT.concat("/") + entidade.getId())
+    this.mockMvc.perform(MockMvcRequestBuilders.delete(END_POINT.concat("/") + entidade.getId())
         .contentType(MediaType.APPLICATION_JSON)
         .characterEncoding(UTF8)
-        .content(Utilitarios.converterObjetoParaJson(dtoRequest))
         .accept(MediaType.APPLICATION_JSON))
-      .andExpect(MockMvcResultMatchers.status().isOk())
+      .andExpect(MockMvcResultMatchers.status().isNoContent())
       .andDo(MockMvcResultHandlers.print());
   }
 
   @Test
   @Order(5)
-  @DisplayName("Atualizar - http 404 por id inexistente")
-  void deveRetornarHttp404_quandoAtualizarComIdInexistente() throws Exception {
+  @DisplayName("Deletar - http 404 por id inexistente")
+  void deveRetornarHttp404_quandoDeletarComIdInexistente() throws Exception {
 
     var idInexistente = Math.round((Math.random() + 1) * 100000);
 
-    var dtoRequest = CriadorDeObjetos.gerarClienteDtoRequestBuilder()
-      .build();
-
-    this.mockMvc.perform(MockMvcRequestBuilders.put(END_POINT.concat("/") + idInexistente)
+    this.mockMvc.perform(MockMvcRequestBuilders.delete(END_POINT.concat("/") + idInexistente)
         .contentType(MediaType.APPLICATION_JSON)
         .characterEncoding(UTF8)
-        .content(Utilitarios.converterObjetoParaJson(dtoRequest))
         .accept(MediaType.APPLICATION_JSON))
       .andExpect(MockMvcResultMatchers.status().isNotFound())
       .andDo(MockMvcResultHandlers.print());

@@ -57,7 +57,7 @@ class ClienteDeleteControllerIntegrationTest {
   @DisplayName("Deletar - http 404 por id inexistente")
   void deveRetornarHttp404_quandoDeletarComIdInexistente() throws Exception {
 
-    var idInexistente = Math.round(Math.random() + 1);
+    var idInexistente = Math.round((Math.random() + 1) * 100000);
 
     this.mockMvc.perform(MockMvcRequestBuilders.delete(END_POINT.concat("/") + idInexistente)
         .contentType(MediaType.APPLICATION_JSON)

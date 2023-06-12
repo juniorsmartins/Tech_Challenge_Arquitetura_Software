@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.adapter.driver.controllers;
 
 import com.techchallenge.devnet.DevnetApplication;
-import com.techchallenge.devnet.adapter.driven.infra.repositories.jpa.ClienteRepositoryJpa;
+import com.techchallenge.devnet.adapter.driven.infra.repositories.jpa.ProdutoRepositoryJpa;
 import com.techchallenge.devnet.utils.CriadorDeObjetos;
 import com.techchallenge.devnet.utils.Utilitarios;
 import org.junit.jupiter.api.DisplayName;
@@ -20,13 +20,15 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest(classes = DevnetApplication.class)
 @AutoConfigureMockMvc
 @ExtendWith(SpringExtension.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class ClientePutControllerIntegrationTest {
+class ProdutoPutControllerIntegrationTest {
 
-  public static final String END_POINT = "/api/v1/clientes";
+  public static final String END_POINT = "/api/v1/produtos";
 
   public static final String UTF8 = "UTF-8";
 
@@ -34,18 +36,18 @@ class ClientePutControllerIntegrationTest {
   private MockMvc mockMvc;
 
   @Autowired
-  private ClienteRepositoryJpa clienteRepositoryJpa;
+  private ProdutoRepositoryJpa produtoRepositoryJpa;
 
   @Test
   @Order(1)
   @DisplayName("Atualizar - http 200")
   void deveRetornarHttp200_quandoAtualizar() throws Exception {
 
-    var entidade = CriadorDeObjetos.gerarClienteBuilder()
+    var entidade = CriadorDeObjetos.gerarProdutoBuilder()
       .build();
-    entidade = this.clienteRepositoryJpa.save(entidade);
+    entidade = this.produtoRepositoryJpa.save(entidade);
 
-    var dtoRequest = CriadorDeObjetos.gerarClienteDtoRequestBuilder()
+    var dtoRequest = CriadorDeObjetos.gerarProdutoDtoRequestBuilder()
       .build();
 
     this.mockMvc.perform(MockMvcRequestBuilders.put(END_POINT.concat("/") + entidade.getId())
@@ -64,7 +66,7 @@ class ClientePutControllerIntegrationTest {
 
     var idInexistente = Math.round((Math.random() + 1) * 100000);
 
-    var dtoRequest = CriadorDeObjetos.gerarClienteDtoRequestBuilder()
+    var dtoRequest = CriadorDeObjetos.gerarProdutoDtoRequestBuilder()
       .build();
 
     this.mockMvc.perform(MockMvcRequestBuilders.put(END_POINT.concat("/") + idInexistente)
