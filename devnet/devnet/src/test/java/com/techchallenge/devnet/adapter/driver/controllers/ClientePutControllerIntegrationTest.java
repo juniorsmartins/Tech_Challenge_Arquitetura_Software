@@ -20,8 +20,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest(classes = DevnetApplication.class)
 @AutoConfigureMockMvc
 @ExtendWith(SpringExtension.class)
@@ -56,6 +54,25 @@ class ClientePutControllerIntegrationTest {
         .content(Utilitarios.converterObjetoParaJson(dtoRequest))
         .accept(MediaType.APPLICATION_JSON))
       .andExpect(MockMvcResultMatchers.status().isOk())
+      .andDo(MockMvcResultHandlers.print());
+  }
+
+  @Test
+  @Order(5)
+  @DisplayName("Atualizar - http 404 por id inexistente")
+  void deveRetornarHttp404_quandoAtualizarComIdInexistente() throws Exception {
+
+    var idInexistente = Math.round((Math.random() + 1) * 100000);
+
+    var dtoRequest = CriadorDeObjetos.gerarClienteDtoRequestBuilder()
+      .build();
+
+    this.mockMvc.perform(MockMvcRequestBuilders.put(END_POINT.concat("/") + idInexistente)
+        .contentType(MediaType.APPLICATION_JSON)
+        .characterEncoding(UTF8)
+        .content(Utilitarios.converterObjetoParaJson(dtoRequest))
+        .accept(MediaType.APPLICATION_JSON))
+      .andExpect(MockMvcResultMatchers.status().isNotFound())
       .andDo(MockMvcResultHandlers.print());
   }
 }

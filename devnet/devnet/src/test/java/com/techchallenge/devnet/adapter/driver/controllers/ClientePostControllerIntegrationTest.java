@@ -20,8 +20,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest(classes = DevnetApplication.class)
 @AutoConfigureMockMvc
 @ExtendWith(SpringExtension.class)
@@ -54,5 +52,25 @@ class ClientePostControllerIntegrationTest {
       .andExpect(MockMvcResultMatchers.status().isCreated())
       .andDo(MockMvcResultHandlers.print());
   }
+
+  @Test
+  @Order(5)
+  @DisplayName("Cadastrar - http 400 por CPF falso")
+  void deveRetornarHttp400_quandoCadastrarComCpfFalso() throws Exception {
+
+    var cpfFalso = "11122233380";
+    var dtoRequest = CriadorDeObjetos.gerarClienteDtoRequestBuilder()
+      .cpf(cpfFalso)
+      .build();
+
+    this.mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
+        .contentType(MediaType.APPLICATION_JSON)
+        .characterEncoding(UTF8)
+        .content(Utilitarios.converterObjetoParaJson(dtoRequest))
+        .accept(MediaType.APPLICATION_JSON))
+      .andExpect(MockMvcResultMatchers.status().isBadRequest())
+      .andDo(MockMvcResultHandlers.print());
+  }
 }
+
 
