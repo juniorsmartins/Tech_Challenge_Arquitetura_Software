@@ -16,7 +16,7 @@
 	<artifactId>devnet</artifactId>
 	<version>0.0.1</version>
 	<name>devnet</name>
-	<description>Desafio de pós-graguação (pós-tech) em Arquitetura de Software na Fiap/Alura.</description>
+	<description>Projeto de pós-graguação (pós-tech) em Arquitetura de Software (Fiap/Alura).</description>
 
 	<properties>
 		<java.version>17</java.version>
