@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public final class PedidoFiltro {
 
-  private Long id;
+  private String id;
 
   private StatusPedidoEnum statusPedido;
 
