@@ -51,5 +51,20 @@ class ClienteDeleteControllerIntegrationTest {
       .andExpect(MockMvcResultMatchers.status().isNoContent())
       .andDo(MockMvcResultHandlers.print());
   }
+
+  @Test
+  @Order(5)
+  @DisplayName("Deletar - http 404 por id inexistente")
+  void deveRetornarHttp404_quandoDeletarComIdInexistente() throws Exception {
+
+    var idInexistente = Math.round((Math.random() + 1) * 100000);
+
+    this.mockMvc.perform(MockMvcRequestBuilders.delete(END_POINT.concat("/") + idInexistente)
+        .contentType(MediaType.APPLICATION_JSON)
+        .characterEncoding(UTF8)
+        .accept(MediaType.APPLICATION_JSON))
+      .andExpect(MockMvcResultMatchers.status().isNotFound())
+      .andDo(MockMvcResultHandlers.print());
+  }
 }
 

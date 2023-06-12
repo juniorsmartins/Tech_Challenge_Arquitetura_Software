@@ -1,5 +1,6 @@
 package com.techchallenge.devnet.core.domain.base.exceptions;
 
+import com.techchallenge.devnet.core.domain.base.exceptions.http_404.RecursoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_409.RegraDeNegocioVioladaException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,7 +16,6 @@ import java.time.Instant;
 @RestControllerAdvice
 public final class TratadorDeExceptions extends ResponseEntityExceptionHandler {
 
-  // Tratamento de exceção personalizada
   @ExceptionHandler(value = RegraDeNegocioVioladaException.class)
   public ResponseEntity<Object> tratarRegraDeNegocioViolada(RegraDeNegocioVioladaException regraViolada,
                                                                    WebRequest webRequest) {
@@ -23,10 +23,25 @@ public final class TratadorDeExceptions extends ResponseEntityExceptionHandler {
     var tipoDeErroEnum = ETipoDeErro.REGRA_NEGOCIO_VIOLADA;
     var detalhe = regraViolada.getMessage();
 
-    var retornoDeErro = this.criarMensagemParaRetornarErro(httpStatus, tipoDeErroEnum, detalhe).build();
+    var retornoDeErro = this.criarMensagemParaRetornarErro(httpStatus, tipoDeErroEnum, detalhe)
+      .build();
 
+    return super.handleExceptionInternal(regraViolada, retornoDeErro, new HttpHeaders(),
+      httpStatus, webRequest);
+  }
 
-    return super.handleExceptionInternal(regraViolada, retornoDeErro, new HttpHeaders(), httpStatus, webRequest);
+  @ExceptionHandler(value = RecursoNaoEncontradoException.class)
+  public ResponseEntity<Object> tratarRecursoNaoEncontrado(RecursoNaoEncontradoException recursoNaoEncontrado,
+                                                           WebRequest webRequest) {
+    var httpStatus = HttpStatus.NOT_FOUND;
+    var tipoDeErroEnum = ETipoDeErro.RECURSO_NAO_ENCONTRADO;
+    var detalhe = recursoNaoEncontrado.getMessage();
+
+    var retornoDeErro = this.criarMensagemParaRetornarErro(httpStatus, tipoDeErroEnum, detalhe)
+      .build();
+
+    return super.handleExceptionInternal(recursoNaoEncontrado, retornoDeErro, new HttpHeaders(),
+      httpStatus, webRequest);
   }
 
   // Método para construção da mensagem de retorno

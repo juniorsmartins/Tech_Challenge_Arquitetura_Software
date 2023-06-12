@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.adapter.driver.controllers;
 
 import com.techchallenge.devnet.DevnetApplication;
-import com.techchallenge.devnet.adapter.driven.infra.repositories.jpa.ClienteRepositoryJpa;
+import com.techchallenge.devnet.adapter.driven.infra.repositories.jpa.ProdutoRepositoryJpa;
 import com.techchallenge.devnet.utils.CriadorDeObjetos;
 import com.techchallenge.devnet.utils.Utilitarios;
 import org.junit.jupiter.api.DisplayName;
@@ -20,13 +20,15 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest(classes = DevnetApplication.class)
 @AutoConfigureMockMvc
 @ExtendWith(SpringExtension.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class ClientePutControllerIntegrationTest {
+class ProdutoPostControllerIntegrationTest {
 
-  public static final String END_POINT = "/api/v1/clientes";
+  public static final String END_POINT = "/api/v1/produtos";
 
   public static final String UTF8 = "UTF-8";
 
@@ -34,46 +36,40 @@ class ClientePutControllerIntegrationTest {
   private MockMvc mockMvc;
 
   @Autowired
-  private ClienteRepositoryJpa clienteRepositoryJpa;
+  private ProdutoRepositoryJpa produtoRepositoryJpa;
 
   @Test
   @Order(1)
-  @DisplayName("Atualizar - http 200")
-  void deveRetornarHttp200_quandoAtualizar() throws Exception {
+  @DisplayName("Cadastrar - http 201")
+  void deveRetornarHttp201_quandoCadastrar() throws Exception {
 
-    var entidade = CriadorDeObjetos.gerarClienteBuilder()
-      .build();
-    entidade = this.clienteRepositoryJpa.save(entidade);
-
-    var dtoRequest = CriadorDeObjetos.gerarClienteDtoRequestBuilder()
+    var dtoRequest = CriadorDeObjetos.gerarProdutoDtoRequestBuilder()
       .build();
 
-    this.mockMvc.perform(MockMvcRequestBuilders.put(END_POINT.concat("/") + entidade.getId())
+    this.mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
         .contentType(MediaType.APPLICATION_JSON)
         .characterEncoding(UTF8)
         .content(Utilitarios.converterObjetoParaJson(dtoRequest))
         .accept(MediaType.APPLICATION_JSON))
-      .andExpect(MockMvcResultMatchers.status().isOk())
+      .andExpect(MockMvcResultMatchers.status().isCreated())
       .andDo(MockMvcResultHandlers.print());
   }
 
   @Test
   @Order(5)
-  @DisplayName("Atualizar - http 404 por id inexistente")
-  void deveRetornarHttp404_quandoAtualizarComIdInexistente() throws Exception {
+  @DisplayName("Cadastrar - http 400 por sem nome")
+  void deveRetornarHttp400_quandoCadastrarSemNome() throws Exception {
 
-    var idInexistente = Math.round((Math.random() + 1) * 100000);
-
-    var dtoRequest = CriadorDeObjetos.gerarClienteDtoRequestBuilder()
+    var dtoRequest = CriadorDeObjetos.gerarProdutoDtoRequestBuilder()
+      .nome(null)
       .build();
 
-    this.mockMvc.perform(MockMvcRequestBuilders.put(END_POINT.concat("/") + idInexistente)
+    this.mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
         .contentType(MediaType.APPLICATION_JSON)
         .characterEncoding(UTF8)
         .content(Utilitarios.converterObjetoParaJson(dtoRequest))
         .accept(MediaType.APPLICATION_JSON))
-      .andExpect(MockMvcResultMatchers.status().isNotFound())
+      .andExpect(MockMvcResultMatchers.status().isBadRequest())
       .andDo(MockMvcResultHandlers.print());
   }
 }
-

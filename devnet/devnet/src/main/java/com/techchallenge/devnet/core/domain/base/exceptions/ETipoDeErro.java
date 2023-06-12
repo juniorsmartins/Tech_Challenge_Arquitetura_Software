@@ -6,6 +6,7 @@ import lombok.Getter;
 public enum ETipoDeErro {
 
   REGRA_NEGOCIO_VIOLADA("Regra de Negócio Violada.", "/regra-de-negocio-violada"),
+  RECURSO_NAO_ENCONTRADO("Recurso não encontrado!", "/recurso-nao-encontrado"),
   MIDIA_NAO_SUPORTADA("Tipo de mídia não suportada.", "/midia-nao-suportada");
 
   private String titulo;

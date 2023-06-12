@@ -1,7 +1,6 @@
 package com.techchallenge.devnet.core.domain.value_objects;
 
 import com.techchallenge.devnet.core.domain.entities.enums.ECategoria;
-import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +10,7 @@ import java.math.BigDecimal;
 @Setter
 public class ProdutoFiltro {
 
-  private Long id;
+  private String id;
 
   private ECategoria categoria;
 
