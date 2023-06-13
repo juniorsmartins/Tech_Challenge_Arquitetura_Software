@@ -1,12 +1,15 @@
 package com.techchallenge.devnet.core.application.use_case;
 
 import com.techchallenge.devnet.core.application.ports.IProdutoRepository;
+import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 public class ProdutoDeleteService implements IProdutoService.DeletarService {
 
@@ -25,7 +28,10 @@ public class ProdutoDeleteService implements IProdutoService.DeletarService {
         this.produtoDeleteRepository.deletar(produto);
         return true;
       })
-      .orElseThrow(() -> new ProdutoNaoEncontradoException(id));
+      .orElseThrow(() -> {
+        log.info(String.format(MensagemPadrao.PRODUTO_NAO_ENCONTRADO, id));
+        throw new ProdutoNaoEncontradoException(id);
+      });
   }
 }
 

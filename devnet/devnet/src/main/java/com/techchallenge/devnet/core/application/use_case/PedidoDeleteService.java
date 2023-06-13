@@ -1,12 +1,15 @@
 package com.techchallenge.devnet.core.application.use_case;
 
 import com.techchallenge.devnet.core.application.ports.IPedidoRepository;
+import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 public class PedidoDeleteService implements IPedidoService.DeletarService {
 
@@ -25,6 +28,9 @@ public class PedidoDeleteService implements IPedidoService.DeletarService {
         this.pedidoDeleteRepository.deletar(pedido);
         return true;
       })
-      .orElseThrow(() -> new PedidoNaoEncontradoException(id));
+      .orElseThrow(() -> {
+        log.info(String.format(MensagemPadrao.PEDIDO_NAO_ENCONTRADO, id));
+        throw new PedidoNaoEncontradoException(id);
+      });
   }
 }
