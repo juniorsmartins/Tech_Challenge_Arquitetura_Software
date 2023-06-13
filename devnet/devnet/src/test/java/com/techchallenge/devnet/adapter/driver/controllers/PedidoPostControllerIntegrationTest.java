@@ -2,16 +2,16 @@ package com.techchallenge.devnet.adapter.driver.controllers;
 
 import com.techchallenge.devnet.DevnetApplication;
 import com.techchallenge.devnet.adapter.driven.infra.repositories.jpa.ClienteRepositoryJpa;
-import com.techchallenge.devnet.adapter.driven.infra.repositories.jpa.PedidoRepositoryJpa;
 import com.techchallenge.devnet.adapter.driven.infra.repositories.jpa.ProdutoRepositoryJpa;
+import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoResumo;
+import com.techchallenge.devnet.adapter.driver.dtos.ProdutoDtoResumo;
+import com.techchallenge.devnet.adapter.driver.dtos.request.ItemPedidoDtoRequest;
+import com.techchallenge.devnet.adapter.driver.dtos.request.PedidoDtoRequest;
 import com.techchallenge.devnet.core.domain.entities.Cliente;
-import com.techchallenge.devnet.core.domain.entities.ItemPedido;
-import com.techchallenge.devnet.core.domain.entities.Pedido;
 import com.techchallenge.devnet.core.domain.entities.Produto;
 import com.techchallenge.devnet.core.domain.entities.enums.FormaPagamentoEnum;
-import com.techchallenge.devnet.core.domain.entities.enums.StatusPedidoEnum;
 import com.techchallenge.devnet.utils.CriadorDeObjetos;
-import org.junit.jupiter.api.AfterEach;
+import com.techchallenge.devnet.utils.Utilitarios;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
@@ -35,7 +35,7 @@ import java.util.List;
 @AutoConfigureMockMvc
 @ExtendWith(SpringExtension.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class PedidoDeleteControllerIntegrationTest {
+class PedidoPostControllerIntegrationTest {
 
   public static final String END_POINT = "/api/v1/pedidos";
 
@@ -43,9 +43,6 @@ class PedidoDeleteControllerIntegrationTest {
 
   @Autowired
   private MockMvc mockMvc;
-
-  @Autowired
-  private PedidoRepositoryJpa pedidoRepositoryJpa;
 
   @Autowired
   private ClienteRepositoryJpa clienteRepositoryJpa;
@@ -69,54 +66,52 @@ class PedidoDeleteControllerIntegrationTest {
     produto = this.produtoRepositoryJpa.save(produto);
   }
 
-  @AfterEach
-  void destruidorDeCenarios() {
-    this.pedidoRepositoryJpa.deleteAll();
-    this.clienteRepositoryJpa.deleteAll();
-    this.produtoRepositoryJpa.deleteAll();
-  }
-
   @Test
   @Order(1)
-  @DisplayName("Deletar - http 204")
-  void deveRetornarHttp204_quandoDeletar() throws Exception {
+  @DisplayName("Cadastrar - http 201")
+  void deveRetornarHttp201_quandoCadastrar() throws Exception {
 
-    var itemPedido = ItemPedido.builder()
-      .produto(produto)
+    var itemPedidoDtoRequest = ItemPedidoDtoRequest.builder()
+      .produto(ProdutoDtoResumo.builder().id(produto.getId()).build())
       .quantidade(2)
       .build();
 
-    var pedido = Pedido.builder()
-      .statusPedido(StatusPedidoEnum.RECEBIDO)
+    var pedidoDtoRequest = PedidoDtoRequest.builder()
+      .cliente(ClienteDtoResumo.builder().id(cliente.getId()).build())
+      .itensPedido(List.of(itemPedidoDtoRequest))
       .formaPagamento(FormaPagamentoEnum.PIX)
-      .itensPedido(List.of(itemPedido))
-      .cliente(cliente)
       .build();
-    itemPedido.calcularPrecoParcial();
-    itemPedido.setPedido(pedido);
-    pedido.calcularPrecoTotal();
-    pedido = this.pedidoRepositoryJpa.save(pedido);
 
-    this.mockMvc.perform(MockMvcRequestBuilders.delete(END_POINT.concat("/") + pedido.getId())
+    this.mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
         .contentType(MediaType.APPLICATION_JSON)
         .characterEncoding(UTF8)
+        .content(Utilitarios.converterObjetoParaJson(pedidoDtoRequest))
         .accept(MediaType.APPLICATION_JSON))
-      .andExpect(MockMvcResultMatchers.status().isNoContent())
+      .andExpect(MockMvcResultMatchers.status().isCreated())
       .andDo(MockMvcResultHandlers.print());
   }
 
   @Test
   @Order(5)
-  @DisplayName("Deletar - http 404 por id inexistente")
-  void deveRetornarHttp404_quandoDeletarComIdInexistente() throws Exception {
+  @DisplayName("Cadastrar - http 400 por sem forma de pagamento")
+  void deveRetornarHttp400_quandoCadastrarSemNome() throws Exception {
 
-    var idInexistente = Math.round((Math.random() + 1) * 100000);
+    var itemPedidoDtoRequest = ItemPedidoDtoRequest.builder()
+      .produto(ProdutoDtoResumo.builder().id(produto.getId()).build())
+      .quantidade(2)
+      .build();
 
-    this.mockMvc.perform(MockMvcRequestBuilders.delete(END_POINT.concat("/") + idInexistente)
+    var pedidoDtoRequest = PedidoDtoRequest.builder()
+      .itensPedido(List.of(itemPedidoDtoRequest))
+      .cliente(ClienteDtoResumo.builder().id(cliente.getId()).build())
+      .build();
+
+    this.mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
         .contentType(MediaType.APPLICATION_JSON)
         .characterEncoding(UTF8)
+        .content(Utilitarios.converterObjetoParaJson(pedidoDtoRequest))
         .accept(MediaType.APPLICATION_JSON))
-      .andExpect(MockMvcResultMatchers.status().isNotFound())
+      .andExpect(MockMvcResultMatchers.status().isBadRequest())
       .andDo(MockMvcResultHandlers.print());
   }
 }
