@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class PedidoGetControllerIntegrationTest {
 
-  public static final String END_POINT = "/api/v1/produtos";
+  public static final String END_POINT = "/api/v1/pedidos";
 
   public static final String UTF8 = "UTF-8";
 

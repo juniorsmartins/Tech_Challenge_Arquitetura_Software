@@ -4,6 +4,10 @@ import com.techchallenge.devnet.DevnetApplication;
 import com.techchallenge.devnet.adapter.driven.infra.repositories.jpa.ClienteRepositoryJpa;
 import com.techchallenge.devnet.adapter.driven.infra.repositories.jpa.PedidoRepositoryJpa;
 import com.techchallenge.devnet.adapter.driven.infra.repositories.jpa.ProdutoRepositoryJpa;
+import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoResumo;
+import com.techchallenge.devnet.adapter.driver.dtos.ProdutoDtoResumo;
+import com.techchallenge.devnet.adapter.driver.dtos.request.ItemPedidoDtoRequest;
+import com.techchallenge.devnet.adapter.driver.dtos.request.PedidoDtoRequest;
 import com.techchallenge.devnet.core.domain.entities.Cliente;
 import com.techchallenge.devnet.core.domain.entities.ItemPedido;
 import com.techchallenge.devnet.core.domain.entities.Pedido;
@@ -11,6 +15,7 @@ import com.techchallenge.devnet.core.domain.entities.Produto;
 import com.techchallenge.devnet.core.domain.entities.enums.FormaPagamentoEnum;
 import com.techchallenge.devnet.core.domain.entities.enums.StatusPedidoEnum;
 import com.techchallenge.devnet.utils.CriadorDeObjetos;
+import com.techchallenge.devnet.utils.Utilitarios;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -35,7 +40,7 @@ import java.util.List;
 @AutoConfigureMockMvc
 @ExtendWith(SpringExtension.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class PedidoDeleteControllerIntegrationTest {
+class PedidoPutControllerIntegrationTest {
 
   public static final String END_POINT = "/api/v1/pedidos";
 
@@ -45,17 +50,19 @@ class PedidoDeleteControllerIntegrationTest {
   private MockMvc mockMvc;
 
   @Autowired
-  private PedidoRepositoryJpa pedidoRepositoryJpa;
-
-  @Autowired
   private ClienteRepositoryJpa clienteRepositoryJpa;
 
   @Autowired
   private ProdutoRepositoryJpa produtoRepositoryJpa;
 
+  @Autowired
+  private PedidoRepositoryJpa pedidoRepositoryJpa;
+
   private Cliente cliente;
 
   private Produto produto;
+
+  private Pedido pedido;
 
   @BeforeEach
   void criadorDeCenarios() {
@@ -67,6 +74,22 @@ class PedidoDeleteControllerIntegrationTest {
     produto = CriadorDeObjetos.gerarProdutoBuilder()
       .build();
     produto = this.produtoRepositoryJpa.save(produto);
+
+    var itemPedido = ItemPedido.builder()
+      .produto(produto)
+      .quantidade(2)
+      .build();
+    itemPedido.calcularPrecoParcial();
+
+    pedido = Pedido.builder()
+      .cliente(cliente)
+      .itensPedido(List.of(itemPedido))
+      .formaPagamento(FormaPagamentoEnum.PIX)
+      .statusPedido(StatusPedidoEnum.RECEBIDO)
+      .build();
+    itemPedido.setPedido(pedido);
+    pedido.calcularPrecoTotal();
+    pedido = this.pedidoRepositoryJpa.save(pedido);
   }
 
   @AfterEach
@@ -78,45 +101,60 @@ class PedidoDeleteControllerIntegrationTest {
 
   @Test
   @Order(1)
-  @DisplayName("Deletar - http 204")
-  void deveRetornarHttp204_quandoDeletar() throws Exception {
+  @DisplayName("Atualizar - http 200")
+  void deveRetornarHttp200_quandoCadastrar() throws Exception {
 
-    var itemPedido = ItemPedido.builder()
-      .produto(produto)
-      .quantidade(2)
+    var produto = CriadorDeObjetos.gerarProdutoBuilder()
+      .build();
+    produto = this.produtoRepositoryJpa.save(produto);
+
+    var itemPedidoDtoRequest1 = ItemPedidoDtoRequest.builder()
+      .produto(ProdutoDtoResumo.builder().id(produto.getId()).build())
+      .quantidade(1)
       .build();
 
-    var pedido = Pedido.builder()
-      .statusPedido(StatusPedidoEnum.RECEBIDO)
-      .formaPagamento(FormaPagamentoEnum.PIX)
-      .itensPedido(List.of(itemPedido))
-      .cliente(cliente)
+    var itemPedidoDtoRequest2 = ItemPedidoDtoRequest.builder()
+      .produto(ProdutoDtoResumo.builder().id(produto.getId()).build())
+      .quantidade(1)
       .build();
-    itemPedido.calcularPrecoParcial();
-    itemPedido.setPedido(pedido);
-    pedido.calcularPrecoTotal();
-    pedido = this.pedidoRepositoryJpa.save(pedido);
 
-    this.mockMvc.perform(MockMvcRequestBuilders.delete(END_POINT.concat("/") + pedido.getId())
+    var pedidoDtoRequest = PedidoDtoRequest.builder()
+      .cliente(ClienteDtoResumo.builder().id(cliente.getId()).build())
+      .itensPedido(List.of(itemPedidoDtoRequest1, itemPedidoDtoRequest2))
+      .formaPagamento(FormaPagamentoEnum.DINHEIRO)
+      .build();
+
+    this.mockMvc.perform(MockMvcRequestBuilders.put(END_POINT.concat("/") + pedido.getId())
         .contentType(MediaType.APPLICATION_JSON)
         .characterEncoding(UTF8)
+        .content(Utilitarios.converterObjetoParaJson(pedidoDtoRequest))
         .accept(MediaType.APPLICATION_JSON))
-      .andExpect(MockMvcResultMatchers.status().isNoContent())
+      .andExpect(MockMvcResultMatchers.status().isOk())
       .andDo(MockMvcResultHandlers.print());
   }
 
   @Test
   @Order(5)
-  @DisplayName("Deletar - http 404 por id inexistente")
-  void deveRetornarHttp404_quandoDeletarComIdInexistente() throws Exception {
+  @DisplayName("Cadastrar - http 400 por sem forma de pagamento")
+  void deveRetornarHttp400_quandoCadastrarSemNome() throws Exception {
 
-    var idInexistente = Math.round((Math.random() + 1) * 100000);
+    var itemPedidoDtoRequest = ItemPedidoDtoRequest.builder()
+      .produto(ProdutoDtoResumo.builder().id(produto.getId()).build())
+      .quantidade(2)
+      .build();
 
-    this.mockMvc.perform(MockMvcRequestBuilders.delete(END_POINT.concat("/") + idInexistente)
+    var pedidoDtoRequest = PedidoDtoRequest.builder()
+      .itensPedido(List.of(itemPedidoDtoRequest))
+      .cliente(ClienteDtoResumo.builder().id(cliente.getId()).build())
+      .formaPagamento(null)
+      .build();
+
+    this.mockMvc.perform(MockMvcRequestBuilders.post(END_POINT)
         .contentType(MediaType.APPLICATION_JSON)
         .characterEncoding(UTF8)
+        .content(Utilitarios.converterObjetoParaJson(pedidoDtoRequest))
         .accept(MediaType.APPLICATION_JSON))
-      .andExpect(MockMvcResultMatchers.status().isNotFound())
+      .andExpect(MockMvcResultMatchers.status().isBadRequest())
       .andDo(MockMvcResultHandlers.print());
   }
 }
