@@ -15,7 +15,6 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Optional;
 
@@ -63,7 +62,7 @@ public class PedidoPostService implements IPedidoService.CadastrarService {
       .precoTotal(dtoResponse.getPrecoTotal())
       .build();
 
-    var response = this.pagamentoOpenFeign.cadastrar(solicitacaoDePagamento, UriComponentsBuilder.newInstance());
+    var response = this.pagamentoOpenFeign.cadastrar(solicitacaoDePagamento);
     if (ObjectUtils.isNotEmpty(response)) {
       System.out.println("\n\n---------- Concluída comunicação de pagamento ----------\n\n");
     }

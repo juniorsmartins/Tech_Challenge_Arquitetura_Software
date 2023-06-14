@@ -16,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
 @Tag(name = "PagamentoPostController", description = "Adaptador para efetuar pagamento.")
 @Slf4j
@@ -36,7 +35,7 @@ public final class PagamentoPostController implements IPagamentoController.PostC
   @Override
   public ResponseEntity<PagamentoDtoResponse> cadastrar(
     @Parameter(name = "PagamentoDtoRequest", description = "Estrutura de dados para transporte de informações de entrada.", required = true)
-    @RequestBody @Valid final PagamentoDtoRequest dtoRequest, final UriComponentsBuilder uriComponentsBuilder) {
+    @RequestBody @Valid final PagamentoDtoRequest dtoRequest) {
 
     System.out.println("\n\n---------- Pagamento Efetuado ----------\n\n");
 
