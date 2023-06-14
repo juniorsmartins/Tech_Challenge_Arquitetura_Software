@@ -6,11 +6,13 @@ import com.techchallenge.devnet.core.application.ports.IClienteRepository;
 import com.techchallenge.devnet.core.application.ports.IItemPedidoRepository;
 import com.techchallenge.devnet.core.application.ports.IPedidoRepository;
 import com.techchallenge.devnet.core.application.ports.IProdutoRepository;
+import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
 import com.techchallenge.devnet.core.domain.base.utils.IUtils;
 import com.techchallenge.devnet.core.domain.entities.Pedido;
 import com.techchallenge.devnet.core.domain.entities.enums.StatusPedidoEnum;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class PedidoPutService implements IPedidoService.AtualizarService {
 
@@ -56,7 +59,10 @@ public class PedidoPutService implements IPedidoService.AtualizarService {
             order.getItensPedido().forEach(item -> this.itemPedidoDeleteRepository.deletar(item));
             return order;
           })
-          .orElseThrow(() -> new PedidoNaoEncontradoException(id));
+          .orElseThrow(() -> {
+            log.info(String.format(MensagemPadrao.PEDIDO_NAO_ENCONTRADO, id));
+            throw new PedidoNaoEncontradoException(id);
+          });
 
         BeanUtils.copyProperties(pedido, pedidoDoBanco, "id");
         pedidoDoBanco.getItensPedido().forEach(item -> item.setPedido(pedidoDoBanco));

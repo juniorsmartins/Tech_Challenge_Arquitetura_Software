@@ -7,7 +7,6 @@ import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
 import com.techchallenge.devnet.core.domain.entities.Produto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
@@ -21,7 +20,7 @@ public class ProdutoPostService implements IProdutoService.CadastrarService {
   @Autowired
   private IProdutoRepository.PostRepository produtoPostRepository;
 
-  @Transactional(isolation = Isolation.SERIALIZABLE)
+  @Transactional
   @Override
   public ProdutoDtoResponse cadastrar(final ProdutoDtoRequest dtoRequest) {
 

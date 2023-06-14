@@ -8,7 +8,6 @@ import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
 import com.techchallenge.devnet.core.domain.entities.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -26,7 +25,7 @@ public class ClientePostService implements IClienteService.CadastrarService {
   @Autowired
   private List<RegrasNegocioCliente> regrasDeNegocio;
 
-  @Transactional(isolation = Isolation.SERIALIZABLE)
+  @Transactional
   @Override
   public ClienteDtoResponse cadastrar(final ClienteDtoRequest dtoRequest) {
 
