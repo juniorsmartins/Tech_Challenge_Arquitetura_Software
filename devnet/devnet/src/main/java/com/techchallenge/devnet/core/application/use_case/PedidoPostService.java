@@ -1,17 +1,21 @@
 package com.techchallenge.devnet.core.application.use_case;
 
+import com.techchallenge.devnet.adapter.driver.dtos.request.PagamentoDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.request.PedidoDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.response.PedidoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.IClienteRepository;
+import com.techchallenge.devnet.core.application.ports.IPagamentoOpenFeign;
 import com.techchallenge.devnet.core.application.ports.IPedidoRepository;
 import com.techchallenge.devnet.core.application.ports.IProdutoRepository;
 import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
 import com.techchallenge.devnet.core.domain.base.utils.IUtils;
 import com.techchallenge.devnet.core.domain.entities.Pedido;
 import com.techchallenge.devnet.core.domain.entities.enums.StatusPedidoEnum;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Optional;
 
@@ -31,13 +35,16 @@ public class PedidoPostService implements IPedidoService.CadastrarService {
   private IProdutoRepository.GetRepository produtoGetRepository;
 
   @Autowired
+  private IPagamentoOpenFeign pagamentoOpenFeign;
+
+  @Autowired
   private IUtils utils;
 
   @Transactional
   @Override
   public PedidoDtoResponse cadastrar(final PedidoDtoRequest dtoRequest) {
 
-    return Optional.of(dtoRequest)
+    var dtoResponse = Optional.of(dtoRequest)
       .map(dto -> this.mapper.converterDtoRequestParaEntidade(dto, Pedido.class))
       .map(this.utils::confirmarCliente)
       .map(this.utils::confirmarProdutos)
@@ -50,6 +57,18 @@ public class PedidoPostService implements IPedidoService.CadastrarService {
       .map(this.pedidoPostRepository::salvar)
       .map(pedido -> this.mapper.converterEntidadeParaDtoResponse(pedido, PedidoDtoResponse.class))
       .orElseThrow();
+
+    var solicitacaoDePagamento = PagamentoDtoRequest.builder()
+      .formaPagamento(dtoResponse.getFormaPagamento())
+      .precoTotal(dtoResponse.getPrecoTotal())
+      .build();
+
+    var response = this.pagamentoOpenFeign.cadastrar(solicitacaoDePagamento, UriComponentsBuilder.newInstance());
+    if (ObjectUtils.isNotEmpty(response)) {
+      System.out.println("\n\n---------- Concluída comunicação de pagamento ----------\n\n");
+    }
+
+    return dtoResponse;
   }
 }
 
