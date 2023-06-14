@@ -69,5 +69,10 @@ public class PedidoPostService implements IPedidoService.CadastrarService {
 
     return dtoResponse;
   }
+
+  private PedidoDtoRequest verificarExistenciaDeIdentificacaoDoCliente(PedidoDtoRequest dtoRequest) {
+
+    return dtoRequest;
+  }
 }
 

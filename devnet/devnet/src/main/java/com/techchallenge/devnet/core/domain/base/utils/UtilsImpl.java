@@ -5,6 +5,7 @@ import com.techchallenge.devnet.core.application.ports.IProdutoRepository;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ClienteNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.entities.Pedido;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,10 +21,19 @@ public final class UtilsImpl implements IUtils {
   @Override
   public Pedido confirmarCliente(Pedido pedido) {
 
-    var idCliente = pedido.getCliente().getId();
-    var cliente = this.clienteGetRepository.consultarPorId(idCliente)
-      .orElseThrow(() -> new ClienteNaoEncontradoException(idCliente));
-    pedido.setCliente(cliente);
+    if (ObjectUtils.isNotEmpty(pedido.getCliente()) && ObjectUtils.isNotEmpty(pedido.getCliente().getId())) {
+      var idCliente = pedido.getCliente().getId();
+      var cliente = this.clienteGetRepository.consultarPorId(idCliente)
+        .orElseThrow(() -> new ClienteNaoEncontradoException(idCliente));
+      pedido.setCliente(cliente);
+
+    } else if (ObjectUtils.isNotEmpty(pedido.getCliente()) && ObjectUtils.isNotEmpty(pedido.getCliente().getCpf())) {
+      var cpfCliente = pedido.getCliente().getCpf();
+      var cliente = this.clienteGetRepository.consultarPorCpf(cpfCliente)
+        .orElseThrow(() ->
+          new ClienteNaoEncontradoException("O Cliente, com CPF " + cpfCliente + ", não foi encontrado."));
+      pedido.setCliente(cliente);
+    }
 
     return pedido;
   }
