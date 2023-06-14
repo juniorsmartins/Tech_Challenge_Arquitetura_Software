@@ -38,6 +38,8 @@ public final class PagamentoPostController implements IPagamentoController.PostC
     @Parameter(name = "PagamentoDtoRequest", description = "Estrutura de dados para transporte de informações de entrada.", required = true)
     @RequestBody @Valid final PagamentoDtoRequest dtoRequest, final UriComponentsBuilder uriComponentsBuilder) {
 
+    System.out.println("\n\n---------- Pagamento Efetuado ----------\n\n");
+
     var response = PagamentoDtoResponse.builder()
       .pago(true)
       .build();
