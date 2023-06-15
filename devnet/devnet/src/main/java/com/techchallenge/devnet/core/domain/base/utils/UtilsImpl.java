@@ -2,6 +2,7 @@ package com.techchallenge.devnet.core.domain.base.utils;
 
 import com.techchallenge.devnet.core.application.ports.IClienteRepository;
 import com.techchallenge.devnet.core.application.ports.IProdutoRepository;
+import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ClienteNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.entities.Pedido;
@@ -31,7 +32,7 @@ public final class UtilsImpl implements IUtils {
       var cpfCliente = pedido.getCliente().getCpf();
       var cliente = this.clienteGetRepository.consultarPorCpf(cpfCliente)
         .orElseThrow(() ->
-          new ClienteNaoEncontradoException("O Cliente, com CPF " + cpfCliente + ", não foi encontrado."));
+          new ClienteNaoEncontradoException(String.format(MensagemPadrao.CPF_NAO_ENCONTRADO, cpfCliente)));
       pedido.setCliente(cliente);
     }
 

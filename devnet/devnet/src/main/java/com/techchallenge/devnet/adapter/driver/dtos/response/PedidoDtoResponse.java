@@ -20,9 +20,9 @@ public final class PedidoDtoResponse implements Serializable {
 
   private Long id;
 
-  private StatusPedidoEnum statusPedido;
-
   private ClienteDtoResponse cliente;
+
+  private StatusPedidoEnum statusPedido;
 
   private List<ItemPedidoDtoResponse> itensPedido;
 
