@@ -2,7 +2,7 @@ package com.techchallenge.devnet.adapter.driver.controllers;
 
 import com.techchallenge.devnet.adapter.driver.dtos.request.ProdutoDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.response.ProdutoDtoResponse;
-import com.techchallenge.devnet.core.domain.value_objects.ProdutoFiltro;
+import com.techchallenge.devnet.core.domain.value_objects.specification.ProdutoFiltro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;

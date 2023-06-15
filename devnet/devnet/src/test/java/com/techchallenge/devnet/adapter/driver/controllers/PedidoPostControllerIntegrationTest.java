@@ -7,6 +7,8 @@ import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoResumo;
 import com.techchallenge.devnet.adapter.driver.dtos.ProdutoDtoResumo;
 import com.techchallenge.devnet.adapter.driver.dtos.request.ItemPedidoDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.request.PedidoDtoRequest;
+import com.techchallenge.devnet.adapter.driver.dtos.response.PagamentoDtoResponse;
+import com.techchallenge.devnet.core.application.ports.IPagamentoOpenFeign;
 import com.techchallenge.devnet.core.domain.entities.Cliente;
 import com.techchallenge.devnet.core.domain.entities.Produto;
 import com.techchallenge.devnet.core.domain.entities.enums.FormaPagamentoEnum;
@@ -19,10 +21,13 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -43,6 +48,9 @@ class PedidoPostControllerIntegrationTest {
 
   @Autowired
   private MockMvc mockMvc;
+
+  @MockBean
+  private IPagamentoOpenFeign pagamentoOpenFeign;
 
   @Autowired
   private ClienteRepositoryJpa clienteRepositoryJpa;
@@ -70,6 +78,8 @@ class PedidoPostControllerIntegrationTest {
   @Order(1)
   @DisplayName("Cadastrar - http 201")
   void deveRetornarHttp201_quandoCadastrar() throws Exception {
+    Mockito.when(this.pagamentoOpenFeign.cadastrar(Mockito.any()))
+      .thenReturn(ResponseEntity.ok().body(PagamentoDtoResponse.builder().build()));
 
     var itemPedidoDtoRequest = ItemPedidoDtoRequest.builder()
       .produto(ProdutoDtoResumo.builder().id(produto.getId()).build())
@@ -95,6 +105,8 @@ class PedidoPostControllerIntegrationTest {
   @Order(5)
   @DisplayName("Cadastrar - http 400 por sem forma de pagamento")
   void deveRetornarHttp400_quandoCadastrarSemNome() throws Exception {
+    Mockito.when(this.pagamentoOpenFeign.cadastrar(Mockito.any()))
+      .thenReturn(ResponseEntity.ok().body(PagamentoDtoResponse.builder().build()));
 
     var itemPedidoDtoRequest = ItemPedidoDtoRequest.builder()
       .produto(ProdutoDtoResumo.builder().id(produto.getId()).build())

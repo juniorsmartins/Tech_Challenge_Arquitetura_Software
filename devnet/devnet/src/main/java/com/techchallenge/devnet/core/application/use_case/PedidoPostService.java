@@ -3,10 +3,8 @@ package com.techchallenge.devnet.core.application.use_case;
 import com.techchallenge.devnet.adapter.driver.dtos.request.PagamentoDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.request.PedidoDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.response.PedidoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.IClienteRepository;
 import com.techchallenge.devnet.core.application.ports.IPagamentoOpenFeign;
 import com.techchallenge.devnet.core.application.ports.IPedidoRepository;
-import com.techchallenge.devnet.core.application.ports.IProdutoRepository;
 import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
 import com.techchallenge.devnet.core.domain.base.utils.IUtils;
 import com.techchallenge.devnet.core.domain.entities.Pedido;
@@ -26,12 +24,6 @@ public class PedidoPostService implements IPedidoService.CadastrarService {
 
   @Autowired
   private IPedidoRepository.PostRepository pedidoPostRepository;
-
-  @Autowired
-  private IClienteRepository.GetRepository clienteGetRepository;
-
-  @Autowired
-  private IProdutoRepository.GetRepository produtoGetRepository;
 
   @Autowired
   private IPagamentoOpenFeign pagamentoOpenFeign;
@@ -57,9 +49,18 @@ public class PedidoPostService implements IPedidoService.CadastrarService {
       .map(pedido -> this.mapper.converterEntidadeParaDtoResponse(pedido, PedidoDtoResponse.class))
       .orElseThrow();
 
+    this.abrirSolicitacaoDePagamento(dtoResponse);
+
+
+    return dtoResponse;
+  }
+
+  private void abrirSolicitacaoDePagamento(PedidoDtoResponse pedidoDtoResponse) {
+
+
     var solicitacaoDePagamento = PagamentoDtoRequest.builder()
-      .formaPagamento(dtoResponse.getFormaPagamento())
-      .precoTotal(dtoResponse.getPrecoTotal())
+      .formaPagamento(pedidoDtoResponse.getFormaPagamento())
+      .precoTotal(pedidoDtoResponse.getPrecoTotal())
       .build();
 
     var response = this.pagamentoOpenFeign.cadastrar(solicitacaoDePagamento);
@@ -67,7 +68,6 @@ public class PedidoPostService implements IPedidoService.CadastrarService {
       System.out.println("\n\n---------- Concluída comunicação de pagamento ----------\n\n");
     }
 
-    return dtoResponse;
   }
 }
 
