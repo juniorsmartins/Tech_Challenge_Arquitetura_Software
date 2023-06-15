@@ -1,11 +1,8 @@
 package com.techchallenge.devnet.adapter.driver.dtos.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoResumo;
 import com.techchallenge.devnet.core.domain.entities.enums.FormaPagamentoEnum;
 import com.techchallenge.devnet.core.domain.entities.enums.StatusPedidoEnum;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +10,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -24,9 +20,9 @@ public final class PedidoDtoResponse implements Serializable {
 
   private Long id;
 
-  private StatusPedidoEnum statusPedido;
+  private ClienteDtoResponse cliente;
 
-  private ClienteDtoResumo cliente;
+  private StatusPedidoEnum statusPedido;
 
   private List<ItemPedidoDtoResponse> itensPedido;
 

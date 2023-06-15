@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/api/v1/pagamentos")
 public final class PagamentoPostController implements IPagamentoController.PostController {
 
-  @Operation(summary = "Cadastrar Produto", description = "Este recurso destina-se a cadastrar.")
+  @Operation(summary = "Cadastrar Pagamento", description = "Este recurso destina-se a cadastrar.")
   @ApiResponses(value = {
     @ApiResponse(responseCode = "201", description = "Created - novo recurso criado com sucesso!", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = PagamentoDtoRequest.class))}),
     @ApiResponse(responseCode = "400", description = "Bad Request - requisição mal feita.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))}),
