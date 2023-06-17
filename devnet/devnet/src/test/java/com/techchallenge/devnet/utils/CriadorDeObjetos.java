@@ -5,7 +5,7 @@ import com.techchallenge.devnet.adapter.driver.dtos.request.ClienteDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.request.ProdutoDtoRequest;
 import com.techchallenge.devnet.core.domain.entities.Cliente;
 import com.techchallenge.devnet.core.domain.entities.Produto;
-import com.techchallenge.devnet.core.domain.entities.enums.ECategoria;
+import com.techchallenge.devnet.core.domain.entities.enums.CategoriaEnum;
 
 import java.math.BigDecimal;
 
@@ -29,7 +29,7 @@ public final class CriadorDeObjetos {
 
     return Produto.builder()
       .nome(faker.food().fruit())
-      .categoria(ECategoria.ACOMPANHAMENTO)
+      .categoria(CategoriaEnum.ACOMPANHAMENTO)
       .descricao(faker.lorem().characters(10, 250))
       .preco(BigDecimal.valueOf(preco));
   }
@@ -48,7 +48,7 @@ public final class CriadorDeObjetos {
 
     return ProdutoDtoRequest.builder()
       .nome(faker.food().fruit())
-      .categoria(ECategoria.ACOMPANHAMENTO)
+      .categoria(CategoriaEnum.ACOMPANHAMENTO)
       .descricao(faker.lorem().characters(10, 250))
       .preco(BigDecimal.valueOf(preco));
   }
