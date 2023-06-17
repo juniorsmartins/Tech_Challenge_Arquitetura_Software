@@ -9,13 +9,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public final class SolicitacaoDePagamento {
+public final class SolicitacaoDePagamentoDto implements Serializable {
+
+  private static final long serialVersionUID = 1L;
 
   private PedidoDtoResponse pedido;
 
