@@ -3,7 +3,7 @@ package com.techchallenge.devnet.core.domain.entities.enums;
 import lombok.Getter;
 
 @Getter
-public enum ECategoria {
+public enum CategoriaEnum {
 
   LANCHE("Lanche"),
   ACOMPANHAMENTO("Acompanhamento"),
@@ -12,7 +12,7 @@ public enum ECategoria {
 
   private String categoria;
 
-  ECategoria(String categoria) {
+  CategoriaEnum(String categoria) {
     this.categoria = categoria;
   }
 }

@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.adapter.driver.dtos.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.techchallenge.devnet.core.domain.entities.enums.ECategoria;
+import com.techchallenge.devnet.core.domain.entities.enums.CategoriaEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,7 +18,7 @@ public final class ProdutoDtoResponse implements Serializable {
 
   private Long id;
 
-  private ECategoria categoria;
+  private CategoriaEnum categoria;
 
   private String nome;
 

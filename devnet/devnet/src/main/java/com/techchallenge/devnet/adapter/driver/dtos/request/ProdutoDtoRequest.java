@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driver.dtos.request;
 
-import com.techchallenge.devnet.core.domain.entities.enums.ECategoria;
+import com.techchallenge.devnet.core.domain.entities.enums.CategoriaEnum;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
@@ -27,7 +27,7 @@ public final class ProdutoDtoRequest implements Serializable {
 
   @NotNull
   @Enumerated(EnumType.STRING)
-  private ECategoria categoria;
+  private CategoriaEnum categoria;
 
   @NotBlank
   @Length(max = 100)
