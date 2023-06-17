@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,7 +22,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.envers.Audited;
 
 import java.io.Serializable;
@@ -36,7 +36,6 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
 @EqualsAndHashCode(of = {"id"})
 @Audited
 public final class Pedido extends AuditoriaDataJpa implements Serializable {
@@ -65,6 +64,9 @@ public final class Pedido extends AuditoriaDataJpa implements Serializable {
 
   @OneToMany(mappedBy = "pedido", cascade = {CascadeType.ALL})
   private List<ItemPedido> itensPedido = new ArrayList<>();
+
+  @OneToOne(mappedBy = "pedido", cascade = {CascadeType.ALL})
+  private Pagamento pagamento;
 
   public void calcularPrecoTotal() {
     this.getItensPedido().forEach(ItemPedido::calcularPrecoParcial);
