@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver.dtos.request.PedidoDtoRequest;
-import com.techchallenge.devnet.adapter.driver.dtos.response.PedidoDtoResponse;
+import com.techchallenge.devnet.adapter.driver.dtos.requisicao.PedidoDtoRequest;
+import com.techchallenge.devnet.adapter.driver.dtos.resposta.PedidoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.IClienteRepository;
 import com.techchallenge.devnet.core.application.ports.IItemPedidoRepository;
 import com.techchallenge.devnet.core.application.ports.IPedidoRepository;
@@ -9,7 +9,7 @@ import com.techchallenge.devnet.core.application.ports.IProdutoRepository;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
-import com.techchallenge.devnet.core.domain.base.utils.IUtils;
+import com.techchallenge.devnet.core.domain.base.utilitarios.IUtils;
 import com.techchallenge.devnet.core.domain.entities.Pedido;
 import com.techchallenge.devnet.core.domain.entities.enums.StatusPedidoEnum;
 import lombok.extern.slf4j.Slf4j;

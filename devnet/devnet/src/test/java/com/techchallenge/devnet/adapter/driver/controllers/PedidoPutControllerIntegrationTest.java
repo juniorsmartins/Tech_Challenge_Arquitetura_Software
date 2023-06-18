@@ -1,13 +1,13 @@
 package com.techchallenge.devnet.adapter.driver.controllers;
 
 import com.techchallenge.devnet.DevnetApplication;
-import com.techchallenge.devnet.adapter.driven.infra.repositories.jpa.ClienteRepositoryJpa;
-import com.techchallenge.devnet.adapter.driven.infra.repositories.jpa.PedidoRepositoryJpa;
-import com.techchallenge.devnet.adapter.driven.infra.repositories.jpa.ProdutoRepositoryJpa;
+import com.techchallenge.devnet.adapter.driven.infra.repositorios.jpa.ClienteRepositoryJpa;
+import com.techchallenge.devnet.adapter.driven.infra.repositorios.jpa.PedidoRepositoryJpa;
+import com.techchallenge.devnet.adapter.driven.infra.repositorios.jpa.ProdutoRepositoryJpa;
 import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoResumo;
 import com.techchallenge.devnet.adapter.driver.dtos.ProdutoDtoResumo;
-import com.techchallenge.devnet.adapter.driver.dtos.request.ItemPedidoDtoRequest;
-import com.techchallenge.devnet.adapter.driver.dtos.request.PedidoDtoRequest;
+import com.techchallenge.devnet.adapter.driver.dtos.requisicao.ItemPedidoDtoRequest;
+import com.techchallenge.devnet.adapter.driver.dtos.requisicao.PedidoDtoRequest;
 import com.techchallenge.devnet.core.domain.entities.Cliente;
 import com.techchallenge.devnet.core.domain.entities.ItemPedido;
 import com.techchallenge.devnet.core.domain.entities.Pedido;

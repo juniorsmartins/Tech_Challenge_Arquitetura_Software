@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.core.domain.value_objects.specification;
 
-import com.techchallenge.devnet.core.domain.entities.enums.ECategoria;
+import com.techchallenge.devnet.core.domain.entities.enums.CategoriaEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +12,7 @@ public class ProdutoFiltro {
 
   private String id;
 
-  private ECategoria categoria;
+  private CategoriaEnum categoria;
 
   private String nome;
 

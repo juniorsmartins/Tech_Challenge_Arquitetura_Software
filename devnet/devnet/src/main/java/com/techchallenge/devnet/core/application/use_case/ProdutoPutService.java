@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver.dtos.request.ProdutoDtoRequest;
-import com.techchallenge.devnet.adapter.driver.dtos.response.ProdutoDtoResponse;
+import com.techchallenge.devnet.adapter.driver.dtos.requisicao.ProdutoDtoRequest;
+import com.techchallenge.devnet.adapter.driver.dtos.resposta.ProdutoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.IProdutoRepository;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;

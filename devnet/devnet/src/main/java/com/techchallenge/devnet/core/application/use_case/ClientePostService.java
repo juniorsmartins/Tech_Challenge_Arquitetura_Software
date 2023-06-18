@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver.dtos.request.ClienteDtoRequest;
-import com.techchallenge.devnet.adapter.driver.dtos.response.ClienteDtoResponse;
+import com.techchallenge.devnet.adapter.driver.dtos.requisicao.ClienteDtoRequest;
+import com.techchallenge.devnet.adapter.driver.dtos.resposta.ClienteDtoResponse;
 import com.techchallenge.devnet.core.application.ports.IClienteRepository;
 import com.techchallenge.devnet.core.domain.base.assertions_concern.RegrasNegocioCliente;
 import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
