@@ -1,5 +1,6 @@
 package com.techchallenge.devnet.adapter.driver.dtos.request;
 
+import com.techchallenge.devnet.core.domain.base.anotacoes.FileContentType;
 import com.techchallenge.devnet.core.domain.base.anotacoes.FileSize;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -8,6 +9,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.http.MediaType;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;
@@ -23,6 +25,7 @@ public final class FotoProdutoDtoRequest implements Serializable {
 
   @NotNull
   @FileSize(max = "2MB")
+  @FileContentType(allowed = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
   private MultipartFile foto;
 
   @NotBlank
