@@ -1,6 +1,7 @@
 package com.techchallenge.devnet.adapter.driver.controllers;
 
 import com.techchallenge.devnet.adapter.driver.dtos.request.FotoProdutoDtoRequest;
+import com.techchallenge.devnet.adapter.driver.dtos.response.FotoProdutoDtoResponse;
 import com.techchallenge.devnet.core.application.use_case.IFotoProdutoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,18 +20,16 @@ public final class FotoProdutoPutController implements IFotoProdutoController.Pu
   private IFotoProdutoService.AtualizarService fotoProdutoService;
 
   @Override
-  public ResponseEntity<Object> inserirFotoNoProduto(@PathVariable(name = "id") final Long produtoId,
-                                                     @Valid final FotoProdutoDtoRequest fotoProdutoDtoRequest) {
-    Optional.of(fotoProdutoDtoRequest)
-      .map(imagem -> {
-        this.fotoProdutoService.inserirFotoNoProduto(produtoId, imagem);
-        return true;
-      })
+  public ResponseEntity<FotoProdutoDtoResponse> inserirFotoNoProduto(@PathVariable(name = "id") final Long produtoId,
+                                                             @Valid final FotoProdutoDtoRequest fotoProdutoDtoRequest) {
+
+    var response = Optional.of(fotoProdutoDtoRequest)
+      .map(imagem -> this.fotoProdutoService.inserirFotoNoProduto(produtoId, imagem))
       .orElseThrow();
 
     return ResponseEntity
-      .noContent()
-      .build();
+      .ok()
+      .body(response);
   }
 }
 

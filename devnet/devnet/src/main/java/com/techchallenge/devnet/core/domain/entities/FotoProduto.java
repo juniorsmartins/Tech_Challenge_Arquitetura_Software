@@ -3,10 +3,11 @@ package com.techchallenge.devnet.core.domain.entities;
 import com.techchallenge.devnet.core.domain.base.auditoria.AuditoriaDataJpa;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -32,8 +33,12 @@ public final class FotoProduto extends AuditoriaDataJpa implements Serializable 
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id")
+  @Column(name = "produto_id")
   private Long id;
+
+  @MapsId
+  @OneToOne(fetch = FetchType.LAZY)
+  private Produto produto;
 
   @Column(name = "nome", nullable = false)
   private String nome;
@@ -46,9 +51,5 @@ public final class FotoProduto extends AuditoriaDataJpa implements Serializable 
 
   @Column(name = "tamanho", nullable = false)
   private long tamanho;
-
-  @OneToOne
-  @JoinColumn(name = "produto_id", referencedColumnName = "id", nullable = false)
-  private Produto produto;
 }
 
