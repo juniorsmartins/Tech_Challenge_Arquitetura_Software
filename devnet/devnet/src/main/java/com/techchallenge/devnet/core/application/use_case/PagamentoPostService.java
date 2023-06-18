@@ -1,8 +1,8 @@
 package com.techchallenge.devnet.core.application.use_case;
 
 import com.google.zxing.WriterException;
-import com.techchallenge.devnet.adapter.driver.dtos.response.PagamentoDtoResponse;
-import com.techchallenge.devnet.adapter.driver.dtos.response.PedidoDtoResponse;
+import com.techchallenge.devnet.adapter.driver.dtos.resposta.PagamentoDtoResponse;
+import com.techchallenge.devnet.adapter.driver.dtos.resposta.PedidoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.IPagamentoRepository;
 import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
 import com.techchallenge.devnet.core.domain.base.utilitarios.QRCodeGenerator;

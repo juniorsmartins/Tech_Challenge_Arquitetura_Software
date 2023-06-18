@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.adapter.driver.dtos.response;
+package com.techchallenge.devnet.adapter.driver.dtos.resposta;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;

@@ -1,12 +1,10 @@
-package com.techchallenge.devnet.adapter.driver.dtos.response;
+package com.techchallenge.devnet.adapter.driver.dtos.resposta;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.Serial;
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.OffsetDateTime;
 
 @Getter

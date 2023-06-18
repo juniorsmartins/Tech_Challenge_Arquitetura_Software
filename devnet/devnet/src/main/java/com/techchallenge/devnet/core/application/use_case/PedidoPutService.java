@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.core.application.use_case;
 
 import com.techchallenge.devnet.adapter.driver.dtos.requisicao.PedidoDtoRequest;
-import com.techchallenge.devnet.adapter.driver.dtos.response.PedidoDtoResponse;
+import com.techchallenge.devnet.adapter.driver.dtos.resposta.PedidoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.IClienteRepository;
 import com.techchallenge.devnet.core.application.ports.IItemPedidoRepository;
 import com.techchallenge.devnet.core.application.ports.IPedidoRepository;

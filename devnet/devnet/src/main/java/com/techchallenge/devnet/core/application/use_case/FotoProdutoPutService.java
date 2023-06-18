@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.core.application.use_case;
 
 import com.techchallenge.devnet.adapter.driver.dtos.requisicao.FotoProdutoDtoRequest;
-import com.techchallenge.devnet.adapter.driver.dtos.response.FotoProdutoDtoResponse;
+import com.techchallenge.devnet.adapter.driver.dtos.resposta.FotoProdutoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.IFotoProdutoRepository;
 import com.techchallenge.devnet.core.application.ports.IProdutoRepository;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;

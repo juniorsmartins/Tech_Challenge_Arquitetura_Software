@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.adapter.driver.controllers;
 
 import com.techchallenge.devnet.adapter.driver.dtos.requisicao.FotoProdutoDtoRequest;
-import com.techchallenge.devnet.adapter.driver.dtos.response.FotoProdutoDtoResponse;
+import com.techchallenge.devnet.adapter.driver.dtos.resposta.FotoProdutoDtoResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;

@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.adapter.driver.controllers;
 
 import com.techchallenge.devnet.adapter.driver.dtos.requisicao.PedidoDtoRequest;
-import com.techchallenge.devnet.adapter.driver.dtos.response.PedidoDtoResponse;
+import com.techchallenge.devnet.adapter.driver.dtos.resposta.PedidoDtoResponse;
 import com.techchallenge.devnet.core.application.use_case.IPedidoService;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.core.domain.value_objects.specification.PedidoFiltro;

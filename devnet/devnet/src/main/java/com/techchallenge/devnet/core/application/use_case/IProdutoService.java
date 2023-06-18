@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.core.application.use_case;
 
 import com.techchallenge.devnet.adapter.driver.dtos.requisicao.ProdutoDtoRequest;
-import com.techchallenge.devnet.adapter.driver.dtos.response.ProdutoDtoResponse;
+import com.techchallenge.devnet.adapter.driver.dtos.resposta.ProdutoDtoResponse;
 import com.techchallenge.devnet.core.domain.value_objects.specification.ProdutoFiltro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
