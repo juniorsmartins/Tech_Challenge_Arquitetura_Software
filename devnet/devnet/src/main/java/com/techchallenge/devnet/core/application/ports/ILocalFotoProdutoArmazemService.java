@@ -5,7 +5,7 @@ import lombok.Getter;
 
 import java.io.InputStream;
 
-public interface IFotoProdutoArmazemService {
+public interface ILocalFotoProdutoArmazemService {
 
   void armazenar(NovaFoto novaFoto);
 

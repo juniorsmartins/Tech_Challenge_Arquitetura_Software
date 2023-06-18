@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.Optional;
 
 @RestController
@@ -24,7 +25,13 @@ public final class FotoProdutoPutController implements IFotoProdutoController.Pu
                                                              @Valid final FotoProdutoDtoRequest fotoProdutoDtoRequest) {
 
     var response = Optional.of(fotoProdutoDtoRequest)
-      .map(imagem -> this.fotoProdutoService.inserirFotoNoProduto(produtoId, imagem))
+      .map(imagem -> {
+        try {
+          return this.fotoProdutoService.inserirFotoNoProduto(produtoId, imagem);
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
+      })
       .orElseThrow();
 
     return ResponseEntity

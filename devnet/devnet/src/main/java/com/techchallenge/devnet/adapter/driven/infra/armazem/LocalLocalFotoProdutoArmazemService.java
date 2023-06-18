@@ -1,20 +1,18 @@
 package com.techchallenge.devnet.adapter.driven.infra.armazem;
 
-import com.techchallenge.devnet.core.application.ports.IFotoProdutoArmazemService;
+import com.techchallenge.devnet.core.application.ports.ILocalFotoProdutoArmazemService;
 import com.techchallenge.devnet.core.domain.base.exceptions.ArmazemException;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Service
-public final class FotoProdutoArmazemService implements IFotoProdutoArmazemService {
+public class LocalLocalFotoProdutoArmazemService implements ILocalFotoProdutoArmazemService {
 
-  @Value("${devnet.armazem.local.diretorio-fotos}")
-  private Path caminhoDoDiretorio;
+  private Path caminhoDoDiretorio = Paths.get("C:\\Users\\junio\\OneDrive\\Documentos\\diretorio-fotos");
 
   @Override
   public void armazenar(NovaFoto novaFoto) {
@@ -23,13 +21,13 @@ public final class FotoProdutoArmazemService implements IFotoProdutoArmazemServi
       Path caminhoDoArquivo = this.pegarCaminhoDoArquivo(novaFoto.getNomeArquivo());
       FileCopyUtils.copy(novaFoto.getInputStream(), Files.newOutputStream(caminhoDoArquivo));
 
-    } catch (IOException e) {
+    } catch (Exception e) {
       throw new ArmazemException("Não foi possível armazenar arquivo de foto.", e);
     }
   }
 
   private Path pegarCaminhoDoArquivo(String nomeArquivo) {
-    return caminhoDoDiretorio.resolve(Path.of(nomeArquivo));
+    return this.caminhoDoDiretorio.resolve(Path.of(nomeArquivo));
   }
 }
 

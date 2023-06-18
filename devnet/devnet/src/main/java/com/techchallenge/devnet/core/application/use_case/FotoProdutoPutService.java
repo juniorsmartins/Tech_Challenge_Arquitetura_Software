@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 @Slf4j
 @Service
 public class FotoProdutoPutService implements IFotoProdutoService.AtualizarService {
@@ -30,34 +32,23 @@ public class FotoProdutoPutService implements IFotoProdutoService.AtualizarServi
 
   @Transactional
   @Override
-  public FotoProdutoDtoResponse inserirFotoNoProduto(final Long id, final FotoProdutoDtoRequest fotoDtoRequest) {
+  public FotoProdutoDtoResponse inserirFotoNoProduto(final Long id, final FotoProdutoDtoRequest fotoDtoRequest) throws IOException {
 
     var produto = this.produtoGetRepository.consultarPorId(id)
       .orElseThrow(() -> new ProdutoNaoEncontradoException(id));
 
     MultipartFile arquivoFoto = fotoDtoRequest.getFoto();
     var fotoProdutoPraSalvar = FotoProduto.builder()
-      .nome(arquivoFoto.getOriginalFilename().toLowerCase().trim())
+      .nome(id + "_" + arquivoFoto.getOriginalFilename().toLowerCase().trim())
       .descricao(fotoDtoRequest.getDescricao())
       .tipo(arquivoFoto.getContentType())
       .tamanho(arquivoFoto.getSize())
       .produto(produto)
       .build();
-    var fotoProdutoSalvo = this.fotoProdutoPostRepository.salvar(fotoProdutoPraSalvar);
+
+    var fotoProdutoSalvo = this.fotoProdutoPostRepository.salvar(fotoProdutoPraSalvar, arquivoFoto.getInputStream());
 
     return this.mapper.converterEntidadeParaDtoResponse(fotoProdutoSalvo, FotoProdutoDtoResponse.class);
-
-
-//        var nomeArquivo = id + "_" + fotoDtoRequest.getFoto().getOriginalFilename().toLowerCase().trim();
-//        var caminhoFoto = Path.of(diretorioDeFotos, nomeArquivo);
-//
-//        try {
-//          fotoDtoRequest.getFoto().transferTo(caminhoFoto);
-//        } catch (IOException e) {
-//          throw new RuntimeException(e);
-//        }
-
-
   }
 }
 
