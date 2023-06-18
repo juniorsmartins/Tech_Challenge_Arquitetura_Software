@@ -1,15 +1,12 @@
 package com.techchallenge.devnet.core.domain.entities;
 
 import com.techchallenge.devnet.core.domain.base.auditoria.AuditoriaDataJpa;
-import com.techchallenge.devnet.core.domain.entities.enums.CategoriaEnum;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -18,23 +15,18 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
-import org.hibernate.envers.Audited;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 @Entity
-@Table(name = "produtos")
+@Table(name = "fotos_produtos")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
 @EqualsAndHashCode(of = {"id"})
-@Audited
-public final class Produto extends AuditoriaDataJpa implements Serializable {
+public final class FotoProduto extends AuditoriaDataJpa implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
@@ -43,20 +35,20 @@ public final class Produto extends AuditoriaDataJpa implements Serializable {
   @Column(name = "id")
   private Long id;
 
-  @Enumerated(EnumType.STRING)
-  @Column(name = "categoria", length = 50, nullable = false)
-  private CategoriaEnum categoria;
-
-  @Column(name = "nome", length = 100, nullable = false)
+  @Column(name = "nome", nullable = false)
   private String nome;
 
-  @Column(name = "descricao", length = 250, nullable = false)
+  @Column(name = "descricao", nullable = false)
   private String descricao;
 
-  @Column(name = "preco", nullable = false)
-  private BigDecimal preco;
+  @Column(name = "tipo", nullable = false)
+  private String tipo;
 
-  @OneToOne(mappedBy = "produto", cascade = {CascadeType.ALL})
-  private FotoProduto fotoProduto;
+  @Column(name = "tamanho", nullable = false)
+  private long tamanho;
+
+  @OneToOne
+  @JoinColumn(name = "produto_id", referencedColumnName = "id", nullable = false)
+  private Produto produto;
 }
 
