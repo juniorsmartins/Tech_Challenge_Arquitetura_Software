@@ -1,6 +1,5 @@
 package com.techchallenge.devnet.core.application.ports;
 
-import com.techchallenge.devnet.core.domain.entities.FotoProduto;
 import com.techchallenge.devnet.core.domain.entities.Produto;
 import com.techchallenge.devnet.core.domain.value_objects.specification.ProdutoFiltro;
 import org.springframework.data.domain.Page;
@@ -12,8 +11,6 @@ public interface IProdutoRepository {
 
   interface PostRepository {
     Produto salvar(Produto produto);
-
-    FotoProduto save(FotoProduto fotoProduto);
   }
 
   interface GetRepository {

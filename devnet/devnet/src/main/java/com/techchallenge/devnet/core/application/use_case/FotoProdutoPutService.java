@@ -2,6 +2,7 @@ package com.techchallenge.devnet.core.application.use_case;
 
 import com.techchallenge.devnet.adapter.driver.dtos.request.FotoProdutoDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.response.FotoProdutoDtoResponse;
+import com.techchallenge.devnet.core.application.ports.IFotoProdutoRepository;
 import com.techchallenge.devnet.core.application.ports.IProdutoRepository;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
@@ -22,7 +23,7 @@ public class FotoProdutoPutService implements IFotoProdutoService.AtualizarServi
   private IProdutoRepository.GetRepository produtoGetRepository;
 
   @Autowired
-  private IProdutoRepository.PostRepository produtoPostRepository;
+  private IFotoProdutoRepository.PostRepository fotoProdutoPostRepository;
 
   @Autowired
   private IMapper mapper;
@@ -42,9 +43,9 @@ public class FotoProdutoPutService implements IFotoProdutoService.AtualizarServi
       .tamanho(arquivoFoto.getSize())
       .produto(produto)
       .build();
-    var fotoProduto = this.produtoPostRepository.save(fotoProdutoPraSalvar);
+    var fotoProdutoSalvo = this.fotoProdutoPostRepository.salvar(fotoProdutoPraSalvar);
 
-    return this.mapper.converterEntidadeParaDtoResponse(fotoProduto, FotoProdutoDtoResponse.class);
+    return this.mapper.converterEntidadeParaDtoResponse(fotoProdutoSalvo, FotoProdutoDtoResponse.class);
 
 
 //        var nomeArquivo = id + "_" + fotoDtoRequest.getFoto().getOriginalFilename().toLowerCase().trim();
