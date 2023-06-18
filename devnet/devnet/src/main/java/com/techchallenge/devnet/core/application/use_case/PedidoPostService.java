@@ -1,15 +1,12 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver.dtos.request.PagamentoDtoRequest;
-import com.techchallenge.devnet.adapter.driver.dtos.request.PedidoDtoRequest;
-import com.techchallenge.devnet.adapter.driver.dtos.response.PedidoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.IPagamentoOpenFeign;
+import com.techchallenge.devnet.adapter.driver.dtos.requisicao.PedidoDtoRequest;
 import com.techchallenge.devnet.core.application.ports.IPedidoRepository;
 import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
-import com.techchallenge.devnet.core.domain.base.utils.IUtils;
+import com.techchallenge.devnet.core.domain.base.utilitarios.IUtils;
 import com.techchallenge.devnet.core.domain.entities.Pedido;
 import com.techchallenge.devnet.core.domain.entities.enums.StatusPedidoEnum;
-import org.apache.commons.lang3.ObjectUtils;
+import com.techchallenge.devnet.core.domain.value_objects.CobrancaPagamentoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,51 +20,35 @@ public class PedidoPostService implements IPedidoService.CadastrarService {
   private IMapper mapper;
 
   @Autowired
-  private IPedidoRepository.PostRepository pedidoPostRepository;
-
-  @Autowired
-  private IPagamentoOpenFeign pagamentoOpenFeign;
-
-  @Autowired
   private IUtils utils;
+
+  @Autowired
+  private IPagamentoService.PagamentoPostService pagamentoPostService;
+
+  @Autowired
+  private IPedidoRepository.PostRepository pedidoPostRepository;
 
   @Transactional
   @Override
-  public PedidoDtoResponse cadastrar(final PedidoDtoRequest dtoRequest) {
+  public CobrancaPagamentoDto cadastrar(final PedidoDtoRequest dtoRequest) {
 
-    var dtoResponse = Optional.of(dtoRequest)
+    return Optional.of(dtoRequest)
       .map(dto -> this.mapper.converterDtoRequestParaEntidade(dto, Pedido.class))
       .map(this.utils::confirmarCliente)
       .map(this.utils::confirmarProdutos)
-      .map(pedido -> {
-        pedido.setStatusPedido(StatusPedidoEnum.RECEBIDO);
-        pedido.getItensPedido().forEach(item -> item.setPedido(pedido));
-        pedido.calcularPrecoTotal();
-        return pedido;
-      })
+      .map(this::organizarPedidoParaRegistrar)
       .map(this.pedidoPostRepository::salvar)
-      .map(pedido -> this.mapper.converterEntidadeParaDtoResponse(pedido, PedidoDtoResponse.class))
+      .map(this.pagamentoPostService::iniciarCobrancaDePagamento)
       .orElseThrow();
-
-    this.abrirSolicitacaoDePagamento(dtoResponse);
-
-
-    return dtoResponse;
   }
 
-  private void abrirSolicitacaoDePagamento(PedidoDtoResponse pedidoDtoResponse) {
+  private Pedido organizarPedidoParaRegistrar(Pedido pedido) {
 
+    pedido.setStatusPedido(StatusPedidoEnum.RECEBIDO);
+    pedido.getItensPedido().forEach(item -> item.setPedido(pedido));
+    pedido.calcularPrecoTotal();
 
-    var solicitacaoDePagamento = PagamentoDtoRequest.builder()
-      .formaPagamento(pedidoDtoResponse.getFormaPagamento())
-      .precoTotal(pedidoDtoResponse.getPrecoTotal())
-      .build();
-
-    var response = this.pagamentoOpenFeign.cadastrar(solicitacaoDePagamento);
-    if (ObjectUtils.isNotEmpty(response)) {
-      System.out.println("\n\n---------- Concluída comunicação de pagamento ----------\n\n");
-    }
-
+    return pedido;
   }
 }
 

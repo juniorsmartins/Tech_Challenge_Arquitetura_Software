@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver.dtos.response.ProdutoDtoResponse;
+import com.techchallenge.devnet.adapter.driver.dtos.resposta.ProdutoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.IProdutoRepository;
 import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
 import com.techchallenge.devnet.core.domain.value_objects.specification.ProdutoFiltro;
