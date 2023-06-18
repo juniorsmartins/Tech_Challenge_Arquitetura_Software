@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.core.domain.base.utils;
+package com.techchallenge.devnet.core.domain.base.utilitarios;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;

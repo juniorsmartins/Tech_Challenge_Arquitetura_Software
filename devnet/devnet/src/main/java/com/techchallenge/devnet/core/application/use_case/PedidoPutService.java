@@ -9,7 +9,7 @@ import com.techchallenge.devnet.core.application.ports.IProdutoRepository;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
-import com.techchallenge.devnet.core.domain.base.utils.IUtils;
+import com.techchallenge.devnet.core.domain.base.utilitarios.IUtils;
 import com.techchallenge.devnet.core.domain.entities.Pedido;
 import com.techchallenge.devnet.core.domain.entities.enums.StatusPedidoEnum;
 import lombok.extern.slf4j.Slf4j;

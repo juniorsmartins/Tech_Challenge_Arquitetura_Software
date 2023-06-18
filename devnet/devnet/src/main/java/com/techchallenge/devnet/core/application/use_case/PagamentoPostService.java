@@ -5,7 +5,7 @@ import com.techchallenge.devnet.adapter.driver.dtos.response.PagamentoDtoRespons
 import com.techchallenge.devnet.adapter.driver.dtos.response.PedidoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.IPagamentoRepository;
 import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
-import com.techchallenge.devnet.core.domain.base.utils.QRCodeGenerator;
+import com.techchallenge.devnet.core.domain.base.utilitarios.QRCodeGenerator;
 import com.techchallenge.devnet.core.domain.entities.Pagamento;
 import com.techchallenge.devnet.core.domain.entities.Pedido;
 import com.techchallenge.devnet.core.domain.entities.enums.StatusPagamentoEnum;

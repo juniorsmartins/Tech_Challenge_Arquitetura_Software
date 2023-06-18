@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.core.domain.base.utils;
+package com.techchallenge.devnet.core.domain.base.utilitarios;
 
 import com.techchallenge.devnet.core.domain.entities.Pedido;
 
