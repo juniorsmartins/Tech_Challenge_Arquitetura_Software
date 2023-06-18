@@ -6,8 +6,8 @@ import com.techchallenge.devnet.adapter.driven.infra.repositorios.jpa.PedidoRepo
 import com.techchallenge.devnet.adapter.driven.infra.repositorios.jpa.ProdutoRepositoryJpa;
 import com.techchallenge.devnet.adapter.driver.dtos.ClienteDtoResumo;
 import com.techchallenge.devnet.adapter.driver.dtos.ProdutoDtoResumo;
-import com.techchallenge.devnet.adapter.driver.dtos.request.ItemPedidoDtoRequest;
-import com.techchallenge.devnet.adapter.driver.dtos.request.PedidoDtoRequest;
+import com.techchallenge.devnet.adapter.driver.dtos.requisicao.ItemPedidoDtoRequest;
+import com.techchallenge.devnet.adapter.driver.dtos.requisicao.PedidoDtoRequest;
 import com.techchallenge.devnet.core.domain.entities.Cliente;
 import com.techchallenge.devnet.core.domain.entities.ItemPedido;
 import com.techchallenge.devnet.core.domain.entities.Pedido;

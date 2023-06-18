@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.adapter.driver.dtos.request;
+package com.techchallenge.devnet.adapter.driver.dtos.requisicao;
 
 import com.techchallenge.devnet.core.domain.entities.enums.FormaPagamentoEnum;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.adapter.driver.dtos.request;
+package com.techchallenge.devnet.adapter.driver.dtos.requisicao;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

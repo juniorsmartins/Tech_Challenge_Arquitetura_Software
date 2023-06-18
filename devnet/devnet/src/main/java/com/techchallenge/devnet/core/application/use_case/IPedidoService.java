@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver.dtos.request.PedidoDtoRequest;
+import com.techchallenge.devnet.adapter.driver.dtos.requisicao.PedidoDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.response.PedidoDtoResponse;
 import com.techchallenge.devnet.core.domain.value_objects.CobrancaPagamentoDto;
 import com.techchallenge.devnet.core.domain.value_objects.specification.PedidoFiltro;

@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver.dtos.request.FotoProdutoDtoRequest;
+import com.techchallenge.devnet.adapter.driver.dtos.requisicao.FotoProdutoDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.response.FotoProdutoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.IFotoProdutoRepository;
 import com.techchallenge.devnet.core.application.ports.IProdutoRepository;
