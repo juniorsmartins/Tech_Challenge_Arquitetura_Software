@@ -13,22 +13,19 @@ import java.nio.file.Path;
 @Service
 public class FotoProdutoPutService implements IFotoProdutoService.AtualizarService {
 
-  public static String fotoStore = "D:\\AreaEstudo\\PosTech-Fiap-Alura\\ArquiteturaDeSoftware\\TechChallenge-Soat\\devnet\\devnet\\foto_store\\";
+  public static String diretorioDeFotos = "D:\\AreaEstudo\\PosTech-Fiap-Alura\\ArquiteturaDeSoftware\\TechChallenge-Soat\\devnet\\devnet\\foto_store\\";
 
   @Autowired
   private IProdutoRepository.GetRepository produtoGetRepository;
 
   @Override
-  public void inserirFotoNoProduto(final Long id, FotoProdutoDtoRequest fotoProdutoDtoRequest) {
+  public void inserirFotoNoProduto(final Long id, final FotoProdutoDtoRequest fotoProdutoDtoRequest) {
 
 //    this.produtoGetRepository.consultarPorId(id)
 //      .map(produto -> {
 
-        var nomeArquivo = id + "_" + fotoProdutoDtoRequest.getFoto().getOriginalFilename();
-        var caminhoFoto = Path.of(fotoStore, nomeArquivo);
-
-        System.out.println(caminhoFoto);
-        System.out.println(fotoProdutoDtoRequest.getFoto().getContentType());
+        var nomeArquivo = id + "_" + fotoProdutoDtoRequest.getFoto().getOriginalFilename().toLowerCase().trim();
+        var caminhoFoto = Path.of(diretorioDeFotos, nomeArquivo);
 
         try {
           fotoProdutoDtoRequest.getFoto().transferTo(caminhoFoto);

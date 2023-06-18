@@ -2,6 +2,7 @@ package com.techchallenge.devnet.adapter.driver.controllers;
 
 import com.techchallenge.devnet.adapter.driver.dtos.request.FotoProdutoDtoRequest;
 import com.techchallenge.devnet.core.application.use_case.IFotoProdutoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +20,7 @@ public final class FotoProdutoPutController implements IFotoProdutoController.Pu
 
   @Override
   public ResponseEntity<Object> inserirFotoNoProduto(@PathVariable(name = "id") final Long produtoId,
-                                                     final FotoProdutoDtoRequest fotoProdutoDtoRequest) {
+                                                     @Valid final FotoProdutoDtoRequest fotoProdutoDtoRequest) {
     Optional.of(fotoProdutoDtoRequest)
       .map(imagem -> {
         this.fotoProdutoService.inserirFotoNoProduto(produtoId, imagem);
@@ -28,7 +29,7 @@ public final class FotoProdutoPutController implements IFotoProdutoController.Pu
       .orElseThrow();
 
     return ResponseEntity
-      .ok()
+      .noContent()
       .build();
   }
 }
