@@ -1,5 +1,6 @@
 package com.techchallenge.devnet.adapter.driver.dtos.request;
 
+import com.techchallenge.devnet.core.domain.base.anotacoes.FileSize;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,7 @@ public final class FotoProdutoDtoRequest implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @NotNull
+  @FileSize(max = "2MB")
   private MultipartFile foto;
 
   @NotBlank
