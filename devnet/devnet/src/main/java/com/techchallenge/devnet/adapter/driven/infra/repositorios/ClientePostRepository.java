@@ -1,6 +1,6 @@
-package com.techchallenge.devnet.adapter.driven.infra.repositories;
+package com.techchallenge.devnet.adapter.driven.infra.repositorios;
 
-import com.techchallenge.devnet.adapter.driven.infra.repositories.jpa.ClienteRepositoryJpa;
+import com.techchallenge.devnet.adapter.driven.infra.repositorios.jpa.ClienteRepositoryJpa;
 import com.techchallenge.devnet.core.application.ports.IClienteRepository;
 import com.techchallenge.devnet.core.domain.entities.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;

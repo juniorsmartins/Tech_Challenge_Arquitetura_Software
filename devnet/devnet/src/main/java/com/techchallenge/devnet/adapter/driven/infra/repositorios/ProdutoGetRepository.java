@@ -1,6 +1,6 @@
-package com.techchallenge.devnet.adapter.driven.infra.repositories;
+package com.techchallenge.devnet.adapter.driven.infra.repositorios;
 
-import com.techchallenge.devnet.adapter.driven.infra.repositories.jpa.ProdutoRepositoryJpa;
+import com.techchallenge.devnet.adapter.driven.infra.repositorios.jpa.ProdutoRepositoryJpa;
 import com.techchallenge.devnet.core.application.ports.IProdutoRepository;
 import com.techchallenge.devnet.core.domain.entities.Produto;
 import com.techchallenge.devnet.core.domain.value_objects.specification.ProdutoFiltro;

@@ -1,6 +1,6 @@
-package com.techchallenge.devnet.adapter.driven.infra.repositories;
+package com.techchallenge.devnet.adapter.driven.infra.repositorios;
 
-import com.techchallenge.devnet.adapter.driven.infra.repositories.jpa.FotoProdutoRepositoryJpa;
+import com.techchallenge.devnet.adapter.driven.infra.repositorios.jpa.FotoProdutoRepositoryJpa;
 import com.techchallenge.devnet.core.application.ports.IFotoProdutoRepository;
 import com.techchallenge.devnet.core.domain.entities.FotoProduto;
 import org.springframework.beans.factory.annotation.Autowired;

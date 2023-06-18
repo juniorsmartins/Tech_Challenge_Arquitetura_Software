@@ -1,6 +1,6 @@
-package com.techchallenge.devnet.adapter.driven.infra.repositories;
+package com.techchallenge.devnet.adapter.driven.infra.repositorios;
 
-import com.techchallenge.devnet.adapter.driven.infra.repositories.jpa.PedidoRepositoryJpa;
+import com.techchallenge.devnet.adapter.driven.infra.repositorios.jpa.PedidoRepositoryJpa;
 import com.techchallenge.devnet.core.application.ports.IPedidoRepository;
 import com.techchallenge.devnet.core.domain.entities.Pedido;
 import org.springframework.beans.factory.annotation.Autowired;
