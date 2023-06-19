@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 @Service
-public class PagamentoPostService implements IPagamentoService.PagamentoPostService {
+public class PagamentoPostService implements IPagamentoService.PostService {
 
   @Autowired
   private IMapper mapper;
