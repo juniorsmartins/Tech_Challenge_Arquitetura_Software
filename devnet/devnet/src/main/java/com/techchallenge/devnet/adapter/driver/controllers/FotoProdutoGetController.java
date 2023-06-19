@@ -2,6 +2,7 @@ package com.techchallenge.devnet.adapter.driver.controllers;
 
 import com.techchallenge.devnet.adapter.driver.dtos.resposta.FotoProdutoDtoResponse;
 import com.techchallenge.devnet.core.application.use_case.IFotoProdutoService;
+import com.techchallenge.devnet.core.domain.base.exceptions.http_404.FotoProdutoNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
@@ -30,12 +31,17 @@ public final class FotoProdutoGetController implements IFotoProdutoController.Ge
   @Override
   public ResponseEntity<InputStreamResource> servirImagemPorId(@PathVariable(name = "id") final Long id) {
 
-    var response = this.fotoProdutoPesquisarService.servirImagemPorId(id);
+    try {
+      var response = this.fotoProdutoPesquisarService.servirImagemPorId(id);
 
-    return ResponseEntity
-      .ok()
-      .contentType(MediaType.IMAGE_JPEG)
-      .body(response);
+      return ResponseEntity
+        .ok()
+        .contentType(MediaType.IMAGE_JPEG)
+        .body(response);
+
+    } catch (FotoProdutoNaoEncontradoException fotoProdutoNaoEncontradoException) {
+      return ResponseEntity.notFound().build();
+    }
   }
 }
 
