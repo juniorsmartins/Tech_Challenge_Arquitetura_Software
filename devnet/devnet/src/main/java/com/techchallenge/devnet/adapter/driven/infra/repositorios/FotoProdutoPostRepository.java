@@ -19,15 +19,16 @@ public class FotoProdutoPostRepository implements IFotoProdutoRepository.PostRep
   private ILocalFotoProdutoArmazemService localFotoProdutoArmazemService;
 
   @Override
-  public FotoProduto salvar(final FotoProduto fotoProduto, InputStream dadosArquivo) {
+  public FotoProduto salvar(final FotoProduto fotoProdutoPraSalvar, final InputStream dadosArquivo) {
 
-    var produtoId = fotoProduto.getProduto().getId();
+    var produtoId = fotoProdutoPraSalvar.getProduto().getId();
+
     var fotoExistente = this.fotoProdutoRepositoryJpa.findById(produtoId);
     if (fotoExistente.isPresent()) {
       this.fotoProdutoRepositoryJpa.delete(fotoExistente.get());
     }
 
-    var fotoProdutoSalvo = this.fotoProdutoRepositoryJpa.save(fotoProduto);
+    var fotoProdutoSalvo = this.fotoProdutoRepositoryJpa.save(fotoProdutoPraSalvar);
     this.fotoProdutoRepositoryJpa.flush();
 
     var novaFoto = ILocalFotoProdutoArmazemService.NovaFoto.builder()
