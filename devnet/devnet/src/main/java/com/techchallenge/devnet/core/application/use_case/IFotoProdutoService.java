@@ -10,5 +10,9 @@ public interface IFotoProdutoService {
   interface AtualizarService {
     FotoProdutoDtoResponse inserirFotoNoProduto(Long id, FotoProdutoDtoRequest fotoProdutoDtoRequest) throws IOException;
   }
+
+  interface PesquisarService {
+    FotoProdutoDtoResponse consultarPorId(Long id);
+  }
 }
 

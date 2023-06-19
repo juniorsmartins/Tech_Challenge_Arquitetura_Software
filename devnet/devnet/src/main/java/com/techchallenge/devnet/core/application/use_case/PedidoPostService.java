@@ -23,7 +23,7 @@ public class PedidoPostService implements IPedidoService.CadastrarService {
   private IUtils utils;
 
   @Autowired
-  private IPagamentoService.PagamentoPostService pagamentoPostService;
+  private IPagamentoService.PostService pagamentoPostService;
 
   @Autowired
   private IPedidoRepository.PostRepository pedidoPostRepository;

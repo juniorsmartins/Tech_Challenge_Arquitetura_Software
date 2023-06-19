@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public final class PagamentoPostController implements IPagamentoController.PostController {
 
   @Autowired
-  private IPagamentoService.PagamentoPostService pagamentoPostService;
+  private IPagamentoService.PostService pagamentoPostService;
 
 //  @Operation(summary = "Cadastrar Pagamento", description = "Este recurso destina-se a cadastrar.")
 //  @ApiResponses(value = {

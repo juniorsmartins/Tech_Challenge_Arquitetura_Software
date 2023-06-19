@@ -3,6 +3,7 @@ package com.techchallenge.devnet.core.application.use_case;
 import com.techchallenge.devnet.adapter.driver.dtos.requisicao.FotoProdutoDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.resposta.FotoProdutoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.IFotoProdutoRepository;
+import com.techchallenge.devnet.core.application.ports.ILocalFotoProdutoArmazemService;
 import com.techchallenge.devnet.core.application.ports.IProdutoRepository;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
@@ -28,6 +29,9 @@ public class FotoProdutoPutService implements IFotoProdutoService.AtualizarServi
   private IFotoProdutoRepository.PostRepository fotoProdutoPostRepository;
 
   @Autowired
+  private ILocalFotoProdutoArmazemService localFotoProdutoArmazemService;
+
+  @Autowired
   private IMapper mapper;
 
   @Transactional
@@ -38,8 +42,9 @@ public class FotoProdutoPutService implements IFotoProdutoService.AtualizarServi
       .orElseThrow(() -> new ProdutoNaoEncontradoException(id));
 
     MultipartFile arquivoFoto = fotoDtoRequest.getFoto();
+
     var fotoProdutoPraSalvar = FotoProduto.builder()
-      .nome(id + "_" + arquivoFoto.getOriginalFilename().toLowerCase().trim())
+      .nome(this.localFotoProdutoArmazemService.gerarNomeArquivoParaArmazenar(id, fotoDtoRequest.getFoto().getOriginalFilename()))
       .descricao(fotoDtoRequest.getDescricao())
       .tipo(arquivoFoto.getContentType())
       .tamanho(arquivoFoto.getSize())
