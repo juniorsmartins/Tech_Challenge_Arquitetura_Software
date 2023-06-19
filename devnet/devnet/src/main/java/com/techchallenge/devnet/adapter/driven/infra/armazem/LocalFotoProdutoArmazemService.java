@@ -12,7 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Service
-public class LocalLocalFotoProdutoArmazemService implements ILocalFotoProdutoArmazemService {
+public class LocalFotoProdutoArmazemService implements ILocalFotoProdutoArmazemService {
 
   private Path caminhoDoDiretorio = Paths.get("C:\\Users\\junio\\OneDrive\\Documentos\\diretorio-fotos");
 
