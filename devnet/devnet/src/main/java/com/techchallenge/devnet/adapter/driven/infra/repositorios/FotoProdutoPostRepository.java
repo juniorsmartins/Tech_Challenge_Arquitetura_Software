@@ -24,7 +24,10 @@ public class FotoProdutoPostRepository implements IFotoProdutoRepository.PostRep
     var produtoId = fotoProdutoPraSalvar.getProduto().getId();
 
     var fotoExistente = this.fotoProdutoRepositoryJpa.findById(produtoId);
+    String nomeFotoExistente = null;
+
     if (fotoExistente.isPresent()) {
+      nomeFotoExistente = fotoExistente.get().getNome();
       this.fotoProdutoRepositoryJpa.delete(fotoExistente.get());
     }
 
@@ -35,7 +38,8 @@ public class FotoProdutoPostRepository implements IFotoProdutoRepository.PostRep
       .nomeArquivo(fotoProdutoSalvo.getNome())
       .inputStream(dadosArquivo)
       .build();
-    this.localFotoProdutoArmazemService.armazenar(novaFoto);
+
+    this.localFotoProdutoArmazemService.substituir(nomeFotoExistente, novaFoto);
 
     return fotoProdutoSalvo;
   }

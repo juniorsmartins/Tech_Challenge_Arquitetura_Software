@@ -26,6 +26,18 @@ public class LocalLocalFotoProdutoArmazemService implements ILocalFotoProdutoArm
     }
   }
 
+  @Override
+  public void remover(String nomeArquivo) {
+
+    try {
+      Path caminhoDoArquivo = this.pegarCaminhoDoArquivo(nomeArquivo);
+      Files.deleteIfExists(caminhoDoArquivo);
+
+    } catch (Exception e) {
+      throw new ArmazemException("Não foi possível deletar arquivo de foto do armazenamento.", e);
+    }
+  }
+
   private Path pegarCaminhoDoArquivo(String nomeArquivo) {
     return this.caminhoDoDiretorio.resolve(Path.of(nomeArquivo));
   }
