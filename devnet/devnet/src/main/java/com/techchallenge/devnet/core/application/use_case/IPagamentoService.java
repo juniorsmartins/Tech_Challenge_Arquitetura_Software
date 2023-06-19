@@ -5,7 +5,7 @@ import com.techchallenge.devnet.core.domain.value_objects.CobrancaPagamentoDto;
 
 public interface IPagamentoService {
 
-  interface PagamentoPostService {
+  interface PostService {
     CobrancaPagamentoDto iniciarCobrancaDePagamento(Pedido pedido);
   }
 }
