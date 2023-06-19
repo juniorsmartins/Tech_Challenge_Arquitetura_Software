@@ -13,5 +13,13 @@ public final class MensagemPadrao {
   public static final String PRODUTO_NAO_ENCONTRADO = "O Produto, com id %s, não foi encontrado!";
 
   public static final String PEDIDO_NAO_ENCONTRADO = "O Pedido, com id %s, não foi encontrado!";
+
+  public static final String FOTO_PRODUTO_NAO_ENCONTRADO = "Não existe cadastro de foto do produto com id %d.";
+
+  public static final String FOTO_PRODUTO_NAO_ARMAZENADO = "Não foi possível armazenar arquivo de foto.";
+
+  public static final String FOTO_PRODUTO_NAO_APAGADO_DO_ARMAZENAMENTO = "Não foi possível deletar arquivo de foto do armazenamento.";
+
+  public static final String FOTO_PRODUTO_NAO_RECUPERADO_DO_ARMAZENAMENTO = "Não foi possível recuperar arquivo de foto do armazenamento.";
 }
 

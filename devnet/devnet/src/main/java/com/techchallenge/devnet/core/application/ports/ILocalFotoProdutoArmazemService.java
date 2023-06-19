@@ -14,6 +14,8 @@ public interface ILocalFotoProdutoArmazemService {
 
   void remover(String nomeArquivo);
 
+  InputStream recuperar(String nomeArquivo);
+
   default void substituir(String nomeFotoExistente, NovaFoto novaFoto) {
     if (ObjectUtils.isNotEmpty(nomeFotoExistente)) {
       this.remover(nomeFotoExistente);
