@@ -2,10 +2,12 @@ package com.techchallenge.devnet.core.application.use_case;
 
 import com.techchallenge.devnet.adapter.driver.dtos.resposta.FotoProdutoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.IFotoProdutoRepository;
+import com.techchallenge.devnet.core.application.ports.ILocalFotoProdutoArmazemService;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.FotoProdutoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,12 +21,27 @@ public class FotoProdutoGetService implements IFotoProdutoService.PesquisarServi
   @Autowired
   private IFotoProdutoRepository.GetRepository fotoProdutoGetRepository;
 
+  @Autowired
+  private ILocalFotoProdutoArmazemService localFotoProdutoArmazemService;
+
   @Transactional(readOnly = true)
   @Override
   public FotoProdutoDtoResponse consultarPorId(final Long id) {
 
     return this.fotoProdutoGetRepository.consultarPorId(id)
       .map(fotoProduto -> this.mapper.converterEntidadeParaDtoResponse(fotoProduto, FotoProdutoDtoResponse.class))
+      .orElseThrow(() -> new FotoProdutoNaoEncontradoException(id));
+  }
+
+  @Transactional(readOnly = true)
+  @Override
+  public InputStreamResource servirImagemPorId(final Long id) {
+
+    return this.fotoProdutoGetRepository.consultarPorId(id)
+      .map(fotoProduto -> {
+        var imagem = this.localFotoProdutoArmazemService.recuperar(fotoProduto.getNome());
+        return new InputStreamResource(imagem);
+      })
       .orElseThrow(() -> new FotoProdutoNaoEncontradoException(id));
   }
 }

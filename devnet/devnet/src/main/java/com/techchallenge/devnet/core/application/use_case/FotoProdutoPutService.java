@@ -23,6 +23,9 @@ public class FotoProdutoPutService implements IFotoProdutoService.AtualizarServi
   public static String diretorioDeFotos = "D:\\AreaEstudo\\PosTech-Fiap-Alura\\ArquiteturaDeSoftware\\TechChallenge-Soat\\devnet\\devnet\\foto_store\\";
 
   @Autowired
+  private IMapper mapper;
+
+  @Autowired
   private IProdutoRepository.GetRepository produtoGetRepository;
 
   @Autowired
@@ -30,9 +33,6 @@ public class FotoProdutoPutService implements IFotoProdutoService.AtualizarServi
 
   @Autowired
   private ILocalFotoProdutoArmazemService localFotoProdutoArmazemService;
-
-  @Autowired
-  private IMapper mapper;
 
   @Transactional
   @Override

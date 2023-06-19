@@ -2,6 +2,7 @@ package com.techchallenge.devnet.adapter.driver.controllers;
 
 import com.techchallenge.devnet.adapter.driver.dtos.requisicao.FotoProdutoDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.resposta.FotoProdutoDtoResponse;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +16,11 @@ public interface IFotoProdutoController {
   }
 
   interface GetController {
-    @GetMapping
+    @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<FotoProdutoDtoResponse> consultarPorId(Long id);
+
+    @GetMapping(path = "/{id}", produces = MediaType.IMAGE_JPEG_VALUE)
+    ResponseEntity<InputStreamResource> servirImagemPorId(Long id);
   }
 }
 
