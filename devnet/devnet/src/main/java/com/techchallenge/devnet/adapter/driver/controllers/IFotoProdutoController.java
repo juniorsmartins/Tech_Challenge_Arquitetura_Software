@@ -19,8 +19,8 @@ public interface IFotoProdutoController {
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<FotoProdutoDtoResponse> consultarPorId(Long id);
 
-    @GetMapping(path = "/{id}", produces = MediaType.IMAGE_JPEG_VALUE)
-    ResponseEntity<InputStreamResource> servirImagemPorId(Long id);
+    @GetMapping(path = "/{id}")
+    ResponseEntity<InputStreamResource> servirImagemPorId(Long id, String acceptHeader);
   }
 }
 

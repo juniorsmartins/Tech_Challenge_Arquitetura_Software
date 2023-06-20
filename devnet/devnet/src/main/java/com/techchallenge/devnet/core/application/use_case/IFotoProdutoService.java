@@ -15,7 +15,7 @@ public interface IFotoProdutoService {
   interface PesquisarService {
     FotoProdutoDtoResponse consultarPorId(Long id);
 
-    InputStreamResource servirImagemPorId(Long id);
+    InputStreamResource servirImagemPorId(Long id, String acceptHeader);
   }
 }
 
