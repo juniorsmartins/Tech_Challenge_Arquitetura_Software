@@ -14,9 +14,9 @@ public class FotoProdutoGetRepository implements IFotoProdutoRepository.GetRepos
   @Autowired
   private FotoProdutoRepositoryJpa fotoProdutoRepositoryJpa;
 
-
   @Override
   public Optional<FotoProduto> consultarPorId(final Long id) {
     return this.fotoProdutoRepositoryJpa.findById(id);
   }
 }
+
