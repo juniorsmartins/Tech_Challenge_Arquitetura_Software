@@ -5,6 +5,7 @@ import com.techchallenge.devnet.adapter.driver.dtos.resposta.FotoProdutoDtoRespo
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
@@ -21,6 +22,11 @@ public interface IFotoProdutoController {
 
     @GetMapping(path = "/{id}")
     ResponseEntity<InputStreamResource> servirImagemPorId(Long id, String acceptHeader);
+  }
+
+  interface DeleteController {
+    @DeleteMapping(path = "/{id}")
+    ResponseEntity<Object> deletarPorId(Long id);
   }
 }
 

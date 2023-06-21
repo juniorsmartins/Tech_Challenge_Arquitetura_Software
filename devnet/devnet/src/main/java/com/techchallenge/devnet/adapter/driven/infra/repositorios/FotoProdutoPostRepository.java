@@ -43,4 +43,9 @@ public class FotoProdutoPostRepository implements IFotoProdutoRepository.PostRep
 
     return fotoProdutoSalvo;
   }
+
+  @Override
+  public void flush() {
+    this.fotoProdutoRepositoryJpa.flush();
+  }
 }

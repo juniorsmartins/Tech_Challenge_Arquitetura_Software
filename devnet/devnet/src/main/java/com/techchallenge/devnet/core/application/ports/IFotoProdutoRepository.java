@@ -9,10 +9,16 @@ public interface IFotoProdutoRepository {
 
   interface PostRepository {
     FotoProduto salvar(FotoProduto fotoProduto, InputStream dadosArquivo);
+
+    void flush();
   }
 
   interface GetRepository {
     Optional<FotoProduto> consultarPorId(Long id);
+  }
+
+  interface DeleteRepository {
+    void deletar(FotoProduto fotoProduto);
   }
 }
 
