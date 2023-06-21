@@ -1,5 +1,6 @@
 package com.techchallenge.devnet.core.application.use_case;
 
+import com.techchallenge.devnet.adapter.driver.dtos.ImagemDto;
 import com.techchallenge.devnet.adapter.driver.dtos.resposta.FotoProdutoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.IFotoProdutoRepository;
 import com.techchallenge.devnet.core.application.ports.ILocalFotoProdutoArmazemService;
@@ -40,7 +41,7 @@ public class FotoProdutoGetService implements IFotoProdutoService.PesquisarServi
 
   @Transactional(readOnly = true)
   @Override
-  public InputStreamResource servirImagemPorId(final Long id, final String acceptHeader) {
+  public ImagemDto servirImagemPorId(final Long id, final String acceptHeader) {
 
     return this.fotoProdutoGetRepository.consultarPorId(id)
       .map(fotoProduto -> {
@@ -53,7 +54,12 @@ public class FotoProdutoGetService implements IFotoProdutoService.PesquisarServi
 
         var imagem = this.localFotoProdutoArmazemService.recuperar(fotoProduto.getNome());
 
-        return new InputStreamResource(imagem);
+        var dtoImagem = ImagemDto.builder()
+          .imagem(new InputStreamResource(imagem))
+          .mediaTypeFoto(MediaType.parseMediaType(fotoProduto.getTipo()))
+          .build();
+
+        return dtoImagem;
       })
       .orElseThrow(() -> new FotoProdutoNaoEncontradoException(id));
   }
