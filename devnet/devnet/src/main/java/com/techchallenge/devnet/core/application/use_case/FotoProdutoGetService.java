@@ -41,7 +41,7 @@ public class FotoProdutoGetService implements IFotoProdutoService.PesquisarServi
 
   @Transactional(readOnly = true)
   @Override
-  public ImagemDto servirImagemPorId(final Long id, final String acceptHeader) {
+  public ImagemDto consultarImagemPorId(final Long id, final String acceptHeader) {
 
     return this.fotoProdutoGetRepository.consultarPorId(id)
       .map(fotoProduto -> {

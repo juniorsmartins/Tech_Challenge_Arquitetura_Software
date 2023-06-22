@@ -15,7 +15,7 @@ public interface IFotoProdutoService {
   interface PesquisarService {
     FotoProdutoDtoResponse consultarPorId(Long id);
 
-    ImagemDto servirImagemPorId(Long id, String acceptHeader);
+    ImagemDto consultarImagemPorId(Long id, String acceptHeader);
   }
 
   interface DeletarService {

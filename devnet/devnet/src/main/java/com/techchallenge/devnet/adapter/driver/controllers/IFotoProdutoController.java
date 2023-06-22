@@ -21,7 +21,7 @@ public interface IFotoProdutoController {
     ResponseEntity<FotoProdutoDtoResponse> consultarPorId(Long id);
 
     @GetMapping(path = "/{id}")
-    ResponseEntity<InputStreamResource> servirImagemPorId(Long id, String acceptHeader);
+    ResponseEntity<InputStreamResource> consultarImagemPorId(Long id, String acceptHeader);
   }
 
   interface DeleteController {
