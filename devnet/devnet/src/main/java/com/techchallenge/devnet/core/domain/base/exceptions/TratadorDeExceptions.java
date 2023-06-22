@@ -45,7 +45,8 @@ public final class TratadorDeExceptions extends ResponseEntityExceptionHandler {
       httpStatus, webRequest);
   }
 
-  // Sobrescrição de um método comum de ResponseEntityExceptionHandler. Captura exceção quando o tipo de mediaType for incompatível.
+  // Sobrescrição de um método comum de ResponseEntityExceptionHandler. Captura exceção quando o tipo de mediaType
+  // for incompatível.
   @Override
   protected ResponseEntity<Object> handleHttpMediaTypeNotAcceptable(HttpMediaTypeNotAcceptableException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 
