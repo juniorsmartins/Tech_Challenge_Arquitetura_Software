@@ -6,6 +6,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.HttpMediaTypeNotAcceptableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
@@ -42,6 +43,17 @@ public final class TratadorDeExceptions extends ResponseEntityExceptionHandler {
 
     return super.handleExceptionInternal(recursoNaoEncontrado, retornoDeErro, new HttpHeaders(),
       httpStatus, webRequest);
+  }
+
+  // Sobrescrição de um método comum de ResponseEntityExceptionHandler. Captura exceção quando o tipo de mediaType
+  // for incompatível.
+  @Override
+  protected ResponseEntity<Object> handleHttpMediaTypeNotAcceptable(HttpMediaTypeNotAcceptableException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+
+    return ResponseEntity
+      .status(status)
+      .headers(headers)
+      .build();
   }
 
   // Método para construção da mensagem de retorno
