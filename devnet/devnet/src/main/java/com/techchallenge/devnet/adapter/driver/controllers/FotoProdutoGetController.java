@@ -29,10 +29,10 @@ public final class FotoProdutoGetController implements IFotoProdutoController.Ge
   }
 
   @Override
-  public ResponseEntity<InputStreamResource> servirImagemPorId(@PathVariable(name = "id") final Long id,
-                                                           @RequestHeader(name = "accept") final String acceptHeader) {
+  public ResponseEntity<InputStreamResource> consultarImagemPorId(@PathVariable(name = "id") final Long id,
+                                                                  @RequestHeader(name = "accept") final String acceptHeader) {
     try {
-      var imagemDto = this.fotoProdutoPesquisarService.servirImagemPorId(id, acceptHeader);
+      var imagemDto = this.fotoProdutoPesquisarService.consultarImagemPorId(id, acceptHeader);
 
       return ResponseEntity
         .ok()
