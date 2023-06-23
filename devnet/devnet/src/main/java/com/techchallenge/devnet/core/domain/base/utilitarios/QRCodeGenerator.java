@@ -5,17 +5,23 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+import com.techchallenge.devnet.core.domain.base.exceptions.ArmazemException;
+import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.entities.Pedido;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 @Service
 public final class QRCodeGenerator {
 
-  public static String localParaArmazenarQRCodes = "D:\\AreaEstudo\\PosTech-Fiap-Alura\\ArquiteturaDeSoftware\\TechChallenge-Soat\\devnet\\devnet\\qrcode_store\\";
+  public static String localParaArmazenarQRCode = "D:\\AreaEstudo\\PosTech-Fiap-Alura\\ArquiteturaDeSoftware\\TechChallenge-Soat\\devnet\\devnet\\qrcode_store\\";
+
   public static String sufixoDoNomeDaImagemDoQRCode = "-QRCODE.png";
 
 //  public String pegarQrCode() {
@@ -74,17 +80,39 @@ public final class QRCodeGenerator {
 //    return pngData;
 //  }
 
-  public static void gerarQRCode(Pedido pedido) throws WriterException, IOException {
+  public static InputStreamResource gerarQRCode(Pedido pedido) throws WriterException, IOException {
 
-    String nomeDoQRCode = localParaArmazenarQRCodes + pedido.getId() + sufixoDoNomeDaImagemDoQRCode;
+    String caminhoDoQrCode = localParaArmazenarQRCode + criarNomeDaImagemQrCode(pedido);
+
     var qrCodeWriter = new QRCodeWriter();
-
     BitMatrix bitMatrix = qrCodeWriter.encode("ID: " + pedido.getId() + "\n" +
-      "Valor do Pagamento: " + pedido.getPrecoTotal(),
+      "Valor do Pagamento: " + pedido.getPrecoTotal() + "\n" +
+      "Banco do Brasil: " + "\n" +
+      "Agência: 5588-8" + "\n" +
+      "Conta: 8877797-10",
       BarcodeFormat.QR_CODE, 400, 400); // Aqui é permitido colocar todas as informações necessárias no QRCode
 
-    Path caminho = FileSystems.getDefault().getPath(nomeDoQRCode);
+    Path caminho = FileSystems.getDefault().getPath(caminhoDoQrCode);
     MatrixToImageWriter.writeToPath(bitMatrix, "PNG", caminho);
+
+    var imagemQrCode = recuperarImagemQrCode(caminho);
+    var imagemQrCodeRetorno = new InputStreamResource(imagemQrCode);
+
+    return imagemQrCodeRetorno;
+  }
+
+  public static String criarNomeDaImagemQrCode(Pedido pedido) {
+    return pedido.getId() + sufixoDoNomeDaImagemDoQRCode;
+  }
+
+  private static InputStream recuperarImagemQrCode(Path caminho) {
+
+    try {
+      return Files.newInputStream(caminho);
+
+    } catch (IOException e) {
+      throw new ArmazemException(MensagemPadrao.QRCODE_NAO_RECUPERADO_DO_ARMAZENAMENTO, e);
+    }
   }
 }
 
