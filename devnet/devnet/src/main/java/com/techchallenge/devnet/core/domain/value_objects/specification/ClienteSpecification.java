@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public final class ClienteSpecification {
 
-  public static Specification<Cliente> consultaDinamica(ClienteFiltro filtro) {
+  public static Specification<Cliente> consultarDinamicamente(ClienteFiltro filtro) {
 
     return ((root, query, criteriaBuilder) -> {
 
