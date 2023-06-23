@@ -1,5 +1,6 @@
 package com.techchallenge.devnet.core.domain.entities;
 
+import com.techchallenge.devnet.core.domain.base.auditoria.AuditoriaDataJpa;
 import com.techchallenge.devnet.core.domain.entities.enums.StatusPagamentoEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,6 +18,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.envers.Audited;
 
 import java.io.Serializable;
 
@@ -28,7 +30,8 @@ import java.io.Serializable;
 @Getter
 @Setter
 @EqualsAndHashCode(of = {"id"})
-public final class Pagamento implements Serializable {
+@Audited
+public final class Pagamento extends AuditoriaDataJpa implements Serializable {
 
   public static final long serialVersionUID = 1L;
 
@@ -39,7 +42,7 @@ public final class Pagamento implements Serializable {
 
   @Enumerated(EnumType.STRING)
   @Column(name = "status_pagamento", nullable = false)
-  private StatusPagamentoEnum statusPagamento;
+  private StatusPagamentoEnum statusPagamento = StatusPagamentoEnum.ABERTO;
 
   @OneToOne
   @JoinColumn(name = "pedido_id", referencedColumnName = "id", nullable = false)

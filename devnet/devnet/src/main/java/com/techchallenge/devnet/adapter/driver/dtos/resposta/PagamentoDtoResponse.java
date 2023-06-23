@@ -1,6 +1,7 @@
 package com.techchallenge.devnet.adapter.driver.dtos.resposta;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.techchallenge.devnet.core.domain.entities.enums.StatusPagamentoEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.time.OffsetDateTime;
 
 @Builder
 @NoArgsConstructor
@@ -21,6 +23,12 @@ public class PagamentoDtoResponse implements Serializable {
 
   private Long id;
 
-  private String qrCode;
+  private StatusPagamentoEnum statusPagamento;
+
+  private String nomeImagemQRCode;
+
+  private OffsetDateTime dataHoraCadastro;
+
+  private OffsetDateTime dataHoraAtualizacao;
 }
 
