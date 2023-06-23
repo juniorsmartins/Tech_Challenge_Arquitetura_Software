@@ -20,13 +20,11 @@ public class PedidoGetRepository implements IPedidoRepository.GetRepository {
 
   @Override
   public Page<Pedido> pesquisar(final PedidoFiltro filtro, final Pageable paginacao) {
-
-    return this.repositoryJpa.findAll(PedidoSpecification.consultaDinamica(filtro), paginacao);
+    return this.repositoryJpa.findAll(PedidoSpecification.consultarDinamicamente(filtro), paginacao);
   }
 
   @Override
   public Optional<Pedido> consultarPorId(final Long id) {
-
     return this.repositoryJpa.findById(id);
   }
 }

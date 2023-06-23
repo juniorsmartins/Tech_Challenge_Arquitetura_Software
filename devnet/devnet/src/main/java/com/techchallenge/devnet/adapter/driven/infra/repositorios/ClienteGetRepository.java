@@ -21,7 +21,7 @@ public class ClienteGetRepository implements IClienteRepository.GetRepository {
   @Override
   public Page<Cliente> pesquisar(final ClienteFiltro filtro, final Pageable paginacao) {
 
-    return this.repositoryJpa.findAll(ClienteSpecification.consultaDinamica(filtro), paginacao);
+    return this.repositoryJpa.findAll(ClienteSpecification.consultarDinamicamente(filtro), paginacao);
   }
 
   @Override

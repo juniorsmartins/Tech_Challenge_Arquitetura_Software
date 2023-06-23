@@ -8,7 +8,6 @@ import com.techchallenge.devnet.adapter.driver.dtos.ProdutoDtoResumo;
 import com.techchallenge.devnet.adapter.driver.dtos.requisicao.ItemPedidoDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.requisicao.PedidoDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.resposta.PagamentoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.IPagamentoOpenFeign;
 import com.techchallenge.devnet.core.domain.entities.Cliente;
 import com.techchallenge.devnet.core.domain.entities.Produto;
 import com.techchallenge.devnet.core.domain.entities.enums.FormaPagamentoEnum;
