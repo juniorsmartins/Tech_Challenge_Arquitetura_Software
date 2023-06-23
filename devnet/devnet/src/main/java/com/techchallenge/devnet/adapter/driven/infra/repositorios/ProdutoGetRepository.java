@@ -21,7 +21,7 @@ public class ProdutoGetRepository implements IProdutoRepository.GetRepository {
   @Override
   public Page<Produto> pesquisar(final ProdutoFiltro filtro, final Pageable paginacao) {
 
-    return this.repositoryJpa.findAll(ProdutoSpecification.consultaDinamica(filtro), paginacao);
+    return this.repositoryJpa.findAll(ProdutoSpecification.consultarDinamicamente(filtro), paginacao);
   }
 
   @Override
