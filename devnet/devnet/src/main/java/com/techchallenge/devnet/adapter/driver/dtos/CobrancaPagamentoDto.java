@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.core.domain.value_objects;
+package com.techchallenge.devnet.adapter.driver.dtos;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.techchallenge.devnet.adapter.driver.dtos.resposta.PagamentoDtoResponse;

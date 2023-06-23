@@ -1,16 +1,14 @@
 package com.techchallenge.devnet.core.application.use_case;
 
 import com.google.zxing.WriterException;
-import com.techchallenge.devnet.adapter.driver.dtos.resposta.PagamentoDtoResponse;
-import com.techchallenge.devnet.adapter.driver.dtos.resposta.PedidoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.IPagamentoRepository;
 import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
 import com.techchallenge.devnet.core.domain.base.utilitarios.QRCodeGenerator;
 import com.techchallenge.devnet.core.domain.entities.Pagamento;
 import com.techchallenge.devnet.core.domain.entities.Pedido;
 import com.techchallenge.devnet.core.domain.entities.enums.StatusPagamentoEnum;
-import com.techchallenge.devnet.core.domain.value_objects.CobrancaPagamentoDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -25,52 +23,39 @@ public class PagamentoPostService implements IPagamentoService.PostService {
   @Autowired
   private IPagamentoRepository.PostRepository pagamentoPostRepository;
 
-//  @Autowired
-//  private QRCodeGenerator qrCodeGenerator;
-
   @Override
-  public CobrancaPagamentoDto iniciarCobrancaDePagamento(final Pedido pedido) {
+  public Pedido iniciarCobrancaDePagamento(final Pedido pedido) {
 
     return Optional.of(pedido)
       .map(entidade -> {
-
-        this.criarQRCode(entidade);
-        var pagamento = this.cadastrarPagamento(entidade);
-
-        var pagamentoDtoResponse = PagamentoDtoResponse.builder()
-          .id(pagamento.getId())
-//          .qrCode(qrcode)
-          .build();
-
-        var pedidoDtoResponse = this.mapper.converterEntidadeParaDtoResponse(entidade, PedidoDtoResponse.class);
-
-        var cobrancaPagamentoDto = CobrancaPagamentoDto.builder()
-          .pedido(pedidoDtoResponse)
-          .pagamento(pagamentoDtoResponse)
-          .build();
-
-        return cobrancaPagamentoDto;
+        var imagemQrCodeRetorno = this.criarQRCode(entidade);
+        return entidade;
       })
+      .map(this::cadastrarPagamento)
       .orElseThrow();
   }
 
-  private void criarQRCode(Pedido pedido) {
+  private InputStreamResource criarQRCode(Pedido pedido) {
 
     try {
-      QRCodeGenerator.gerarQRCode(pedido);
+      return QRCodeGenerator.gerarQRCode(pedido);
+
     } catch (WriterException | IOException e) {
       throw new RuntimeException(e);
     }
   }
 
-  private Pagamento cadastrarPagamento(Pedido pedido) {
+  private Pedido cadastrarPagamento(Pedido pedido) {
 
     var pagamento = Pagamento.builder()
       .statusPagamento(StatusPagamentoEnum.ABERTO)
       .pedido(pedido)
-      .nomeImagemQRCode(pedido.getId() + QRCodeGenerator.sufixoDoNomeDaImagemDoQRCode)
+      .nomeImagemQRCode(QRCodeGenerator.criarNomeDaImagemQrCode(pedido))
       .build();
-    return this.pagamentoPostRepository.salvar(pagamento);
+    this.pagamentoPostRepository.salvar(pagamento);
+    pedido.setPagamento(pagamento);
+
+    return pedido;
   }
 }
 
