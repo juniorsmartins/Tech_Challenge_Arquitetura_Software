@@ -1,12 +1,12 @@
 package com.techchallenge.devnet.core.application.use_case;
 
 import com.techchallenge.devnet.adapter.driver.dtos.requisicao.PedidoDtoRequest;
+import com.techchallenge.devnet.adapter.driver.dtos.resposta.PedidoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.IPedidoRepository;
 import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
 import com.techchallenge.devnet.core.domain.base.utilitarios.IUtils;
 import com.techchallenge.devnet.core.domain.entities.Pedido;
 import com.techchallenge.devnet.core.domain.entities.enums.StatusPedidoEnum;
-import com.techchallenge.devnet.core.domain.value_objects.CobrancaPagamentoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +30,7 @@ public class PedidoPostService implements IPedidoService.CadastrarService {
 
   @Transactional
   @Override
-  public CobrancaPagamentoDto cadastrar(final PedidoDtoRequest dtoRequest) {
+  public PedidoDtoResponse cadastrar(final PedidoDtoRequest dtoRequest) {
 
     return Optional.of(dtoRequest)
       .map(dto -> this.mapper.converterDtoRequestParaEntidade(dto, Pedido.class))
@@ -39,6 +39,7 @@ public class PedidoPostService implements IPedidoService.CadastrarService {
       .map(this::organizarPedidoParaRegistrar)
       .map(this.pedidoPostRepository::salvar)
       .map(this.pagamentoPostService::iniciarCobrancaDePagamento)
+      .map(entidade -> this.mapper.converterEntidadeParaDtoResponse(entidade, PedidoDtoResponse.class))
       .orElseThrow();
   }
 

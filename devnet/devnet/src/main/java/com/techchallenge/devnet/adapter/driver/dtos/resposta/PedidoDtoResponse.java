@@ -33,5 +33,7 @@ public final class PedidoDtoResponse implements Serializable {
   private OffsetDateTime dataHoraCadastro;
 
   private OffsetDateTime dataHoraAtualizacao;
+
+  private PagamentoDtoResponse pagamento;
 }
 

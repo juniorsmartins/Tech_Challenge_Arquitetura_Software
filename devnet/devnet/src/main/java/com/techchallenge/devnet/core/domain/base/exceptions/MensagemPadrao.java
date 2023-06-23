@@ -21,5 +21,7 @@ public final class MensagemPadrao {
   public static final String FOTO_PRODUTO_NAO_APAGADO_DO_ARMAZENAMENTO = "Não foi possível deletar arquivo de foto do armazenamento.";
 
   public static final String FOTO_PRODUTO_NAO_RECUPERADO_DO_ARMAZENAMENTO = "Não foi possível recuperar arquivo de foto do armazenamento.";
+
+  public static final String QRCODE_NAO_RECUPERADO_DO_ARMAZENAMENTO = "Não foi possível recuperar QrCode do local de armazenamento.";
 }
 
