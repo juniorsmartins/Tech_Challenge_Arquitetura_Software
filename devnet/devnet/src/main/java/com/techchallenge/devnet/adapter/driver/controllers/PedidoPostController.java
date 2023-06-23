@@ -1,9 +1,10 @@
 package com.techchallenge.devnet.adapter.driver.controllers;
 
 import com.techchallenge.devnet.adapter.driver.dtos.requisicao.PedidoDtoRequest;
+import com.techchallenge.devnet.adapter.driver.dtos.resposta.PedidoDtoResponse;
 import com.techchallenge.devnet.core.application.use_case.IPedidoService;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
-import com.techchallenge.devnet.core.domain.value_objects.CobrancaPagamentoDto;
+import com.techchallenge.devnet.adapter.driver.dtos.CobrancaPagamentoDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -40,7 +41,7 @@ public final class PedidoPostController implements IPedidoController.PostControl
     @ApiResponse(responseCode = "500", description = "Internal Server Error - situação inesperada no servidor.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))})
   })
   @Override
-  public ResponseEntity<CobrancaPagamentoDto> cadastrar(
+  public ResponseEntity<PedidoDtoResponse> cadastrar(
     @Parameter(name = "PedidoDtoRequest", description = "Estrutura de dados para transporte de informações de entrada.", required = true)
     @RequestBody @Valid final PedidoDtoRequest dtoRequest, final UriComponentsBuilder uriComponentsBuilder) {
 

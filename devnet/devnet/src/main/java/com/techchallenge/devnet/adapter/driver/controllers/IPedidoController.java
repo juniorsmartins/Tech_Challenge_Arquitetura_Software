@@ -2,7 +2,6 @@ package com.techchallenge.devnet.adapter.driver.controllers;
 
 import com.techchallenge.devnet.adapter.driver.dtos.requisicao.PedidoDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.resposta.PedidoDtoResponse;
-import com.techchallenge.devnet.core.domain.value_objects.CobrancaPagamentoDto;
 import com.techchallenge.devnet.core.domain.value_objects.specification.PedidoFiltro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +16,7 @@ public interface IPedidoController {
 
   interface PostController {
     @PostMapping
-    ResponseEntity<CobrancaPagamentoDto> cadastrar(PedidoDtoRequest dtoRequest, UriComponentsBuilder uriComponentsBuilder);
+    ResponseEntity<PedidoDtoResponse> cadastrar(PedidoDtoRequest dtoRequest, UriComponentsBuilder uriComponentsBuilder);
   }
 
   interface PutController {
