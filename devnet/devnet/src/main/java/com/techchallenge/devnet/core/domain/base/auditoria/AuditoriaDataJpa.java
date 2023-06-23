@@ -8,11 +8,9 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.envers.Audited;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.OffsetDateTime;
 
 @MappedSuperclass
@@ -27,7 +25,7 @@ public abstract class AuditoriaDataJpa implements Serializable {
   private OffsetDateTime dataHoraCadastro = OffsetDateTime.now();
 
   @UpdateTimestamp
-  @Column(name = "data_hora_atualizacao")
+  @Column(name = "data_hora_atualizacao", updatable = true)
   private OffsetDateTime dataHoraAtualizacao = OffsetDateTime.now();
 }
 
