@@ -28,6 +28,8 @@ public final class MensagemPadrao {
 
   public static final String PAGAMENTO_NAO_ENCONTRADO = "O Pagamento, com id %s, não foi encontrado.";
 
+  public static final String PAGAMENTO_BLOQUEADO = "O Pedido, com id %s, teve confirmação de pagamento bloqueado por estar no status: %s.";
+
   public static final String IDS_INCOMPATIVEIS = "Os dois IDs enviados, %s e %s, são incompatíveis.";
 }
 
