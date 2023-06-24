@@ -25,7 +25,7 @@ public final class PedidoDeleteController implements IPedidoController.DeleteCon
   @Autowired
   private IPedidoService.DeletarService deletarService;
 
-  @Operation(summary = "Deletar Pedido", description = "Este recurso destina-se a apagar pelo identificador exclusivo (ID).")
+  @Operation(summary = "Cancelar Pedido", description = "Este recurso destina-se a apagar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {
     @ApiResponse(responseCode = "204", description = "No Content - requisição bem sucedida e sem retorno.", content = {@Content(mediaType = "application/json")}),
     @ApiResponse(responseCode = "400", description = "Bad Request - requisição mal feita.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))}),
@@ -35,11 +35,11 @@ public final class PedidoDeleteController implements IPedidoController.DeleteCon
     @ApiResponse(responseCode = "500", description = "Internal Server Error - situação inesperada no servidor.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))})
   })
   @Override
-  public ResponseEntity<Object> deletarPorId(
+  public ResponseEntity<Object> cancelarPorId(
     @Parameter(name = "id", description = "Chave de identificação", example = "22", required = true)
     @PathVariable(name = "id") final Long pedidoId) {
 
-    this.deletarService.deletar(pedidoId);
+    this.deletarService.cancelarPorId(pedidoId);
 
     return ResponseEntity
       .noContent()

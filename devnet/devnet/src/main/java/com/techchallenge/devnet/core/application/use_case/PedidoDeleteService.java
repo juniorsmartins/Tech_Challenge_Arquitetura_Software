@@ -3,6 +3,9 @@ package com.techchallenge.devnet.core.application.use_case;
 import com.techchallenge.devnet.core.application.ports.IPedidoRepository;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
+import com.techchallenge.devnet.core.domain.base.exceptions.http_409.CancelamentoBloqueadoException;
+import com.techchallenge.devnet.core.domain.entities.enums.StatusPagamentoEnum;
+import com.techchallenge.devnet.core.domain.entities.enums.StatusPedidoEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,16 +19,19 @@ public class PedidoDeleteService implements IPedidoService.DeletarService {
   @Autowired
   private IPedidoRepository.GetRepository pedidoGetRepository;
 
-  @Autowired
-  private IPedidoRepository.DeleteRepository pedidoDeleteRepository;
-
   @Transactional(isolation = Isolation.SERIALIZABLE)
   @Override
-  public void deletar(final Long id) {
+  public void cancelarPorId(final Long id) {
 
     this.pedidoGetRepository.consultarPorId(id)
       .map(pedido -> {
-        this.pedidoDeleteRepository.deletar(pedido);
+
+        if (!pedido.getStatusPedido().equals(StatusPedidoEnum.RECEBIDO)) {
+          throw new CancelamentoBloqueadoException(id, pedido.getStatusPedido());
+        }
+        pedido.setStatusPedido(StatusPedidoEnum.CANCELADO);
+        pedido.getPagamento().setStatusPagamento(StatusPagamentoEnum.CANCELADO);
+
         return true;
       })
       .orElseThrow(() -> {
@@ -34,3 +40,4 @@ public class PedidoDeleteService implements IPedidoService.DeletarService {
       });
   }
 }
+
