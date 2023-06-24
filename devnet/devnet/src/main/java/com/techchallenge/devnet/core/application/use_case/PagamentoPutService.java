@@ -28,21 +28,20 @@ public class PagamentoPutService implements IPagamentoService.AtualizarService {
 
     return this.pedidoGetRepository.consultarPorId(idPedido)
       .map(order -> {
-        this.verificarSeStatusPedidoPermiteConfirmarPagamento(order);
-
-        order.getPagamento().setStatusPagamento(StatusPagamentoEnum.PAGO);
-        order.setStatusPedido(StatusPedidoEnum.PREPARACAO);
-
+        order = this.alterarStatusPagamentoParaPagoAndPedidoParaPreparacao(order);
         return order.getPagamento();
       })
       .map(pagamento -> this.mapper.converterEntidadeParaDtoResponse(pagamento, PagamentoDtoResponse.class))
       .orElseThrow(() -> new PedidoNaoEncontradoException(idPedido));
   }
 
-  private void verificarSeStatusPedidoPermiteConfirmarPagamento(Pedido pedido) {
+  private Pedido alterarStatusPagamentoParaPagoAndPedidoParaPreparacao(Pedido pedido) {
     if (!pedido.getStatusPedido().equals(StatusPedidoEnum.RECEBIDO)) {
       throw new ConfirmarPagamentoBloqueadoException(pedido.getId(), pedido.getStatusPedido());
     }
+    pedido.getPagamento().setStatusPagamento(StatusPagamentoEnum.PAGO);
+    pedido.setStatusPedido(StatusPedidoEnum.PREPARACAO);
+    return pedido;
   }
 }
 
