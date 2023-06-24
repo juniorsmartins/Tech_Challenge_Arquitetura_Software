@@ -1,5 +1,6 @@
 package com.techchallenge.devnet.core.domain.base.exceptions;
 
+import com.techchallenge.devnet.core.domain.base.exceptions.http_400.RequisicaoMalFormuladaException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.RecursoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_409.RegraDeNegocioVioladaException;
 import org.springframework.http.HttpHeaders;
@@ -17,6 +18,19 @@ import java.time.Instant;
 @RestControllerAdvice
 public final class TratadorDeExceptions extends ResponseEntityExceptionHandler {
 
+  @ExceptionHandler(value = RequisicaoMalFormuladaException.class)
+  public ResponseEntity<Object> tratarRequisicaoMalFormulada(RequisicaoMalFormuladaException requisicaoMalFormulada,
+                                                             WebRequest webRequest) {
+    var httpStatus = HttpStatus.BAD_REQUEST;
+    var tipoDeErroEnum = ETipoDeErro.REQUISICAO_MAL_FORMULADA;
+    var detalhe = requisicaoMalFormulada.getMessage();
+
+    var retornoDeErro = this.criarMensagemParaRetornarErro(httpStatus, tipoDeErroEnum, detalhe).build();
+
+    return super.handleExceptionInternal(requisicaoMalFormulada, retornoDeErro, new HttpHeaders(),
+      httpStatus, webRequest);
+  }
+
   @ExceptionHandler(value = RegraDeNegocioVioladaException.class)
   public ResponseEntity<Object> tratarRegraDeNegocioViolada(RegraDeNegocioVioladaException regraViolada,
                                                                    WebRequest webRequest) {
@@ -24,8 +38,7 @@ public final class TratadorDeExceptions extends ResponseEntityExceptionHandler {
     var tipoDeErroEnum = ETipoDeErro.REGRA_NEGOCIO_VIOLADA;
     var detalhe = regraViolada.getMessage();
 
-    var retornoDeErro = this.criarMensagemParaRetornarErro(httpStatus, tipoDeErroEnum, detalhe)
-      .build();
+    var retornoDeErro = this.criarMensagemParaRetornarErro(httpStatus, tipoDeErroEnum, detalhe).build();
 
     return super.handleExceptionInternal(regraViolada, retornoDeErro, new HttpHeaders(),
       httpStatus, webRequest);

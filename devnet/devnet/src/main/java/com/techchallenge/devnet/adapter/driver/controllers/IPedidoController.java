@@ -31,7 +31,7 @@ public interface IPedidoController {
 
   interface DeleteController {
     @DeleteMapping(path = "/{id}")
-    ResponseEntity<Object> deletarPorId(Long id);
+    ResponseEntity<Object> cancelarPorId(Long id);
   }
 }
 

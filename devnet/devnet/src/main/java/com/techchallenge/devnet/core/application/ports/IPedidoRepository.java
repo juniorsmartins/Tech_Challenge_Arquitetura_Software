@@ -18,9 +18,5 @@ public interface IPedidoRepository {
 
     Optional<Pedido> consultarPorId(Long id);
   }
-
-  interface DeleteRepository {
-    void deletar(Pedido pedido);
-  }
 }
 

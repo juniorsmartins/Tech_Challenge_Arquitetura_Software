@@ -14,6 +14,8 @@ public final class MensagemPadrao {
 
   public static final String PEDIDO_NAO_ENCONTRADO = "O Pedido, com id %s, não foi encontrado!";
 
+  public static final String CANCELAMENTO_BLOQUEADO = "O Pedido, com id %s, não pode ser cancelado por estar no status: %s.";
+
   public static final String FOTO_PRODUTO_NAO_ENCONTRADO = "Não existe cadastro de foto do produto com id %d.";
 
   public static final String FOTO_PRODUTO_NAO_ARMAZENADO = "Não foi possível armazenar arquivo de foto.";
@@ -25,5 +27,9 @@ public final class MensagemPadrao {
   public static final String QRCODE_NAO_RECUPERADO_DO_ARMAZENAMENTO = "Não foi possível recuperar QrCode do local de armazenamento.";
 
   public static final String PAGAMENTO_NAO_ENCONTRADO = "O Pagamento, com id %s, não foi encontrado.";
+
+  public static final String PAGAMENTO_BLOQUEADO = "O Pedido, com id %s, teve confirmação de pagamento bloqueado por estar no status: %s.";
+
+  public static final String IDS_INCOMPATIVEIS = "Os dois IDs enviados, %s e %s, são incompatíveis.";
 }
 

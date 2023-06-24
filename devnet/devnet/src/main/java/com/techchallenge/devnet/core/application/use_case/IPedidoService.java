@@ -21,7 +21,7 @@ public interface IPedidoService {
   }
 
   interface DeletarService {
-    void deletar(Long id);
+    void cancelarPorId(Long id);
   }
 }
 

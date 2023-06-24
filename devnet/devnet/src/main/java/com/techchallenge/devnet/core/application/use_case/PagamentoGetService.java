@@ -36,7 +36,7 @@ public class PagamentoGetService implements IPagamentoService.PesquisarService {
 
   @Transactional(readOnly = true)
   @Override
-  public InputStreamResource consultarQrCodePorId(final Long id) {
+  public InputStreamResource buscarQrCodePorId(final Long id) {
 
     return this.pagamentoGetRepository.consultarPorId(id)
       .map(pagamento -> {
