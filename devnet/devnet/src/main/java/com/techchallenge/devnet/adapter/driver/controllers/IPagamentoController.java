@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 public interface IPagamentoController {
 
-  interface PostController {
-
-  }
+  interface PostController { }
 
   interface GetController {
     @GetMapping
