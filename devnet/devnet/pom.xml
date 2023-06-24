@@ -64,29 +64,17 @@
 		</dependency>
 
 		<!-- Gerador de QR Code -->
-<!--		<dependency>-->
-<!--			<groupId>com.google.zxing</groupId>-->
-<!--			<artifactId>core</artifactId>-->
-<!--			<version>3.5.1</version>-->
-<!--		</dependency>-->
-
-<!--		<dependency>-->
-<!--			<groupId>com.google.zxing</groupId>-->
-<!--			<artifactId>javase</artifactId>-->
-<!--			<version>3.5.1</version>-->
-<!--		</dependency>-->
-			<dependency>
-				<groupId>com.github.hiwepy</groupId>
-				<artifactId>zxing-spring-boot-starter</artifactId>
-				<version>2.0.0.RELEASE</version>
-			</dependency>
+		<dependency>
+			<groupId>com.github.hiwepy</groupId>
+			<artifactId>zxing-spring-boot-starter</artifactId>
+			<version>2.0.0.RELEASE</version>
+		</dependency>
 
 
 		<!-- Comunicação -->
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-openfeign</artifactId>
-			<version>${openfeign.version}</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 
 
