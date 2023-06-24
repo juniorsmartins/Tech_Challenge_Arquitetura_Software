@@ -30,10 +30,10 @@ public final class PagamentoSpecification {
         predicados.add(criteriaBuilder.equal(root.get("statusPagamento"), filtro.getStatusPagamento()));
       }
 
-      if (ObjectUtils.isNotEmpty(filtro.getPedido())) {
-        var ids = Arrays.asList(filtro.getPedido().split(","));
-        List<Predicate> idPredicates = ids.stream()
-          .map(id -> criteriaBuilder.equal(root.get("cliente").get("id"), id))
+      if (ObjectUtils.isNotEmpty(filtro.getNomeImagemQRCode())) {
+        var nomes = Arrays.asList(filtro.getNomeImagemQRCode().split(","));
+        List<Predicate> idPredicates = nomes.stream()
+          .map(nome -> criteriaBuilder.like(root.get("nomeImagemQRCode"), "%" + nome + "%"))
           .collect(Collectors.toList());
 
         predicados.add(criteriaBuilder.or(idPredicates.toArray(new Predicate[0])));

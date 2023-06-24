@@ -23,5 +23,7 @@ public final class MensagemPadrao {
   public static final String FOTO_PRODUTO_NAO_RECUPERADO_DO_ARMAZENAMENTO = "Não foi possível recuperar arquivo de foto do armazenamento.";
 
   public static final String QRCODE_NAO_RECUPERADO_DO_ARMAZENAMENTO = "Não foi possível recuperar QrCode do local de armazenamento.";
+
+  public static final String PAGAMENTO_NAO_ENCONTRADO = "O Pagamento, com id %s, não foi encontrado.";
 }
 
