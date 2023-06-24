@@ -77,7 +77,8 @@ public class PedidoPutService implements IPedidoService.AtualizarService {
 
   private Pedido verificarPermissaoParaAtualizar(Pedido pedido) {
     if (!pedido.getStatusPedido().equals(StatusPedidoEnum.RECEBIDO)) {
-      throw new AtualizarPedidoBloqueadoException(pedido.getId(), pedido.getStatusPedido());
+      throw new AtualizarPedidoBloqueadoException(String
+        .format(MensagemPadrao.PEDIDO_BLOQUEADO_PARA_ATUALIZAR, pedido.getId(), pedido.getStatusPedido()));
     }
     return pedido;
   }
