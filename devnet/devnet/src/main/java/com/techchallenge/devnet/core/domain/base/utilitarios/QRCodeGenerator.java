@@ -24,6 +24,46 @@ public final class QRCodeGenerator {
 
   public static String sufixoDoNomeDaImagemDoQRCode = "-QRCODE.png";
 
+  public static InputStreamResource gerarQRCode(Pedido pedido) throws WriterException, IOException {
+
+    var nomeDaImagemQrCode = criarNomeDaImagemQrCode(pedido);
+    var caminhoDaImagemQrCode = criarCaminhoComNomeDaImagemQrCode(nomeDaImagemQrCode);
+
+    var qrCodeWriter = new QRCodeWriter();
+    BitMatrix bitMatrix = qrCodeWriter.encode("ID: " + pedido.getId() + "\n" +
+        "Valor do Pagamento: " + pedido.getPrecoTotal() + "\n" +
+        "Banco do Brasil: " + "\n" +
+        "Agência: 5588-8" + "\n" +
+        "Conta: 8877797-10",
+      BarcodeFormat.QR_CODE, 400, 400); // Aqui é permitido colocar todas as informações necessárias no QRCode
+
+    MatrixToImageWriter.writeToPath(bitMatrix, "PNG", caminhoDaImagemQrCode);
+
+    var imagemQrCode = recuperarImagemQrCode(nomeDaImagemQrCode);
+    var imagemQrCodeRetorno = new InputStreamResource(imagemQrCode);
+
+    return imagemQrCodeRetorno;
+  }
+
+  public static String criarNomeDaImagemQrCode(Pedido pedido) {
+    return pedido.getId() + sufixoDoNomeDaImagemDoQRCode;
+  }
+
+  private static Path criarCaminhoComNomeDaImagemQrCode(String nomeDaImagemQrCode) {
+    return FileSystems.getDefault().getPath(localParaArmazenarQRCode + nomeDaImagemQrCode);
+  }
+
+  public static InputStream recuperarImagemQrCode(String nomeDaImagemQrCode) {
+
+    try {
+      var caminhoDaImagemQrCode = criarCaminhoComNomeDaImagemQrCode(nomeDaImagemQrCode);
+      return Files.newInputStream(caminhoDaImagemQrCode);
+
+    } catch (IOException e) {
+      throw new ArmazemException(MensagemPadrao.QRCODE_NAO_RECUPERADO_DO_ARMAZENAMENTO, e);
+    }
+  }
+
 //  public String pegarQrCode() {
 //
 //    String linkedin ="https://www.linkedin.com/in/juniorsmartins/";
@@ -79,40 +119,5 @@ public final class QRCodeGenerator {
 //    byte[] pngData = pngOutputStream.toByteArray();
 //    return pngData;
 //  }
-
-  public static InputStreamResource gerarQRCode(Pedido pedido) throws WriterException, IOException {
-
-    String caminhoDoQrCode = localParaArmazenarQRCode + criarNomeDaImagemQrCode(pedido);
-
-    var qrCodeWriter = new QRCodeWriter();
-    BitMatrix bitMatrix = qrCodeWriter.encode("ID: " + pedido.getId() + "\n" +
-      "Valor do Pagamento: " + pedido.getPrecoTotal() + "\n" +
-      "Banco do Brasil: " + "\n" +
-      "Agência: 5588-8" + "\n" +
-      "Conta: 8877797-10",
-      BarcodeFormat.QR_CODE, 400, 400); // Aqui é permitido colocar todas as informações necessárias no QRCode
-
-    Path caminho = FileSystems.getDefault().getPath(caminhoDoQrCode);
-    MatrixToImageWriter.writeToPath(bitMatrix, "PNG", caminho);
-
-    var imagemQrCode = recuperarImagemQrCode(caminho);
-    var imagemQrCodeRetorno = new InputStreamResource(imagemQrCode);
-
-    return imagemQrCodeRetorno;
-  }
-
-  public static String criarNomeDaImagemQrCode(Pedido pedido) {
-    return pedido.getId() + sufixoDoNomeDaImagemDoQRCode;
-  }
-
-  private static InputStream recuperarImagemQrCode(Path caminho) {
-
-    try {
-      return Files.newInputStream(caminho);
-
-    } catch (IOException e) {
-      throw new ArmazemException(MensagemPadrao.QRCODE_NAO_RECUPERADO_DO_ARMAZENAMENTO, e);
-    }
-  }
 }
 

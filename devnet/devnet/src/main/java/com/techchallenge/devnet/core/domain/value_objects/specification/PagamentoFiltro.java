@@ -12,6 +12,6 @@ public final class PagamentoFiltro {
 
   private StatusPagamentoEnum statusPagamento;
 
-  private String pedido;
+  private String nomeImagemQRCode;
 }
 
