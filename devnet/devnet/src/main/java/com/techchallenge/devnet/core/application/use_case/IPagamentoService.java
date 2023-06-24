@@ -16,7 +16,11 @@ public interface IPagamentoService {
   interface PesquisarService {
     Page<PagamentoDtoResponse> pesquisar(PagamentoFiltro filtro, Pageable paginacao);
 
-    InputStreamResource consultarQrCodePorId(Long id);
+    InputStreamResource buscarQrCodePorId(Long id);
+  }
+
+  interface AtualizarService {
+    PagamentoDtoResponse confirmarPagamento(Long idPedido, Long idPagamento);
   }
 }
 
