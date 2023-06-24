@@ -6,6 +6,7 @@ import com.techchallenge.devnet.core.application.ports.IPedidoRepository;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_400.IdsIncompativeis;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PagamentoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
+import com.techchallenge.devnet.core.domain.base.exceptions.http_409.ConfirmarPagamentoBloqueadoException;
 import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
 import com.techchallenge.devnet.core.domain.entities.Pagamento;
 import com.techchallenge.devnet.core.domain.entities.Pedido;
@@ -30,10 +31,11 @@ public class PagamentoPutService implements IPagamentoService.AtualizarService {
 
   @Transactional(isolation = Isolation.SERIALIZABLE)
   @Override
-  public PagamentoDtoResponse confirmarPagamentoFeito(final Long idPedido, final Long idPagamento) {
+  public PagamentoDtoResponse confirmarPagamento(final Long idPedido, final Long idPagamento) {
 
     return this.pedidoGetRepository.consultarPorId(idPedido)
       .map(order -> {
+        this.verificarSeStatusPedidoPermiteConfirmarPagamento(order);
 
         var pagamento = this.pagamentoGetRepository.consultarPorId(idPagamento)
           .map(pgto -> {
@@ -49,6 +51,12 @@ public class PagamentoPutService implements IPagamentoService.AtualizarService {
       })
       .map(pagamento -> this.mapper.converterEntidadeParaDtoResponse(pagamento, PagamentoDtoResponse.class))
       .orElseThrow(() -> new PedidoNaoEncontradoException(idPedido));
+  }
+
+  private void verificarSeStatusPedidoPermiteConfirmarPagamento(Pedido pedido) {
+    if (!pedido.getStatusPedido().equals(StatusPedidoEnum.RECEBIDO)) {
+      throw new ConfirmarPagamentoBloqueadoException(pedido.getId(), pedido.getStatusPedido());
+    }
   }
 
   private void verificarCompatibilidadeDeIds(final Pedido pedido, final Pagamento pagamento) {

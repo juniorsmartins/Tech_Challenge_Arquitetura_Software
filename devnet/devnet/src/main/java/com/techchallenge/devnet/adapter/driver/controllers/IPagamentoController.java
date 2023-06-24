@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 public interface IPagamentoController {
 
-  interface PostController { }
-
   interface GetController {
     @GetMapping
     ResponseEntity<Page<PagamentoDtoResponse>> pesquisar(PagamentoFiltro filtro, Pageable paginacao);
@@ -24,7 +22,7 @@ public interface IPagamentoController {
 
   interface PutController {
     @PutMapping(path = "/status/{idPedido}/{idPagamento}")
-    ResponseEntity<PagamentoDtoResponse> confirmarPagamentoFeito(Long idPedido, Long idPagamento);
+    ResponseEntity<PagamentoDtoResponse> confirmarPagamento(Long idPedido, Long idPagamento);
   }
 }
 
