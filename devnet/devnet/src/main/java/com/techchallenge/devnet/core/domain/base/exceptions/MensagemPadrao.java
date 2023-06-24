@@ -30,6 +30,8 @@ public final class MensagemPadrao {
 
   public static final String PAGAMENTO_BLOQUEADO = "O Pedido, com id %s, teve confirmação de pagamento bloqueado por estar no status: %s.";
 
+  public static final String PEDIDO_BLOQUEADO_PARA_ATUALIZAR = "O Pedido, com id %s, não pode ser atualizado por estar no status: %s";
+
   public static final String IDS_INCOMPATIVEIS = "Os dois IDs enviados, %s e %s, são incompatíveis.";
 }
 

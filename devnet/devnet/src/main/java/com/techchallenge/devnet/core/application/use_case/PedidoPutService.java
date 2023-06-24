@@ -8,6 +8,7 @@ import com.techchallenge.devnet.core.application.ports.IPedidoRepository;
 import com.techchallenge.devnet.core.application.ports.IProdutoRepository;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
+import com.techchallenge.devnet.core.domain.base.exceptions.http_409.AtualizarBloqueadoException;
 import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
 import com.techchallenge.devnet.core.domain.base.utilitarios.IUtils;
 import com.techchallenge.devnet.core.domain.entities.Pedido;
@@ -55,6 +56,7 @@ public class PedidoPutService implements IPedidoService.AtualizarService {
         pedido.setStatusPedido(StatusPedidoEnum.RECEBIDO);
 
         var pedidoDoBanco = this.pedidoGetRepository.consultarPorId(id)
+          .map(this::verificarPermissaoParaAtualizar)
           .map(order -> {
             order.getItensPedido().forEach(item -> this.itemPedidoDeleteRepository.deletar(item));
             return order;
@@ -71,6 +73,13 @@ public class PedidoPutService implements IPedidoService.AtualizarService {
       })
       .map(pedido -> this.mapper.converterEntidadeParaDtoResponse(pedido, PedidoDtoResponse.class))
       .orElseThrow();
+  }
+
+  private Pedido verificarPermissaoParaAtualizar(Pedido pedido) {
+    if (!pedido.getStatusPedido().equals(StatusPedidoEnum.RECEBIDO)) {
+      throw new AtualizarBloqueadoException(pedido.getId(), pedido.getStatusPedido());
+    }
+    return pedido;
   }
 }
 

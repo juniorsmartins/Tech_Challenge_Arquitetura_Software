@@ -17,10 +17,9 @@ public final class PagamentoPutController implements IPagamentoController.PutCon
 
   @Override
   public ResponseEntity<PagamentoDtoResponse> confirmarPagamento(
-    @PathVariable(name = "idPedido") final Long idPedido,
-    @PathVariable(name = "idPagamento") final Long idPagamento) {
+    @PathVariable(name = "idPedido") final Long idPedido) {
 
-    var response = this.atualizarService.confirmarPagamento(idPedido, idPagamento);
+    var response = this.atualizarService.confirmarPagamento(idPedido);
 
     return ResponseEntity
       .ok()

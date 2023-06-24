@@ -20,7 +20,7 @@ public interface IPagamentoService {
   }
 
   interface AtualizarService {
-    PagamentoDtoResponse confirmarPagamento(Long idPedido, Long idPagamento);
+    PagamentoDtoResponse confirmarPagamento(Long idPedido);
   }
 }
 
