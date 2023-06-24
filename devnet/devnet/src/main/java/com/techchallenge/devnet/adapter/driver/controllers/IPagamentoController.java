@@ -19,12 +19,12 @@ public interface IPagamentoController {
     ResponseEntity<Page<PagamentoDtoResponse>> pesquisar(PagamentoFiltro filtro, Pageable paginacao);
 
     @GetMapping(path = "/{id}", produces = MediaType.IMAGE_PNG_VALUE)
-    ResponseEntity<InputStreamResource> consultarQrCodePorId(Long id);
+    ResponseEntity<InputStreamResource> buscarQrCodePorId(Long id);
   }
 
   interface PutController {
-    @PutMapping(path = "/{id}")
-    ResponseEntity<PagamentoDtoResponse> informarPagamento(Long id);
+    @PutMapping(path = "/{idPedido}/{idPagamento}")
+    ResponseEntity<PagamentoDtoResponse> informarPagamento(Long idPedido, Long idPagamento);
   }
 }
 
