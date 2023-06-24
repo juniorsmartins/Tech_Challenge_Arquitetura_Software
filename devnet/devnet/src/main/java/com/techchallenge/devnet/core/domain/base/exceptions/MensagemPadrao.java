@@ -25,5 +25,7 @@ public final class MensagemPadrao {
   public static final String QRCODE_NAO_RECUPERADO_DO_ARMAZENAMENTO = "Não foi possível recuperar QrCode do local de armazenamento.";
 
   public static final String PAGAMENTO_NAO_ENCONTRADO = "O Pagamento, com id %s, não foi encontrado.";
+
+  public static final String IDS_INCOMPATIVEIS = "Os dois IDs enviados, %s e %s, são incompatíveis.";
 }
 
