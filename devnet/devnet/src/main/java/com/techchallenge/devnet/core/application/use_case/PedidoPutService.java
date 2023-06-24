@@ -8,7 +8,7 @@ import com.techchallenge.devnet.core.application.ports.IPedidoRepository;
 import com.techchallenge.devnet.core.application.ports.IProdutoRepository;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
-import com.techchallenge.devnet.core.domain.base.exceptions.http_409.AtualizarBloqueadoException;
+import com.techchallenge.devnet.core.domain.base.exceptions.http_409.AtualizarPedidoBloqueadoException;
 import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
 import com.techchallenge.devnet.core.domain.base.utilitarios.IUtils;
 import com.techchallenge.devnet.core.domain.entities.Pedido;
@@ -77,7 +77,7 @@ public class PedidoPutService implements IPedidoService.AtualizarService {
 
   private Pedido verificarPermissaoParaAtualizar(Pedido pedido) {
     if (!pedido.getStatusPedido().equals(StatusPedidoEnum.RECEBIDO)) {
-      throw new AtualizarBloqueadoException(pedido.getId(), pedido.getStatusPedido());
+      throw new AtualizarPedidoBloqueadoException(pedido.getId(), pedido.getStatusPedido());
     }
     return pedido;
   }
