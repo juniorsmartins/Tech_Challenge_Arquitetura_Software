@@ -6,6 +6,7 @@ import lombok.Getter;
 public enum StatusPagamentoEnum {
 
   ABERTO,
-  PAGO;
+  PAGO,
+  CANCELADO;
 }
 

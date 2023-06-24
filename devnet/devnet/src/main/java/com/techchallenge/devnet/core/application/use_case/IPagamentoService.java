@@ -18,5 +18,9 @@ public interface IPagamentoService {
 
     InputStreamResource buscarQrCodePorId(Long id);
   }
+
+  interface AtualizarService {
+    PagamentoDtoResponse confirmarPagamentoFeito(Long idPedido, Long idPagamento);
+  }
 }
 

@@ -23,8 +23,8 @@ public interface IPagamentoController {
   }
 
   interface PutController {
-    @PutMapping(path = "/{idPedido}/{idPagamento}")
-    ResponseEntity<PagamentoDtoResponse> informarPagamento(Long idPedido, Long idPagamento);
+    @PutMapping(path = "/status/{idPedido}/{idPagamento}")
+    ResponseEntity<PagamentoDtoResponse> confirmarPagamentoFeito(Long idPedido, Long idPagamento);
   }
 }
 
