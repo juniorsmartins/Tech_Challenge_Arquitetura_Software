@@ -28,6 +28,7 @@ public class PedidoDeleteService implements IPedidoService.DeletarService {
       .map(pedido -> {
 
         if (!pedido.getStatusPedido().equals(StatusPedidoEnum.RECEBIDO)) {
+          log.info(String.format(MensagemPadrao.CANCELAMENTO_BLOQUEADO, id, pedido.getStatusPedido()));
           throw new CancelamentoBloqueadoException(id, pedido.getStatusPedido());
         }
         pedido.setStatusPedido(StatusPedidoEnum.CANCELADO);

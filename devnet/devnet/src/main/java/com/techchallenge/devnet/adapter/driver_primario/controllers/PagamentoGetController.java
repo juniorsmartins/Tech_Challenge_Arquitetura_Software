@@ -12,7 +12,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
@@ -28,7 +27,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 
 @Tag(name = "PagamentoGetController", description = "Adaptador para buscar recurso Pagamento.")
-@Slf4j
 @RestController
 @RequestMapping(path = "/api/v1/pagamentos")
 public final class PagamentoGetController implements IPagamentoController.GetController {

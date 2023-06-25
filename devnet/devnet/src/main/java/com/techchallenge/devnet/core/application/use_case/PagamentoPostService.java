@@ -3,7 +3,6 @@ package com.techchallenge.devnet.core.application.use_case;
 import com.google.zxing.WriterException;
 import com.techchallenge.devnet.core.application.ports.entrada.IPagamentoService;
 import com.techchallenge.devnet.core.application.ports.saida.IPagamentoRepository;
-import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.core.domain.base.utilitarios.QRCodeGenerator;
 import com.techchallenge.devnet.core.domain.entities.Pagamento;
 import com.techchallenge.devnet.core.domain.entities.Pedido;
@@ -17,9 +16,6 @@ import java.util.Optional;
 
 @Service
 public class PagamentoPostService implements IPagamentoService.PostService {
-
-  @Autowired
-  private IMapper mapper;
 
   @Autowired
   private IPagamentoRepository.PostRepository pagamentoPostRepository;

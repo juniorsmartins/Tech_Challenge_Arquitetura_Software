@@ -3,10 +3,12 @@ package com.techchallenge.devnet.core.application.use_case;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PagamentoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.entrada.IPagamentoService;
 import com.techchallenge.devnet.core.application.ports.saida.IPagamentoRepository;
+import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PagamentoNaoEncontradoException;
 import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.core.domain.base.utilitarios.QRCodeGenerator;
 import com.techchallenge.devnet.core.domain.value_objects.filtros.PagamentoFiltro;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
@@ -16,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class PagamentoGetService implements IPagamentoService.PesquisarService {
 
@@ -44,7 +47,10 @@ public class PagamentoGetService implements IPagamentoService.PesquisarService {
         var inputStream = QRCodeGenerator.recuperarImagemQrCode(pagamento.getNomeImagemQRCode());
        return new InputStreamResource(inputStream);
       })
-      .orElseThrow(() -> new PagamentoNaoEncontradoException(id));
+      .orElseThrow(() -> {
+        log.info(String.format(MensagemPadrao.PAGAMENTO_NAO_ENCONTRADO, id));
+        throw new PagamentoNaoEncontradoException(id);
+      });
   }
 }
 

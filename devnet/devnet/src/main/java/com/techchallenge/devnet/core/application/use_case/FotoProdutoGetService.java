@@ -5,6 +5,7 @@ import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.FotoProdut
 import com.techchallenge.devnet.core.application.ports.entrada.IFotoProdutoService;
 import com.techchallenge.devnet.core.application.ports.saida.IFotoProdutoRepository;
 import com.techchallenge.devnet.core.application.ports.saida.ILocalFotoProdutoArmazemService;
+import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.FotoProdutoNaoEncontradoException;
 import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.core.domain.entities.FotoProduto;
@@ -37,7 +38,10 @@ public class FotoProdutoGetService implements IFotoProdutoService.PesquisarServi
 
     return this.fotoProdutoGetRepository.consultarPorId(id)
       .map(fotoProduto -> this.mapper.converterEntidadeParaDtoResponse(fotoProduto, FotoProdutoDtoResponse.class))
-      .orElseThrow(() -> new FotoProdutoNaoEncontradoException(id));
+      .orElseThrow(() -> {
+        log.info(String.format(MensagemPadrao.FOTO_PRODUTO_NAO_ENCONTRADO, id));
+        throw new FotoProdutoNaoEncontradoException(id);
+      });
   }
 
   @Transactional(readOnly = true)
@@ -62,7 +66,10 @@ public class FotoProdutoGetService implements IFotoProdutoService.PesquisarServi
 
         return dtoImagem;
       })
-      .orElseThrow(() -> new FotoProdutoNaoEncontradoException(id));
+      .orElseThrow(() -> {
+        log.info(String.format(MensagemPadrao.FOTO_PRODUTO_NAO_ENCONTRADO, id));
+        throw new FotoProdutoNaoEncontradoException(id);
+      });
   }
 
   private void verificarCompatibilidadeDeTiposDeImagens(FotoProduto fotoProduto, String acceptHeader) throws HttpMediaTypeNotAcceptableException {
@@ -74,6 +81,7 @@ public class FotoProdutoGetService implements IFotoProdutoService.PesquisarServi
       .anyMatch(mediaTypeAceita -> mediaTypeAceita.isCompatibleWith(mediaTypeFoto));
 
     if (!compativel) {
+      log.info(MensagemPadrao.MEDIA_NAO_SUPORTADA);
       throw new HttpMediaTypeNotAcceptableException(mediaTypesAceitas);
     }
   }
