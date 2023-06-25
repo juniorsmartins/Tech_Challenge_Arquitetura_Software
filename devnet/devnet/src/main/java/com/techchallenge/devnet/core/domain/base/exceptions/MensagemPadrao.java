@@ -6,7 +6,7 @@ public final class MensagemPadrao {
 
   public static final String CPF_NAO_ENCONTRADO = "O Cliente, com CPF %s, não foi encontrado.";
 
-  public static final String MIDIA_NAO_SUPORTADA = "A API suporta mídia do tipo Json. Não possui suporte para outros tipos de mídia.";
+  public static final String MEDIA_NAO_SUPORTADA = "O recurso não suporta esse tipo de midia.";
 
   public static final String CLIENTE_NAO_ENCONTRADO = "O Cliente, com id %s, não foi encontrado!";
 
@@ -35,5 +35,7 @@ public final class MensagemPadrao {
   public static final String PEDIDO_BLOQUEADO_PARA_PRONTO = "O Pedido, com id %s, não pode ser alterado para PRONTO por estar no status: %s";
 
   public static final String IDS_INCOMPATIVEIS = "Os dois IDs enviados, %s e %s, são incompatíveis.";
+
+  public static final String EMAIL_NAO_ENVIADO_POR_EXCECAO = "Email não enviado por exceção!";
 }
 

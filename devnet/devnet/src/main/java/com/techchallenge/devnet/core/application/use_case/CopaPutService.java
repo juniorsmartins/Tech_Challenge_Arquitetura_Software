@@ -10,10 +10,12 @@ import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.core.domain.base.utilitarios.IUtils;
 import com.techchallenge.devnet.core.domain.entities.Pedido;
 import com.techchallenge.devnet.core.domain.entities.enums.StatusPedidoEnum;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 public class CopaPutService implements ICopaService.AtualizarService {
 
@@ -34,11 +36,15 @@ public class CopaPutService implements ICopaService.AtualizarService {
       .map(this::alterarStatusPedidoParaPronto)
       .map(this.utils::notificarPedidoPronto)
       .map(pedido -> this.mapper.converterEntidadeParaDtoResponse(pedido, PedidoDtoResponse.class))
-      .orElseThrow(() -> new PedidoNaoEncontradoException(idPedido));
+      .orElseThrow(() -> {
+        log.info(String.format(MensagemPadrao.PEDIDO_NAO_ENCONTRADO, idPedido));
+        throw new PedidoNaoEncontradoException(idPedido);
+      });
   }
 
   private Pedido alterarStatusPedidoParaPronto(Pedido pedido) {
     if (!pedido.getStatusPedido().equals(StatusPedidoEnum.PREPARACAO)) {
+      log.info(String.format(MensagemPadrao.PEDIDO_BLOQUEADO_PARA_PRONTO, pedido.getId(), pedido.getStatusPedido()));
       throw new AtualizarPedidoBloqueadoException(String
         .format(MensagemPadrao.PEDIDO_BLOQUEADO_PARA_PRONTO, pedido.getId(), pedido.getStatusPedido()));
     }

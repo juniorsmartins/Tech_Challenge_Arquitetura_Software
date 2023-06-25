@@ -13,7 +13,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 
 @Tag(name = "PedidoPutController", description = "Adaptador para atualizar recurso Pedido.")
-@Slf4j
 @RestController
 @RequestMapping(path = "/api/v1/pedidos")
 public final class PedidoPutController implements IPedidoController.PutController {
