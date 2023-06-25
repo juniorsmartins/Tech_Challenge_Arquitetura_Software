@@ -1,7 +1,8 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.core.application.ports.IFotoProdutoRepository;
-import com.techchallenge.devnet.core.application.ports.ILocalFotoProdutoArmazemService;
+import com.techchallenge.devnet.core.application.ports.entrada.IFotoProdutoService;
+import com.techchallenge.devnet.core.application.ports.saida.IFotoProdutoRepository;
+import com.techchallenge.devnet.core.application.ports.saida.ILocalFotoProdutoArmazemService;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.FotoProdutoNaoEncontradoException;
 import lombok.extern.slf4j.Slf4j;

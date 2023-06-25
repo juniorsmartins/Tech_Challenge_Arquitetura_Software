@@ -1,6 +1,7 @@
 package com.techchallenge.devnet.core.domain.value_objects.specification;
 
 import com.techchallenge.devnet.core.domain.entities.Pagamento;
+import com.techchallenge.devnet.core.domain.value_objects.filtros.PagamentoFiltro;
 import jakarta.persistence.criteria.Predicate;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.jpa.domain.Specification;

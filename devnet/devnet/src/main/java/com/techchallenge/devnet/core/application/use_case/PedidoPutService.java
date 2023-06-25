@@ -1,15 +1,16 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver.dtos.requisicao.PedidoDtoRequest;
-import com.techchallenge.devnet.adapter.driver.dtos.resposta.PedidoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.IClienteRepository;
-import com.techchallenge.devnet.core.application.ports.IItemPedidoRepository;
-import com.techchallenge.devnet.core.application.ports.IPedidoRepository;
-import com.techchallenge.devnet.core.application.ports.IProdutoRepository;
+import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.PedidoDtoRequest;
+import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PedidoDtoResponse;
+import com.techchallenge.devnet.core.application.ports.entrada.IPedidoService;
+import com.techchallenge.devnet.core.application.ports.saida.IClienteRepository;
+import com.techchallenge.devnet.core.application.ports.saida.IItemPedidoRepository;
+import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepository;
+import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepository;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_409.AtualizarPedidoBloqueadoException;
-import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
+import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.core.domain.base.utilitarios.IUtils;
 import com.techchallenge.devnet.core.domain.entities.Pedido;
 import com.techchallenge.devnet.core.domain.entities.enums.StatusPedidoEnum;
@@ -77,7 +78,8 @@ public class PedidoPutService implements IPedidoService.AtualizarService {
 
   private Pedido verificarPermissaoParaAtualizar(Pedido pedido) {
     if (!pedido.getStatusPedido().equals(StatusPedidoEnum.RECEBIDO)) {
-      throw new AtualizarPedidoBloqueadoException(pedido.getId(), pedido.getStatusPedido());
+      throw new AtualizarPedidoBloqueadoException(String
+        .format(MensagemPadrao.PEDIDO_BLOQUEADO_PARA_ATUALIZAR, pedido.getId(), pedido.getStatusPedido()));
     }
     return pedido;
   }

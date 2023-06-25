@@ -1,6 +1,7 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.core.application.ports.IProdutoRepository;
+import com.techchallenge.devnet.core.application.ports.entrada.IProdutoService;
+import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepository;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
 import lombok.extern.slf4j.Slf4j;
