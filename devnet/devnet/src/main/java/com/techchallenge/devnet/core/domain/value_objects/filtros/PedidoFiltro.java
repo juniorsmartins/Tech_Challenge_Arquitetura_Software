@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.core.domain.value_objects.specification;
+package com.techchallenge.devnet.core.domain.value_objects.filtros;
 
 import com.techchallenge.devnet.core.domain.entities.enums.FormaPagamentoEnum;
 import com.techchallenge.devnet.core.domain.entities.enums.StatusPedidoEnum;
