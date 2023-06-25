@@ -6,6 +6,7 @@ import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepository;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_409.ConfirmarPagamentoBloqueadoException;
 import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
+import com.techchallenge.devnet.core.domain.base.utilitarios.IUtils;
 import com.techchallenge.devnet.core.domain.entities.Pedido;
 import com.techchallenge.devnet.core.domain.entities.enums.StatusPagamentoEnum;
 import com.techchallenge.devnet.core.domain.entities.enums.StatusPedidoEnum;
@@ -21,6 +22,9 @@ public class PagamentoPutService implements IPagamentoService.AtualizarService {
   private IMapper mapper;
 
   @Autowired
+  private IUtils utils;
+
+  @Autowired
   private IPedidoRepository.GetRepository pedidoGetRepository;
 
   @Transactional(isolation = Isolation.SERIALIZABLE)
@@ -30,6 +34,7 @@ public class PagamentoPutService implements IPagamentoService.AtualizarService {
     return this.pedidoGetRepository.consultarPorId(idPedido)
       .map(order -> {
         order = this.alterarStatusPagamentoParaPagoAndPedidoParaPreparacao(order);
+        order = this.utils.notificarPedidoEmPreparacao(order);
         return order.getPagamento();
       })
       .map(pagamento -> this.mapper.converterEntidadeParaDtoResponse(pagamento, PagamentoDtoResponse.class))
