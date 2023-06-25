@@ -62,15 +62,17 @@ public final class PagamentoGetController implements IPagamentoController.GetCon
 
   @Operation(summary = "Buscar QRCode", description = "Este recurso permite buscar a imagem do QRCode.")
   @ApiResponses(value = {
-    @ApiResponse(responseCode = "200", description = "OK - requisição bem sucedida e com retorno.", content = {@Content(mediaType = "application/json", array = @ArraySchema(minItems = 1, schema = @Schema(implementation = PagamentoDtoResponse.class), uniqueItems = true))}),
+    @ApiResponse(responseCode = "200", description = "OK - requisição bem sucedida e com retorno.", content = {@Content(mediaType = "application/json", array = @ArraySchema(minItems = 1, schema = @Schema(implementation = InputStreamResource.class), uniqueItems = true))}),
     @ApiResponse(responseCode = "400", description = "Bad Request - requisição mal feita.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))}),
     @ApiResponse(responseCode = "401", description = "Unauthorized: cliente não autenticado.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))}),
     @ApiResponse(responseCode = "403", description = "Forbidden - cliente autenticado, mas sem autorização para acessar recurso.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))}),
     @ApiResponse(responseCode = "404", description = "Not Found - recurso não encontrado no banco de dados.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))}),
     @ApiResponse(responseCode = "500", description = "Internal Server Error - situação inesperada no servidor.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))})
-})
+  })
   @Override
-  public ResponseEntity<InputStreamResource> buscarQrCodePorId(@PathVariable(name = "id") final Long id) {
+  public ResponseEntity<InputStreamResource> buscarQrCodePorId(
+    @Parameter(name = "id", description = "Chave de identificação", example = "22", required = true)
+    @PathVariable(name = "id") final Long id) {
 
     var response = this.service.buscarQrCodePorId(id);
 
