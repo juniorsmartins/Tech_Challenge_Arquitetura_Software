@@ -37,5 +37,7 @@ public final class MensagemPadrao {
   public static final String IDS_INCOMPATIVEIS = "Os dois IDs enviados, %s e %s, são incompatíveis.";
 
   public static final String EMAIL_NAO_ENVIADO_POR_EXCECAO = "Email não enviado por exceção!";
+
+  public static final String BLOQUEADO_POR_USO = "O recurso, com id %s, está em uso e não pode ser apagado.";
 }
 
