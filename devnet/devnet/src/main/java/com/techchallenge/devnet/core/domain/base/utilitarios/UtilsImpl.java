@@ -73,7 +73,7 @@ public final class UtilsImpl implements IUtils {
         .emailFrom(EMAIL_ORIGEM)
         .emailTo(cliente.getEmail())
         .subject("Notificação - Pedido RECEBIDO.")
-        .text(cliente.getNome() + ", teu Pedido foi recebido pela DevNet.")
+        .text(cliente.getNome() + ", teu Pedido foi RECEBIDO pela DevNet.")
         .pedido(PedidoDtoId.builder().id(pedido.getId()).build())
         .build();
 
@@ -96,6 +96,28 @@ public final class UtilsImpl implements IUtils {
         .emailTo(cliente.getEmail())
         .subject("Notificação - Pedido PAGO em PREPARAÇÃO.")
         .text(cliente.getNome() + ", teu Pedido foi PAGO e está em PREPARAÇÃO.")
+        .pedido(PedidoDtoId.builder().id(pedido.getId()).build())
+        .build();
+
+      this.emailEnviarService.enviar(emailDtoRequest);
+    }
+
+    return pedido;
+  }
+
+  @Override
+  public Pedido notificarPedidoPronto(Pedido pedido) {
+
+    if (ObjectUtils.isNotEmpty(pedido.getCliente())) {
+
+      var cliente = pedido.getCliente();
+
+      var emailDtoRequest = EmailDtoRequest.builder()
+        .ownerRef(cliente.getNome())
+        .emailFrom(EMAIL_ORIGEM)
+        .emailTo(cliente.getEmail())
+        .subject("Notificação - Pedido PRONTO.")
+        .text(cliente.getNome() + ", teu Pedido está PRONTO e pode ser retirado.")
         .pedido(PedidoDtoId.builder().id(pedido.getId()).build())
         .build();
 

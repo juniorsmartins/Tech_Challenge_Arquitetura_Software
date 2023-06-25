@@ -7,6 +7,7 @@ import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_409.AtualizarPedidoBloqueadoException;
 import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
+import com.techchallenge.devnet.core.domain.base.utilitarios.IUtils;
 import com.techchallenge.devnet.core.domain.entities.Pedido;
 import com.techchallenge.devnet.core.domain.entities.enums.StatusPedidoEnum;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class CopaService implements ICopaService.AtualizarService {
+public class CopaPutService implements ICopaService.AtualizarService {
 
   @Autowired
   private IMapper mapper;
+
+  @Autowired
+  private IUtils utils;
 
   @Autowired
   private IPedidoRepository.GetRepository pedidoGetRepository;
@@ -28,6 +32,7 @@ public class CopaService implements ICopaService.AtualizarService {
 
     return this.pedidoGetRepository.consultarPorId(idPedido)
       .map(this::alterarStatusPedidoParaPronto)
+      .map(this.utils::notificarPedidoPronto)
       .map(pedido -> this.mapper.converterEntidadeParaDtoResponse(pedido, PedidoDtoResponse.class))
       .orElseThrow(() -> new PedidoNaoEncontradoException(idPedido));
   }
