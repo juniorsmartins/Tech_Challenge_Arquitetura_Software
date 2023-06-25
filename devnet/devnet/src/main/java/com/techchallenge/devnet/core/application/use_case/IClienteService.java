@@ -2,7 +2,7 @@ package com.techchallenge.devnet.core.application.use_case;
 
 import com.techchallenge.devnet.adapter.driver.dtos.requisicao.ClienteDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.resposta.ClienteDtoResponse;
-import com.techchallenge.devnet.core.domain.value_objects.specification.ClienteFiltro;
+import com.techchallenge.devnet.core.domain.value_objects.filtros.ClienteFiltro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

@@ -3,7 +3,7 @@ package com.techchallenge.devnet.core.application.use_case;
 import com.techchallenge.devnet.adapter.driver.dtos.resposta.ProdutoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.IProdutoRepository;
 import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
-import com.techchallenge.devnet.core.domain.value_objects.specification.ProdutoFiltro;
+import com.techchallenge.devnet.core.domain.value_objects.filtros.ProdutoFiltro;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

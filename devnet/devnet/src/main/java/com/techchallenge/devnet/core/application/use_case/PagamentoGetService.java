@@ -5,7 +5,7 @@ import com.techchallenge.devnet.core.application.ports.IPagamentoRepository;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PagamentoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
 import com.techchallenge.devnet.core.domain.base.utilitarios.QRCodeGenerator;
-import com.techchallenge.devnet.core.domain.value_objects.specification.PagamentoFiltro;
+import com.techchallenge.devnet.core.domain.value_objects.filtros.PagamentoFiltro;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;

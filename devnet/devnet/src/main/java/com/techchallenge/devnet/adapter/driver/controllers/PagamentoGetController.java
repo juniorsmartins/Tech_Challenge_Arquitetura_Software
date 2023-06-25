@@ -3,7 +3,7 @@ package com.techchallenge.devnet.adapter.driver.controllers;
 import com.techchallenge.devnet.adapter.driver.dtos.resposta.PagamentoDtoResponse;
 import com.techchallenge.devnet.core.application.use_case.IPagamentoService;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
-import com.techchallenge.devnet.core.domain.value_objects.specification.PagamentoFiltro;
+import com.techchallenge.devnet.core.domain.value_objects.filtros.PagamentoFiltro;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
