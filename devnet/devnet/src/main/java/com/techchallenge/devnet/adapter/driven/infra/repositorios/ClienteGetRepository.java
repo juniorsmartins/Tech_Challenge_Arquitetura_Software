@@ -3,7 +3,7 @@ package com.techchallenge.devnet.adapter.driven.infra.repositorios;
 import com.techchallenge.devnet.adapter.driven.infra.repositorios.jpa.ClienteRepositoryJpa;
 import com.techchallenge.devnet.core.application.ports.IClienteRepository;
 import com.techchallenge.devnet.core.domain.entities.Cliente;
-import com.techchallenge.devnet.core.domain.value_objects.specification.ClienteFiltro;
+import com.techchallenge.devnet.core.domain.value_objects.filtros.ClienteFiltro;
 import com.techchallenge.devnet.core.domain.value_objects.specification.ClienteSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

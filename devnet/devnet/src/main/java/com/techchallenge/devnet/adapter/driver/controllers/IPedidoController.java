@@ -2,7 +2,7 @@ package com.techchallenge.devnet.adapter.driver.controllers;
 
 import com.techchallenge.devnet.adapter.driver.dtos.requisicao.PedidoDtoRequest;
 import com.techchallenge.devnet.adapter.driver.dtos.resposta.PedidoDtoResponse;
-import com.techchallenge.devnet.core.domain.value_objects.specification.PedidoFiltro;
+import com.techchallenge.devnet.core.domain.value_objects.filtros.PedidoFiltro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;

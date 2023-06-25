@@ -25,7 +25,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 public final class ClientePostController implements IClienteController.PostController {
 
   @Autowired
-  private IClienteService.CadastrarService service;
+  private IClienteService.CadastrarService clienteCadastrarservice;
 
   @Operation(summary = "Cadastrar Cliente", description = "Este recurso destina-se a cadastrar.")
   @ApiResponses(value = {
@@ -41,7 +41,7 @@ public final class ClientePostController implements IClienteController.PostContr
     @Parameter(name = "ClienteDtoRequest", description = "Estrutura de dados para transporte de informações de entrada.", required = true)
     @RequestBody @Valid final ClienteDtoRequest dtoRequest, final UriComponentsBuilder uriComponentsBuilder) {
 
-    var response = this.service.cadastrar(dtoRequest);
+    var response = this.clienteCadastrarservice.cadastrar(dtoRequest);
 
     return ResponseEntity
       .created(uriComponentsBuilder
