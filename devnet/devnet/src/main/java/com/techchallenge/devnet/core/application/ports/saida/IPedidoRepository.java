@@ -5,6 +5,7 @@ import com.techchallenge.devnet.core.domain.value_objects.filtros.PedidoFiltro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface IPedidoRepository {
@@ -17,6 +18,8 @@ public interface IPedidoRepository {
     Page<Pedido> pesquisar(PedidoFiltro filtro, Pageable paginacao);
 
     Optional<Pedido> consultarPorId(Long id);
+
+    List<Pedido> consultarPorIdDeCliente(Long idCliente);
   }
 }
 

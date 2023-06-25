@@ -6,6 +6,7 @@ import com.techchallenge.devnet.core.domain.entities.ItemPedido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -17,5 +18,10 @@ public class ItemPedidoGetRepository implements IItemPedidoRepository.GetReposit
   @Override
   public Optional<ItemPedido> consultarPorId(final Long id) {
     return this.itemPedidoRepositoryJpa.findById(id);
+  }
+
+  @Override
+  public List<ItemPedido> consultarPorIdDeProduto(Long produtoId) {
+    return this.itemPedidoRepositoryJpa.findByProdutoId(produtoId);
   }
 }
