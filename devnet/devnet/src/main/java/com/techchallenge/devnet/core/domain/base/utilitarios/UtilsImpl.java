@@ -1,5 +1,8 @@
 package com.techchallenge.devnet.core.domain.base.utilitarios;
 
+import com.techchallenge.devnet.adapter.driver_primario.dtos.PedidoDtoId;
+import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.EmailDtoRequest;
+import com.techchallenge.devnet.core.application.ports.entrada.IEmailService;
 import com.techchallenge.devnet.core.application.ports.saida.IClienteRepository;
 import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepository;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
@@ -13,11 +16,16 @@ import org.springframework.stereotype.Service;
 @Service
 public final class UtilsImpl implements IUtils {
 
+  private static final String EMAIL_ORIGEM = "techchallenge6@gmail.com";
+
   @Autowired
   private IClienteRepository.GetRepository clienteGetRepository;
 
   @Autowired
   private IProdutoRepository.GetRepository produtoGetRepository;
+
+  @Autowired
+  private IEmailService.EnviarService emailEnviarService;
 
   @Override
   public Pedido confirmarCliente(Pedido pedido) {
@@ -50,6 +58,28 @@ public final class UtilsImpl implements IUtils {
     });
 
     pedido.calcularPrecoTotal();
+    return pedido;
+  }
+
+  @Override
+  public Pedido notificarPedidoRecebido(Pedido pedido) {
+
+    if (ObjectUtils.isNotEmpty(pedido.getCliente())) {
+
+      var cliente = pedido.getCliente();
+
+      var emailDtoRequest = EmailDtoRequest.builder()
+        .ownerRef(cliente.getNome())
+        .emailFrom(EMAIL_ORIGEM)
+        .emailTo(cliente.getEmail())
+        .subject("Notificação - Pedido RECEBIDO.")
+        .text("Teu Pedido foi recebido pela DevNet.")
+        .pedido(PedidoDtoId.builder().id(pedido.getId()).build())
+        .build();
+
+      this.emailEnviarService.enviar(emailDtoRequest);
+    }
+
     return pedido;
   }
 }

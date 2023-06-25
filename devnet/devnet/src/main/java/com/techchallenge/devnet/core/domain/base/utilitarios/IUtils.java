@@ -7,5 +7,7 @@ public interface IUtils {
   Pedido confirmarCliente(Pedido pedido);
 
   Pedido confirmarProdutos(Pedido pedido);
+
+  Pedido notificarPedidoRecebido(Pedido pedido);
 }
 

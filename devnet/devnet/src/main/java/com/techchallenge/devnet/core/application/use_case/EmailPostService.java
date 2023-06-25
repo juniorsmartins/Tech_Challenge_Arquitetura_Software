@@ -4,9 +4,14 @@ import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.EmailDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.EmailDtoResponse;
 import com.techchallenge.devnet.core.application.ports.entrada.IEmailService;
+import com.techchallenge.devnet.core.application.ports.saida.IClienteRepository;
 import com.techchallenge.devnet.core.application.ports.saida.IEmailRepository;
+import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepository;
+import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ClienteNaoEncontradoException;
+import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.entities.Email;
 import com.techchallenge.devnet.core.domain.entities.enums.StatusEmailEnum;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
@@ -23,6 +28,12 @@ public class EmailPostService implements IEmailService.EnviarService {
   private IMapper mapper;
 
   @Autowired
+  private IPedidoRepository.GetRepository pedidoGetRepository;
+
+  @Autowired
+  private IClienteRepository.GetRepository clienteGetRepository;
+
+  @Autowired
   private JavaMailSender javaMailSender;
 
   @Autowired
@@ -33,6 +44,8 @@ public class EmailPostService implements IEmailService.EnviarService {
 
     return Optional.of(dtoRequest)
       .map(dto -> this.mapper.converterDtoRequestParaEntidade(dto, Email.class))
+      .map(this::validarPedido)
+      .map(this::validarCliente)
       .map(email -> {
         email.setSendDataEmail(LocalDateTime.now());
 
@@ -55,6 +68,31 @@ public class EmailPostService implements IEmailService.EnviarService {
       })
       .map(email -> this.mapper.converterEntidadeParaDtoResponse(email, EmailDtoResponse.class))
       .orElseThrow();
+  }
+
+  private Email validarPedido(Email email) {
+    var idPedido = email.getPedido().getId();
+
+    var pedido = this.pedidoGetRepository.consultarPorId(idPedido)
+      .orElseThrow(() -> new PedidoNaoEncontradoException(idPedido));
+
+    email.setPedido(pedido);
+
+    return email;
+  }
+
+  private Email validarCliente(Email email) {
+
+    if (ObjectUtils.isNotEmpty(email.getPedido().getCliente())) {
+      var idCliente = email.getPedido().getCliente().getId();
+
+      var cliente = this.clienteGetRepository.consultarPorId(idCliente)
+        .orElseThrow(() -> new ClienteNaoEncontradoException(idCliente));
+
+      email.getPedido().setCliente(cliente);
+    }
+
+    return email;
   }
 }
 

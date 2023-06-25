@@ -59,7 +59,7 @@ public final class Pedido extends AuditoriaDataJpa implements Serializable {
   private BigDecimal precoTotal;
 
   @ManyToOne
-  @JoinColumn(name = "usuario_id", referencedColumnName = "id", nullable = true)
+  @JoinColumn(name = "cliente_id", referencedColumnName = "id", nullable = true)
   private Cliente cliente;
 
   @OneToMany(mappedBy = "pedido", cascade = {CascadeType.ALL})

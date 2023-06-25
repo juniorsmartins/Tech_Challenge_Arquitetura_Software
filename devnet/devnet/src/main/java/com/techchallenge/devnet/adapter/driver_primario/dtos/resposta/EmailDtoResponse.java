@@ -1,6 +1,7 @@
 package com.techchallenge.devnet.adapter.driver_primario.dtos.resposta;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.techchallenge.devnet.adapter.driver_primario.dtos.PedidoDtoId;
 import com.techchallenge.devnet.core.domain.entities.enums.StatusEmailEnum;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -32,5 +33,7 @@ public final class EmailDtoResponse implements Serializable {
   private LocalDateTime sendDataEmail;
 
   private StatusEmailEnum statusEmail;
+
+  private PedidoDtoId pedido;
 }
 
