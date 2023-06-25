@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = "/api/v1/copa")
-public final class CopaController implements ICopaController.PutController {
+public final class CopaPutController implements ICopaController.PutController {
 
   @Autowired
   private ICopaService.AtualizarService copaAtualizarService;
