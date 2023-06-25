@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.core.domain.base.utilitarios;
 
-import com.techchallenge.devnet.core.application.ports.IClienteRepository;
-import com.techchallenge.devnet.core.application.ports.IProdutoRepository;
+import com.techchallenge.devnet.core.application.ports.saida.IClienteRepository;
+import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepository;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ClienteNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;

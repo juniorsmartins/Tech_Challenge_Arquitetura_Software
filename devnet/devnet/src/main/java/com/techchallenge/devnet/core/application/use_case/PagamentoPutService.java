@@ -1,10 +1,11 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver.dtos.resposta.PagamentoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.IPedidoRepository;
+import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PagamentoDtoResponse;
+import com.techchallenge.devnet.core.application.ports.entrada.IPagamentoService;
+import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepository;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_409.ConfirmarPagamentoBloqueadoException;
-import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
+import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.core.domain.entities.Pedido;
 import com.techchallenge.devnet.core.domain.entities.enums.StatusPagamentoEnum;
 import com.techchallenge.devnet.core.domain.entities.enums.StatusPedidoEnum;

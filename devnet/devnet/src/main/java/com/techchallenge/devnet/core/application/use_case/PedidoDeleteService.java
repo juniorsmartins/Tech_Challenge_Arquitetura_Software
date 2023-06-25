@@ -1,6 +1,7 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.core.application.ports.IPedidoRepository;
+import com.techchallenge.devnet.core.application.ports.entrada.IPedidoService;
+import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepository;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_409.CancelamentoBloqueadoException;

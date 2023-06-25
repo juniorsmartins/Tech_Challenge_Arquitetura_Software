@@ -1,9 +1,11 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver.dtos.requisicao.PedidoDtoRequest;
-import com.techchallenge.devnet.adapter.driver.dtos.resposta.PedidoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.IPedidoRepository;
-import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
+import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.PedidoDtoRequest;
+import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PedidoDtoResponse;
+import com.techchallenge.devnet.core.application.ports.entrada.IPagamentoService;
+import com.techchallenge.devnet.core.application.ports.entrada.IPedidoService;
+import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepository;
+import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.core.domain.base.utilitarios.IUtils;
 import com.techchallenge.devnet.core.domain.entities.Pedido;
 import com.techchallenge.devnet.core.domain.entities.enums.StatusPedidoEnum;

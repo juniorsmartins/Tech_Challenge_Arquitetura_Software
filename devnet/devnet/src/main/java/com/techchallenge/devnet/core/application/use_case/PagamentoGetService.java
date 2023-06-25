@@ -1,9 +1,10 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver.dtos.resposta.PagamentoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.IPagamentoRepository;
+import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PagamentoDtoResponse;
+import com.techchallenge.devnet.core.application.ports.entrada.IPagamentoService;
+import com.techchallenge.devnet.core.application.ports.saida.IPagamentoRepository;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PagamentoNaoEncontradoException;
-import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
+import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.core.domain.base.utilitarios.QRCodeGenerator;
 import com.techchallenge.devnet.core.domain.value_objects.filtros.PagamentoFiltro;
 import org.springframework.beans.factory.annotation.Autowired;
