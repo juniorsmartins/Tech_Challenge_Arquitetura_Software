@@ -5,6 +5,7 @@ import com.techchallenge.devnet.core.application.ports.entrada.IFotoProdutoServi
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.FotoProdutoNaoEncontradoException;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -38,7 +39,9 @@ public final class FotoProdutoGetController implements IFotoProdutoController.Ge
     @ApiResponse(responseCode = "500", description = "Internal Server Error - situação inesperada no servidor.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))})
   })
   @Override
-  public ResponseEntity<FotoProdutoDtoResponse> consultarPorId(@PathVariable(name = "id") final Long id) {
+  public ResponseEntity<FotoProdutoDtoResponse> consultarPorId(
+    @Parameter(name = "id", description = "Chave de identificação", example = "22", required = true)
+    @PathVariable(name = "id") final Long id) {
 
     var response = this.fotoProdutoPesquisarService.consultarPorId(id);
 

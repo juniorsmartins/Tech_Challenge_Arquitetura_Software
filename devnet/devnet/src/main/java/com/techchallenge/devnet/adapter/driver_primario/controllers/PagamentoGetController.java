@@ -70,7 +70,9 @@ public final class PagamentoGetController implements IPagamentoController.GetCon
     @ApiResponse(responseCode = "500", description = "Internal Server Error - situação inesperada no servidor.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))})
   })
   @Override
-  public ResponseEntity<InputStreamResource> buscarQrCodePorId(@PathVariable(name = "id") final Long id) {
+  public ResponseEntity<InputStreamResource> buscarQrCodePorId(
+    @Parameter(name = "id", description = "Chave de identificação", example = "22", required = true)
+    @PathVariable(name = "id") final Long id) {
 
     var response = this.service.buscarQrCodePorId(id);
 
