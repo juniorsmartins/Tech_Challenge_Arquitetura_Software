@@ -3,26 +3,36 @@ package com.techchallenge.devnet.core.domain.base.exceptions;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_400.RequisicaoMalFormuladaException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.RecursoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_409.RegraDeNegocioVioladaException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.HttpMediaTypeNotAcceptableException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.Instant;
+import java.util.List;
 
 @RestControllerAdvice
 public final class TratadorDeExceptions extends ResponseEntityExceptionHandler {
+
+  @Autowired
+  private MessageSource mensagemInternacionalizada;
 
   @ExceptionHandler(value = RequisicaoMalFormuladaException.class)
   public ResponseEntity<Object> tratarRequisicaoMalFormulada(RequisicaoMalFormuladaException requisicaoMalFormulada,
                                                              WebRequest webRequest) {
     var httpStatus = HttpStatus.BAD_REQUEST;
-    var tipoDeErroEnum = ETipoDeErro.REQUISICAO_MAL_FORMULADA;
+    var tipoDeErroEnum = TipoDeErroEnum.REQUISICAO_MAL_FORMULADA;
     var detalhe = requisicaoMalFormulada.getMessage();
 
     var retornoDeErro = this.criarMensagemParaRetornarErro(httpStatus, tipoDeErroEnum, detalhe).build();
@@ -35,7 +45,7 @@ public final class TratadorDeExceptions extends ResponseEntityExceptionHandler {
   public ResponseEntity<Object> tratarRegraDeNegocioViolada(RegraDeNegocioVioladaException regraViolada,
                                                                    WebRequest webRequest) {
     var httpStatus = HttpStatus.CONFLICT;
-    var tipoDeErroEnum = ETipoDeErro.REGRA_NEGOCIO_VIOLADA;
+    var tipoDeErroEnum = TipoDeErroEnum.REGRA_NEGOCIO_VIOLADA;
     var detalhe = regraViolada.getMessage();
 
     var retornoDeErro = this.criarMensagemParaRetornarErro(httpStatus, tipoDeErroEnum, detalhe).build();
@@ -48,7 +58,7 @@ public final class TratadorDeExceptions extends ResponseEntityExceptionHandler {
   public ResponseEntity<Object> tratarRecursoNaoEncontrado(RecursoNaoEncontradoException recursoNaoEncontrado,
                                                            WebRequest webRequest) {
     var httpStatus = HttpStatus.NOT_FOUND;
-    var tipoDeErroEnum = ETipoDeErro.RECURSO_NAO_ENCONTRADO;
+    var tipoDeErroEnum = TipoDeErroEnum.RECURSO_NAO_ENCONTRADO;
     var detalhe = recursoNaoEncontrado.getMessage();
 
     var retornoDeErro = this.criarMensagemParaRetornarErro(httpStatus, tipoDeErroEnum, detalhe)
@@ -57,6 +67,8 @@ public final class TratadorDeExceptions extends ResponseEntityExceptionHandler {
     return super.handleExceptionInternal(recursoNaoEncontrado, retornoDeErro, new HttpHeaders(),
       httpStatus, webRequest);
   }
+
+
 
   // Sobrescrição de um método comum de ResponseEntityExceptionHandler. Captura exceção quando o tipo de mediaType
   // for incompatível.
@@ -71,7 +83,7 @@ public final class TratadorDeExceptions extends ResponseEntityExceptionHandler {
 
   // Método para construção da mensagem de retorno
   private RetornoDeErro.RetornoDeErroBuilder criarMensagemParaRetornarErro(HttpStatusCode httpStatusCode,
-                                                                           ETipoDeErro tipoDeErroEnum, String detalhe) {
+                                                           TipoDeErroEnum tipoDeErroEnum, String detalhe) {
     return RetornoDeErro.builder()
       .tipo(tipoDeErroEnum.getCaminho())
       .titulo(tipoDeErroEnum.getTitulo())
@@ -105,6 +117,47 @@ public final class TratadorDeExceptions extends ResponseEntityExceptionHandler {
     }
 
     return super.handleExceptionInternal(exception, body, headers, status, webRequest);
+  }
+
+
+  // Aqui o tratamendo de anotações de BeanValidation
+  @Override
+  protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException argumentNotValid,
+                                        HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+
+    return this.construirResponseComMensagemDeErros(argumentNotValid, argumentNotValid.getBindingResult(),
+      new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+  }
+
+  private ResponseEntity<Object> construirResponseComMensagemDeErros(Exception exception,
+         BindingResult bindingResult, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+
+    var tipoDeErroEnum = TipoDeErroEnum.DADOS_INVALIDOS;
+    var detalhe = "A requisição contém um ou mais dados inválidos. Preencha corretamente e tente novamente.";
+
+    List<RetornoDeErro.ParametroInvalido> erros = bindingResult.getAllErrors().stream()
+      .map(error -> {
+        var mensagem = mensagemInternacionalizada.getMessage(error, LocaleContextHolder.getLocale());
+
+        var name = error.getObjectName();
+
+        if (error instanceof FieldError) {
+          name = ((FieldError) error).getField();
+        }
+
+        return RetornoDeErro.ParametroInvalido.builder()
+          .anotacaoViolada(error.getCode())
+          .localDeErro(name)
+          .motivo(mensagem)
+          .build();
+      })
+      .toList();
+
+    var problema = this.criarMensagemParaRetornarErro(status, tipoDeErroEnum, detalhe)
+      .parametrosInvalidos(erros)
+      .build();
+
+    return handleExceptionInternal(exception, problema, headers, status, request);
   }
 }
 
