@@ -2,7 +2,7 @@ package com.techchallenge.devnet.core.domain.base.assertions_concern;
 
 import com.techchallenge.devnet.core.domain.base.exceptions.http_409.RegraClienteCpfUnicoException;
 import com.techchallenge.devnet.core.domain.entities.Cliente;
-import com.techchallenge.devnet.core.application.ports.IClienteRepository;
+import com.techchallenge.devnet.core.application.ports.saida.IClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

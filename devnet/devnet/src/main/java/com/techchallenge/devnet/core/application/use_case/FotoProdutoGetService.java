@@ -1,11 +1,12 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver.dtos.ImagemDto;
-import com.techchallenge.devnet.adapter.driver.dtos.resposta.FotoProdutoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.IFotoProdutoRepository;
-import com.techchallenge.devnet.core.application.ports.ILocalFotoProdutoArmazemService;
+import com.techchallenge.devnet.adapter.driver_primario.dtos.ImagemDto;
+import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.FotoProdutoDtoResponse;
+import com.techchallenge.devnet.core.application.ports.entrada.IFotoProdutoService;
+import com.techchallenge.devnet.core.application.ports.saida.IFotoProdutoRepository;
+import com.techchallenge.devnet.core.application.ports.saida.ILocalFotoProdutoArmazemService;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.FotoProdutoNaoEncontradoException;
-import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
+import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.core.domain.entities.FotoProduto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

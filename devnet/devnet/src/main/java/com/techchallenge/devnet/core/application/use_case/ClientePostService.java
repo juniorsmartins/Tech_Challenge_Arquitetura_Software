@@ -1,10 +1,11 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver.dtos.requisicao.ClienteDtoRequest;
-import com.techchallenge.devnet.adapter.driver.dtos.resposta.ClienteDtoResponse;
-import com.techchallenge.devnet.core.application.ports.IClienteRepository;
+import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ClienteDtoRequest;
+import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ClienteDtoResponse;
+import com.techchallenge.devnet.core.application.ports.entrada.IClienteService;
+import com.techchallenge.devnet.core.application.ports.saida.IClienteRepository;
 import com.techchallenge.devnet.core.domain.base.assertions_concern.RegrasNegocioCliente;
-import com.techchallenge.devnet.core.domain.base.mappers.IMapper;
+import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.core.domain.entities.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
