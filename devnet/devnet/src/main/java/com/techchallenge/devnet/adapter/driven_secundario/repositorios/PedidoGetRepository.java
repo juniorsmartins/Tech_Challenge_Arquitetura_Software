@@ -30,8 +30,8 @@ public class PedidoGetRepository implements IPedidoRepository.GetRepository {
   }
 
   @Override
-  public List<Pedido> consultarPorIdDeCliente(final Long idCliente) {
-    return this.repositoryJpa.findByClienteId(idCliente);
+  public List<Pedido> consultarPorIdDeCliente(final Long clienteId) {
+    return this.repositoryJpa.findByClienteId(clienteId);
   }
 }
 
