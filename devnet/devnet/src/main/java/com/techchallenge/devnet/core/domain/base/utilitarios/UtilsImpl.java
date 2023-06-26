@@ -126,5 +126,27 @@ public final class UtilsImpl implements IUtils {
 
     return pedido;
   }
+
+  @Override
+  public Pedido notificarPedidoFinalizado(Pedido pedido) {
+
+    if (ObjectUtils.isNotEmpty(pedido.getCliente())) {
+
+      var cliente = pedido.getCliente();
+
+      var emailDtoRequest = EmailDtoRequest.builder()
+        .ownerRef(cliente.getNome())
+        .emailFrom(EMAIL_ORIGEM)
+        .emailTo(cliente.getEmail())
+        .subject("Notificação - Pedido FINALIZADO.")
+        .text(cliente.getNome() + ", teu Pedido foi retirado e está FINALIZADO.")
+        .pedido(PedidoDtoId.builder().id(pedido.getId()).build())
+        .build();
+
+      this.emailEnviarService.enviar(emailDtoRequest);
+    }
+
+    return pedido;
+  }
 }
 

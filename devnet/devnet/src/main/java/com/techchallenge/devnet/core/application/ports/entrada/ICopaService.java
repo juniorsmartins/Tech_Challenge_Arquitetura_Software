@@ -6,6 +6,8 @@ public interface ICopaService {
 
   interface AtualizarService {
     PedidoDtoResponse confirmarPedidoPronto(Long idPedido);
+
+    PedidoDtoResponse confirmarPedidoFinalizado(Long idPedido);
   }
 }
 

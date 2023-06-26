@@ -42,6 +42,20 @@ public class CopaPutService implements ICopaService.AtualizarService {
       });
   }
 
+  @Transactional
+  @Override
+  public PedidoDtoResponse confirmarPedidoFinalizado(final Long idPedido) {
+
+    return this.pedidoGetRepository.consultarPorId(idPedido)
+      .map(this::alterarStatusPedidoParaFinalizado)
+      .map(this.utils::notificarPedidoFinalizado)
+      .map(pedido -> this.mapper.converterEntidadeParaDtoResponse(pedido, PedidoDtoResponse.class))
+      .orElseThrow(() -> {
+        log.info(String.format(MensagemPadrao.PEDIDO_NAO_ENCONTRADO, idPedido));
+        throw new PedidoNaoEncontradoException(idPedido);
+      });
+  }
+
   private Pedido alterarStatusPedidoParaPronto(Pedido pedido) {
     if (!pedido.getStatusPedido().equals(StatusPedidoEnum.PREPARACAO)) {
       log.info(String.format(MensagemPadrao.PEDIDO_BLOQUEADO_PARA_PRONTO, pedido.getId(), pedido.getStatusPedido()));
@@ -49,6 +63,16 @@ public class CopaPutService implements ICopaService.AtualizarService {
         .format(MensagemPadrao.PEDIDO_BLOQUEADO_PARA_PRONTO, pedido.getId(), pedido.getStatusPedido()));
     }
     pedido.setStatusPedido(StatusPedidoEnum.PRONTO);
+    return pedido;
+  }
+
+  private Pedido alterarStatusPedidoParaFinalizado(Pedido pedido) {
+    if (!pedido.getStatusPedido().equals(StatusPedidoEnum.PRONTO)) {
+      log.info(String.format(MensagemPadrao.PEDIDO_BLOQUEADO_PARA_FINALIZADO, pedido.getId(), pedido.getStatusPedido()));
+      throw new AtualizarPedidoBloqueadoException(String
+        .format(MensagemPadrao.PEDIDO_BLOQUEADO_PARA_FINALIZADO, pedido.getId(), pedido.getStatusPedido()));
+    }
+    pedido.setStatusPedido(StatusPedidoEnum.FINALIZADO);
     return pedido;
   }
 }
