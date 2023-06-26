@@ -16,6 +16,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.envers.Audited;
 
 import java.io.Serializable;
 
@@ -27,6 +28,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @EqualsAndHashCode(of = {"id"})
+@Audited
 public final class FotoProduto extends AuditoriaDataJpa implements Serializable {
 
   private static final long serialVersionUID = 1L;
