@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
-public class CopaPutService implements ICopaService.AtualizarService {
+public class CopaPutService implements ICopaService.PutService {
 
   @Autowired
   private IMapper mapper;

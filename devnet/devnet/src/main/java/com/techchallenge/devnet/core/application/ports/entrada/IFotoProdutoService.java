@@ -8,17 +8,17 @@ import java.io.IOException;
 
 public interface IFotoProdutoService {
 
-  interface AtualizarService {
+  interface PutService {
     FotoProdutoDtoResponse inserirFotoNoProduto(Long id, FotoProdutoDtoRequest fotoProdutoDtoRequest) throws IOException;
   }
 
-  interface PesquisarService {
+  interface GetService {
     FotoProdutoDtoResponse consultarPorId(Long id);
 
     ImagemDto consultarImagemPorId(Long id, String acceptHeader);
   }
 
-  interface DeletarService {
+  interface DeleteService {
     void deletarPorId(Long id);
   }
 }

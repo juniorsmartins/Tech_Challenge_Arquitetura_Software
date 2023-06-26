@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public final class PedidoDeleteController implements IPedidoController.DeleteController {
 
   @Autowired
-  private IPedidoService.DeletarService deletarService;
+  private IPedidoService.DeleteService deleteService;
 
   @Operation(summary = "Cancelar Pedido", description = "Este recurso destina-se a apagar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {
@@ -37,7 +37,7 @@ public final class PedidoDeleteController implements IPedidoController.DeleteCon
     @Parameter(name = "id", description = "Chave de identificação", example = "22", required = true)
     @PathVariable(name = "id") final Long pedidoId) {
 
-    this.deletarService.cancelarPorId(pedidoId);
+    this.deleteService.cancelarPorId(pedidoId);
 
     return ResponseEntity
       .noContent()

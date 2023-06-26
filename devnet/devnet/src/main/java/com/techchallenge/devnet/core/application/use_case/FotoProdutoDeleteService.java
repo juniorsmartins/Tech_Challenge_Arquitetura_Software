@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
-public class FotoProdutoDeleteService implements IFotoProdutoService.DeletarService {
+public class FotoProdutoDeleteService implements IFotoProdutoService.DeleteService {
 
   @Autowired
   private IFotoProdutoRepository.GetRepository fotoProdutoGetRepository;

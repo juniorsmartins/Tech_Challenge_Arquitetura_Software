@@ -23,7 +23,7 @@ import java.util.Optional;
 
 @Slf4j
 @Service
-public class PedidoPutService implements IPedidoService.AtualizarService {
+public class PedidoPutService implements IPedidoService.PutService {
 
   @Autowired
   private IMapper mapper;

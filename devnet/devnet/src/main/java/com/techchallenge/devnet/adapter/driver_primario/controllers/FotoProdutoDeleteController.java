@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public final class FotoProdutoDeleteController implements IFotoProdutoController.DeleteController {
 
   @Autowired
-  private IFotoProdutoService.DeletarService fotoProdutoDeletarService;
+  private IFotoProdutoService.DeleteService fotoProdutoDeleteService;
 
   @Operation(summary = "Deletar Cliente", description = "Este recurso destina-se a apagar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {
@@ -37,7 +37,7 @@ public final class FotoProdutoDeleteController implements IFotoProdutoController
     @Parameter(name = "id", description = "Chave de identificação", example = "22", required = true)
     @PathVariable(name = "id") final Long id) {
 
-    this.fotoProdutoDeletarService.deletarPorId(id);
+    this.fotoProdutoDeleteService.deletarPorId(id);
 
     return ResponseEntity
       .noContent()

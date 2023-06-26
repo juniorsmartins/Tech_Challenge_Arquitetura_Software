@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 public final class FotoProdutoGetController implements IFotoProdutoController.GetController {
 
   @Autowired
-  private IFotoProdutoService.PesquisarService fotoProdutoPesquisarService;
+  private IFotoProdutoService.GetService fotoProdutoGetService;
 
   @Operation(summary = "Pesquisar FotoProduto", description = "Este recurso permite consultar FotoProduto por diversas propriedades com retorno paginado.")
   @ApiResponses(value = {
@@ -41,7 +41,7 @@ public final class FotoProdutoGetController implements IFotoProdutoController.Ge
     @Parameter(name = "id", description = "Chave de identificação", example = "22", required = true)
     @PathVariable(name = "id") final Long id) {
 
-    var response = this.fotoProdutoPesquisarService.consultarPorId(id);
+    var response = this.fotoProdutoGetService.consultarPorId(id);
 
     return ResponseEntity
       .ok()
@@ -61,7 +61,7 @@ public final class FotoProdutoGetController implements IFotoProdutoController.Ge
   public ResponseEntity<InputStreamResource> consultarImagemPorId(@PathVariable(name = "id") final Long id,
                                                       @RequestHeader(name = "accept") final String acceptHeader) {
     try {
-      var imagemDto = this.fotoProdutoPesquisarService.consultarImagemPorId(id, acceptHeader);
+      var imagemDto = this.fotoProdutoGetService.consultarImagemPorId(id, acceptHeader);
 
       return ResponseEntity
         .ok()
