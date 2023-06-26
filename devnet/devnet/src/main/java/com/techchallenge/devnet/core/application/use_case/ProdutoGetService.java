@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
-public class ProdutoGetService implements IProdutoService.PesquisarService {
+public class ProdutoGetService implements IProdutoService.GetService {
 
   @Autowired
   private IMapper mapper;

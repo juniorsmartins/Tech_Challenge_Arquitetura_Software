@@ -25,7 +25,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 public final class ProdutoPostController implements IProdutoController.PostController {
 
   @Autowired
-  private IProdutoService.CadastrarService service;
+  private IProdutoService.PostService service;
 
   @Operation(summary = "Cadastrar Produto", description = "Este recurso destina-se a cadastrar.")
   @ApiResponses(value = {

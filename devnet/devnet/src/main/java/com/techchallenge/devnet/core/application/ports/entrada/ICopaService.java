@@ -4,7 +4,7 @@ import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PedidoDtoR
 
 public interface ICopaService {
 
-  interface AtualizarService {
+  interface PutService {
     PedidoDtoResponse confirmarPedidoPronto(Long idPedido);
 
     PedidoDtoResponse confirmarPedidoFinalizado(Long idPedido);

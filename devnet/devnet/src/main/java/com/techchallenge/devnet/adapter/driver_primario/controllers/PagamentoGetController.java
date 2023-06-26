@@ -32,7 +32,7 @@ import java.util.Optional;
 public final class PagamentoGetController implements IPagamentoController.GetController {
 
   @Autowired
-  private IPagamentoService.PesquisarService service;
+  private IPagamentoService.GetService service;
 
   @Operation(summary = "Pesquisar Pagamento", description = "Este recurso permite consultar por diversas propriedades com retorno paginado.")
   @ApiResponses(value = {

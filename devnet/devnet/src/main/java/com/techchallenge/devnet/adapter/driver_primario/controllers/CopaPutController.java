@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public final class CopaPutController implements ICopaController.PutController {
 
   @Autowired
-  private ICopaService.AtualizarService copaAtualizarService;
+  private ICopaService.PutService copaPutService;
 
   @Operation(summary = "Atualizar Cliente", description = "Este recurso destina-se a atualizar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {
@@ -38,7 +38,7 @@ public final class CopaPutController implements ICopaController.PutController {
     @Parameter(name = "id", description = "Chave de identificação", example = "22", required = true)
     @PathVariable(name = "idPedido") final Long idPedido) {
 
-    var response = this.copaAtualizarService.confirmarPedidoPronto(idPedido);
+    var response = this.copaPutService.confirmarPedidoPronto(idPedido);
 
     return ResponseEntity
       .ok()
@@ -59,7 +59,7 @@ public final class CopaPutController implements ICopaController.PutController {
     @Parameter(name = "id", description = "Chave de identificação", example = "22", required = true)
     @PathVariable(name = "idPedido") final Long idPedido) {
 
-    var response = this.copaAtualizarService.confirmarPedidoFinalizado(idPedido);
+    var response = this.copaPutService.confirmarPedidoFinalizado(idPedido);
 
     return ResponseEntity
       .ok()

@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @Slf4j
 @Service
-public class PagamentoGetService implements IPagamentoService.PesquisarService {
+public class PagamentoGetService implements IPagamentoService.GetService {
 
   @Autowired
   private IMapper mapper;

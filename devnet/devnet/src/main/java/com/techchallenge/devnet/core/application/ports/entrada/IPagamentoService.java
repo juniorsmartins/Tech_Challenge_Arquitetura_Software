@@ -13,13 +13,13 @@ public interface IPagamentoService {
     Pedido iniciarCobrancaDePagamento(Pedido pedido);
   }
 
-  interface PesquisarService {
+  interface GetService {
     Page<PagamentoDtoResponse> pesquisar(PagamentoFiltro filtro, Pageable paginacao);
 
     InputStreamResource buscarQrCodePorId(Long id);
   }
 
-  interface AtualizarService {
+  interface PutService {
     PagamentoDtoResponse confirmarPagamento(Long idPedido);
   }
 }

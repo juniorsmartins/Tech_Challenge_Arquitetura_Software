@@ -33,5 +33,10 @@ public class PedidoGetRepository implements IPedidoRepository.GetRepository {
   public List<Pedido> consultarPorIdDeCliente(final Long clienteId) {
     return this.repositoryJpa.findByClienteId(clienteId);
   }
+
+  @Override
+  public List<Pedido> listar() {
+    return this.repositoryJpa.findAll();
+  }
 }
 

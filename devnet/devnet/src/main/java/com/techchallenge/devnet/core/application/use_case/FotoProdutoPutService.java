@@ -19,7 +19,7 @@ import java.io.IOException;
 
 @Slf4j
 @Service
-public class FotoProdutoPutService implements IFotoProdutoService.AtualizarService {
+public class FotoProdutoPutService implements IFotoProdutoService.PutService {
 
   public static String diretorioDeFotos = "D:\\AreaEstudo\\PosTech-Fiap-Alura\\ArquiteturaDeSoftware\\TechChallenge-Soat\\devnet\\devnet\\foto_store\\";
 

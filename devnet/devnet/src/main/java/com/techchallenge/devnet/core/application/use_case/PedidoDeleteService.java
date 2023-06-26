@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
-public class PedidoDeleteService implements IPedidoService.DeletarService {
+public class PedidoDeleteService implements IPedidoService.DeleteService {
 
   @Autowired
   private IPedidoRepository.GetRepository pedidoGetRepository;
