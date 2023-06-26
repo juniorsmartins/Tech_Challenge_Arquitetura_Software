@@ -8,19 +8,19 @@ import org.springframework.data.domain.Pageable;
 
 public interface IPedidoService {
 
-  interface CadastrarService {
+  interface PostService {
     PedidoDtoResponse cadastrar(PedidoDtoRequest dtoRequest);
   }
 
-  interface AtualizarService {
+  interface PutService {
     PedidoDtoResponse atualizar(Long id, PedidoDtoRequest dtoRequest);
   }
 
-  interface PesquisarService {
+  interface GetService {
     Page<PedidoDtoResponse> pesquisar(PedidoFiltro filtro, Pageable paginacao);
   }
 
-  interface DeletarService {
+  interface DeleteService {
     void cancelarPorId(Long id);
   }
 }

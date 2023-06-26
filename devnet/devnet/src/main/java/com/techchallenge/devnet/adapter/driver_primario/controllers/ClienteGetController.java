@@ -29,7 +29,7 @@ import java.util.Optional;
 public final class ClienteGetController implements IClienteController.GetController {
 
   @Autowired
-  private IClienteService.PesquisarService service;
+  private IClienteService.GetService service;
 
   @Operation(summary = "Pesquisar Cliente", description = "Este recurso permite consultar Cliente por diversas propriedades com retorno paginado.")
   @ApiResponses(value = {

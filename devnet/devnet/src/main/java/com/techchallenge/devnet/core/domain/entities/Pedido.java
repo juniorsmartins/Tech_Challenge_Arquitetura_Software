@@ -8,6 +8,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -65,7 +66,7 @@ public final class Pedido extends AuditoriaDataJpa implements Serializable {
   @OneToMany(mappedBy = "pedido", cascade = {CascadeType.ALL})
   private List<ItemPedido> itensPedido = new ArrayList<>();
 
-  @OneToOne(mappedBy = "pedido", cascade = {CascadeType.ALL})
+  @OneToOne(mappedBy = "pedido", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
   private Pagamento pagamento;
 
   public void calcularPrecoTotal() {

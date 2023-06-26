@@ -27,7 +27,7 @@ import java.util.Optional;
 public final class FotoProdutoPutController implements IFotoProdutoController.PutController {
 
   @Autowired
-  private IFotoProdutoService.AtualizarService fotoProdutoService;
+  private IFotoProdutoService.PutService fotoProdutoService;
 
   @Operation(summary = "Atualizar Cliente", description = "Este recurso destina-se a atualizar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {

@@ -28,7 +28,7 @@ import java.util.Optional;
 public final class ClientePutController implements IClienteController.PutController {
 
   @Autowired
-  private IClienteService.AtualizarService service;
+  private IClienteService.PutService service;
 
   @Operation(summary = "Atualizar Cliente", description = "Este recurso destina-se a atualizar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {

@@ -4,7 +4,7 @@ import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.Indicadore
 
 public interface IAdminService {
 
-  interface PesquisarService {
+  interface GetService {
     IndicadoresDtoResponse buscarIndicadores();
   }
 }

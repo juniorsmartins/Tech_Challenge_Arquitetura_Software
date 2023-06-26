@@ -28,7 +28,7 @@ import java.util.Optional;
 public final class ProdutoPutController implements IProdutoController.PutController {
 
   @Autowired
-  private IProdutoService.AtualizarService service;
+  private IProdutoService.PutService service;
 
   @Operation(summary = "Atualizar Produto", description = "Este recurso destina-se a atualizar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {

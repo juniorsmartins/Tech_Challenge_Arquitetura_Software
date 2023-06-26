@@ -21,7 +21,7 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class FotoProdutoGetService implements IFotoProdutoService.PesquisarService {
+public class FotoProdutoGetService implements IFotoProdutoService.GetService {
 
   @Autowired
   private IMapper mapper;

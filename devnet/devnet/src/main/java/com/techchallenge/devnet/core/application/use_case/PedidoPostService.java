@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
-public class PedidoPostService implements IPedidoService.CadastrarService {
+public class PedidoPostService implements IPedidoService.PostService {
 
   @Autowired
   private IMapper mapper;

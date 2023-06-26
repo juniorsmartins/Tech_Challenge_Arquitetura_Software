@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ClientePostService implements IClienteService.CadastrarService {
+public class ClientePostService implements IClienteService.PostService {
 
   @Autowired
   private IMapper mapper;

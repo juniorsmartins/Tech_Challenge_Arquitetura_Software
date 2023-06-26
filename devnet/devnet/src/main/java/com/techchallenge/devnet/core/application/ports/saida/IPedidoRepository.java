@@ -20,6 +20,8 @@ public interface IPedidoRepository {
     Optional<Pedido> consultarPorId(Long id);
 
     List<Pedido> consultarPorIdDeCliente(Long idCliente);
+
+    List<Pedido> listar();
   }
 }
 

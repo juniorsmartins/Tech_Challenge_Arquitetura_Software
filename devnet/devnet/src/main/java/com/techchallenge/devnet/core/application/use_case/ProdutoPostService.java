@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
-public class ProdutoPostService implements IProdutoService.CadastrarService {
+public class ProdutoPostService implements IProdutoService.PostService {
 
   @Autowired
   private IMapper mapper;

@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
-public class ProdutoPutService implements IProdutoService.AtualizarService {
+public class ProdutoPutService implements IProdutoService.PutService {
 
   @Autowired
   private IMapper mapper;

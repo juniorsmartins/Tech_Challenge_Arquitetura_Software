@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public final class PagamentoPutController implements IPagamentoController.PutController {
 
   @Autowired
-  private IPagamentoService.AtualizarService atualizarService;
+  private IPagamentoService.PutService putService;
 
   @Operation(summary = "Atualizar Cliente", description = "Este recurso destina-se a atualizar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {
@@ -38,7 +38,7 @@ public final class PagamentoPutController implements IPagamentoController.PutCon
     @Parameter(name = "id", description = "Chave de identificação", example = "22", required = true)
     @PathVariable(name = "idPedido") final Long idPedido) {
 
-    var response = this.atualizarService.confirmarPagamento(idPedido);
+    var response = this.putService.confirmarPagamento(idPedido);
 
     return ResponseEntity
       .ok()

@@ -29,7 +29,7 @@ import java.util.Optional;
 public final class ProdutoGetController implements IProdutoController.GetController {
 
   @Autowired
-  private IProdutoService.PesquisarService service;
+  private IProdutoService.GetService service;
 
   @Operation(summary = "Pesquisar Produto", description = "Este recurso permite consultar Produto por diversas propriedades com retorno paginado.")
   @ApiResponses(value = {

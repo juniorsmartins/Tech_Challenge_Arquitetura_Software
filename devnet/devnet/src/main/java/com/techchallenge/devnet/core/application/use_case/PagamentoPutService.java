@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
-public class PagamentoPutService implements IPagamentoService.AtualizarService {
+public class PagamentoPutService implements IPagamentoService.PutService {
 
   @Autowired
   private IMapper mapper;

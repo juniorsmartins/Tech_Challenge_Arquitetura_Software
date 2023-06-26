@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public final class AdminGetController implements IAdminController.GetController {
 
   @Autowired
-  private IAdminService.PesquisarService adminPesquisarService;
+  private IAdminService.GetService adminGetService;
 
   @Operation(summary = "Pesquisar Cliente", description = "Este recurso permite consultar Cliente por diversas propriedades com retorno paginado.")
   @ApiResponses(value = {
@@ -36,7 +36,7 @@ public final class AdminGetController implements IAdminController.GetController 
   @Override
   public ResponseEntity<IndicadoresDtoResponse> buscarIndicadores() {
 
-    var response = this.adminPesquisarService.buscarIndicadores();
+    var response = this.adminGetService.buscarIndicadores();
 
     return ResponseEntity
       .ok()
