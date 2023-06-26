@@ -44,5 +44,26 @@ public final class CopaPutController implements ICopaController.PutController {
       .ok()
       .body(response);
   }
+
+  @Operation(summary = "Atualizar Cliente", description = "Este recurso destina-se a atualizar pelo identificador exclusivo (ID).")
+  @ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "OK - requisição bem sucedida e com retorno.", content = {@Content(mediaType = "application/json")}),
+    @ApiResponse(responseCode = "400", description = "Bad Request - requisição mal feita.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))}),
+    @ApiResponse(responseCode = "401", description = "Unauthorized: cliente não autenticado.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))}),
+    @ApiResponse(responseCode = "403", description = "Forbidden - cliente autenticado, mas sem autorização para acessar recurso.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))}),
+    @ApiResponse(responseCode = "404", description = "Not Found - recurso não encontrado no banco de dados.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))}),
+    @ApiResponse(responseCode = "500", description = "Internal Server Error - situação inesperada no servidor.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))})
+  })
+  @Override
+  public ResponseEntity<PedidoDtoResponse> confirmarPedidoFinalizado(
+    @Parameter(name = "id", description = "Chave de identificação", example = "22", required = true)
+    @PathVariable(name = "idPedido") final Long idPedido) {
+
+    var response = this.copaAtualizarService.confirmarPedidoFinalizado(idPedido);
+
+    return ResponseEntity
+      .ok()
+      .body(response);
+  }
 }
 

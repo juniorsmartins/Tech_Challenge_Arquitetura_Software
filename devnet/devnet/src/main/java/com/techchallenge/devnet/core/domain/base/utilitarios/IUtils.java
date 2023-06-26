@@ -13,5 +13,7 @@ public interface IUtils {
   Pedido notificarPedidoEmPreparacao(Pedido pedido);
 
   Pedido notificarPedidoPronto(Pedido pedido);
+
+  Pedido notificarPedidoFinalizado(Pedido pedido);
 }
 

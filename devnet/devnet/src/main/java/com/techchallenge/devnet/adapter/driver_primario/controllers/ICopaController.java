@@ -9,6 +9,9 @@ public interface ICopaController {
   interface PutController {
     @PutMapping(path = "/status-pronto/{idPedido}")
     ResponseEntity<PedidoDtoResponse> confirmarPedidoPronto(Long idPedido);
+
+    @PutMapping(path = "/status-finalizado/{idPedido}")
+    ResponseEntity<PedidoDtoResponse> confirmarPedidoFinalizado(Long idPedido);
   }
 }
 
