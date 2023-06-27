@@ -158,6 +158,7 @@ Além dos eventos, o Event Storming também pode incluir outras informações re
 > - [x] Atualizar FotoProduto;
 > - [x] Pesquisar FotoProduto;
 > - [x] Deletar FotoProduto;
+> - [x] Atualizar Copa;
 > - [x] Pesquisar Admin;
 > - [x] Enviar Email;
 
