@@ -84,6 +84,8 @@ Ao adotar uma Linguagem Ubíqua, os termos técnicos e de negócio são definido
 
 A Linguagem Ubíqua permeia todos os artefatos do projeto, incluindo o código-fonte, os testes, a documentação e até mesmo as discussões em reuniões. Ela ajuda a alinhar a visão do domínio entre todas as partes interessadas e permite que o modelo de domínio seja expresso de forma clara e concisa em todo o processo de desenvolvimento.
 
+![Acesso ao dicionário!]([https://github.com/images/logo.png](https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/dicionario))
+
 
 #### Event Storming:
 
