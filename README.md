@@ -1,10 +1,21 @@
 # Tech_Challenge
 
 ```
+
 Nome: Tech-Challenge-DevNet;
 
+FASE 1
 Data de Início: 05/2023;
 Previsão de Término: 06/2023;
+
+FASE 2
+Data de Início: 07/2023;
+Previsão de Término: 08/2023;
+
+FASE 3
+FASE 4
+FASE 5
+
 ```
 Descrição: aplicação desenvolvida para compor nota no processo avaliativo da pós-graduação em Arquitetura de Software na Fiap/Alura. E visa construir simulacro de app para uma Lanchonete, nomeada DevNet. 
 
@@ -27,6 +38,7 @@ Descrição: aplicação desenvolvida para compor nota no processo avaliativo da
     4. Ferramentas;
 
 3. Documentação de Utilização do Projeto;
+    1. Documentação Swagger/OpenAPI;
 
 ```
 
@@ -43,7 +55,7 @@ Ao adotar uma Linguagem Ubíqua, os termos técnicos e de negócio são definido
 
 A Linguagem Ubíqua permeia todos os artefatos do projeto, incluindo o código-fonte, os testes, a documentação e até mesmo as discussões em reuniões. Ela ajuda a alinhar a visão do domínio entre todas as partes interessadas e permite que o modelo de domínio seja expresso de forma clara e concisa em todo o processo de desenvolvimento.
 
-[Clique aqui para ver o dicionário](https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/DICIONARIO.md){:target="_blank"}
+[Clique aqui para ver o dicionário](https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/DICIONARIO.md)
 
 
 #### Linguagem Pictográfica:
@@ -109,18 +121,27 @@ Além dos eventos, o Event Storming também pode incluir outras informações re
 
 ### Documentação de Desenvolvimento do Projeto
 
+#### Diagramas
+
+##### Diagrama Entidade Relacionamento - DER
+<img width=800 src=>
+
 #### Tecnologias:
 
 1. Java (17 LTS);
 2. Spring Boot (v3.1.0);
-3. PostgreSQL;
-4. Bean Validation;
-5. Spring Data JPA;
-6. Hibernate Envers;
-7. Model Mapper (v3.1.1);
-8. Commons Lang3;
-9. Lombok;
-10. DevTools;
+3. Spring Mail;
+4. Spring Data JPA;
+5. Spring Doc;
+6. Bean Validation;
+7. Hibernate Envers;
+8. Model Mapper (v3.1.1);
+9. Commons Lang3;
+10. Lombok;
+11. DevTools;
+12. Zxing (2.0.0);
+13. PostgreSQL;
+14. JavaFaker (1.0.2);
 
 ### Funcionalidades: 
 
@@ -133,10 +154,17 @@ Além dos eventos, o Event Storming também pode incluir outras informações re
 > - [x] Pesquisar Produto;
 > - [x] Deletar Produto;
 > - [x] Cadastrar Pedido;
-> - [ ] Atualizar Pedido;
+> - [x] Atualizar Pedido;
 > - [x] Pesquisar Pedido;
 > - [x] Deletar Pedido;
-
+> - [x] Cadastrar Pagamento;
+> - [x] Atualizar Pagamento;
+> - [x] Pesquisar Pagamento;
+> - [x] Atualizar FotoProduto;
+> - [x] Pesquisar FotoProduto;
+> - [x] Deletar FotoProduto;
+> - [x] Pesquisar Admin;
+> - [x] Enviar Email;
 
 #### Ferramentas:
 
@@ -151,3 +179,11 @@ Além dos eventos, o Event Storming também pode incluir outras informações re
 9. YouTube (pesquisa);
 10. Google (pesquisa);
 
+
+### Documentação de Utilização do Projeto;
+
+#### Documentação
+
+[Clique aqui para ver a documentação via Swagger/OpenAPI](http://localhost:8080/swagger-ui/index.html#/)
+
+Obs: rode a aplicação antes de acessar a documentação.
