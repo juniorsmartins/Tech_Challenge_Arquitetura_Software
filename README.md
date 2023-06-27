@@ -12,10 +12,11 @@ Descrição: aplicação desenvolvida para compor nota no processo avaliativo da
 ## Índice
 
 ```
+
 1. Documentação de Arquitetura do Projeto
-    1. Linguagem Pictográfica (Domain Storytelling);
-    2. Domínio (Subdomínio Principal, Subdomínio Genérico e Subdomínio de Suporte);
-    3. Linguagem Ubíqua;
+    1. Linguagem Ubíqua;
+    2. Linguagem Pictográfica (Domain Storytelling);
+    3. Domínio (Subdomínio Principal, Subdomínio Genérico e Subdomínio de Suporte);
     4. Event Storming;
     5. Bounded Context e Context Maps;
 
@@ -24,11 +25,9 @@ Descrição: aplicação desenvolvida para compor nota no processo avaliativo da
     2. Tecnologias;
     3. Funcionalidades;
     4. Ferramentas;
-    5.
 
-3. Documentação de Infraestrutura do Projeto;
+3. Documentação de Utilização do Projeto;
 
-4. Documentação de Utilização do Projeto;
 ```
 
 ### Documentação de Arquitetura do Projeto
