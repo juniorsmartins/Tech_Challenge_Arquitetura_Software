@@ -1,10 +1,21 @@
 # Tech_Challenge
 
 ```
+
 Nome: Tech-Challenge-DevNet;
 
+FASE 1
 Data de Início: 05/2023;
 Previsão de Término: 06/2023;
+
+FASE 2
+Data de Início: 07/2023;
+Previsão de Término: 08/2023;
+
+FASE 3
+FASE 4
+FASE 5
+
 ```
 Descrição: aplicação desenvolvida para compor nota no processo avaliativo da pós-graduação em Arquitetura de Software na Fiap/Alura. E visa construir simulacro de app para uma Lanchonete, nomeada DevNet. 
 
@@ -12,26 +23,39 @@ Descrição: aplicação desenvolvida para compor nota no processo avaliativo da
 ## Índice
 
 ```
+
 1. Documentação de Arquitetura do Projeto
-    1. Linguagem Pictográfica (Domain Storytelling);
-    2. Domínio (Subdomínio Principal, Subdomínio Genérico e Subdomínio de Suporte);
-    3. Linguagem Ubíqua;
+    1. Linguagem Ubíqua;
+    2. Linguagem Pictográfica (Domain Storytelling);
+    3. Domínio (Subdomínio Principal, Subdomínio Genérico e Subdomínio de Suporte);
     4. Event Storming;
     5. Bounded Context e Context Maps;
 
 2. Documentação de Desenvolvimento do Projeto;
-    1. Diagramas;
-    2. Tecnologias;
-    3. Funcionalidades;
-    4. Ferramentas;
-    5.
+    1. Tecnologias;
+    2. Funcionalidades;
+    3. Ferramentas;
+    4. Diagramas;
 
-3. Documentação de Infraestrutura do Projeto;
+3. Documentação de Utilização do Projeto;
+    1. Documentação Swagger/OpenAPI;
 
-4. Documentação de Utilização do Projeto;
 ```
 
 ### Documentação de Arquitetura do Projeto
+
+
+#### Linguagem Ubíqua:
+
+A Linguagem Ubíqua (Ubiquitous Language) é um conceito fundamental que envolve o uso de uma linguagem comum e compartilhada entre todos os membros de uma equipe, incluindo especialistas de domínio, desenvolvedores, analistas e demais envolvidos no desenvolvimento de software.
+
+A Linguagem Ubíqua é essencial para garantir uma comunicação efetiva e precisa entre todas as partes envolvidas no projeto, eliminando ambiguidades e mal-entendidos. Ela busca estabelecer um vocabulário comum que reflita as nuances e os conceitos do domínio em questão.
+
+Ao adotar uma Linguagem Ubíqua, os termos técnicos e de negócio são definidos de forma colaborativa, levando em consideração a compreensão dos especialistas de domínio. Essa linguagem compartilhada é utilizada tanto na documentação do projeto quanto nas conversas diárias entre os membros da equipe.
+
+A Linguagem Ubíqua permeia todos os artefatos do projeto, incluindo o código-fonte, os testes, a documentação e até mesmo as discussões em reuniões. Ela ajuda a alinhar a visão do domínio entre todas as partes interessadas e permite que o modelo de domínio seja expresso de forma clara e concisa em todo o processo de desenvolvimento.
+
+[Clique aqui para ver o dicionário](https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/DICIONARIO.md)
 
 
 #### Linguagem Pictográfica:
@@ -74,19 +98,6 @@ Subdomínio de Suporte (Supporting Subdomain): O subdomínio de suporte engloba 
 <img width=600 src=Documentacao/DevNet-DiagramaDeDomínios.png>
 
 
-#### Linguagem Ubíqua:
-
-A Linguagem Ubíqua (Ubiquitous Language) é um conceito fundamental que envolve o uso de uma linguagem comum e compartilhada entre todos os membros de uma equipe, incluindo especialistas de domínio, desenvolvedores, analistas e demais envolvidos no desenvolvimento de software.
-
-A Linguagem Ubíqua é essencial para garantir uma comunicação efetiva e precisa entre todas as partes envolvidas no projeto, eliminando ambiguidades e mal-entendidos. Ela busca estabelecer um vocabulário comum que reflita as nuances e os conceitos do domínio em questão.
-
-Ao adotar uma Linguagem Ubíqua, os termos técnicos e de negócio são definidos de forma colaborativa, levando em consideração a compreensão dos especialistas de domínio. Essa linguagem compartilhada é utilizada tanto na documentação do projeto quanto nas conversas diárias entre os membros da equipe.
-
-A Linguagem Ubíqua permeia todos os artefatos do projeto, incluindo o código-fonte, os testes, a documentação e até mesmo as discussões em reuniões. Ela ajuda a alinhar a visão do domínio entre todas as partes interessadas e permite que o modelo de domínio seja expresso de forma clara e concisa em todo o processo de desenvolvimento.
-
-[Clique aqui para ver o dicionário](dicionario){:target="_blank"}
-
-
 #### Event Storming:
 
 No contexto do Domain-Driven Design (DDD), Event Storming é uma técnica de modelagem colaborativa e visual que visa explorar e entender o domínio de um sistema por meio da identificação de eventos de domínio significativos. É uma ferramenta poderosa para capturar conhecimento compartilhado e colaborar com as partes interessadas, incluindo especialistas de domínio, desenvolvedores e outros membros da equipe.
@@ -114,14 +125,18 @@ Além dos eventos, o Event Storming também pode incluir outras informações re
 
 1. Java (17 LTS);
 2. Spring Boot (v3.1.0);
-3. PostgreSQL;
-4. Bean Validation;
-5. Spring Data JPA;
-6. Hibernate Envers;
-7. Model Mapper (v3.1.1);
-8. Commons Lang3;
-9. Lombok;
-10. DevTools;
+3. Spring Mail;
+4. Spring Data JPA;
+5. Spring Doc;
+6. Bean Validation;
+7. Hibernate Envers;
+8. Model Mapper (v3.1.1);
+9. Commons Lang3;
+10. Lombok;
+11. DevTools;
+12. Zxing (2.0.0);
+13. PostgreSQL;
+14. JavaFaker (1.0.2);
 
 ### Funcionalidades: 
 
@@ -134,10 +149,18 @@ Além dos eventos, o Event Storming também pode incluir outras informações re
 > - [x] Pesquisar Produto;
 > - [x] Deletar Produto;
 > - [x] Cadastrar Pedido;
-> - [ ] Atualizar Pedido;
+> - [x] Atualizar Pedido;
 > - [x] Pesquisar Pedido;
 > - [x] Deletar Pedido;
-
+> - [x] Cadastrar Pagamento;
+> - [x] Atualizar Pagamento;
+> - [x] Pesquisar Pagamento;
+> - [x] Atualizar FotoProduto;
+> - [x] Pesquisar FotoProduto;
+> - [x] Deletar FotoProduto;
+> - [x] Atualizar Copa;
+> - [x] Pesquisar Admin;
+> - [x] Enviar Email;
 
 #### Ferramentas:
 
@@ -152,3 +175,16 @@ Além dos eventos, o Event Storming também pode incluir outras informações re
 9. YouTube (pesquisa);
 10. Google (pesquisa);
 
+#### Diagramas
+
+##### Diagrama Entidade Relacionamento - DER
+<img width=800 src=https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/BancoDeDados-27-06-23.png>
+
+
+### Documentação de Utilização do Projeto;
+
+#### Documentação
+
+[Clique aqui para ver a documentação via Swagger/OpenAPI](http://localhost:8080/swagger-ui/index.html#/)
+
+Obs: rode a aplicação antes de acessar a documentação.
