@@ -1,6 +1,8 @@
 DICIONÁRIO (Linguagem Ubíqua)
 
-Atores
+
+ATORES
+
 - Cliente: um cliente é uma pessoa ou entidade que utiliza ou adquire produtos, serviços ou experiências de uma empresa ou provedor. No contexto de negócios, o termo "cliente" refere-se a alguém que compra ou utiliza os produtos ou serviços oferecidos por uma empresa em troca de pagamento.
 
 - Garçon: um garçon é um profissional que trabalha em restaurantes, bares, hotéis e outros estabelecimentos de alimentação e bebidas. Sua principal função é atender e servir os clientes, proporcionando uma experiência agradável durante sua refeição.
@@ -14,7 +16,9 @@ Atores
 - Sistema: um conjunto de programas de computador inter-relacionados, dados e documentação que trabalham juntos para realizar uma função ou conjunto de funções específicas. Ele é projetado para resolver problemas ou atender às necessidades de usuários ou organizações.
 
 
-Objetos de Trabalho
+OBJETOS DE TRABALHO
+
+Físicos:
 
 - Mesa: uma mesa é um móvel com uma superfície plana e horizontal, geralmente apoiada em pernas ou suportes, projetado para permitir que as pessoas coloquem objetos sobre ela. É um item comumente utilizado em casas, escritórios, escolas, restaurantes e vários outros ambientes.
 
@@ -54,8 +58,18 @@ Objetos de Trabalho
 
 - Nota Fiscal e Troco: é um documento fiscal emitido após a realização de uma venda de bens ou prestação de serviços. É utilizada para registrar a transação, identificar as partes envolvidas, descrever os itens ou serviços adquiridos, e fornecer informações relevantes para fins fiscais e contábeis. E o troco é o valor em dinheiro que é devolvido ao cliente quando ele paga por um produto ou serviço com uma quantia maior do que o valor total da compra.
 
+Digitais:
 
-* Interações:
+- Categoria: a categoria de produtos refere-se à classificação ou agrupamento dos itens do cardápio em categorias distintas com base em características semelhantes. Essa classificação é feita para facilitar a navegação do cliente pelo menu e auxiliar na organização dos itens oferecidos.
+
+- FormaPagamento: são as opções disponíveis para os clientes efetuarem o pagamento pelos produtos ou serviços adquiridos. As lanchonetes geralmente oferecem diferentes métodos de pagamento para atender às preferências e necessidades dos clientes.
+- StatusPedido: refere-se à etapa em que o pedido se encontra durante o processo de atendimento. É uma maneira de acompanhar e comunicar o progresso do pedido desde o momento em que é feito até o momento em que é entregue ao cliente.
+
+- StatusPagamento: refere-se ao estágio em que a transação financeira relacionada ao pedido se encontra. Fornece informações sobre o status da conclusão do pagamento e pode variar dependendo do método de pagamento usado e das políticas da lanchonete.
+
+- QRCode: é um tipo de código de barras bidimensional que pode ser escaneado por dispositivos eletrônicos, como smartphones e tablets, por meio de câmeras. Os QR Codes são amplamente usados em diversas áreas, como marketing, publicidade, varejo, transporte, bilhetes de eventos, entre outros. E oferecem maneira conveniente de fornecer acesso rápido a informações ou executar ações (por exemplo: pagamento).
+
+Interações:
 
 - Pedido Falado: refere-se à forma como o cliente faz o pedido de sua refeição ou itens do cardápio através da comunicação oral, geralmente diretamente ao atendente no balcão ou ao garçom que está atendendo as mesas.
 
@@ -64,4 +78,5 @@ Objetos de Trabalho
 - Campainha de Garçon: é um dispositivo utilizado em restaurantes, lanchonetes e estabelecimentos de serviços de alimentação para chamar a assistência de um garçom de forma rápida e conveniente. É uma forma de comunicação, proporcionando um meio fácil de chamar a atenção dos garçons quando necessário.
 
 - Email: é a abreviação de "eletronic mail" ou "correio eletrônico" em português. Trata-se de um meio de comunicação eletrônico que permite o envio, recebimento e armazenamento de mensagens digitais entre pessoas ou organizações através da internet.
+
 
