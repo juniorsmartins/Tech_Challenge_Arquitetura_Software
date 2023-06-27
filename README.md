@@ -32,10 +32,10 @@ Descrição: aplicação desenvolvida para compor nota no processo avaliativo da
     5. Bounded Context e Context Maps;
 
 2. Documentação de Desenvolvimento do Projeto;
-    1. Diagramas;
-    2. Tecnologias;
-    3. Funcionalidades;
-    4. Ferramentas;
+    1. Tecnologias;
+    2. Funcionalidades;
+    3. Ferramentas;
+    4. Diagramas;
 
 3. Documentação de Utilização do Projeto;
     1. Documentação Swagger/OpenAPI;
@@ -121,11 +121,6 @@ Além dos eventos, o Event Storming também pode incluir outras informações re
 
 ### Documentação de Desenvolvimento do Projeto
 
-#### Diagramas
-
-##### Diagrama Entidade Relacionamento - DER
-<img width=800 src=>
-
 #### Tecnologias:
 
 1. Java (17 LTS);
@@ -178,6 +173,11 @@ Além dos eventos, o Event Storming também pode incluir outras informações re
 8. ChatGPT (pesquisa);
 9. YouTube (pesquisa);
 10. Google (pesquisa);
+
+#### Diagramas
+
+##### Diagrama Entidade Relacionamento - DER
+<img width=800 src=https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/BancoDeDados-27-06-23.png>
 
 
 ### Documentação de Utilização do Projeto;
