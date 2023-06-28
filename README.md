@@ -185,6 +185,6 @@ Além dos eventos, o Event Storming também pode incluir outras informações re
 
 #### Documentação
 
-[Clique aqui para ver a documentação via Swagger/OpenAPI](http://localhost:8080/swagger-ui/index.html#/)
+[Clique para ver a documentação via Swagger/OpenAPI](http://localhost:8080/swagger-ui/index.html#/)
 
 Obs: rode a aplicação antes de acessar a documentação.
