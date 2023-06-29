@@ -108,7 +108,7 @@ Além dos eventos, o Event Storming também pode incluir outras informações re
 
 > Gestão de Clientes
 
-<img width=600 src=Documentacao/EventStorming-CadastroDeClientes.png>
+<img width=600 src=Documentacao/EventStorming-CadastroDeClientes-29-06.png>
 
 > Gestão de Cardápio (produtos)
 
