@@ -178,7 +178,7 @@ Além dos eventos, o Event Storming também pode incluir outras informações re
 #### Diagramas
 
 ##### Diagrama Entidade Relacionamento - DER
-<img width=800 src=https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/BancoDeDados-27-06-23.png>
+<img width=800 src=https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/BancoDeDados-29-06-23.png>
 
 
 ### Documentação de Utilização do Projeto;
