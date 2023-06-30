@@ -124,6 +124,10 @@ Além dos eventos, o Event Storming também pode incluir outras informações re
 
 <img width=600 src=Documentacao/EventStorming-CadastroDePedidos-30-06-23.png>
 
+> Administrativo
+
+<img width=600 src=Documentacao/EventStorming-AcessoAdministrativo-30-06-23.png>
+
 
 ### Documentação de Desenvolvimento do Projeto
 
