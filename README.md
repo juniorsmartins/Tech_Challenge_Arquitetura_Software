@@ -39,6 +39,10 @@ Descrição: aplicação desenvolvida para compor nota no processo avaliativo da
 
 3. Documentação de Utilização do Projeto;
     1. Documentação Swagger/OpenAPI;
+    2. EndPoints e formato de Json;
+    3. Arquivo de requisições do Postman;
+
+4. Autoria.
 
 ```
 
@@ -110,7 +114,7 @@ Além dos eventos, o Event Storming também pode incluir outras informações re
 
 <img width=600 src=Documentacao/EventStorming-CadastroDeClientes-30-06-23.png>
 
-> Produtos
+> Produto
 
 <img width=600 src=Documentacao/EventStorming-CadastroDeProdutos-30-06-23.png>
 
@@ -188,3 +192,7 @@ Além dos eventos, o Event Storming também pode incluir outras informações re
 [Clique para ver a documentação via Swagger/OpenAPI](http://localhost:8080/swagger-ui/index.html#/)
 
 Obs: rode a aplicação antes de acessar a documentação.
+
+### Autoria
+
+[Junior Martins](https://www.linkedin.com/in/juniorsmartins/)
