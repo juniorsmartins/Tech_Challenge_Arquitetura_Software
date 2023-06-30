@@ -110,6 +110,8 @@ O Event Storming é realizado em uma sessão de workshop envolvendo todas as par
 
 Além dos eventos, o Event Storming também pode incluir outras informações relevantes, como comandos, agregados, políticas, restrições e outras anotações que ajudam a capturar o conhecimento do domínio e a compreensão do sistema.
 
+[Link para Miro](https://miro.com/app/board/uXjVMG0U7lM=/)
+
 > Cliente
 
 <img width=600 src=Documentacao/EventStorming-CadastroDeClientes-30-06-23.png>
