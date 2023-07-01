@@ -29,7 +29,7 @@ import java.util.Optional;
 @Tag(name = "PagamentoGetController", description = "Adaptador para buscar recurso Pagamento.")
 @RestController
 @RequestMapping(path = "/api/v1/pagamentos")
-public final class PagamentoGetController implements IPagamentoController.GetController {
+public final class PagamentoGetController implements IPagamentoControllerPort.GetController {
 
   @Autowired
   private IPagamentoServicePort.GetService service;

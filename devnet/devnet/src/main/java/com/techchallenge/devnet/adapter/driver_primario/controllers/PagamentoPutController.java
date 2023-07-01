@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "PagamentoPutController", description = "Adaptador para atualizar recurso Pagamento.")
 @RestController
 @RequestMapping(path = "/api/v1/pagamentos")
-public final class PagamentoPutController implements IPagamentoController.PutController {
+public final class PagamentoPutController implements IPagamentoControllerPort.PutController {
 
   @Autowired
   private IPagamentoServicePort.PutService putService;

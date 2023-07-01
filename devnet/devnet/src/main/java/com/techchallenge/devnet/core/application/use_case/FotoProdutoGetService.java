@@ -1,14 +1,12 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver_primario.dtos.ImagemDto;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.FotoProdutoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.IFotoProdutoService;
-import com.techchallenge.devnet.core.application.ports.saida.IFotoProdutoRepository;
+import com.techchallenge.devnet.core.application.ports.entrada.IFotoProdutoServicePort;
+import com.techchallenge.devnet.core.application.ports.saida.IFotoProdutoRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.ILocalFotoProdutoArmazemService;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.FotoProdutoNaoEncontradoException;
-import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
-import com.techchallenge.devnet.core.domain.models.FotoProduto;
+import com.techchallenge.devnet.core.domain.models.FotoProdutoModel;
+import com.techchallenge.devnet.core.domain.models.ImagemModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -21,23 +19,19 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class FotoProdutoGetService implements IFotoProdutoService.GetService {
+public class FotoProdutoGetService implements IFotoProdutoServicePort.GetService {
 
   @Autowired
-  private IMapper mapper;
-
-  @Autowired
-  private IFotoProdutoRepository.GetRepository fotoProdutoGetRepository;
+  private IFotoProdutoRepositoryPort.GetRepository fotoProdutoGetRepository;
 
   @Autowired
   private ILocalFotoProdutoArmazemService localFotoProdutoArmazemService;
 
   @Transactional(readOnly = true)
   @Override
-  public FotoProdutoDtoResponse consultarPorId(final Long id) {
+  public FotoProdutoModel consultarPorId(final Long id) {
 
     return this.fotoProdutoGetRepository.consultarPorId(id)
-      .map(fotoProduto -> this.mapper.converterEntidadeParaDtoResponse(fotoProduto, FotoProdutoDtoResponse.class))
       .orElseThrow(() -> {
         log.info(String.format(MensagemPadrao.FOTO_PRODUTO_NAO_ENCONTRADO, id));
         throw new FotoProdutoNaoEncontradoException(id);
@@ -46,7 +40,7 @@ public class FotoProdutoGetService implements IFotoProdutoService.GetService {
 
   @Transactional(readOnly = true)
   @Override
-  public ImagemDto consultarImagemPorId(final Long id, final String acceptHeader) {
+  public ImagemModel consultarImagemPorId(final Long id, final String acceptHeader) {
 
     return this.fotoProdutoGetRepository.consultarPorId(id)
       .map(fotoProduto -> {
@@ -59,12 +53,12 @@ public class FotoProdutoGetService implements IFotoProdutoService.GetService {
 
         var imagem = this.localFotoProdutoArmazemService.recuperar(fotoProduto.getNome());
 
-        var dtoImagem = ImagemDto.builder()
+        var imagemModel = ImagemModel.builder()
           .imagem(new InputStreamResource(imagem))
           .mediaTypeFoto(MediaType.parseMediaType(fotoProduto.getTipo()))
           .build();
 
-        return dtoImagem;
+        return imagemModel;
       })
       .orElseThrow(() -> {
         log.info(String.format(MensagemPadrao.FOTO_PRODUTO_NAO_ENCONTRADO, id));
@@ -72,7 +66,7 @@ public class FotoProdutoGetService implements IFotoProdutoService.GetService {
       });
   }
 
-  private void verificarCompatibilidadeDeTiposDeImagens(FotoProduto fotoProduto, String acceptHeader) throws HttpMediaTypeNotAcceptableException {
+  private void verificarCompatibilidadeDeTiposDeImagens(FotoProdutoModel fotoProduto, String acceptHeader) throws HttpMediaTypeNotAcceptableException {
 
     MediaType mediaTypeFoto = MediaType.parseMediaType(fotoProduto.getTipo());
     List<MediaType> mediaTypesAceitas = MediaType.parseMediaTypes(acceptHeader);

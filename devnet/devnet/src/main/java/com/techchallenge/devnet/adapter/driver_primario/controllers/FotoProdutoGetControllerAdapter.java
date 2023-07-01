@@ -1,7 +1,8 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
+import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.FotoProdutoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.IFotoProdutoService;
+import com.techchallenge.devnet.core.application.ports.entrada.IFotoProdutoServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.FotoProdutoNaoEncontradoException;
 import io.swagger.v3.oas.annotations.Operation;
@@ -19,13 +20,18 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 @Tag(name = "FotoProdutoGetController", description = "Adaptador para buscar recurso FotoProduto.")
 @RestController
 @RequestMapping(path = "/api/v1/fotos")
-public final class FotoProdutoGetController implements IFotoProdutoController.GetController {
+public final class FotoProdutoGetControllerAdapter implements IFotoProdutoControllerPort.GetController {
 
   @Autowired
-  private IFotoProdutoService.GetService fotoProdutoGetService;
+  private IMapper mapper;
+
+  @Autowired
+  private IFotoProdutoServicePort.GetService fotoProdutoGetService;
 
   @Operation(summary = "Pesquisar FotoProduto", description = "Este recurso permite consultar FotoProduto por diversas propriedades com retorno paginado.")
   @ApiResponses(value = {
@@ -41,7 +47,10 @@ public final class FotoProdutoGetController implements IFotoProdutoController.Ge
     @Parameter(name = "id", description = "Chave de identificação", example = "22", required = true)
     @PathVariable(name = "id") final Long id) {
 
-    var response = this.fotoProdutoGetService.consultarPorId(id);
+    var response = Optional.of(id)
+      .map(codigo -> this.fotoProdutoGetService.consultarPorId(codigo))
+      .map(model -> this.mapper.converterOrigemParaDestino(model, FotoProdutoDtoResponse.class))
+      .orElseThrow();
 
     return ResponseEntity
       .ok()
@@ -61,12 +70,12 @@ public final class FotoProdutoGetController implements IFotoProdutoController.Ge
   public ResponseEntity<InputStreamResource> consultarImagemPorId(@PathVariable(name = "id") final Long id,
                                                       @RequestHeader(name = "accept") final String acceptHeader) {
     try {
-      var imagemDto = this.fotoProdutoGetService.consultarImagemPorId(id, acceptHeader);
+      var imagemModel = this.fotoProdutoGetService.consultarImagemPorId(id, acceptHeader);
 
       return ResponseEntity
         .ok()
-        .contentType(imagemDto.getMediaTypeFoto())
-        .body(imagemDto.getImagem());
+        .contentType(imagemModel.getMediaTypeFoto())
+        .body(imagemModel.getImagem());
 
     } catch (FotoProdutoNaoEncontradoException fotoProdutoNaoEncontradoException) {
 

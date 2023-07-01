@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
-import com.techchallenge.devnet.core.application.ports.entrada.IFotoProdutoService;
+import com.techchallenge.devnet.core.application.ports.entrada.IFotoProdutoServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "FotoProdutoDeleteController", description = "Adaptador para apagar recurso FotoProduto.")
 @RestController
 @RequestMapping(path = "/api/v1/fotos")
-public final class FotoProdutoDeleteController implements IFotoProdutoController.DeleteController {
+public final class FotoProdutoDeleteController implements IFotoProdutoControllerPort.DeleteController {
 
   @Autowired
-  private IFotoProdutoService.DeleteService fotoProdutoDeleteService;
+  private IFotoProdutoServicePort.DeleteService fotoProdutoDeleteService;
 
   @Operation(summary = "Deletar Cliente", description = "Este recurso destina-se a apagar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {

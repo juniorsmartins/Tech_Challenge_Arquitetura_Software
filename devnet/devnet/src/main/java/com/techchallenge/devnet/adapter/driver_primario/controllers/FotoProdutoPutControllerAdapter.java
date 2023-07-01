@@ -1,9 +1,11 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
+import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.FotoProdutoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.FotoProdutoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.IFotoProdutoService;
+import com.techchallenge.devnet.core.application.ports.entrada.IFotoProdutoServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
+import com.techchallenge.devnet.core.domain.models.FotoProdutoArquivo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -21,13 +23,16 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.util.Optional;
 
-@Tag(name = "FotoProdutoPutController", description = "Adaptador para atualizar recurso FotoProduto.")
+@Tag(name = "FotoProdutoPutControllerAdapter", description = "Adaptador para atualizar recurso FotoProduto.")
 @RestController
 @RequestMapping(path = "/api/v1/fotos")
-public final class FotoProdutoPutController implements IFotoProdutoController.PutController {
+public final class FotoProdutoPutControllerAdapter implements IFotoProdutoControllerPort.PutController {
 
   @Autowired
-  private IFotoProdutoService.PutService fotoProdutoService;
+  private IMapper mapper;
+
+  @Autowired
+  private IFotoProdutoServicePort.PutService fotoProdutoService;
 
   @Operation(summary = "Atualizar Cliente", description = "Este recurso destina-se a atualizar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {
@@ -45,13 +50,15 @@ public final class FotoProdutoPutController implements IFotoProdutoController.Pu
     @Valid final FotoProdutoDtoRequest fotoProdutoDtoRequest) {
 
     var response = Optional.of(fotoProdutoDtoRequest)
-      .map(imagem -> {
+      .map(dtoRequest -> this.mapper.converterOrigemParaDestino(dtoRequest, FotoProdutoArquivo.class))
+      .map(arquivo -> {
         try {
-          return this.fotoProdutoService.inserirFotoNoProduto(produtoId, imagem);
+          return this.fotoProdutoService.inserirFotoNoProduto(produtoId, arquivo);
         } catch (IOException e) {
           throw new RuntimeException(e);
         }
       })
+      .map(model -> this.mapper.converterOrigemParaDestino(model, FotoProdutoDtoResponse.class))
       .orElseThrow();
 
     return ResponseEntity

@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.core.application.ports.entrada.IFotoProdutoService;
-import com.techchallenge.devnet.core.application.ports.saida.IFotoProdutoRepository;
+import com.techchallenge.devnet.core.application.ports.entrada.IFotoProdutoServicePort;
+import com.techchallenge.devnet.core.application.ports.saida.IFotoProdutoRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.ILocalFotoProdutoArmazemService;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.FotoProdutoNaoEncontradoException;
@@ -13,16 +13,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
-public class FotoProdutoDeleteService implements IFotoProdutoService.DeleteService {
+public class FotoProdutoDeleteService implements IFotoProdutoServicePort.DeleteService {
 
   @Autowired
-  private IFotoProdutoRepository.GetRepository fotoProdutoGetRepository;
+  private IFotoProdutoRepositoryPort.GetRepository fotoProdutoGetRepository;
 
   @Autowired
-  private IFotoProdutoRepository.PostRepository fotoProdutoPostRepository;
+  private IFotoProdutoRepositoryPort.PostRepository fotoProdutoPostRepository;
 
   @Autowired
-  private IFotoProdutoRepository.DeleteRepository fotoProdutoDeleteRepository;
+  private IFotoProdutoRepositoryPort.DeleteRepository fotoProdutoDeleteRepository;
 
   @Autowired
   private ILocalFotoProdutoArmazemService localFotoProdutoArmazemService;
@@ -32,13 +32,13 @@ public class FotoProdutoDeleteService implements IFotoProdutoService.DeleteServi
   public void deletarPorId(final Long id) {
 
     this.fotoProdutoGetRepository.consultarPorId(id)
-      .map(fotoProduto -> {
+      .map(model -> {
 
-        this.fotoProdutoDeleteRepository.deletar(fotoProduto);
+        this.fotoProdutoDeleteRepository.deletar(model);
         this.fotoProdutoPostRepository.flush();
-        this.localFotoProdutoArmazemService.remover(fotoProduto.getNome());
+        this.localFotoProdutoArmazemService.remover(model.getNome());
 
-        return fotoProduto;
+        return model;
       })
       .orElseThrow(() -> {
         log.info(String.format(MensagemPadrao.FOTO_PRODUTO_NAO_ENCONTRADO, id));
