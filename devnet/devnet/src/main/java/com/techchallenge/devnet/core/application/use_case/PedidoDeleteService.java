@@ -25,14 +25,14 @@ public class PedidoDeleteService implements IPedidoServicePort.DeleteService {
   public void cancelarPorId(final Long id) {
 
     this.pedidoGetRepository.consultarPorId(id)
-      .map(pedido -> {
+      .map(model -> {
 
-        if (!pedido.getStatusPedido().equals(StatusPedidoEnum.RECEBIDO)) {
-          log.info(String.format(MensagemPadrao.CANCELAMENTO_BLOQUEADO, id, pedido.getStatusPedido()));
-          throw new CancelamentoBloqueadoException(id, pedido.getStatusPedido());
+        if (!model.getStatusPedido().equals(StatusPedidoEnum.RECEBIDO)) {
+          log.info(String.format(MensagemPadrao.CANCELAMENTO_BLOQUEADO, id, model.getStatusPedido()));
+          throw new CancelamentoBloqueadoException(id, model.getStatusPedido());
         }
-        pedido.setStatusPedido(StatusPedidoEnum.CANCELADO);
-        pedido.getPagamento().setStatusPagamento(StatusPagamentoEnum.CANCELADO);
+        model.setStatusPedido(StatusPedidoEnum.CANCELADO);
+        model.getPagamento().setStatusPagamento(StatusPagamentoEnum.CANCELADO);
 
         return true;
       })

@@ -1,8 +1,5 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.PedidoDtoRequest;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PedidoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.entrada.IPedidoServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IItemPedidoRepository;
 import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
@@ -10,7 +7,7 @@ import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_409.AtualizarPedidoBloqueadoException;
 import com.techchallenge.devnet.core.domain.base.utilitarios.IUtils;
-import com.techchallenge.devnet.adapter.driven_secundario.entities.PedidoEntity;
+import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -26,9 +23,6 @@ import java.util.Optional;
 public class PedidoPutService implements IPedidoServicePort.PutService {
 
   @Autowired
-  private IMapper mapper;
-
-  @Autowired
   private IPedidoRepositoryPort.GetRepository pedidoGetRepository;
 
   @Autowired
@@ -39,10 +33,9 @@ public class PedidoPutService implements IPedidoServicePort.PutService {
 
   @Transactional(isolation = Isolation.SERIALIZABLE)
   @Override
-  public PedidoDtoResponse atualizar(final Long id, final PedidoDtoRequest dtoRequest) {
+  public PedidoModel atualizar(final Long id, final PedidoModel pedidoModel) {
 
-    return Optional.of(dtoRequest)
-      .map(dto -> this.mapper.converterDtoRequestParaEntidade(dto, PedidoEntity.class))
+    return Optional.of(pedidoModel)
       .map(this.utils::confirmarCliente)
       .map(this.utils::confirmarProdutos)
       .map(pedido -> {
@@ -64,17 +57,16 @@ public class PedidoPutService implements IPedidoServicePort.PutService {
 
         return pedidoDoBanco;
       })
-      .map(pedido -> this.mapper.converterEntidadeParaDtoResponse(pedido, PedidoDtoResponse.class))
       .orElseThrow();
   }
 
-  private PedidoEntity verificarPermissaoParaAtualizar(PedidoEntity pedido) {
-    if (!pedido.getStatusPedido().equals(StatusPedidoEnum.RECEBIDO)) {
-      log.info(String.format(MensagemPadrao.PEDIDO_BLOQUEADO_PARA_ATUALIZAR, pedido.getId(), pedido.getStatusPedido()));
+  private PedidoModel verificarPermissaoParaAtualizar(PedidoModel pedidoModel) {
+    if (!pedidoModel.getStatusPedido().equals(StatusPedidoEnum.RECEBIDO)) {
+      log.info(String.format(MensagemPadrao.PEDIDO_BLOQUEADO_PARA_ATUALIZAR, pedidoModel.getId(), pedidoModel.getStatusPedido()));
       throw new AtualizarPedidoBloqueadoException(String
-        .format(MensagemPadrao.PEDIDO_BLOQUEADO_PARA_ATUALIZAR, pedido.getId(), pedido.getStatusPedido()));
+        .format(MensagemPadrao.PEDIDO_BLOQUEADO_PARA_ATUALIZAR, pedidoModel.getId(), pedidoModel.getStatusPedido()));
     }
-    return pedido;
+    return pedidoModel;
   }
 }
 
