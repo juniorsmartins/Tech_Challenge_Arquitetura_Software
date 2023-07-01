@@ -1,31 +1,44 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
+import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
+import com.techchallenge.devnet.adapter.driver_primario.dtos.filtros.PedidoFiltroDto;
+import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PedidoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.entrada.IPedidoServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
+import com.techchallenge.devnet.core.domain.value_objects.filtros.PedidoFiltro;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Tag(name = "PedidoDeleteController", description = "Adaptador para apagar recurso Pedido.")
+import java.util.Optional;
+
+@Tag(name = "PedidoGetControllerAdapter", description = "Adaptador para buscar recurso Pedido.")
 @RestController
 @RequestMapping(path = "/api/v1/pedidos")
-public final class PedidoDeleteController implements IPedidoControllerPort.DeleteController {
+public final class PedidoGetControllerAdapter implements IPedidoControllerPort.GetController {
 
   @Autowired
-  private IPedidoServicePort.DeleteService service;
+  private IMapper mapper;
 
-  @Operation(summary = "Cancelar Pedido", description = "Este recurso destina-se a apagar pelo identificador exclusivo (ID).")
+  @Autowired
+  private IPedidoServicePort.GetService service;
+
+  @Operation(summary = "Pesquisar Pedido", description = "Este recurso permite consultar Pedido por diversas propriedades com retorno paginado.")
   @ApiResponses(value = {
-    @ApiResponse(responseCode = "204", description = "No Content - requisição bem sucedida e sem retorno.", content = {@Content(mediaType = "application/json")}),
+    @ApiResponse(responseCode = "200", description = "OK - requisição bem sucedida e com retorno.", content = {@Content(mediaType = "application/json", array = @ArraySchema(minItems = 1, schema = @Schema(implementation = PedidoFiltro.class), uniqueItems = true))}),
     @ApiResponse(responseCode = "400", description = "Bad Request - requisição mal feita.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))}),
     @ApiResponse(responseCode = "401", description = "Unauthorized: cliente não autenticado.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))}),
     @ApiResponse(responseCode = "403", description = "Forbidden - cliente autenticado, mas sem autorização para acessar recurso.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))}),
@@ -33,15 +46,20 @@ public final class PedidoDeleteController implements IPedidoControllerPort.Delet
     @ApiResponse(responseCode = "500", description = "Internal Server Error - situação inesperada no servidor.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))})
   })
   @Override
-  public ResponseEntity<Object> cancelarPorId(
-    @Parameter(name = "id", description = "Chave de identificação", example = "22", required = true)
-    @PathVariable(name = "id") final Long pedidoId) {
+  public ResponseEntity<Page<PedidoDtoResponse>> pesquisar(
+    @Parameter(name = "PedidoFiltro", description = "Estrutura de dados usada como filtro de pesquisa.", required = false)
+    final PedidoFiltroDto filtroDto,
+    @PageableDefault(sort = "id", direction = Sort.Direction.DESC, page = 0, size = 10) final Pageable paginacao) {
 
-    this.service.cancelarPorId(pedidoId);
+    var response = Optional.of(filtroDto)
+      .map(dto -> this.mapper.converterOrigemParaDestino(dto, PedidoFiltro.class))
+      .map(parametrosDePesquisa -> this.service.pesquisar(parametrosDePesquisa, paginacao))
+      .map(paginaPedidos -> this.mapper.converterPaginaOrigemParaPaginaDestino(paginaPedidos, PedidoDtoResponse.class))
+      .orElseThrow();
 
     return ResponseEntity
-      .noContent()
-      .build();
+      .ok()
+      .body(response);
   }
 }
 

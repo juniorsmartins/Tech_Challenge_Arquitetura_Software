@@ -3,7 +3,7 @@ package com.techchallenge.devnet.adapter.driver_primario.controllers;
 import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.EmailDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.EmailDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.IEmailService;
+import com.techchallenge.devnet.core.application.ports.entrada.IEmailServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.core.domain.models.EmailModel;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,7 +33,7 @@ public final class EmailPostControllerAdapter implements IEmailControllerPort.Po
   private IMapper mapper;
 
   @Autowired
-  private IEmailService.EnviarService service;
+  private IEmailServicePort.EnviarService service;
 
   @Operation(summary = "Enviar Email", description = "Este recurso destina-se a enviar Email.")
   @ApiResponses(value = {

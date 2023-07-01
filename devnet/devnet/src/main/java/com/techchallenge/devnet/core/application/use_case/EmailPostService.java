@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.core.application.ports.entrada.IEmailService;
+import com.techchallenge.devnet.core.application.ports.entrada.IEmailServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IClienteRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.IEmailRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
@@ -22,7 +22,7 @@ import java.util.Optional;
 
 @Slf4j
 @Service
-public class EmailPostService implements IEmailService.EnviarService {
+public class EmailPostService implements IEmailServicePort.EnviarService {
 
   @Autowired
   private IPedidoRepositoryPort.GetRepository pedidoGetRepository;

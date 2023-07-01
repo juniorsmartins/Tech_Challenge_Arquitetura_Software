@@ -1,8 +1,8 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
+import com.techchallenge.devnet.adapter.driver_primario.dtos.filtros.PedidoFiltroDto;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.PedidoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PedidoDtoResponse;
-import com.techchallenge.devnet.core.domain.value_objects.filtros.PedidoFiltro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +26,7 @@ public interface IPedidoControllerPort {
 
   interface GetController {
     @GetMapping
-    ResponseEntity<Page<PedidoDtoResponse>> pesquisar(PedidoFiltro filtro, Pageable paginacao);
+    ResponseEntity<Page<PedidoDtoResponse>> pesquisar(PedidoFiltroDto pedidoFiltroDto, Pageable paginacao);
   }
 
   interface DeleteController {
