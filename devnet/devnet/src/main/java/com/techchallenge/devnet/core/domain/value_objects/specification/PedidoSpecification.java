@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.core.domain.value_objects.specification;
 
-import com.techchallenge.devnet.core.domain.entities.Pedido;
+import com.techchallenge.devnet.core.domain.models.Pedido;
 import com.techchallenge.devnet.core.domain.value_objects.filtros.PedidoFiltro;
 import jakarta.persistence.criteria.Predicate;
 import org.apache.commons.lang3.ObjectUtils;

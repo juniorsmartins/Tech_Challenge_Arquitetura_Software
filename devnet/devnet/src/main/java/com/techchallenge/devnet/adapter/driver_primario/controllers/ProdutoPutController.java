@@ -2,7 +2,7 @@ package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ProdutoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ProdutoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.IProdutoService;
+import com.techchallenge.devnet.core.application.ports.entrada.IProdutoServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -28,7 +28,7 @@ import java.util.Optional;
 public final class ProdutoPutController implements IProdutoController.PutController {
 
   @Autowired
-  private IProdutoService.PutService service;
+  private IProdutoServicePort.PutService service;
 
   @Operation(summary = "Atualizar Produto", description = "Este recurso destina-se a atualizar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {

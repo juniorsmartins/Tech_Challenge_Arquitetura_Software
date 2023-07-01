@@ -8,9 +8,9 @@ import com.techchallenge.devnet.adapter.driver_primario.dtos.ProdutoDtoResumo;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ItemPedidoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.PedidoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PagamentoDtoResponse;
-import com.techchallenge.devnet.core.domain.entities.ClienteModel;
-import com.techchallenge.devnet.core.domain.entities.Produto;
-import com.techchallenge.devnet.core.domain.entities.enums.FormaPagamentoEnum;
+import com.techchallenge.devnet.core.domain.models.ClienteModel;
+import com.techchallenge.devnet.core.domain.models.ProdutoModel;
+import com.techchallenge.devnet.core.domain.models.enums.FormaPagamentoEnum;
 import com.techchallenge.devnet.utils.CriadorDeObjetos;
 import com.techchallenge.devnet.utils.Utilitarios;
 import org.junit.jupiter.api.BeforeEach;
@@ -59,7 +59,7 @@ class PedidoPostControllerIntegrationTest {
 
   private ClienteModel cliente;
 
-  private Produto produto;
+  private ProdutoModel produto;
 
   @BeforeEach
   void criadorDeCenarios() {

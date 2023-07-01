@@ -8,7 +8,7 @@ import com.techchallenge.devnet.core.application.ports.saida.ILocalFotoProdutoAr
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.FotoProdutoNaoEncontradoException;
 import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
-import com.techchallenge.devnet.core.domain.entities.FotoProduto;
+import com.techchallenge.devnet.core.domain.models.FotoProduto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;

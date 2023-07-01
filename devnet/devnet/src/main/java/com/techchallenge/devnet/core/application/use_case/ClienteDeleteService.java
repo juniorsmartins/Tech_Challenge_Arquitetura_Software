@@ -6,7 +6,7 @@ import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepository;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ClienteNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_409.DeletarBloqueadoPoUso;
-import com.techchallenge.devnet.core.domain.entities.ClienteModel;
+import com.techchallenge.devnet.core.domain.models.ClienteModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

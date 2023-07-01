@@ -1,7 +1,5 @@
-package com.techchallenge.devnet.adapter.driver_primario.dtos.resposta;
+package com.techchallenge.devnet.core.domain.models;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.techchallenge.devnet.core.domain.models.enums.StatusPagamentoEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -18,16 +16,17 @@ import java.time.OffsetDateTime;
 @Getter
 @Setter
 @EqualsAndHashCode(of = {"id"})
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class PagamentoDtoResponse implements Serializable {
+public final class ClienteModel implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
   private Long id;
 
-  private StatusPagamentoEnum statusPagamento;
+  private String nome;
 
-  private String nomeImagemQRCode;
+  private String cpf;
+
+  private String email;
 
   private OffsetDateTime dataHoraCadastro;
 

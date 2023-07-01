@@ -1,14 +1,14 @@
-package com.techchallenge.devnet.core.domain.entities;
+package com.techchallenge.devnet.core.domain.models;
 
 import com.techchallenge.devnet.core.domain.base.auditoria.AuditoriaDataJpa;
-import com.techchallenge.devnet.core.domain.entities.enums.CategoriaEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.MapsId;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,42 +16,42 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.envers.Audited;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 @Entity
-@Table(name = "produtos")
+@Table(name = "fotos_produtos")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
 @EqualsAndHashCode(of = {"id"})
 @Audited
-public final class Produto extends AuditoriaDataJpa implements Serializable {
+public final class FotoProduto extends AuditoriaDataJpa implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id")
+  @Column(name = "produto_id")
   private Long id;
 
-  @Enumerated(EnumType.STRING)
-  @Column(name = "categoria", length = 50, nullable = false)
-  private CategoriaEnum categoria;
+  @MapsId
+  @OneToOne(fetch = FetchType.LAZY)
+  private ProdutoModel produto;
 
-  @Column(name = "nome", length = 100, nullable = false)
+  @Column(name = "nome", nullable = false)
   private String nome;
 
-  @Column(name = "descricao", length = 250, nullable = false)
+  @Column(name = "descricao", nullable = false)
   private String descricao;
 
-  @Column(name = "preco", nullable = false)
-  private BigDecimal preco;
+  @Column(name = "tipo", nullable = false)
+  private String tipo;
+
+  @Column(name = "tamanho", nullable = false)
+  private long tamanho;
 }
 

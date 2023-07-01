@@ -1,9 +1,11 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
+import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ProdutoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ProdutoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.IProdutoService;
+import com.techchallenge.devnet.core.application.ports.entrada.IProdutoServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
+import com.techchallenge.devnet.core.domain.models.ProdutoModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -17,15 +19,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URI;
+import java.util.Optional;
 
 @Tag(name = "ProdutoPostController", description = "Adaptador para criar recurso Produto.")
 @RestController
 @RequestMapping(path = "/api/v1/produtos")
-public final class ProdutoPostController implements IProdutoController.PostController {
+public final class ProdutoPostControllerAdapter implements IProdutoController.PostController {
 
   @Autowired
-  private IProdutoService.PostService service;
+  private IMapper mapper;
+
+  @Autowired
+  private IProdutoServicePort.PostService produtoPostService;
 
   @Operation(summary = "Cadastrar Produto", description = "Este recurso destina-se a cadastrar.")
   @ApiResponses(value = {
@@ -39,15 +46,16 @@ public final class ProdutoPostController implements IProdutoController.PostContr
   @Override
   public ResponseEntity<ProdutoDtoResponse> cadastrar(
     @Parameter(name = "ProdutoDtoRequest", description = "Estrutura de dados para transporte de informações de entrada.", required = true)
-    @RequestBody @Valid final ProdutoDtoRequest dtoRequest, final UriComponentsBuilder uriComponentsBuilder) {
+    @RequestBody @Valid final ProdutoDtoRequest dtoRequest) {
 
-    var response = this.service.cadastrar(dtoRequest);
+    var response = Optional.of(dtoRequest)
+      .map(dto -> this.mapper.converterOrigemParaDestino(dto, ProdutoModel.class))
+      .map(this.produtoPostService::cadastrar)
+      .map(model -> this.mapper.converterOrigemParaDestino(model, ProdutoDtoResponse.class))
+      .orElseThrow();
 
     return ResponseEntity
-      .created(uriComponentsBuilder
-        .path("/api/v1/produtos/{id}")
-        .buildAndExpand(response.getId())
-        .toUri())
+      .created(URI.create("/api/v1/produtos" + response.getId()))
       .body(response);
   }
 }

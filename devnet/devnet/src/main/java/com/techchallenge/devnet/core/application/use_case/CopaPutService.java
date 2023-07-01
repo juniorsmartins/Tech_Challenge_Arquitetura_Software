@@ -8,8 +8,8 @@ import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEn
 import com.techchallenge.devnet.core.domain.base.exceptions.http_409.AtualizarPedidoBloqueadoException;
 import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.core.domain.base.utilitarios.IUtils;
-import com.techchallenge.devnet.core.domain.entities.Pedido;
-import com.techchallenge.devnet.core.domain.entities.enums.StatusPedidoEnum;
+import com.techchallenge.devnet.core.domain.models.Pedido;
+import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

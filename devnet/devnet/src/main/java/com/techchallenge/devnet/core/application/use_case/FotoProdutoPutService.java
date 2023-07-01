@@ -5,10 +5,10 @@ import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.FotoProdut
 import com.techchallenge.devnet.core.application.ports.entrada.IFotoProdutoService;
 import com.techchallenge.devnet.core.application.ports.saida.IFotoProdutoRepository;
 import com.techchallenge.devnet.core.application.ports.saida.ILocalFotoProdutoArmazemService;
-import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepository;
+import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
 import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
-import com.techchallenge.devnet.core.domain.entities.FotoProduto;
+import com.techchallenge.devnet.core.domain.models.FotoProduto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,7 @@ public class FotoProdutoPutService implements IFotoProdutoService.PutService {
   private IMapper mapper;
 
   @Autowired
-  private IProdutoRepository.GetRepository produtoGetRepository;
+  private IProdutoRepositoryPort.GetRepository produtoGetRepository;
 
   @Autowired
   private IFotoProdutoRepository.PostRepository fotoProdutoPostRepository;

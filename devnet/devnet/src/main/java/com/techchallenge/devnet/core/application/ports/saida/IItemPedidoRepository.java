@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.core.application.ports.saida;
 
-import com.techchallenge.devnet.core.domain.entities.ItemPedido;
+import com.techchallenge.devnet.core.domain.models.ItemPedido;
 
 import java.util.List;
 import java.util.Optional;

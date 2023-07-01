@@ -4,7 +4,7 @@ import com.techchallenge.devnet.adapter.driven_secundario.entities.ClienteEntity
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.ClienteRepositoryJpa;
 import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.core.application.ports.saida.IClienteRepositoryPort;
-import com.techchallenge.devnet.core.domain.entities.ClienteModel;
+import com.techchallenge.devnet.core.domain.models.ClienteModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

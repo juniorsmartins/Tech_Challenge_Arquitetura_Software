@@ -7,8 +7,8 @@ import com.techchallenge.devnet.core.application.ports.entrada.IPagamentoService
 import com.techchallenge.devnet.core.application.ports.entrada.IPedidoService;
 import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepository;
 import com.techchallenge.devnet.core.domain.base.utilitarios.IUtils;
-import com.techchallenge.devnet.core.domain.entities.Pedido;
-import com.techchallenge.devnet.core.domain.entities.enums.StatusPedidoEnum;
+import com.techchallenge.devnet.core.domain.models.Pedido;
+import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

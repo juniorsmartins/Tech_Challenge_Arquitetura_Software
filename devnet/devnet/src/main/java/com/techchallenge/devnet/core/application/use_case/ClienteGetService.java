@@ -3,7 +3,7 @@ package com.techchallenge.devnet.core.application.use_case;
 import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.core.application.ports.entrada.IClienteServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IClienteRepositoryPort;
-import com.techchallenge.devnet.core.domain.entities.ClienteModel;
+import com.techchallenge.devnet.core.domain.models.ClienteModel;
 import com.techchallenge.devnet.core.domain.value_objects.filtros.ClienteFiltro;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

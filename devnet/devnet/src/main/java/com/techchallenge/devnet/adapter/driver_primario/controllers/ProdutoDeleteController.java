@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
-import com.techchallenge.devnet.core.application.ports.entrada.IProdutoService;
+import com.techchallenge.devnet.core.application.ports.entrada.IProdutoServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public final class ProdutoDeleteController implements IProdutoController.DeleteController {
 
   @Autowired
-  private IProdutoService.DeleteService deleteService;
+  private IProdutoServicePort.DeleteService deleteService;
 
   @Operation(summary = "Deletar Produto", description = "Este recurso destina-se a apagar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {

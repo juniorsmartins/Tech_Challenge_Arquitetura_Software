@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.core.domain.value_objects.specification;
 
-import com.techchallenge.devnet.core.domain.entities.Produto;
+import com.techchallenge.devnet.core.domain.models.ProdutoModel;
 import com.techchallenge.devnet.core.domain.value_objects.filtros.ProdutoFiltro;
 import jakarta.persistence.criteria.Predicate;
 import org.apache.commons.lang3.ObjectUtils;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public final class ProdutoSpecification {
 
-  public static Specification<Produto> consultarDinamicamente(ProdutoFiltro filtro) {
+  public static Specification<ProdutoModel> consultarDinamicamente(ProdutoFiltro filtro) {
 
     return ((root, query, criteriaBuilder) -> {
 

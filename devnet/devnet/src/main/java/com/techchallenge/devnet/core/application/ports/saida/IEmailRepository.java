@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.core.application.ports.saida;
 
-import com.techchallenge.devnet.core.domain.entities.Email;
+import com.techchallenge.devnet.core.domain.models.Email;
 
 public interface IEmailRepository {
 

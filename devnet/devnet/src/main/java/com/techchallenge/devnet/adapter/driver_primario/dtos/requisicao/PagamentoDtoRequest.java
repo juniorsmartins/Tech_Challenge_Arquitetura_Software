@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao;
 
-import com.techchallenge.devnet.core.domain.entities.enums.FormaPagamentoEnum;
+import com.techchallenge.devnet.core.domain.models.enums.FormaPagamentoEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

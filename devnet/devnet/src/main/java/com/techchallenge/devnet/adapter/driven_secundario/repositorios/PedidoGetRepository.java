@@ -2,7 +2,7 @@ package com.techchallenge.devnet.adapter.driven_secundario.repositorios;
 
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.PedidoRepositoryJpa;
 import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepository;
-import com.techchallenge.devnet.core.domain.entities.Pedido;
+import com.techchallenge.devnet.core.domain.models.Pedido;
 import com.techchallenge.devnet.core.domain.value_objects.filtros.PedidoFiltro;
 import com.techchallenge.devnet.core.domain.value_objects.specification.PedidoSpecification;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.core.application.ports.saida;
 
-import com.techchallenge.devnet.core.domain.entities.FotoProduto;
+import com.techchallenge.devnet.core.domain.models.FotoProduto;
 
 import java.io.InputStream;
 import java.util.Optional;

@@ -2,14 +2,15 @@ package com.techchallenge.devnet.core.application.ports.entrada;
 
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ProdutoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ProdutoDtoResponse;
+import com.techchallenge.devnet.core.domain.models.ProdutoModel;
 import com.techchallenge.devnet.core.domain.value_objects.filtros.ProdutoFiltro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface IProdutoService {
+public interface IProdutoServicePort {
 
   interface PostService {
-    ProdutoDtoResponse cadastrar(ProdutoDtoRequest dtoRequest);
+    ProdutoModel cadastrar(ProdutoModel produtoModel);
   }
 
   interface PutService {

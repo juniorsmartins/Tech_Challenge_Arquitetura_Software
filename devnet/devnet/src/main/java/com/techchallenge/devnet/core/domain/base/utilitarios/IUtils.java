@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.core.domain.base.utilitarios;
 
-import com.techchallenge.devnet.core.domain.entities.Pedido;
+import com.techchallenge.devnet.core.domain.models.Pedido;
 
 public interface IUtils {
 

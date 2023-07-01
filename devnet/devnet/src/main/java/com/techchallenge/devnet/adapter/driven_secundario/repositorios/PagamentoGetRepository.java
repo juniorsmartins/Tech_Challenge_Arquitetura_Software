@@ -2,7 +2,7 @@ package com.techchallenge.devnet.adapter.driven_secundario.repositorios;
 
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.PagamentoRepositoryJpa;
 import com.techchallenge.devnet.core.application.ports.saida.IPagamentoRepository;
-import com.techchallenge.devnet.core.domain.entities.Pagamento;
+import com.techchallenge.devnet.core.domain.models.Pagamento;
 import com.techchallenge.devnet.core.domain.value_objects.filtros.PagamentoFiltro;
 import com.techchallenge.devnet.core.domain.value_objects.specification.PagamentoSpecification;
 import org.springframework.beans.factory.annotation.Autowired;

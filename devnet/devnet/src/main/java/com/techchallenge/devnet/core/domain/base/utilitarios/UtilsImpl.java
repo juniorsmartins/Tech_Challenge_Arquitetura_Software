@@ -4,11 +4,11 @@ import com.techchallenge.devnet.adapter.driver_primario.dtos.PedidoDtoId;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.EmailDtoRequest;
 import com.techchallenge.devnet.core.application.ports.entrada.IEmailService;
 import com.techchallenge.devnet.core.application.ports.saida.IClienteRepositoryPort;
-import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepository;
+import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ClienteNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
-import com.techchallenge.devnet.core.domain.entities.Pedido;
+import com.techchallenge.devnet.core.domain.models.Pedido;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public final class UtilsImpl implements IUtils {
   private IClienteRepositoryPort.GetRepository clienteGetRepository;
 
   @Autowired
-  private IProdutoRepository.GetRepository produtoGetRepository;
+  private IProdutoRepositoryPort.GetRepository produtoGetRepository;
 
   @Autowired
   private IEmailService.EnviarService emailEnviarService;

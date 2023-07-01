@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.core.domain.entities.enums;
+package com.techchallenge.devnet.core.domain.models.enums;
 
 import lombok.Getter;
 

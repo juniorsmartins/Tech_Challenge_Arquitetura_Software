@@ -2,7 +2,7 @@ package com.techchallenge.devnet.adapter.driven_secundario.repositorios;
 
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.EmailRepositoryJpa;
 import com.techchallenge.devnet.core.application.ports.saida.IEmailRepository;
-import com.techchallenge.devnet.core.domain.entities.Email;
+import com.techchallenge.devnet.core.domain.models.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

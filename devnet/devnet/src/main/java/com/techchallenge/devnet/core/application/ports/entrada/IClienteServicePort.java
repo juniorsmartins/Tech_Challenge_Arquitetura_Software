@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.core.application.ports.entrada;
 
-import com.techchallenge.devnet.core.domain.entities.ClienteModel;
+import com.techchallenge.devnet.core.domain.models.ClienteModel;
 import com.techchallenge.devnet.core.domain.value_objects.filtros.ClienteFiltro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

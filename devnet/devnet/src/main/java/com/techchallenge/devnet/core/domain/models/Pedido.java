@@ -1,8 +1,8 @@
-package com.techchallenge.devnet.core.domain.entities;
+package com.techchallenge.devnet.core.domain.models;
 
 import com.techchallenge.devnet.core.domain.base.auditoria.AuditoriaDataJpa;
-import com.techchallenge.devnet.core.domain.entities.enums.FormaPagamentoEnum;
-import com.techchallenge.devnet.core.domain.entities.enums.StatusPedidoEnum;
+import com.techchallenge.devnet.core.domain.models.enums.FormaPagamentoEnum;
+import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

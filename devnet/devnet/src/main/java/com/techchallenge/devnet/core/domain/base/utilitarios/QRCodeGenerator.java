@@ -7,7 +7,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.techchallenge.devnet.core.domain.base.exceptions.ArmazemException;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
-import com.techchallenge.devnet.core.domain.entities.Pedido;
+import com.techchallenge.devnet.core.domain.models.Pedido;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
 

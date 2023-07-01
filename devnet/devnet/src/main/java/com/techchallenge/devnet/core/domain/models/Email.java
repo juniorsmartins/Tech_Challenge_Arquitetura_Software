@@ -1,6 +1,6 @@
-package com.techchallenge.devnet.core.domain.entities;
+package com.techchallenge.devnet.core.domain.models;
 
-import com.techchallenge.devnet.core.domain.entities.enums.StatusEmailEnum;
+import com.techchallenge.devnet.core.domain.models.enums.StatusEmailEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

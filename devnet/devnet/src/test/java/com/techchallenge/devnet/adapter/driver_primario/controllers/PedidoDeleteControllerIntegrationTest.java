@@ -4,12 +4,12 @@ import com.techchallenge.devnet.DevnetApplication;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.ClienteRepositoryJpa;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.PedidoRepositoryJpa;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.ProdutoRepositoryJpa;
-import com.techchallenge.devnet.core.domain.entities.ClienteModel;
-import com.techchallenge.devnet.core.domain.entities.ItemPedido;
-import com.techchallenge.devnet.core.domain.entities.Pedido;
-import com.techchallenge.devnet.core.domain.entities.Produto;
-import com.techchallenge.devnet.core.domain.entities.enums.FormaPagamentoEnum;
-import com.techchallenge.devnet.core.domain.entities.enums.StatusPedidoEnum;
+import com.techchallenge.devnet.core.domain.models.ClienteModel;
+import com.techchallenge.devnet.core.domain.models.ItemPedido;
+import com.techchallenge.devnet.core.domain.models.Pedido;
+import com.techchallenge.devnet.core.domain.models.ProdutoModel;
+import com.techchallenge.devnet.core.domain.models.enums.FormaPagamentoEnum;
+import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;
 import com.techchallenge.devnet.utils.CriadorDeObjetos;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -55,7 +55,7 @@ class PedidoDeleteControllerIntegrationTest {
 
   private ClienteModel cliente;
 
-  private Produto produto;
+  private ProdutoModel produto;
 
   @BeforeEach
   void criadorDeCenarios() {

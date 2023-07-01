@@ -2,8 +2,8 @@ package com.techchallenge.devnet.core.application.use_case;
 
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ProdutoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ProdutoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.IProdutoService;
-import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepository;
+import com.techchallenge.devnet.core.application.ports.entrada.IProdutoServicePort;
+import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
 import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
@@ -16,13 +16,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
-public class ProdutoPutService implements IProdutoService.PutService {
+public class ProdutoPutService implements IProdutoServicePort.PutService {
 
   @Autowired
   private IMapper mapper;
 
   @Autowired
-  private IProdutoRepository.GetRepository produtoGetRepository;
+  private IProdutoRepositoryPort.GetRepository produtoGetRepository;
 
   @Transactional(isolation = Isolation.SERIALIZABLE)
   @Override

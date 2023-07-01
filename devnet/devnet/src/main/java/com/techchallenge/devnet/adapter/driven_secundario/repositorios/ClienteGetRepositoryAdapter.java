@@ -4,7 +4,7 @@ import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.Clien
 import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.filtros.ClienteFiltroDto;
 import com.techchallenge.devnet.core.application.ports.saida.IClienteRepositoryPort;
-import com.techchallenge.devnet.core.domain.entities.ClienteModel;
+import com.techchallenge.devnet.core.domain.models.ClienteModel;
 import com.techchallenge.devnet.core.domain.value_objects.filtros.ClienteFiltro;
 import com.techchallenge.devnet.core.domain.value_objects.specification.ClienteSpecification;
 import org.springframework.beans.factory.annotation.Autowired;

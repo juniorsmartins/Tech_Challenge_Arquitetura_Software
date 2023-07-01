@@ -8,12 +8,12 @@ import com.techchallenge.devnet.adapter.driver_primario.dtos.ClienteDtoResumo;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.ProdutoDtoResumo;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ItemPedidoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.PedidoDtoRequest;
-import com.techchallenge.devnet.core.domain.entities.ClienteModel;
-import com.techchallenge.devnet.core.domain.entities.ItemPedido;
-import com.techchallenge.devnet.core.domain.entities.Pedido;
-import com.techchallenge.devnet.core.domain.entities.Produto;
-import com.techchallenge.devnet.core.domain.entities.enums.FormaPagamentoEnum;
-import com.techchallenge.devnet.core.domain.entities.enums.StatusPedidoEnum;
+import com.techchallenge.devnet.core.domain.models.ClienteModel;
+import com.techchallenge.devnet.core.domain.models.ItemPedido;
+import com.techchallenge.devnet.core.domain.models.Pedido;
+import com.techchallenge.devnet.core.domain.models.ProdutoModel;
+import com.techchallenge.devnet.core.domain.models.enums.FormaPagamentoEnum;
+import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;
 import com.techchallenge.devnet.utils.CriadorDeObjetos;
 import com.techchallenge.devnet.utils.Utilitarios;
 import org.junit.jupiter.api.AfterEach;
@@ -60,7 +60,7 @@ class PedidoPutControllerIntegrationTest {
 
   private ClienteModel cliente;
 
-  private Produto produto;
+  private ProdutoModel produto;
 
   private Pedido pedido;
 
