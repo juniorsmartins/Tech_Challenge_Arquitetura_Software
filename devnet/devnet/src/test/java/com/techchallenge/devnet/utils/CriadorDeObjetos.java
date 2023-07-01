@@ -3,7 +3,7 @@ package com.techchallenge.devnet.utils;
 import com.github.javafaker.Faker;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ClienteDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ProdutoDtoRequest;
-import com.techchallenge.devnet.core.domain.entities.Cliente;
+import com.techchallenge.devnet.core.domain.entities.ClienteModel;
 import com.techchallenge.devnet.core.domain.entities.Produto;
 import com.techchallenge.devnet.core.domain.entities.enums.CategoriaEnum;
 
@@ -15,9 +15,9 @@ public final class CriadorDeObjetos {
 
   private static CpfGenerator cpfGenerator = new CpfGenerator();
 
-  public static Cliente.ClienteBuilder gerarClienteBuilder() {
+  public static ClienteModel.ClienteBuilder gerarClienteBuilder() {
 
-    return Cliente.builder()
+    return ClienteModel.builder()
       .nome(faker.name().fullName())
       .cpf(cpfGenerator.cpf(false))
       .email(faker.internet().emailAddress());

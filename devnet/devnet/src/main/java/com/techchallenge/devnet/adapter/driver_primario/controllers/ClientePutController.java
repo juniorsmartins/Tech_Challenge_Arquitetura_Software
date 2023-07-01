@@ -1,9 +1,11 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
+import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ClienteDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ClienteDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.IClienteService;
+import com.techchallenge.devnet.core.application.ports.entrada.IClienteServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
+import com.techchallenge.devnet.core.domain.entities.ClienteModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -28,7 +30,10 @@ import java.util.Optional;
 public final class ClientePutController implements IClienteController.PutController {
 
   @Autowired
-  private IClienteService.PutService service;
+  private IMapper mapper;
+
+  @Autowired
+  private IClienteServicePort.PutService service;
 
   @Operation(summary = "Atualizar Cliente", description = "Este recurso destina-se a atualizar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {
@@ -47,7 +52,9 @@ public final class ClientePutController implements IClienteController.PutControl
     @RequestBody @Valid final ClienteDtoRequest dtoRequest) {
 
     var response = Optional.of(dtoRequest)
-      .map(dto -> this.service.atualizar(clienteId, dto))
+      .map(dto -> this.mapper.converterOrigemParaDestino(dto, ClienteModel.class))
+      .map(model -> this.service.atualizar(clienteId, model))
+      .map(model -> this.mapper.converterOrigemParaDestino(model, ClienteDtoResponse.class))
       .orElseThrow();
 
     return ResponseEntity

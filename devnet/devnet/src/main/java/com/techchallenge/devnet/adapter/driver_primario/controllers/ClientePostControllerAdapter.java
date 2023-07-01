@@ -1,9 +1,11 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
+import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ClienteDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ClienteDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.IClienteService;
+import com.techchallenge.devnet.core.application.ports.entrada.IClienteServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
+import com.techchallenge.devnet.core.domain.entities.ClienteModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -17,15 +19,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URI;
+import java.util.Optional;
 
 @Tag(name = "ClientePostController", description = "Adaptador para criar recurso Cliente.")
 @RestController
 @RequestMapping(path = "/api/v1/clientes")
-public final class ClientePostController implements IClienteController.PostController {
+public final class ClientePostControllerAdapter implements IClienteController.PostController {
 
   @Autowired
-  private IClienteService.PostService clienteCadastrarservice;
+  private IMapper mapper;
+
+  @Autowired
+  private IClienteServicePort.PostService clientePostService;
 
   @Operation(summary = "Cadastrar Cliente", description = "Este recurso destina-se a cadastrar.")
   @ApiResponses(value = {
@@ -39,15 +46,16 @@ public final class ClientePostController implements IClienteController.PostContr
   @Override
   public ResponseEntity<ClienteDtoResponse> cadastrar(
     @Parameter(name = "ClienteDtoRequest", description = "Estrutura de dados para transporte de informações de entrada.", required = true)
-    @RequestBody @Valid final ClienteDtoRequest dtoRequest, final UriComponentsBuilder uriComponentsBuilder) {
+    @RequestBody @Valid final ClienteDtoRequest dtoRequest) {
 
-    var response = this.clienteCadastrarservice.cadastrar(dtoRequest);
+    var response = Optional.of(dtoRequest)
+      .map(dto -> this.mapper.converterOrigemParaDestino(dto, ClienteModel.class))
+      .map(this.clientePostService::cadastrar)
+      .map(model -> this.mapper.converterOrigemParaDestino(model, ClienteDtoResponse.class))
+      .orElseThrow();
 
     return ResponseEntity
-      .created(uriComponentsBuilder
-        .path("/api/v1/clientes/{id}")
-        .buildAndExpand(response.getId())
-        .toUri())
+      .created(URI.create("/api/v1/clientes/" + response.getId()))
       .body(response);
   }
 }

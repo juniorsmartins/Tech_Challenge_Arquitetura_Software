@@ -4,7 +4,7 @@ import com.techchallenge.devnet.DevnetApplication;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.ClienteRepositoryJpa;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.PedidoRepositoryJpa;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.ProdutoRepositoryJpa;
-import com.techchallenge.devnet.core.domain.entities.Cliente;
+import com.techchallenge.devnet.core.domain.entities.ClienteModel;
 import com.techchallenge.devnet.core.domain.entities.ItemPedido;
 import com.techchallenge.devnet.core.domain.entities.Pedido;
 import com.techchallenge.devnet.core.domain.entities.Produto;
@@ -53,7 +53,7 @@ class PedidoDeleteControllerIntegrationTest {
   @Autowired
   private ProdutoRepositoryJpa produtoRepositoryJpa;
 
-  private Cliente cliente;
+  private ClienteModel cliente;
 
   private Produto produto;
 

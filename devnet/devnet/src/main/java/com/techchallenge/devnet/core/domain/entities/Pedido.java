@@ -61,7 +61,7 @@ public final class Pedido extends AuditoriaDataJpa implements Serializable {
 
   @ManyToOne
   @JoinColumn(name = "cliente_id", referencedColumnName = "id", nullable = true)
-  private Cliente cliente;
+  private ClienteModel cliente;
 
   @OneToMany(mappedBy = "pedido", cascade = {CascadeType.ALL})
   private List<ItemPedido> itensPedido = new ArrayList<>();

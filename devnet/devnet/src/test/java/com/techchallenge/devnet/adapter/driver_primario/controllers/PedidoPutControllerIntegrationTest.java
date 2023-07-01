@@ -8,7 +8,7 @@ import com.techchallenge.devnet.adapter.driver_primario.dtos.ClienteDtoResumo;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.ProdutoDtoResumo;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ItemPedidoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.PedidoDtoRequest;
-import com.techchallenge.devnet.core.domain.entities.Cliente;
+import com.techchallenge.devnet.core.domain.entities.ClienteModel;
 import com.techchallenge.devnet.core.domain.entities.ItemPedido;
 import com.techchallenge.devnet.core.domain.entities.Pedido;
 import com.techchallenge.devnet.core.domain.entities.Produto;
@@ -58,7 +58,7 @@ class PedidoPutControllerIntegrationTest {
   @Autowired
   private PedidoRepositoryJpa pedidoRepositoryJpa;
 
-  private Cliente cliente;
+  private ClienteModel cliente;
 
   private Produto produto;
 

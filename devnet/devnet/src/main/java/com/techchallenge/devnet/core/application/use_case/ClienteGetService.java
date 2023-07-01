@@ -1,9 +1,9 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ClienteDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.IClienteService;
-import com.techchallenge.devnet.core.application.ports.saida.IClienteRepository;
 import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
+import com.techchallenge.devnet.core.application.ports.entrada.IClienteServicePort;
+import com.techchallenge.devnet.core.application.ports.saida.IClienteRepositoryPort;
+import com.techchallenge.devnet.core.domain.entities.ClienteModel;
 import com.techchallenge.devnet.core.domain.value_objects.filtros.ClienteFiltro;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,21 +14,20 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
-public class ClienteGetService implements IClienteService.GetService {
+public class ClienteGetService implements IClienteServicePort.GetService {
 
   @Autowired
   private IMapper mapper;
 
   @Autowired
-  private IClienteRepository.GetRepository clienteGetRepository;
+  private IClienteRepositoryPort.GetRepository clienteGetRepository;
 
   @Transactional(readOnly = true)
   @Override
-  public Page<ClienteDtoResponse> pesquisar(final ClienteFiltro filtro, final Pageable paginacao) {
+  public Page<ClienteModel> pesquisar(final ClienteFiltro filtro, final Pageable paginacao) {
 
     return Optional.of(filtro)
       .map(parametrosDePesquisa -> this.clienteGetRepository.pesquisar(parametrosDePesquisa, paginacao))
-      .map(paginaClientes -> this.mapper.converterPaginaDeEntidadeParaPaginaDtoResponse(paginaClientes, ClienteDtoResponse.class))
       .orElseThrow();
   }
 }

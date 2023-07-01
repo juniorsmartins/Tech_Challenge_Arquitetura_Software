@@ -8,7 +8,7 @@ import com.techchallenge.devnet.adapter.driver_primario.dtos.ProdutoDtoResumo;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ItemPedidoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.PedidoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PagamentoDtoResponse;
-import com.techchallenge.devnet.core.domain.entities.Cliente;
+import com.techchallenge.devnet.core.domain.entities.ClienteModel;
 import com.techchallenge.devnet.core.domain.entities.Produto;
 import com.techchallenge.devnet.core.domain.entities.enums.FormaPagamentoEnum;
 import com.techchallenge.devnet.utils.CriadorDeObjetos;
@@ -57,7 +57,7 @@ class PedidoPostControllerIntegrationTest {
   @Autowired
   private ProdutoRepositoryJpa produtoRepositoryJpa;
 
-  private Cliente cliente;
+  private ClienteModel cliente;
 
   private Produto produto;
 

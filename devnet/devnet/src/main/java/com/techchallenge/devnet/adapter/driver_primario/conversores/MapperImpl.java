@@ -12,6 +12,16 @@ public final class MapperImpl implements IMapper {
   private ModelMapper modelMapper;
 
   @Override
+  public <O, D> D converterOrigemParaDestino(O origem, Class<D> destino) {
+    return this.modelMapper.map(origem, destino);
+  }
+
+  @Override
+  public <O, D> Page<D> converterPaginaOrigemParaPaginaDestino(Page<O> origens, Class<D> destino) {
+    return origens.map(origem -> this.modelMapper.map(origem, destino));
+  }
+
+  @Override
   public <D, E> E converterDtoRequestParaEntidade(D dtoRequest, Class<E> eClass) {
     return this.modelMapper.map(dtoRequest, eClass);
   }

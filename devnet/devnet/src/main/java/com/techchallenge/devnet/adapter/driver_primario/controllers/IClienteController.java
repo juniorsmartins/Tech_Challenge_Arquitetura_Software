@@ -2,7 +2,7 @@ package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ClienteDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ClienteDtoResponse;
-import com.techchallenge.devnet.core.domain.value_objects.filtros.ClienteFiltro;
+import com.techchallenge.devnet.adapter.driver_primario.dtos.filtros.ClienteFiltroDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -10,13 +10,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.util.UriComponentsBuilder;
 
 public interface IClienteController {
 
   interface PostController {
     @PostMapping
-    ResponseEntity<ClienteDtoResponse> cadastrar(ClienteDtoRequest dtoRequest, UriComponentsBuilder uriComponentsBuilder);
+    ResponseEntity<ClienteDtoResponse> cadastrar(ClienteDtoRequest dtoRequest);
   }
 
   interface PutController {
@@ -26,7 +25,7 @@ public interface IClienteController {
 
   interface GetController {
     @GetMapping
-    ResponseEntity<Page<ClienteDtoResponse>> pesquisar(ClienteFiltro filtro, Pageable paginacao);
+    ResponseEntity<Page<ClienteDtoResponse>> pesquisar(ClienteFiltroDto filtro, Pageable paginacao);
   }
 
   interface DeleteController {

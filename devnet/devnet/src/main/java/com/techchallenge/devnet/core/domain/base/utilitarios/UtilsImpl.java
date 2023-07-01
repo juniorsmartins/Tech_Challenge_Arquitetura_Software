@@ -3,7 +3,7 @@ package com.techchallenge.devnet.core.domain.base.utilitarios;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.PedidoDtoId;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.EmailDtoRequest;
 import com.techchallenge.devnet.core.application.ports.entrada.IEmailService;
-import com.techchallenge.devnet.core.application.ports.saida.IClienteRepository;
+import com.techchallenge.devnet.core.application.ports.saida.IClienteRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepository;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ClienteNaoEncontradoException;
@@ -19,7 +19,7 @@ public final class UtilsImpl implements IUtils {
   private static final String EMAIL_ORIGEM = "techchallenge6@gmail.com";
 
   @Autowired
-  private IClienteRepository.GetRepository clienteGetRepository;
+  private IClienteRepositoryPort.GetRepository clienteGetRepository;
 
   @Autowired
   private IProdutoRepository.GetRepository produtoGetRepository;

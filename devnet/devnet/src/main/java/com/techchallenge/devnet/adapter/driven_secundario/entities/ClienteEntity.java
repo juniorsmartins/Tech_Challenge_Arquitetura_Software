@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.core.domain.entities;
+package com.techchallenge.devnet.adapter.driven_secundario.entities;
 
 import com.techchallenge.devnet.core.domain.base.auditoria.AuditoriaDataJpa;
 import jakarta.persistence.Column;
@@ -13,7 +13,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.envers.Audited;
 
 import java.io.Serializable;
@@ -25,10 +24,9 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
 @EqualsAndHashCode(of = {"id"})
 @Audited
-public final class Cliente extends AuditoriaDataJpa implements Serializable {
+public final class ClienteEntity extends AuditoriaDataJpa implements Serializable {
 
   private static final long serialVersionUID = 1L;
 

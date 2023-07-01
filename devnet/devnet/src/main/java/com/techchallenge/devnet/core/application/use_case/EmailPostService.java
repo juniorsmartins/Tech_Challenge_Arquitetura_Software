@@ -4,7 +4,7 @@ import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.EmailDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.EmailDtoResponse;
 import com.techchallenge.devnet.core.application.ports.entrada.IEmailService;
-import com.techchallenge.devnet.core.application.ports.saida.IClienteRepository;
+import com.techchallenge.devnet.core.application.ports.saida.IClienteRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.IEmailRepository;
 import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepository;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
@@ -34,7 +34,7 @@ public class EmailPostService implements IEmailService.EnviarService {
   private IPedidoRepository.GetRepository pedidoGetRepository;
 
   @Autowired
-  private IClienteRepository.GetRepository clienteGetRepository;
+  private IClienteRepositoryPort.GetRepository clienteGetRepository;
 
   @Autowired
   private JavaMailSender javaMailSender;
