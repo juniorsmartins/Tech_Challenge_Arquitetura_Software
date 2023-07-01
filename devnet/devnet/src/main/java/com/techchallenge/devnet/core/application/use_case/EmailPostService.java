@@ -1,11 +1,8 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.EmailDtoRequest;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.EmailDtoResponse;
 import com.techchallenge.devnet.core.application.ports.entrada.IEmailService;
 import com.techchallenge.devnet.core.application.ports.saida.IClienteRepositoryPort;
-import com.techchallenge.devnet.core.application.ports.saida.IEmailRepository;
+import com.techchallenge.devnet.core.application.ports.saida.IEmailRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ClienteNaoEncontradoException;
@@ -28,9 +25,6 @@ import java.util.Optional;
 public class EmailPostService implements IEmailService.EnviarService {
 
   @Autowired
-  private IMapper mapper;
-
-  @Autowired
   private IPedidoRepositoryPort.GetRepository pedidoGetRepository;
 
   @Autowired
@@ -40,13 +34,12 @@ public class EmailPostService implements IEmailService.EnviarService {
   private JavaMailSender javaMailSender;
 
   @Autowired
-  private IEmailRepository.PostRepository emailPostRepository;
+  private IEmailRepositoryPort.PostRepository emailPostRepository;
 
   @Override
-  public EmailDtoResponse enviar(EmailDtoRequest dtoRequest) {
+  public EmailModel enviar(EmailModel emailModel) {
 
-    return Optional.of(dtoRequest)
-      .map(dto -> this.mapper.converterDtoRequestParaEntidade(dto, EmailModel.class))
+    return Optional.of(emailModel)
       .map(this::validarPedido)
       .map(this::validarCliente)
       .map(email -> {
@@ -70,12 +63,11 @@ public class EmailPostService implements IEmailService.EnviarService {
 
         return email;
       })
-      .map(email -> this.mapper.converterEntidadeParaDtoResponse(email, EmailDtoResponse.class))
       .orElseThrow();
   }
 
-  private EmailModel validarPedido(EmailModel email) {
-    var idPedido = email.getPedido().getId();
+  private EmailModel validarPedido(EmailModel emailModel) {
+    var idPedido = emailModel.getPedido().getId();
 
     var pedido = this.pedidoGetRepository.consultarPorId(idPedido)
       .orElseThrow(() -> {
@@ -83,9 +75,9 @@ public class EmailPostService implements IEmailService.EnviarService {
         throw new PedidoNaoEncontradoException(idPedido);
       });
 
-    email.setPedido(pedido);
+    emailModel.setPedido(pedido);
 
-    return email;
+    return emailModel;
   }
 
   private EmailModel validarCliente(EmailModel email) {

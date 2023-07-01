@@ -1,6 +1,5 @@
 package com.techchallenge.devnet.core.domain.models;
 
-import com.techchallenge.devnet.adapter.driven_secundario.entities.PedidoEntity;
 import com.techchallenge.devnet.core.domain.models.enums.StatusEmailEnum;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -42,7 +41,7 @@ public final class EmailModel implements Serializable {
   @Enumerated(EnumType.STRING)
   private StatusEmailEnum statusEmail;
 
-  private PedidoEntity pedido;
+  private PedidoModel pedido;
 
   private OffsetDateTime dataHoraCadastro;
 

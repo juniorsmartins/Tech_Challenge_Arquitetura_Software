@@ -1,13 +1,12 @@
 package com.techchallenge.devnet.core.domain.base.utilitarios;
 
-import com.techchallenge.devnet.adapter.driver_primario.dtos.PedidoDtoId;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.EmailDtoRequest;
 import com.techchallenge.devnet.core.application.ports.entrada.IEmailService;
 import com.techchallenge.devnet.core.application.ports.saida.IClienteRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ClienteNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
+import com.techchallenge.devnet.core.domain.models.EmailModel;
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,16 +67,16 @@ public final class UtilsImpl implements IUtils {
 
       var cliente = pedidoModel.getCliente();
 
-      var emailDtoRequest = EmailDtoRequest.builder()
+      var emailModel = EmailModel.builder()
         .ownerRef(cliente.getNome())
         .emailFrom(EMAIL_ORIGEM)
         .emailTo(cliente.getEmail())
         .subject("Notificação - Pedido RECEBIDO.")
         .text(cliente.getNome() + ", teu Pedido foi RECEBIDO pela DevNet.")
-        .pedido(PedidoDtoId.builder().id(pedidoModel.getId()).build())
+        .pedido(pedidoModel)
         .build();
 
-      this.emailEnviarService.enviar(emailDtoRequest);
+      this.emailEnviarService.enviar(emailModel);
     }
 
     return pedidoModel;
@@ -90,16 +89,16 @@ public final class UtilsImpl implements IUtils {
 
       var cliente = pedidoModel.getCliente();
 
-      var emailDtoRequest = EmailDtoRequest.builder()
+      var emailModel = EmailModel.builder()
         .ownerRef(cliente.getNome())
         .emailFrom(EMAIL_ORIGEM)
         .emailTo(cliente.getEmail())
         .subject("Notificação - Pedido PAGO em PREPARAÇÃO.")
         .text(cliente.getNome() + ", teu Pedido foi PAGO e está em PREPARAÇÃO.")
-        .pedido(PedidoDtoId.builder().id(pedidoModel.getId()).build())
+        .pedido(pedidoModel)
         .build();
 
-      this.emailEnviarService.enviar(emailDtoRequest);
+      this.emailEnviarService.enviar(emailModel);
     }
 
     return pedidoModel;
@@ -112,16 +111,16 @@ public final class UtilsImpl implements IUtils {
 
       var cliente = pedidoModel.getCliente();
 
-      var emailDtoRequest = EmailDtoRequest.builder()
+      var emailModel = EmailModel.builder()
         .ownerRef(cliente.getNome())
         .emailFrom(EMAIL_ORIGEM)
         .emailTo(cliente.getEmail())
         .subject("Notificação - Pedido PRONTO.")
         .text(cliente.getNome() + ", teu Pedido está PRONTO e pode ser retirado.")
-        .pedido(PedidoDtoId.builder().id(pedidoModel.getId()).build())
+        .pedido(pedidoModel)
         .build();
 
-      this.emailEnviarService.enviar(emailDtoRequest);
+      this.emailEnviarService.enviar(emailModel);
     }
 
     return pedidoModel;
@@ -134,16 +133,16 @@ public final class UtilsImpl implements IUtils {
 
       var cliente = pedidoModel.getCliente();
 
-      var emailDtoRequest = EmailDtoRequest.builder()
+      var emailModel = EmailModel.builder()
         .ownerRef(cliente.getNome())
         .emailFrom(EMAIL_ORIGEM)
         .emailTo(cliente.getEmail())
         .subject("Notificação - Pedido FINALIZADO.")
         .text(cliente.getNome() + ", teu Pedido foi retirado e está FINALIZADO.")
-        .pedido(PedidoDtoId.builder().id(pedidoModel.getId()).build())
+        .pedido(pedidoModel)
         .build();
 
-      this.emailEnviarService.enviar(emailDtoRequest);
+      this.emailEnviarService.enviar(emailModel);
     }
 
     return pedidoModel;

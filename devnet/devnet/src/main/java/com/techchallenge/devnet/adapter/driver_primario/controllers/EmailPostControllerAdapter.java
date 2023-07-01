@@ -1,9 +1,11 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
+import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.EmailDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.EmailDtoResponse;
 import com.techchallenge.devnet.core.application.ports.entrada.IEmailService;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
+import com.techchallenge.devnet.core.domain.models.EmailModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -19,10 +21,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-@Tag(name = "EmailPostController", description = "Adaptador para enviar recurso Email.")
+import java.net.URI;
+import java.util.Optional;
+
+@Tag(name = "EmailPostControllerAdapter", description = "Adaptador para enviar recurso Email.")
 @RestController
 @RequestMapping(path = "/api/v1/emails")
-public final class EmailPostController implements IEmailController.PostController {
+public final class EmailPostControllerAdapter implements IEmailControllerPort.PostController {
+
+  @Autowired
+  private IMapper mapper;
 
   @Autowired
   private IEmailService.EnviarService emailEnviarService;
@@ -41,13 +49,14 @@ public final class EmailPostController implements IEmailController.PostControlle
     @Parameter(name = "EmailDtoRequest", description = "Estrutura de dados para transporte de informações de entrada.", required = true)
     @RequestBody @Valid final EmailDtoRequest dtoRequest, final UriComponentsBuilder uriComponentsBuilder) {
 
-    var response = this.emailEnviarService.enviar(dtoRequest);
+    var response = Optional.of(dtoRequest)
+      .map(dto -> this.mapper.converterOrigemParaDestino(dto, EmailModel.class))
+      .map(this.emailEnviarService::enviar)
+      .map(model -> this.mapper.converterOrigemParaDestino(model, EmailDtoResponse.class))
+      .orElseThrow();
 
     return ResponseEntity
-      .created(uriComponentsBuilder
-        .path("/api/v1/emails/{id}")
-        .buildAndExpand(response.getId())
-        .toUri())
+      .created(URI.create("/api/v1/emails/" + response.getId()))
       .body(response);
   }
 }
