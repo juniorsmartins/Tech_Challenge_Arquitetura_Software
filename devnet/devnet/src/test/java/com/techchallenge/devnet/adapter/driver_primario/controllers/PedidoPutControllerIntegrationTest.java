@@ -10,7 +10,7 @@ import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ItemPedi
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.PedidoDtoRequest;
 import com.techchallenge.devnet.core.domain.models.ClienteModel;
 import com.techchallenge.devnet.core.domain.models.ItemPedido;
-import com.techchallenge.devnet.core.domain.models.Pedido;
+import com.techchallenge.devnet.adapter.driven_secundario.entities.PedidoEntity;
 import com.techchallenge.devnet.core.domain.models.ProdutoModel;
 import com.techchallenge.devnet.core.domain.models.enums.FormaPagamentoEnum;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;
@@ -62,7 +62,7 @@ class PedidoPutControllerIntegrationTest {
 
   private ProdutoModel produto;
 
-  private Pedido pedido;
+  private PedidoEntity pedido;
 
   @BeforeEach
   void criadorDeCenarios() {
@@ -81,7 +81,7 @@ class PedidoPutControllerIntegrationTest {
       .build();
     itemPedido.calcularPrecoParcial();
 
-    pedido = Pedido.builder()
+    pedido = PedidoEntity.builder()
       .cliente(cliente)
       .itensPedido(List.of(itemPedido))
       .formaPagamento(FormaPagamentoEnum.PIX)

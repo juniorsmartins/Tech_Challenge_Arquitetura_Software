@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.core.domain.value_objects.filtros;
+package com.techchallenge.devnet.adapter.driver_primario.dtos.filtros;
 
 import com.techchallenge.devnet.core.domain.models.enums.FormaPagamentoEnum;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;
@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public final class PedidoFiltro {
+public final class PedidoFiltroDto {
 
   private String id;
 

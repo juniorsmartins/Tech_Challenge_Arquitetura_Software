@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
-import com.techchallenge.devnet.core.application.ports.entrada.IPedidoService;
+import com.techchallenge.devnet.core.application.ports.entrada.IPedidoServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public final class PedidoDeleteController implements IPedidoController.DeleteController {
 
   @Autowired
-  private IPedidoService.DeleteService deleteService;
+  private IPedidoServicePort.DeleteService deleteService;
 
   @Operation(summary = "Cancelar Pedido", description = "Este recurso destina-se a apagar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {

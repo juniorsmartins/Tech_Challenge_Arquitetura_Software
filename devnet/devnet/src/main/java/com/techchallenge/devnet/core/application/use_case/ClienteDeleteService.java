@@ -2,7 +2,7 @@ package com.techchallenge.devnet.core.application.use_case;
 
 import com.techchallenge.devnet.core.application.ports.entrada.IClienteServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IClienteRepositoryPort;
-import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepository;
+import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ClienteNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_409.DeletarBloqueadoPoUso;
@@ -24,7 +24,7 @@ public class ClienteDeleteService implements IClienteServicePort.DeleteService {
   private IClienteRepositoryPort.DeleteRepository clienteDeleteRepository;
 
   @Autowired
-  private IPedidoRepository.GetRepository pedidoGetRepository;
+  private IPedidoRepositoryPort.GetRepository pedidoGetRepository;
 
   @Transactional(isolation = Isolation.SERIALIZABLE)
   @Override

@@ -2,7 +2,7 @@ package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.PedidoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PedidoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.IPedidoService;
+import com.techchallenge.devnet.core.application.ports.entrada.IPedidoServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -26,7 +26,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 public final class PedidoPostController implements IPedidoController.PostController {
 
   @Autowired
-  private IPedidoService.PostService service;
+  private IPedidoServicePort.PostService service;
 
   @Operation(summary = "Cadastrar Pedido", description = "Este recurso destina-se a cadastrar.")
   @ApiResponses(value = {

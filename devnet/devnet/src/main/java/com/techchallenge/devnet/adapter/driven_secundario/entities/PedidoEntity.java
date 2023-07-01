@@ -1,6 +1,9 @@
-package com.techchallenge.devnet.core.domain.models;
+package com.techchallenge.devnet.adapter.driven_secundario.entities;
 
 import com.techchallenge.devnet.core.domain.base.auditoria.AuditoriaDataJpa;
+import com.techchallenge.devnet.core.domain.models.ClienteModel;
+import com.techchallenge.devnet.core.domain.models.ItemPedido;
+import com.techchallenge.devnet.core.domain.models.PagamentoModel;
 import com.techchallenge.devnet.core.domain.models.enums.FormaPagamentoEnum;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;
 import jakarta.persistence.CascadeType;
@@ -39,7 +42,7 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode(of = {"id"})
 @Audited
-public final class Pedido extends AuditoriaDataJpa implements Serializable {
+public final class PedidoEntity extends AuditoriaDataJpa implements Serializable {
 
   public static final long serialVersionUID = 1L;
 
@@ -67,7 +70,7 @@ public final class Pedido extends AuditoriaDataJpa implements Serializable {
   private List<ItemPedido> itensPedido = new ArrayList<>();
 
   @OneToOne(mappedBy = "pedido", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-  private Pagamento pagamento;
+  private PagamentoModel pagamento;
 
   public void calcularPrecoTotal() {
     this.getItensPedido().forEach(ItemPedido::calcularPrecoParcial);

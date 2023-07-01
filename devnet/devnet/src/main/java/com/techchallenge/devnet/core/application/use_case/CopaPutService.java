@@ -1,14 +1,12 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PedidoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.ICopaService;
-import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepository;
+import com.techchallenge.devnet.core.application.ports.entrada.ICopaServicePort;
+import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_409.AtualizarPedidoBloqueadoException;
-import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.core.domain.base.utilitarios.IUtils;
-import com.techchallenge.devnet.core.domain.models.Pedido;
+import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,25 +15,21 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
-public class CopaPutService implements ICopaService.PutService {
-
-  @Autowired
-  private IMapper mapper;
+public class CopaPutService implements ICopaServicePort.PutService {
 
   @Autowired
   private IUtils utils;
 
   @Autowired
-  private IPedidoRepository.GetRepository pedidoGetRepository;
+  private IPedidoRepositoryPort.GetRepository pedidoGetRepository;
 
   @Transactional
   @Override
-  public PedidoDtoResponse confirmarPedidoPronto(final Long idPedido) {
+  public PedidoModel confirmarPedidoPronto(final Long idPedido) {
 
     return this.pedidoGetRepository.consultarPorId(idPedido)
       .map(this::alterarStatusPedidoParaPronto)
       .map(this.utils::notificarPedidoPronto)
-      .map(pedido -> this.mapper.converterEntidadeParaDtoResponse(pedido, PedidoDtoResponse.class))
       .orElseThrow(() -> {
         log.info(String.format(MensagemPadrao.PEDIDO_NAO_ENCONTRADO, idPedido));
         throw new PedidoNaoEncontradoException(idPedido);
@@ -44,36 +38,35 @@ public class CopaPutService implements ICopaService.PutService {
 
   @Transactional
   @Override
-  public PedidoDtoResponse confirmarPedidoFinalizado(final Long idPedido) {
+  public PedidoModel confirmarPedidoFinalizado(final Long idPedido) {
 
     return this.pedidoGetRepository.consultarPorId(idPedido)
       .map(this::alterarStatusPedidoParaFinalizado)
       .map(this.utils::notificarPedidoFinalizado)
-      .map(pedido -> this.mapper.converterEntidadeParaDtoResponse(pedido, PedidoDtoResponse.class))
       .orElseThrow(() -> {
         log.info(String.format(MensagemPadrao.PEDIDO_NAO_ENCONTRADO, idPedido));
         throw new PedidoNaoEncontradoException(idPedido);
       });
   }
 
-  private Pedido alterarStatusPedidoParaPronto(Pedido pedido) {
-    if (!pedido.getStatusPedido().equals(StatusPedidoEnum.PREPARACAO)) {
-      log.info(String.format(MensagemPadrao.PEDIDO_BLOQUEADO_PARA_PRONTO, pedido.getId(), pedido.getStatusPedido()));
+  private PedidoModel alterarStatusPedidoParaPronto(PedidoModel pedidoModel) {
+    if (!pedidoModel.getStatusPedido().equals(StatusPedidoEnum.PREPARACAO)) {
+      log.info(String.format(MensagemPadrao.PEDIDO_BLOQUEADO_PARA_PRONTO, pedidoModel.getId(), pedidoModel.getStatusPedido()));
       throw new AtualizarPedidoBloqueadoException(String
-        .format(MensagemPadrao.PEDIDO_BLOQUEADO_PARA_PRONTO, pedido.getId(), pedido.getStatusPedido()));
+        .format(MensagemPadrao.PEDIDO_BLOQUEADO_PARA_PRONTO, pedidoModel.getId(), pedidoModel.getStatusPedido()));
     }
-    pedido.setStatusPedido(StatusPedidoEnum.PRONTO);
-    return pedido;
+    pedidoModel.setStatusPedido(StatusPedidoEnum.PRONTO);
+    return pedidoModel;
   }
 
-  private Pedido alterarStatusPedidoParaFinalizado(Pedido pedido) {
-    if (!pedido.getStatusPedido().equals(StatusPedidoEnum.PRONTO)) {
-      log.info(String.format(MensagemPadrao.PEDIDO_BLOQUEADO_PARA_FINALIZADO, pedido.getId(), pedido.getStatusPedido()));
+  private PedidoModel alterarStatusPedidoParaFinalizado(PedidoModel pedidoModel) {
+    if (!pedidoModel.getStatusPedido().equals(StatusPedidoEnum.PRONTO)) {
+      log.info(String.format(MensagemPadrao.PEDIDO_BLOQUEADO_PARA_FINALIZADO, pedidoModel.getId(), pedidoModel.getStatusPedido()));
       throw new AtualizarPedidoBloqueadoException(String
-        .format(MensagemPadrao.PEDIDO_BLOQUEADO_PARA_FINALIZADO, pedido.getId(), pedido.getStatusPedido()));
+        .format(MensagemPadrao.PEDIDO_BLOQUEADO_PARA_FINALIZADO, pedidoModel.getId(), pedidoModel.getStatusPedido()));
     }
-    pedido.setStatusPedido(StatusPedidoEnum.FINALIZADO);
-    return pedido;
+    pedidoModel.setStatusPedido(StatusPedidoEnum.FINALIZADO);
+    return pedidoModel;
   }
 }
 

@@ -7,7 +7,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.techchallenge.devnet.core.domain.base.exceptions.ArmazemException;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
-import com.techchallenge.devnet.core.domain.models.Pedido;
+import com.techchallenge.devnet.adapter.driven_secundario.entities.PedidoEntity;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +24,7 @@ public final class QRCodeGenerator {
 
   public static String sufixoDoNomeDaImagemDoQRCode = "-QRCODE.png";
 
-  public static InputStreamResource gerarQRCode(Pedido pedido) throws WriterException, IOException {
+  public static InputStreamResource gerarQRCode(PedidoEntity pedido) throws WriterException, IOException {
 
     var nomeDaImagemQrCode = criarNomeDaImagemQrCode(pedido);
     var caminhoDaImagemQrCode = criarCaminhoComNomeDaImagemQrCode(nomeDaImagemQrCode);
@@ -45,7 +45,7 @@ public final class QRCodeGenerator {
     return imagemQrCodeRetorno;
   }
 
-  public static String criarNomeDaImagemQrCode(Pedido pedido) {
+  public static String criarNomeDaImagemQrCode(PedidoEntity pedido) {
     return pedido.getId() + sufixoDoNomeDaImagemDoQRCode;
   }
 

@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PedidoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.IPedidoService;
+import com.techchallenge.devnet.core.application.ports.entrada.IPedidoServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.core.domain.value_objects.filtros.PedidoFiltro;
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,7 +29,7 @@ import java.util.Optional;
 public final class PedidoGetController implements IPedidoController.GetController {
 
   @Autowired
-  private IPedidoService.GetService service;
+  private IPedidoServicePort.GetService service;
 
   @Operation(summary = "Pesquisar Pedido", description = "Este recurso permite consultar Pedido por diversas propriedades com retorno paginado.")
   @ApiResponses(value = {

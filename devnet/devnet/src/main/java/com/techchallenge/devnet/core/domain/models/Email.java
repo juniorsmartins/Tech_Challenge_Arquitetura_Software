@@ -1,5 +1,6 @@
 package com.techchallenge.devnet.core.domain.models;
 
+import com.techchallenge.devnet.adapter.driven_secundario.entities.PedidoEntity;
 import com.techchallenge.devnet.core.domain.models.enums.StatusEmailEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -63,6 +64,6 @@ public final class Email implements Serializable {
 
   @ManyToOne
   @JoinColumn(name = "pedido_id", referencedColumnName = "id", nullable = false)
-  private Pedido pedido;
+  private PedidoEntity pedido;
 }
 

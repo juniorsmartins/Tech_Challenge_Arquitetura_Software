@@ -1,13 +1,13 @@
 package com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa;
 
-import com.techchallenge.devnet.core.domain.models.Pedido;
+import com.techchallenge.devnet.adapter.driven_secundario.entities.PedidoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import java.util.List;
 
-public interface PedidoRepositoryJpa extends JpaRepository<Pedido, Long>, JpaSpecificationExecutor<Pedido> {
+public interface PedidoRepositoryJpa extends JpaRepository<PedidoEntity, Long>, JpaSpecificationExecutor<PedidoEntity> {
 
-  List<Pedido> findByClienteId(Long clienteId);
+  List<PedidoEntity> findByClienteId(Long clienteId);
 }
 

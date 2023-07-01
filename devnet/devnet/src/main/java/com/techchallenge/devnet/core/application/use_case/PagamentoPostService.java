@@ -1,11 +1,11 @@
 package com.techchallenge.devnet.core.application.use_case;
 
 import com.google.zxing.WriterException;
-import com.techchallenge.devnet.core.application.ports.entrada.IPagamentoService;
-import com.techchallenge.devnet.core.application.ports.saida.IPagamentoRepository;
+import com.techchallenge.devnet.core.application.ports.entrada.IPagamentoServicePort;
+import com.techchallenge.devnet.core.application.ports.saida.IPagamentoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.utilitarios.QRCodeGenerator;
-import com.techchallenge.devnet.core.domain.models.Pagamento;
-import com.techchallenge.devnet.core.domain.models.Pedido;
+import com.techchallenge.devnet.core.domain.models.PagamentoModel;
+import com.techchallenge.devnet.adapter.driven_secundario.entities.PedidoEntity;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPagamentoEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -15,13 +15,13 @@ import java.io.IOException;
 import java.util.Optional;
 
 @Service
-public class PagamentoPostService implements IPagamentoService.PostService {
+public class PagamentoPostService implements IPagamentoServicePort.PostService {
 
   @Autowired
-  private IPagamentoRepository.PostRepository pagamentoPostRepository;
+  private IPagamentoRepositoryPort.PostRepository pagamentoPostRepository;
 
   @Override
-  public Pedido iniciarCobrancaDePagamento(final Pedido pedido) {
+  public PedidoEntity iniciarCobrancaDePagamento(final PedidoEntity pedido) {
 
     return Optional.of(pedido)
       .map(entidade -> {
@@ -32,7 +32,7 @@ public class PagamentoPostService implements IPagamentoService.PostService {
       .orElseThrow();
   }
 
-  private InputStreamResource criarQRCode(Pedido pedido) {
+  private InputStreamResource criarQRCode(PedidoEntity pedido) {
 
     try {
       return QRCodeGenerator.gerarQRCode(pedido);
@@ -42,9 +42,9 @@ public class PagamentoPostService implements IPagamentoService.PostService {
     }
   }
 
-  private Pedido cadastrarPagamento(Pedido pedido) {
+  private PedidoEntity cadastrarPagamento(PedidoEntity pedido) {
 
-    var pagamento = Pagamento.builder()
+    var pagamento = PagamentoModel.builder()
       .statusPagamento(StatusPagamentoEnum.ABERTO)
       .pedido(pedido)
       .nomeImagemQRCode(QRCodeGenerator.criarNomeDaImagemQrCode(pedido))

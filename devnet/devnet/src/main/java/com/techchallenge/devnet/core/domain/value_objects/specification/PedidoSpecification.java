@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.core.domain.value_objects.specification;
 
-import com.techchallenge.devnet.core.domain.models.Pedido;
-import com.techchallenge.devnet.core.domain.value_objects.filtros.PedidoFiltro;
+import com.techchallenge.devnet.adapter.driven_secundario.entities.PedidoEntity;
+import com.techchallenge.devnet.adapter.driver_primario.dtos.filtros.PedidoFiltroDto;
 import jakarta.persistence.criteria.Predicate;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.jpa.domain.Specification;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public final class PedidoSpecification {
 
-  public static Specification<Pedido> consultarDinamicamente(PedidoFiltro filtro) {
+  public static Specification<PedidoEntity> consultarDinamicamente(PedidoFiltroDto filtro) {
 
     return ((root, query, criteriaBuilder) -> {
 

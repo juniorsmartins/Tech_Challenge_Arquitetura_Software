@@ -1,5 +1,6 @@
 package com.techchallenge.devnet.core.domain.models;
 
+import com.techchallenge.devnet.adapter.driven_secundario.entities.PedidoEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -46,7 +47,7 @@ public final class ItemPedido implements Serializable {
 
   @ManyToOne
   @JoinColumn(name = "pedido_id", referencedColumnName = "id", nullable = false)
-  private Pedido pedido;
+  private PedidoEntity pedido;
 
   @ManyToOne
   @JoinColumn(name = "produto_id", referencedColumnName = "id", nullable = false)

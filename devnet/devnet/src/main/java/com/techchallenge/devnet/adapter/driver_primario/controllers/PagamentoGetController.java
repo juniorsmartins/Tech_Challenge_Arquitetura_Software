@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PagamentoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.IPagamentoService;
+import com.techchallenge.devnet.core.application.ports.entrada.IPagamentoServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.core.domain.value_objects.filtros.PagamentoFiltro;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,7 +32,7 @@ import java.util.Optional;
 public final class PagamentoGetController implements IPagamentoController.GetController {
 
   @Autowired
-  private IPagamentoService.GetService service;
+  private IPagamentoServicePort.GetService service;
 
   @Operation(summary = "Pesquisar Pagamento", description = "Este recurso permite consultar por diversas propriedades com retorno paginado.")
   @ApiResponses(value = {

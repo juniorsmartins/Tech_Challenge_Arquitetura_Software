@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PagamentoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.IPagamentoService;
+import com.techchallenge.devnet.core.application.ports.entrada.IPagamentoServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public final class PagamentoPutController implements IPagamentoController.PutController {
 
   @Autowired
-  private IPagamentoService.PutService putService;
+  private IPagamentoServicePort.PutService putService;
 
   @Operation(summary = "Atualizar Cliente", description = "Este recurso destina-se a atualizar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {

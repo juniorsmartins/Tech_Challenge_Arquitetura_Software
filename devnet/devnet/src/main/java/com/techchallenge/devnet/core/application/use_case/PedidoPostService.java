@@ -3,11 +3,11 @@ package com.techchallenge.devnet.core.application.use_case;
 import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.PedidoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PedidoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.IPagamentoService;
-import com.techchallenge.devnet.core.application.ports.entrada.IPedidoService;
-import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepository;
+import com.techchallenge.devnet.core.application.ports.entrada.IPagamentoServicePort;
+import com.techchallenge.devnet.core.application.ports.entrada.IPedidoServicePort;
+import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.utilitarios.IUtils;
-import com.techchallenge.devnet.core.domain.models.Pedido;
+import com.techchallenge.devnet.adapter.driven_secundario.entities.PedidoEntity;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
-public class PedidoPostService implements IPedidoService.PostService {
+public class PedidoPostService implements IPedidoServicePort.PostService {
 
   @Autowired
   private IMapper mapper;
@@ -25,17 +25,17 @@ public class PedidoPostService implements IPedidoService.PostService {
   private IUtils utils;
 
   @Autowired
-  private IPagamentoService.PostService pagamentoPostService;
+  private IPagamentoServicePort.PostService pagamentoPostService;
 
   @Autowired
-  private IPedidoRepository.PostRepository pedidoPostRepository;
+  private IPedidoRepositoryPort.PostRepository pedidoPostRepository;
 
   @Transactional
   @Override
   public PedidoDtoResponse cadastrar(final PedidoDtoRequest dtoRequest) {
 
     return Optional.of(dtoRequest)
-      .map(dto -> this.mapper.converterDtoRequestParaEntidade(dto, Pedido.class))
+      .map(dto -> this.mapper.converterDtoRequestParaEntidade(dto, PedidoEntity.class))
       .map(this.utils::confirmarCliente)
       .map(this.utils::confirmarProdutos)
       .map(this::organizarPedidoParaRegistrar)
@@ -46,7 +46,7 @@ public class PedidoPostService implements IPedidoService.PostService {
       .orElseThrow();
   }
 
-  private Pedido organizarPedidoParaRegistrar(Pedido pedido) {
+  private PedidoEntity organizarPedidoParaRegistrar(PedidoEntity pedido) {
 
     pedido.setStatusPedido(StatusPedidoEnum.RECEBIDO);
     pedido.getItensPedido().forEach(item -> item.setPedido(pedido));

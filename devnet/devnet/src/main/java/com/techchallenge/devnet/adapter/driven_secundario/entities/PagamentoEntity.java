@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.core.domain.models;
+package com.techchallenge.devnet.adapter.driven_secundario.entities;
 
 import com.techchallenge.devnet.core.domain.base.auditoria.AuditoriaDataJpa;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPagamentoEnum;
@@ -31,7 +31,7 @@ import java.io.Serializable;
 @Setter
 @EqualsAndHashCode(of = {"id"})
 @Audited
-public final class Pagamento extends AuditoriaDataJpa implements Serializable {
+public final class PagamentoEntity extends AuditoriaDataJpa implements Serializable {
 
   public static final long serialVersionUID = 1L;
 
@@ -46,7 +46,7 @@ public final class Pagamento extends AuditoriaDataJpa implements Serializable {
 
   @OneToOne
   @JoinColumn(name = "pedido_id", referencedColumnName = "id", nullable = false)
-  private Pedido pedido;
+  private PedidoEntity pedido;
 
   @Column(name = "nome_imagem_qrcode", nullable = true)
   private String nomeImagemQRCode;

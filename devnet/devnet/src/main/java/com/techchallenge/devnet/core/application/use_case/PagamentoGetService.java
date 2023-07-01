@@ -1,8 +1,8 @@
 package com.techchallenge.devnet.core.application.use_case;
 
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PagamentoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.IPagamentoService;
-import com.techchallenge.devnet.core.application.ports.saida.IPagamentoRepository;
+import com.techchallenge.devnet.core.application.ports.entrada.IPagamentoServicePort;
+import com.techchallenge.devnet.core.application.ports.saida.IPagamentoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PagamentoNaoEncontradoException;
 import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
@@ -20,13 +20,13 @@ import java.util.Optional;
 
 @Slf4j
 @Service
-public class PagamentoGetService implements IPagamentoService.GetService {
+public class PagamentoGetService implements IPagamentoServicePort.GetService {
 
   @Autowired
   private IMapper mapper;
 
   @Autowired
-  private IPagamentoRepository.GetRepository pagamentoGetRepository;
+  private IPagamentoRepositoryPort.GetRepository pagamentoGetRepository;
 
   @Transactional(readOnly = true)
   @Override

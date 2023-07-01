@@ -6,7 +6,7 @@ import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.Pedid
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.ProdutoRepositoryJpa;
 import com.techchallenge.devnet.core.domain.models.ClienteModel;
 import com.techchallenge.devnet.core.domain.models.ItemPedido;
-import com.techchallenge.devnet.core.domain.models.Pedido;
+import com.techchallenge.devnet.adapter.driven_secundario.entities.PedidoEntity;
 import com.techchallenge.devnet.core.domain.models.ProdutoModel;
 import com.techchallenge.devnet.core.domain.models.enums.FormaPagamentoEnum;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;
@@ -86,7 +86,7 @@ class PedidoDeleteControllerIntegrationTest {
       .quantidade(2)
       .build();
 
-    var pedido = Pedido.builder()
+    var pedido = PedidoEntity.builder()
       .statusPedido(StatusPedidoEnum.RECEBIDO)
       .formaPagamento(FormaPagamentoEnum.PIX)
       .itensPedido(List.of(itemPedido))

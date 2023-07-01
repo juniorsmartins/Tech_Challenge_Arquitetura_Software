@@ -4,7 +4,7 @@ import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PedidoDtoR
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;
 
-public interface ICopaController {
+public interface ICopaControllerPort {
 
   interface PutController {
     @PutMapping(path = "/status-pronto/{idPedido}")

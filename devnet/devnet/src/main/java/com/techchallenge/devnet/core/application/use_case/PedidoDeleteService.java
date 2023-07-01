@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.core.application.ports.entrada.IPedidoService;
-import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepository;
+import com.techchallenge.devnet.core.application.ports.entrada.IPedidoServicePort;
+import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_409.CancelamentoBloqueadoException;
@@ -15,10 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
-public class PedidoDeleteService implements IPedidoService.DeleteService {
+public class PedidoDeleteService implements IPedidoServicePort.DeleteService {
 
   @Autowired
-  private IPedidoRepository.GetRepository pedidoGetRepository;
+  private IPedidoRepositoryPort.GetRepository pedidoGetRepository;
 
   @Transactional(isolation = Isolation.SERIALIZABLE)
   @Override

@@ -6,7 +6,7 @@ import com.techchallenge.devnet.core.domain.value_objects.filtros.PedidoFiltro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface IPedidoService {
+public interface IPedidoServicePort {
 
   interface PostService {
     PedidoDtoResponse cadastrar(PedidoDtoRequest dtoRequest);

@@ -1,7 +1,8 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
+import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PedidoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.ICopaService;
+import com.techchallenge.devnet.core.application.ports.entrada.ICopaServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -16,13 +17,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 @Tag(name = "CopaPutController", description = "Adaptador para atualizar recurso Pedido.")
 @RestController
 @RequestMapping(path = "/api/v1/copa")
-public final class CopaPutController implements ICopaController.PutController {
+public final class CopaPutControllerAdapter implements ICopaControllerPort.PutController {
 
   @Autowired
-  private ICopaService.PutService copaPutService;
+  private IMapper mapper;
+
+  @Autowired
+  private ICopaServicePort.PutService copaPutService;
 
   @Operation(summary = "Atualizar Cliente", description = "Este recurso destina-se a atualizar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {
@@ -38,7 +44,10 @@ public final class CopaPutController implements ICopaController.PutController {
     @Parameter(name = "id", description = "Chave de identificação", example = "22", required = true)
     @PathVariable(name = "idPedido") final Long idPedido) {
 
-    var response = this.copaPutService.confirmarPedidoPronto(idPedido);
+    var response = Optional.of(idPedido)
+      .map(id -> this.copaPutService.confirmarPedidoPronto(id))
+      .map(model -> this.mapper.converterOrigemParaDestino(model, PedidoDtoResponse.class))
+      .orElseThrow();
 
     return ResponseEntity
       .ok()
@@ -59,7 +68,10 @@ public final class CopaPutController implements ICopaController.PutController {
     @Parameter(name = "id", description = "Chave de identificação", example = "22", required = true)
     @PathVariable(name = "idPedido") final Long idPedido) {
 
-    var response = this.copaPutService.confirmarPedidoFinalizado(idPedido);
+    var response = Optional.of(idPedido)
+      .map(id -> this.copaPutService.confirmarPedidoFinalizado(id))
+      .map(model -> this.mapper.converterOrigemParaDestino(model, PedidoDtoResponse.class))
+      .orElseThrow();
 
     return ResponseEntity
       .ok()

@@ -6,7 +6,7 @@ import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.EmailDtoRe
 import com.techchallenge.devnet.core.application.ports.entrada.IEmailService;
 import com.techchallenge.devnet.core.application.ports.saida.IClienteRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.IEmailRepository;
-import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepository;
+import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ClienteNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
@@ -31,7 +31,7 @@ public class EmailPostService implements IEmailService.EnviarService {
   private IMapper mapper;
 
   @Autowired
-  private IPedidoRepository.GetRepository pedidoGetRepository;
+  private IPedidoRepositoryPort.GetRepository pedidoGetRepository;
 
   @Autowired
   private IClienteRepositoryPort.GetRepository clienteGetRepository;

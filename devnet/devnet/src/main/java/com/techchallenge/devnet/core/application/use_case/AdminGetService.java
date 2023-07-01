@@ -2,8 +2,8 @@ package com.techchallenge.devnet.core.application.use_case;
 
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.IndicadoresDtoResponse;
 import com.techchallenge.devnet.core.application.ports.entrada.IAdminService;
-import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepository;
-import com.techchallenge.devnet.core.domain.models.Pedido;
+import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
+import com.techchallenge.devnet.adapter.driven_secundario.entities.PedidoEntity;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPagamentoEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import java.util.List;
 public class AdminGetService implements IAdminService.GetService {
 
   @Autowired
-  private IPedidoRepository.GetRepository pedidoGetRepository;
+  private IPedidoRepositoryPort.GetRepository pedidoGetRepository;
 
   @Transactional(readOnly = true)
   @Override
@@ -34,24 +34,24 @@ public class AdminGetService implements IAdminService.GetService {
       .build();
   }
 
-  private BigDecimal calcularTotalDePagamentoEmAberto(List<Pedido> pedidos) {
+  private BigDecimal calcularTotalDePagamentoEmAberto(List<PedidoEntity> pedidos) {
     return pedidos.stream()
       .filter(pedido -> pedido.getPagamento().getStatusPagamento().equals(StatusPagamentoEnum.ABERTO))
-      .map(Pedido::getPrecoTotal)
+      .map(PedidoEntity::getPrecoTotal)
       .reduce(BigDecimal.ZERO, BigDecimal::add);
   }
 
-  private BigDecimal calcularTotalDePagamentoPago(List<Pedido> pedidos) {
+  private BigDecimal calcularTotalDePagamentoPago(List<PedidoEntity> pedidos) {
     return pedidos.stream()
       .filter(pedido -> pedido.getPagamento().getStatusPagamento().equals(StatusPagamentoEnum.PAGO))
-      .map(Pedido::getPrecoTotal)
+      .map(PedidoEntity::getPrecoTotal)
       .reduce(BigDecimal.ZERO, BigDecimal::add);
   }
 
-  private BigDecimal calcularTotalDePagamentoCancelado(List<Pedido> pedidos) {
+  private BigDecimal calcularTotalDePagamentoCancelado(List<PedidoEntity> pedidos) {
     return pedidos.stream()
       .filter(pedido -> pedido.getPagamento().getStatusPagamento().equals(StatusPagamentoEnum.CANCELADO))
-      .map(Pedido::getPrecoTotal)
+      .map(PedidoEntity::getPrecoTotal)
       .reduce(BigDecimal.ZERO, BigDecimal::add);
   }
 }

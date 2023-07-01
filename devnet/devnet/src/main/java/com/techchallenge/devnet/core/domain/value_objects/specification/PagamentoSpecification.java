@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.core.domain.value_objects.specification;
 
-import com.techchallenge.devnet.core.domain.models.Pagamento;
+import com.techchallenge.devnet.core.domain.models.PagamentoModel;
 import com.techchallenge.devnet.core.domain.value_objects.filtros.PagamentoFiltro;
 import jakarta.persistence.criteria.Predicate;
 import org.apache.commons.lang3.ObjectUtils;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public final class PagamentoSpecification {
 
-  public static Specification<Pagamento> consultarDinamicamente(PagamentoFiltro filtro) {
+  public static Specification<PagamentoModel> consultarDinamicamente(PagamentoFiltro filtro) {
     return ((root, query, criteriaBuilder) -> {
 
       var predicados = new ArrayList<Predicate>();
