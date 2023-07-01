@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface IClienteRepositoryPort {
 
   interface PostRepository {
-    ClienteModel salvar(ClienteModel cliente);
+    ClienteModel salvar(ClienteModel clienteModel);
   }
 
   interface GetRepository {

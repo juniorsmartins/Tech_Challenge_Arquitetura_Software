@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
-@Tag(name = "ClientePutController", description = "Adaptador para atualizar recurso Cliente.")
+@Tag(name = "ClientePutControllerAdapter", description = "Adaptador para atualizar recurso Cliente.")
 @RestController
 @RequestMapping(path = "/api/v1/clientes")
 public final class ClientePutControllerAdapter implements IClienteControllerPort.PutController {

@@ -7,6 +7,7 @@ import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPo
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -19,6 +20,7 @@ public class PedidoPostRepositoryAdapter implements IPedidoRepositoryPort.PostRe
   @Autowired
   private PedidoRepositoryJpa jpa;
 
+  @Transactional
   @Override
   public PedidoModel salvar(final PedidoModel pedidoModel) {
 

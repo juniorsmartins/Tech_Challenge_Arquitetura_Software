@@ -10,6 +10,7 @@ import com.techchallenge.devnet.core.domain.models.enums.StatusPagamentoEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -20,13 +21,14 @@ public class PagamentoPostService implements IPagamentoServicePort.PostService {
   @Autowired
   private IPagamentoRepositoryPort.PostRepository pagamentoPostRepository;
 
+  @Transactional
   @Override
   public PedidoModel iniciarCobrancaDePagamento(final PedidoModel pedidoModel) {
 
     return Optional.of(pedidoModel)
-      .map(entidade -> {
-        var imagemQrCodeRetorno = this.criarQRCode(entidade);
-        return entidade;
+      .map(model -> {
+        var imagemQrCodeRetorno = this.criarQRCode(model);
+        return model;
       })
       .map(this::cadastrarPagamento)
       .orElseThrow();

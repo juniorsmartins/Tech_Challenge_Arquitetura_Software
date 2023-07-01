@@ -9,8 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
@@ -19,7 +17,6 @@ public class ClientePutService implements IClienteServicePort.PutService {
   @Autowired
   private IClienteRepositoryPort.GetRepository clienteGetRepository;
 
-  @Transactional(isolation = Isolation.SERIALIZABLE)
   @Override
   public ClienteModel atualizar(final Long id, final ClienteModel clienteModel) {
 
