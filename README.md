@@ -29,18 +29,19 @@ Descrição: aplicação desenvolvida para compor nota no processo avaliativo da
     2. Linguagem Pictográfica (Domain Storytelling);
     3. Domínio (Subdomínio Principal, Subdomínio Genérico e Subdomínio de Suporte);
     4. Event Storming;
-    5. Bounded Context e Context Maps;
+    5. Bounded Context e Context Maps.
 
 2. Documentação de Desenvolvimento do Projeto;
     1. Tecnologias;
     2. Funcionalidades;
     3. Ferramentas;
-    4. Diagramas;
+    4. Diagramas.
 
 3. Documentação de Utilização do Projeto;
     1. Documentação Swagger/OpenAPI;
     2. EndPoints e formato de Json;
     3. Arquivo de requisições do Postman;
+    4. Como testar.
 
 4. Autoria.
 
