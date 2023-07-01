@@ -32,7 +32,7 @@ public final class FotoProdutoPutControllerAdapter implements IFotoProdutoContro
   private IMapper mapper;
 
   @Autowired
-  private IFotoProdutoServicePort.PutService fotoProdutoService;
+  private IFotoProdutoServicePort.PutService service;
 
   @Operation(summary = "Atualizar Cliente", description = "Este recurso destina-se a atualizar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {
@@ -53,7 +53,7 @@ public final class FotoProdutoPutControllerAdapter implements IFotoProdutoContro
       .map(dtoRequest -> this.mapper.converterOrigemParaDestino(dtoRequest, FotoProdutoArquivo.class))
       .map(arquivo -> {
         try {
-          return this.fotoProdutoService.inserirFotoNoProduto(produtoId, arquivo);
+          return this.service.inserirFotoNoProduto(produtoId, arquivo);
         } catch (IOException e) {
           throw new RuntimeException(e);
         }

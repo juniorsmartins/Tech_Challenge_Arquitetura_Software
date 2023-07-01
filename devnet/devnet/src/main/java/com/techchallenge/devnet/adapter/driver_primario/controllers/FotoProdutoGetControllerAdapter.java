@@ -31,7 +31,7 @@ public final class FotoProdutoGetControllerAdapter implements IFotoProdutoContro
   private IMapper mapper;
 
   @Autowired
-  private IFotoProdutoServicePort.GetService fotoProdutoGetService;
+  private IFotoProdutoServicePort.GetService service;
 
   @Operation(summary = "Pesquisar FotoProduto", description = "Este recurso permite consultar FotoProduto por diversas propriedades com retorno paginado.")
   @ApiResponses(value = {
@@ -48,7 +48,7 @@ public final class FotoProdutoGetControllerAdapter implements IFotoProdutoContro
     @PathVariable(name = "id") final Long id) {
 
     var response = Optional.of(id)
-      .map(codigo -> this.fotoProdutoGetService.consultarPorId(codigo))
+      .map(codigo -> this.service.consultarPorId(codigo))
       .map(model -> this.mapper.converterOrigemParaDestino(model, FotoProdutoDtoResponse.class))
       .orElseThrow();
 
@@ -70,7 +70,7 @@ public final class FotoProdutoGetControllerAdapter implements IFotoProdutoContro
   public ResponseEntity<InputStreamResource> consultarImagemPorId(@PathVariable(name = "id") final Long id,
                                                       @RequestHeader(name = "accept") final String acceptHeader) {
     try {
-      var imagemModel = this.fotoProdutoGetService.consultarImagemPorId(id, acceptHeader);
+      var imagemModel = this.service.consultarImagemPorId(id, acceptHeader);
 
       return ResponseEntity
         .ok()

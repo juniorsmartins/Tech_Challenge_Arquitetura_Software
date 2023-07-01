@@ -34,7 +34,7 @@ public final class ClienteGetControllerAdapter implements IClienteControllerPort
   private IMapper mapper;
 
   @Autowired
-  private IClienteServicePort.GetService clienteGetService;
+  private IClienteServicePort.GetService service;
 
   @Operation(summary = "Pesquisar Cliente", description = "Este recurso permite consultar Cliente por diversas propriedades com retorno paginado.")
   @ApiResponses(value = {
@@ -53,7 +53,7 @@ public final class ClienteGetControllerAdapter implements IClienteControllerPort
 
     var response = Optional.of(filtroDto)
       .map(dto -> this.mapper.converterOrigemParaDestino(dto, ClienteFiltro.class))
-      .map(filtro -> this.clienteGetService.pesquisar(filtro, paginacao))
+      .map(filtro -> this.service.pesquisar(filtro, paginacao))
       .map(paginaClientes -> this.mapper.converterPaginaOrigemParaPaginaDestino(paginaClientes, ClienteDtoResponse.class))
       .orElseThrow();
 

@@ -1,9 +1,11 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
+import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.PedidoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PedidoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.entrada.IPedidoServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
+import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -25,7 +27,10 @@ import java.util.Optional;
 @Tag(name = "PedidoPutController", description = "Adaptador para atualizar recurso Pedido.")
 @RestController
 @RequestMapping(path = "/api/v1/pedidos")
-public final class PedidoPutController implements IPedidoController.PutController {
+public final class PedidoPutControllerAdapter implements IPedidoControllerPort.PutController {
+
+  @Autowired
+  private IMapper mapper;
 
   @Autowired
   private IPedidoServicePort.PutService service;
@@ -47,7 +52,9 @@ public final class PedidoPutController implements IPedidoController.PutControlle
     @RequestBody @Valid final PedidoDtoRequest dtoRequest) {
 
     var response = Optional.of(dtoRequest)
-      .map(dto -> this.service.atualizar(pedidoId, dto))
+      .map(dto -> this.mapper.converterOrigemParaDestino(dto, PedidoModel.class))
+      .map(model -> this.service.atualizar(pedidoId, model))
+      .map(model -> this.mapper.converterOrigemParaDestino(model, PedidoDtoResponse.class))
       .orElseThrow();
 
     return ResponseEntity

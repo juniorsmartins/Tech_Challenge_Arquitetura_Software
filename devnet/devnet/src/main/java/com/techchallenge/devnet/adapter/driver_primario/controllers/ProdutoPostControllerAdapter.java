@@ -32,7 +32,7 @@ public final class ProdutoPostControllerAdapter implements IProdutoControllerPor
   private IMapper mapper;
 
   @Autowired
-  private IProdutoServicePort.PostService produtoPostService;
+  private IProdutoServicePort.PostService service;
 
   @Operation(summary = "Cadastrar Produto", description = "Este recurso destina-se a cadastrar.")
   @ApiResponses(value = {
@@ -50,7 +50,7 @@ public final class ProdutoPostControllerAdapter implements IProdutoControllerPor
 
     var response = Optional.of(dtoRequest)
       .map(dto -> this.mapper.converterOrigemParaDestino(dto, ProdutoModel.class))
-      .map(this.produtoPostService::cadastrar)
+      .map(this.service::cadastrar)
       .map(model -> this.mapper.converterOrigemParaDestino(model, ProdutoDtoResponse.class))
       .orElseThrow();
 

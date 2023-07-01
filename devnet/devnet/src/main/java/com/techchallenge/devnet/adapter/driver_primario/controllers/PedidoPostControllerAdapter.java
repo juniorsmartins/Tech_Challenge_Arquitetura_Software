@@ -1,9 +1,11 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
+import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.PedidoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PedidoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.entrada.IPedidoServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
+import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -13,17 +15,22 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-@Tag(name = "PedidoPostController", description = "Adaptador para criar recurso Pedido.")
+import java.net.URI;
+import java.util.Optional;
+
+@Tag(name = "PedidoPostControllerAdapter", description = "Adaptador para criar recurso Pedido.")
 @RestController
 @RequestMapping(path = "/api/v1/pedidos")
-public final class PedidoPostController implements IPedidoController.PostController {
+public final class PedidoPostControllerAdapter implements IPedidoControllerPort.PostController {
+
+  @Autowired
+  private IMapper mapper;
 
   @Autowired
   private IPedidoServicePort.PostService service;
@@ -42,10 +49,14 @@ public final class PedidoPostController implements IPedidoController.PostControl
     @Parameter(name = "PedidoDtoRequest", description = "Estrutura de dados para transporte de informações de entrada.", required = true)
     @RequestBody @Valid final PedidoDtoRequest dtoRequest, final UriComponentsBuilder uriComponentsBuilder) {
 
-    var response = this.service.cadastrar(dtoRequest);
+    var response = Optional.of(dtoRequest)
+      .map(dto -> this.mapper.converterOrigemParaDestino(dto, PedidoModel.class))
+      .map(this.service::cadastrar)
+      .map(model -> this.mapper.converterOrigemParaDestino(model, PedidoDtoResponse.class))
+      .orElseThrow();
 
     return ResponseEntity
-      .status(HttpStatus.CREATED)
+      .created(URI.create("/api/v1/pedidos" + response.getId()))
       .body(response);
   }
 }

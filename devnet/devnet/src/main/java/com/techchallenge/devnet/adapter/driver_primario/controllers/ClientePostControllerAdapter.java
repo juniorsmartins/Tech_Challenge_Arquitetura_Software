@@ -32,7 +32,7 @@ public final class ClientePostControllerAdapter implements IClienteControllerPor
   private IMapper mapper;
 
   @Autowired
-  private IClienteServicePort.PostService clientePostService;
+  private IClienteServicePort.PostService service;
 
   @Operation(summary = "Cadastrar Cliente", description = "Este recurso destina-se a cadastrar.")
   @ApiResponses(value = {
@@ -50,7 +50,7 @@ public final class ClientePostControllerAdapter implements IClienteControllerPor
 
     var response = Optional.of(dtoRequest)
       .map(dto -> this.mapper.converterOrigemParaDestino(dto, ClienteModel.class))
-      .map(this.clientePostService::cadastrar)
+      .map(this.service::cadastrar)
       .map(model -> this.mapper.converterOrigemParaDestino(model, ClienteDtoResponse.class))
       .orElseThrow();
 

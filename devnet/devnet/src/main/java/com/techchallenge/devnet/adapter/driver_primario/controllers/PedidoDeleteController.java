@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "PedidoDeleteController", description = "Adaptador para apagar recurso Pedido.")
 @RestController
 @RequestMapping(path = "/api/v1/pedidos")
-public final class PedidoDeleteController implements IPedidoController.DeleteController {
+public final class PedidoDeleteController implements IPedidoControllerPort.DeleteController {
 
   @Autowired
-  private IPedidoServicePort.DeleteService deleteService;
+  private IPedidoServicePort.DeleteService service;
 
   @Operation(summary = "Cancelar Pedido", description = "Este recurso destina-se a apagar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {
@@ -37,7 +37,7 @@ public final class PedidoDeleteController implements IPedidoController.DeleteCon
     @Parameter(name = "id", description = "Chave de identificação", example = "22", required = true)
     @PathVariable(name = "id") final Long pedidoId) {
 
-    this.deleteService.cancelarPorId(pedidoId);
+    this.service.cancelarPorId(pedidoId);
 
     return ResponseEntity
       .noContent()

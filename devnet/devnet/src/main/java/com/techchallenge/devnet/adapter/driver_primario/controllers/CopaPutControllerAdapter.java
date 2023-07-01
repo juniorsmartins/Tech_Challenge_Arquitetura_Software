@@ -28,7 +28,7 @@ public final class CopaPutControllerAdapter implements ICopaControllerPort.PutCo
   private IMapper mapper;
 
   @Autowired
-  private ICopaServicePort.PutService copaPutService;
+  private ICopaServicePort.PutService service;
 
   @Operation(summary = "Atualizar Cliente", description = "Este recurso destina-se a atualizar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {
@@ -45,7 +45,7 @@ public final class CopaPutControllerAdapter implements ICopaControllerPort.PutCo
     @PathVariable(name = "idPedido") final Long idPedido) {
 
     var response = Optional.of(idPedido)
-      .map(id -> this.copaPutService.confirmarPedidoPronto(id))
+      .map(id -> this.service.confirmarPedidoPronto(id))
       .map(model -> this.mapper.converterOrigemParaDestino(model, PedidoDtoResponse.class))
       .orElseThrow();
 
@@ -69,7 +69,7 @@ public final class CopaPutControllerAdapter implements ICopaControllerPort.PutCo
     @PathVariable(name = "idPedido") final Long idPedido) {
 
     var response = Optional.of(idPedido)
-      .map(id -> this.copaPutService.confirmarPedidoFinalizado(id))
+      .map(id -> this.service.confirmarPedidoFinalizado(id))
       .map(model -> this.mapper.converterOrigemParaDestino(model, PedidoDtoResponse.class))
       .orElseThrow();
 

@@ -28,7 +28,7 @@ public final class PagamentoPutControllerAdapter implements IPagamentoController
   private IMapper mapper;
 
   @Autowired
-  private IPagamentoServicePort.PutService pagamentoPutService;
+  private IPagamentoServicePort.PutService service;
 
   @Operation(summary = "Atualizar Cliente", description = "Este recurso destina-se a atualizar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {
@@ -45,7 +45,7 @@ public final class PagamentoPutControllerAdapter implements IPagamentoController
     @PathVariable(name = "idPedido") final Long idPedido) {
 
     var response = Optional.of(idPedido)
-      .map(id -> this.pagamentoPutService.confirmarPagamento(id))
+      .map(id -> this.service.confirmarPagamento(id))
       .map(model -> this.mapper.converterOrigemParaDestino(model, PagamentoDtoResponse.class))
       .orElseThrow();
 

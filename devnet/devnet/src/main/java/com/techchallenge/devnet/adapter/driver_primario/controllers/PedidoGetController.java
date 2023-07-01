@@ -26,7 +26,7 @@ import java.util.Optional;
 @Tag(name = "PedidoGetController", description = "Adaptador para buscar recurso Pedido.")
 @RestController
 @RequestMapping(path = "/api/v1/pedidos")
-public final class PedidoGetController implements IPedidoController.GetController {
+public final class PedidoGetController implements IPedidoControllerPort.GetController {
 
   @Autowired
   private IPedidoServicePort.GetService service;

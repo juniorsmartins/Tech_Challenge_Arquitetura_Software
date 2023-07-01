@@ -28,7 +28,7 @@ public final class AdminGetControllerAdapter implements IAdminControllerPort.Get
   private IMapper mapper;
 
   @Autowired
-  private IAdminService.GetService adminGetService;
+  private IAdminService.GetService service;
 
   @Operation(summary = "Pesquisar Cliente", description = "Este recurso permite consultar Cliente por diversas propriedades com retorno paginado.")
   @ApiResponses(value = {
@@ -42,7 +42,7 @@ public final class AdminGetControllerAdapter implements IAdminControllerPort.Get
   @Override
   public ResponseEntity<IndicadorDtoResponse> buscarIndicadores() {
 
-    var response = Optional.of(this.adminGetService.buscarIndicadores())
+    var response = Optional.of(this.service.buscarIndicadores())
       .map(indicador -> this.mapper.converterOrigemParaDestino(indicador, IndicadorDtoResponse.class))
       .orElseThrow();
 

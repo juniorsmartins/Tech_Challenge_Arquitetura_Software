@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.util.UriComponentsBuilder;
 
-public interface IPedidoController {
+public interface IPedidoControllerPort {
 
   interface PostController {
     @PostMapping

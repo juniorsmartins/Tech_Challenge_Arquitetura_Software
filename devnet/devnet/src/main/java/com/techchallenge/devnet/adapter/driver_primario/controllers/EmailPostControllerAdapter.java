@@ -33,7 +33,7 @@ public final class EmailPostControllerAdapter implements IEmailControllerPort.Po
   private IMapper mapper;
 
   @Autowired
-  private IEmailService.EnviarService emailEnviarService;
+  private IEmailService.EnviarService service;
 
   @Operation(summary = "Enviar Email", description = "Este recurso destina-se a enviar Email.")
   @ApiResponses(value = {
@@ -51,7 +51,7 @@ public final class EmailPostControllerAdapter implements IEmailControllerPort.Po
 
     var response = Optional.of(dtoRequest)
       .map(dto -> this.mapper.converterOrigemParaDestino(dto, EmailModel.class))
-      .map(this.emailEnviarService::enviar)
+      .map(this.service::enviar)
       .map(model -> this.mapper.converterOrigemParaDestino(model, EmailDtoResponse.class))
       .orElseThrow();
 
