@@ -4,5 +4,6 @@ import com.techchallenge.devnet.adapter.driven_secundario.entities.PagamentoEnti
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-public interface PagamentoRepositoryJpa extends JpaRepository<PagamentoEntity, Long>, JpaSpecificationExecutor<PagamentoEntity> { }
+public interface PagamentoRepositoryJpa extends JpaRepository<PagamentoEntity, Long>,
+  JpaSpecificationExecutor<PagamentoEntity> { }
 

@@ -6,7 +6,8 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import java.util.List;
 
-public interface PedidoRepositoryJpa extends JpaRepository<PedidoEntity, Long>, JpaSpecificationExecutor<PedidoEntity> {
+public interface PedidoRepositoryJpa extends JpaRepository<PedidoEntity, Long>,
+  JpaSpecificationExecutor<PedidoEntity> {
 
   List<PedidoEntity> findByClienteId(Long clienteId);
 }

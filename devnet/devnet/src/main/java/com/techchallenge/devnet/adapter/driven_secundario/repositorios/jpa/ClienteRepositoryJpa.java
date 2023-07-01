@@ -6,7 +6,8 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import java.util.Optional;
 
-public interface ClienteRepositoryJpa extends JpaRepository<ClienteEntity, Long>, JpaSpecificationExecutor<ClienteEntity> {
+public interface ClienteRepositoryJpa extends JpaRepository<ClienteEntity, Long>,
+  JpaSpecificationExecutor<ClienteEntity> {
 
   Optional<ClienteEntity> findByCpf(String cpf);
 }
