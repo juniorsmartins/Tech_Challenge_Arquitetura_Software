@@ -1,13 +1,10 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.PedidoDtoRequest;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PedidoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.entrada.IPagamentoServicePort;
 import com.techchallenge.devnet.core.application.ports.entrada.IPedidoServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.utilitarios.IUtils;
-import com.techchallenge.devnet.adapter.driven_secundario.entities.PedidoEntity;
+import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,9 +14,6 @@ import java.util.Optional;
 
 @Service
 public class PedidoPostService implements IPedidoServicePort.PostService {
-
-  @Autowired
-  private IMapper mapper;
 
   @Autowired
   private IUtils utils;
@@ -32,27 +26,25 @@ public class PedidoPostService implements IPedidoServicePort.PostService {
 
   @Transactional
   @Override
-  public PedidoDtoResponse cadastrar(final PedidoDtoRequest dtoRequest) {
+  public PedidoModel cadastrar(final PedidoModel pedidoModel) {
 
-    return Optional.of(dtoRequest)
-      .map(dto -> this.mapper.converterDtoRequestParaEntidade(dto, PedidoEntity.class))
+    return Optional.of(pedidoModel)
       .map(this.utils::confirmarCliente)
       .map(this.utils::confirmarProdutos)
       .map(this::organizarPedidoParaRegistrar)
       .map(this.pedidoPostRepository::salvar)
       .map(this.pagamentoPostService::iniciarCobrancaDePagamento)
       .map(this.utils::notificarPedidoRecebido)
-      .map(entidade -> this.mapper.converterEntidadeParaDtoResponse(entidade, PedidoDtoResponse.class))
       .orElseThrow();
   }
 
-  private PedidoEntity organizarPedidoParaRegistrar(PedidoEntity pedido) {
+  private PedidoModel organizarPedidoParaRegistrar(PedidoModel pedidoModel) {
 
-    pedido.setStatusPedido(StatusPedidoEnum.RECEBIDO);
-    pedido.getItensPedido().forEach(item -> item.setPedido(pedido));
-    pedido.calcularPrecoTotal();
+    pedidoModel.setStatusPedido(StatusPedidoEnum.RECEBIDO);
+    pedidoModel.getItensPedido().forEach(item -> item.setPedido(pedidoModel));
+    pedidoModel.calcularPrecoTotal();
 
-    return pedido;
+    return pedidoModel;
   }
 }
 

@@ -35,7 +35,7 @@ public final class PedidoModel implements Serializable {
 
   private ClienteModel cliente;
 
-  private List<ItemPedido> itensPedido = new ArrayList<>();
+  private List<ItemPedidoModel> itensPedido = new ArrayList<>();
 
   private PagamentoModel pagamento;
 
@@ -44,10 +44,10 @@ public final class PedidoModel implements Serializable {
   private OffsetDateTime dataHoraAtualizacao;
 
   public void calcularPrecoTotal() {
-    this.getItensPedido().forEach(ItemPedido::calcularPrecoParcial);
+    this.getItensPedido().forEach(ItemPedidoModel::calcularPrecoParcial);
 
     var total = this.getItensPedido().stream()
-      .map(ItemPedido::getPrecoParcial)
+      .map(ItemPedidoModel::getPrecoParcial)
       .reduce(BigDecimal.ZERO, BigDecimal::add);
 
     this.setPrecoTotal(total);

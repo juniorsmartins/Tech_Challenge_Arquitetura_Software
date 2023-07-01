@@ -1,9 +1,6 @@
 package com.techchallenge.devnet.adapter.driven_secundario.entities;
 
 import com.techchallenge.devnet.core.domain.base.auditoria.AuditoriaDataJpa;
-import com.techchallenge.devnet.core.domain.models.ClienteModel;
-import com.techchallenge.devnet.core.domain.models.ItemPedido;
-import com.techchallenge.devnet.core.domain.models.PagamentoModel;
 import com.techchallenge.devnet.core.domain.models.enums.FormaPagamentoEnum;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;
 import jakarta.persistence.CascadeType;
@@ -64,22 +61,22 @@ public final class PedidoEntity extends AuditoriaDataJpa implements Serializable
 
   @ManyToOne
   @JoinColumn(name = "cliente_id", referencedColumnName = "id", nullable = true)
-  private ClienteModel cliente;
+  private ClienteEntity cliente;
 
   @OneToMany(mappedBy = "pedido", cascade = {CascadeType.ALL})
-  private List<ItemPedido> itensPedido = new ArrayList<>();
+  private List<ItemPedidoEntity> itensPedido = new ArrayList<>();
 
   @OneToOne(mappedBy = "pedido", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-  private PagamentoModel pagamento;
+  private PagamentoEntity pagamento;
 
-  public void calcularPrecoTotal() {
-    this.getItensPedido().forEach(ItemPedido::calcularPrecoParcial);
-
-    var total = this.getItensPedido().stream()
-      .map(ItemPedido::getPrecoParcial)
-      .reduce(BigDecimal.ZERO, BigDecimal::add);
-
-    this.setPrecoTotal(total);
-  }
+//  public void calcularPrecoTotal() {
+//    this.getItensPedido().forEach(ItemPedido::calcularPrecoParcial);
+//
+//    var total = this.getItensPedido().stream()
+//      .map(ItemPedido::getPrecoParcial)
+//      .reduce(BigDecimal.ZERO, BigDecimal::add);
+//
+//    this.setPrecoTotal(total);
+//  }
 }
 

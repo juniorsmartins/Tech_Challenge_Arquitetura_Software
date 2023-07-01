@@ -1,12 +1,11 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PagamentoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.entrada.IPagamentoServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IPagamentoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PagamentoNaoEncontradoException;
-import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.core.domain.base.utilitarios.QRCodeGenerator;
+import com.techchallenge.devnet.core.domain.models.PagamentoModel;
 import com.techchallenge.devnet.core.domain.value_objects.filtros.PagamentoFiltro;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,18 +22,14 @@ import java.util.Optional;
 public class PagamentoGetService implements IPagamentoServicePort.GetService {
 
   @Autowired
-  private IMapper mapper;
-
-  @Autowired
   private IPagamentoRepositoryPort.GetRepository pagamentoGetRepository;
 
   @Transactional(readOnly = true)
   @Override
-  public Page<PagamentoDtoResponse> pesquisar(final PagamentoFiltro filtro, final Pageable paginacao) {
+  public Page<PagamentoModel> pesquisar(final PagamentoFiltro filtro, final Pageable paginacao) {
 
     return Optional.of(filtro)
       .map(parametrosDePesquisa -> this.pagamentoGetRepository.pesquisar(parametrosDePesquisa, paginacao))
-      .map(paginaPagamentos -> this.mapper.converterPaginaDeEntidadeParaPaginaDtoResponse(paginaPagamentos, PagamentoDtoResponse.class))
       .orElseThrow();
   }
 
@@ -43,8 +38,8 @@ public class PagamentoGetService implements IPagamentoServicePort.GetService {
   public InputStreamResource buscarQrCodePorId(final Long id) {
 
     return this.pagamentoGetRepository.consultarPorId(id)
-      .map(pagamento -> {
-        var inputStream = QRCodeGenerator.recuperarImagemQrCode(pagamento.getNomeImagemQRCode());
+      .map(model -> {
+        var inputStream = QRCodeGenerator.recuperarImagemQrCode(model.getNomeImagemQRCode());
        return new InputStreamResource(inputStream);
       })
       .orElseThrow(() -> {

@@ -33,7 +33,7 @@ public final class ClientePutControllerAdapter implements IClienteControllerPort
   private IMapper mapper;
 
   @Autowired
-  private IClienteServicePort.PutService service;
+  private IClienteServicePort.PutService clientePutservice;
 
   @Operation(summary = "Atualizar Cliente", description = "Este recurso destina-se a atualizar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {
@@ -53,7 +53,7 @@ public final class ClientePutControllerAdapter implements IClienteControllerPort
 
     var response = Optional.of(dtoRequest)
       .map(dto -> this.mapper.converterOrigemParaDestino(dto, ClienteModel.class))
-      .map(model -> this.service.atualizar(clienteId, model))
+      .map(model -> this.clientePutservice.atualizar(clienteId, model))
       .map(model -> this.mapper.converterOrigemParaDestino(model, ClienteDtoResponse.class))
       .orElseThrow();
 

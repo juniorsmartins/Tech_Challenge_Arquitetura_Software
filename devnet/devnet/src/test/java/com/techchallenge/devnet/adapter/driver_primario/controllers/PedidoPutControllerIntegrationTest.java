@@ -9,7 +9,7 @@ import com.techchallenge.devnet.adapter.driver_primario.dtos.ProdutoDtoResumo;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ItemPedidoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.PedidoDtoRequest;
 import com.techchallenge.devnet.core.domain.models.ClienteModel;
-import com.techchallenge.devnet.core.domain.models.ItemPedido;
+import com.techchallenge.devnet.core.domain.models.ItemPedidoModel;
 import com.techchallenge.devnet.adapter.driven_secundario.entities.PedidoEntity;
 import com.techchallenge.devnet.core.domain.models.ProdutoModel;
 import com.techchallenge.devnet.core.domain.models.enums.FormaPagamentoEnum;
@@ -75,7 +75,7 @@ class PedidoPutControllerIntegrationTest {
       .build();
     produto = this.produtoRepositoryJpa.save(produto);
 
-    var itemPedido = ItemPedido.builder()
+    var itemPedido = ItemPedidoModel.builder()
       .produto(produto)
       .quantidade(2)
       .build();

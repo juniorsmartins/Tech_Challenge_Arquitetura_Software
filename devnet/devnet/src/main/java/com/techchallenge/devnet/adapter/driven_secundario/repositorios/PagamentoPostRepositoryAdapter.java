@@ -1,0 +1,32 @@
+package com.techchallenge.devnet.adapter.driven_secundario.repositorios;
+
+import com.techchallenge.devnet.adapter.driven_secundario.entities.PagamentoEntity;
+import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.PagamentoRepositoryJpa;
+import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
+import com.techchallenge.devnet.core.application.ports.saida.IPagamentoRepositoryPort;
+import com.techchallenge.devnet.core.domain.models.PagamentoModel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
+@Repository
+public class PagamentoPostRepositoryAdapter implements IPagamentoRepositoryPort.PostRepository {
+
+  @Autowired
+  private IMapper mapper;
+
+  @Autowired
+  private PagamentoRepositoryJpa jpa;
+
+  @Override
+  public PagamentoModel salvar(final PagamentoModel pagamentoModel) {
+
+    return Optional.of(pagamentoModel)
+      .map(model -> this.mapper.converterOrigemParaDestino(model, PagamentoEntity.class))
+      .map(this.jpa::save)
+      .map(entity -> this.mapper.converterOrigemParaDestino(entity, PagamentoModel.class))
+      .orElseThrow();
+  }
+}
+

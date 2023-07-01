@@ -1,7 +1,6 @@
 package com.techchallenge.devnet.core.application.ports.entrada;
 
-import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.PedidoDtoRequest;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PedidoDtoResponse;
+import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import com.techchallenge.devnet.core.domain.value_objects.filtros.PedidoFiltro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,15 +8,15 @@ import org.springframework.data.domain.Pageable;
 public interface IPedidoServicePort {
 
   interface PostService {
-    PedidoDtoResponse cadastrar(PedidoDtoRequest dtoRequest);
+    PedidoModel cadastrar(PedidoModel pedidoModel);
   }
 
   interface PutService {
-    PedidoDtoResponse atualizar(Long id, PedidoDtoRequest dtoRequest);
+    PedidoModel atualizar(Long id, PedidoModel pedidoModel);
   }
 
   interface GetService {
-    Page<PedidoDtoResponse> pesquisar(PedidoFiltro filtro, Pageable paginacao);
+    Page<PedidoModel> pesquisar(PedidoFiltro filtro, Pageable paginacao);
   }
 
   interface DeleteService {

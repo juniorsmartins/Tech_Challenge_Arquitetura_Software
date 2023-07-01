@@ -5,7 +5,7 @@ import com.techchallenge.devnet.core.application.ports.entrada.IPagamentoService
 import com.techchallenge.devnet.core.application.ports.saida.IPagamentoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.utilitarios.QRCodeGenerator;
 import com.techchallenge.devnet.core.domain.models.PagamentoModel;
-import com.techchallenge.devnet.adapter.driven_secundario.entities.PedidoEntity;
+import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPagamentoEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -21,9 +21,9 @@ public class PagamentoPostService implements IPagamentoServicePort.PostService {
   private IPagamentoRepositoryPort.PostRepository pagamentoPostRepository;
 
   @Override
-  public PedidoEntity iniciarCobrancaDePagamento(final PedidoEntity pedido) {
+  public PedidoModel iniciarCobrancaDePagamento(final PedidoModel pedidoModel) {
 
-    return Optional.of(pedido)
+    return Optional.of(pedidoModel)
       .map(entidade -> {
         var imagemQrCodeRetorno = this.criarQRCode(entidade);
         return entidade;
@@ -32,27 +32,27 @@ public class PagamentoPostService implements IPagamentoServicePort.PostService {
       .orElseThrow();
   }
 
-  private InputStreamResource criarQRCode(PedidoEntity pedido) {
+  private InputStreamResource criarQRCode(PedidoModel pedidoModel) {
 
     try {
-      return QRCodeGenerator.gerarQRCode(pedido);
+      return QRCodeGenerator.gerarQRCode(pedidoModel);
 
     } catch (WriterException | IOException e) {
       throw new RuntimeException(e);
     }
   }
 
-  private PedidoEntity cadastrarPagamento(PedidoEntity pedido) {
+  private PedidoModel cadastrarPagamento(PedidoModel pedidoModel) {
 
     var pagamento = PagamentoModel.builder()
       .statusPagamento(StatusPagamentoEnum.ABERTO)
-      .pedido(pedido)
-      .nomeImagemQRCode(QRCodeGenerator.criarNomeDaImagemQrCode(pedido))
+      .pedido(pedidoModel)
+      .nomeImagemQRCode(QRCodeGenerator.criarNomeDaImagemQrCode(pedidoModel))
       .build();
     this.pagamentoPostRepository.salvar(pagamento);
-    pedido.setPagamento(pagamento);
+    pedidoModel.setPagamento(pagamento);
 
-    return pedido;
+    return pedidoModel;
   }
 }
 

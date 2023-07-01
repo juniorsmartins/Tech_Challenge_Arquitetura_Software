@@ -2,7 +2,7 @@ package com.techchallenge.devnet.adapter.driven_secundario.repositorios;
 
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.ItemPedidoRepositoryJpa;
 import com.techchallenge.devnet.core.application.ports.saida.IItemPedidoRepository;
-import com.techchallenge.devnet.core.domain.models.ItemPedido;
+import com.techchallenge.devnet.core.domain.models.ItemPedidoModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -16,12 +16,12 @@ public class ItemPedidoGetRepository implements IItemPedidoRepository.GetReposit
   private ItemPedidoRepositoryJpa itemPedidoRepositoryJpa;
 
   @Override
-  public Optional<ItemPedido> consultarPorId(final Long id) {
+  public Optional<ItemPedidoModel> consultarPorId(final Long id) {
     return this.itemPedidoRepositoryJpa.findById(id);
   }
 
   @Override
-  public List<ItemPedido> consultarPorIdDeProduto(Long produtoId) {
+  public List<ItemPedidoModel> consultarPorIdDeProduto(Long produtoId) {
     return this.itemPedidoRepositoryJpa.findByProdutoId(produtoId);
   }
 }

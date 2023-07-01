@@ -1,5 +1,7 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
+import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
+import com.techchallenge.devnet.adapter.driver_primario.dtos.filtros.PagamentoFiltroDto;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PagamentoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.entrada.IPagamentoServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
@@ -29,7 +31,10 @@ import java.util.Optional;
 @Tag(name = "PagamentoGetController", description = "Adaptador para buscar recurso Pagamento.")
 @RestController
 @RequestMapping(path = "/api/v1/pagamentos")
-public final class PagamentoGetController implements IPagamentoControllerPort.GetController {
+public final class PagamentoGetControllerAdapter implements IPagamentoControllerPort.GetController {
+
+  @Autowired
+  private IMapper mapper;
 
   @Autowired
   private IPagamentoServicePort.GetService service;
@@ -46,11 +51,13 @@ public final class PagamentoGetController implements IPagamentoControllerPort.Ge
   @Override
   public ResponseEntity<Page<PagamentoDtoResponse>> pesquisar(
     @Parameter(name = "PagamentoFiltro", description = "Estrutura de dados usada como filtro de pesquisa.", required = false)
-    final PagamentoFiltro filtro,
+    final PagamentoFiltroDto filtroDto,
     @PageableDefault(sort = "id", direction = Sort.Direction.DESC, page = 0, size = 10) final Pageable paginacao) {
 
-    var response = Optional.of(filtro)
+    var response = Optional.of(filtroDto)
+      .map(dto -> this.mapper.converterOrigemParaDestino(dto, PagamentoFiltro.class))
       .map(parametrosDePesquisa -> this.service.pesquisar(parametrosDePesquisa, paginacao))
+      .map(paginaPagamentos -> this.mapper.converterPaginaOrigemParaPaginaDestino(paginaPagamentos, PagamentoDtoResponse.class))
       .orElseThrow();
 
     return ResponseEntity

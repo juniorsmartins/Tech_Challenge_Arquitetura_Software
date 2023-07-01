@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
+import com.techchallenge.devnet.adapter.driver_primario.dtos.filtros.PagamentoFiltroDto;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PagamentoDtoResponse;
-import com.techchallenge.devnet.core.domain.value_objects.filtros.PagamentoFiltro;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,7 +14,7 @@ public interface IPagamentoControllerPort {
 
   interface GetController {
     @GetMapping
-    ResponseEntity<Page<PagamentoDtoResponse>> pesquisar(PagamentoFiltro filtro, Pageable paginacao);
+    ResponseEntity<Page<PagamentoDtoResponse>> pesquisar(PagamentoFiltroDto pagamentoFiltroDto, Pageable paginacao);
 
     @GetMapping(path = "/{id}", produces = MediaType.IMAGE_PNG_VALUE)
     ResponseEntity<InputStreamResource> buscarQrCodePorId(Long id);

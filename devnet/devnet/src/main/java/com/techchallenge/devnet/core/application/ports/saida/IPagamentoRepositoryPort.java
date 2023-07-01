@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface IPagamentoRepositoryPort {
 
   interface PostRepository {
-    PagamentoModel salvar(PagamentoModel pagamento);
+    PagamentoModel salvar(PagamentoModel pagamentoModel);
   }
 
   interface GetRepository {

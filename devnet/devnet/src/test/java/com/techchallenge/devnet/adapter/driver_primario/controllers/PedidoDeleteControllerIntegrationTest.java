@@ -5,7 +5,7 @@ import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.Clien
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.PedidoRepositoryJpa;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.ProdutoRepositoryJpa;
 import com.techchallenge.devnet.core.domain.models.ClienteModel;
-import com.techchallenge.devnet.core.domain.models.ItemPedido;
+import com.techchallenge.devnet.core.domain.models.ItemPedidoModel;
 import com.techchallenge.devnet.adapter.driven_secundario.entities.PedidoEntity;
 import com.techchallenge.devnet.core.domain.models.ProdutoModel;
 import com.techchallenge.devnet.core.domain.models.enums.FormaPagamentoEnum;
@@ -81,7 +81,7 @@ class PedidoDeleteControllerIntegrationTest {
   @DisplayName("Deletar - http 204")
   void deveRetornarHttp204_quandoDeletar() throws Exception {
 
-    var itemPedido = ItemPedido.builder()
+    var itemPedido = ItemPedidoModel.builder()
       .produto(produto)
       .quantidade(2)
       .build();

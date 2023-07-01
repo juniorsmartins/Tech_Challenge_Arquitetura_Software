@@ -1,6 +1,5 @@
 package com.techchallenge.devnet.core.domain.models;
 
-import com.techchallenge.devnet.core.domain.models.enums.StatusPagamentoEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -9,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.time.OffsetDateTime;
+import java.math.BigDecimal;
 
 @Builder
 @NoArgsConstructor
@@ -17,20 +16,25 @@ import java.time.OffsetDateTime;
 @Getter
 @Setter
 @EqualsAndHashCode(of = {"id"})
-public final class PagamentoModel implements Serializable {
+public final class ItemPedidoModel implements Serializable {
 
   public static final long serialVersionUID = 1L;
 
   private Long id;
 
-  private StatusPagamentoEnum statusPagamento = StatusPagamentoEnum.ABERTO;
+  private int quantidade;
+
+  private BigDecimal precoParcial;
 
   private PedidoModel pedido;
 
-  private String nomeImagemQRCode;
+  private ProdutoModel produto;
 
-  private OffsetDateTime dataHoraCadastro;
+  public void calcularPrecoParcial() {
+    var precoUnitario = this.produto.getPreco();
+    var quantidade = this.quantidade;
 
-  private OffsetDateTime dataHoraAtualizacao;
+    this.setPrecoParcial(precoUnitario.multiply(new BigDecimal(quantidade)));
+  }
 }
 

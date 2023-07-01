@@ -1,12 +1,12 @@
 package com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa;
 
-import com.techchallenge.devnet.core.domain.models.ItemPedido;
+import com.techchallenge.devnet.core.domain.models.ItemPedidoModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface ItemPedidoRepositoryJpa extends JpaRepository<ItemPedido, Long> {
+public interface ItemPedidoRepositoryJpa extends JpaRepository<ItemPedidoModel, Long> {
 
-  List<ItemPedido> findByProdutoId(Long produtoId);
+  List<ItemPedidoModel> findByProdutoId(Long produtoId);
 }
 

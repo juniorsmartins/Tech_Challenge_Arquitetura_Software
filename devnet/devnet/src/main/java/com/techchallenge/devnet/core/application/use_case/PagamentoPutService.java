@@ -1,14 +1,13 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PagamentoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.entrada.IPagamentoServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_409.ConfirmarPagamentoBloqueadoException;
-import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.core.domain.base.utilitarios.IUtils;
-import com.techchallenge.devnet.adapter.driven_secundario.entities.PedidoEntity;
+import com.techchallenge.devnet.core.domain.models.PagamentoModel;
+import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPagamentoEnum;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;
 import lombok.extern.slf4j.Slf4j;
@@ -22,9 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class PagamentoPutService implements IPagamentoServicePort.PutService {
 
   @Autowired
-  private IMapper mapper;
-
-  @Autowired
   private IUtils utils;
 
   @Autowired
@@ -32,7 +28,7 @@ public class PagamentoPutService implements IPagamentoServicePort.PutService {
 
   @Transactional(isolation = Isolation.SERIALIZABLE)
   @Override
-  public PagamentoDtoResponse confirmarPagamento(final Long idPedido) {
+  public PagamentoModel confirmarPagamento(final Long idPedido) {
 
     return this.pedidoGetRepository.consultarPorId(idPedido)
       .map(order -> {
@@ -40,21 +36,20 @@ public class PagamentoPutService implements IPagamentoServicePort.PutService {
         order = this.utils.notificarPedidoEmPreparacao(order);
         return order.getPagamento();
       })
-      .map(pagamento -> this.mapper.converterEntidadeParaDtoResponse(pagamento, PagamentoDtoResponse.class))
       .orElseThrow(() -> {
         log.info(String.format(MensagemPadrao.PEDIDO_NAO_ENCONTRADO, idPedido));
         throw new PedidoNaoEncontradoException(idPedido);
       });
   }
 
-  private PedidoEntity alterarStatusPagamentoParaPagoAndPedidoParaPreparacao(PedidoEntity pedido) {
-    if (!pedido.getStatusPedido().equals(StatusPedidoEnum.RECEBIDO)) {
-      log.info(String.format(MensagemPadrao.PAGAMENTO_BLOQUEADO, pedido.getId(), pedido.getStatusPedido()));
-      throw new ConfirmarPagamentoBloqueadoException(pedido.getId(), pedido.getStatusPedido());
+  private PedidoModel alterarStatusPagamentoParaPagoAndPedidoParaPreparacao(PedidoModel pedidoModel) {
+    if (!pedidoModel.getStatusPedido().equals(StatusPedidoEnum.RECEBIDO)) {
+      log.info(String.format(MensagemPadrao.PAGAMENTO_BLOQUEADO, pedidoModel.getId(), pedidoModel.getStatusPedido()));
+      throw new ConfirmarPagamentoBloqueadoException(pedidoModel.getId(), pedidoModel.getStatusPedido());
     }
-    pedido.getPagamento().setStatusPagamento(StatusPagamentoEnum.PAGO);
-    pedido.setStatusPedido(StatusPedidoEnum.PREPARACAO);
-    return pedido;
+    pedidoModel.getPagamento().setStatusPagamento(StatusPagamentoEnum.PAGO);
+    pedidoModel.setStatusPedido(StatusPedidoEnum.PREPARACAO);
+    return pedidoModel;
   }
 }
 

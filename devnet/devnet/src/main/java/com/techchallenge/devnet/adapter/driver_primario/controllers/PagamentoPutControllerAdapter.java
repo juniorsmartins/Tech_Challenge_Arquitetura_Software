@@ -1,6 +1,8 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
-import com.techchallenge.devnet.core.application.ports.entrada.IFotoProdutoServicePort;
+import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
+import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PagamentoDtoResponse;
+import com.techchallenge.devnet.core.application.ports.entrada.IPagamentoServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -15,17 +17,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Tag(name = "FotoProdutoDeleteController", description = "Adaptador para apagar recurso FotoProduto.")
+import java.util.Optional;
+
+@Tag(name = "PagamentoPutControllerAdapter", description = "Adaptador para atualizar recurso Pagamento.")
 @RestController
-@RequestMapping(path = "/api/v1/fotos")
-public final class FotoProdutoDeleteController implements IFotoProdutoControllerPort.DeleteController {
+@RequestMapping(path = "/api/v1/pagamentos")
+public final class PagamentoPutControllerAdapter implements IPagamentoControllerPort.PutController {
 
   @Autowired
-  private IFotoProdutoServicePort.DeleteService fotoProdutoDeleteService;
+  private IMapper mapper;
 
-  @Operation(summary = "Deletar Cliente", description = "Este recurso destina-se a apagar pelo identificador exclusivo (ID).")
+  @Autowired
+  private IPagamentoServicePort.PutService pagamentoPutService;
+
+  @Operation(summary = "Atualizar Cliente", description = "Este recurso destina-se a atualizar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {
-    @ApiResponse(responseCode = "204", description = "No Content - requisição bem sucedida e sem retorno.", content = {@Content(mediaType = "application/json")}),
+    @ApiResponse(responseCode = "200", description = "OK - requisição bem sucedida e com retorno.", content = {@Content(mediaType = "application/json")}),
     @ApiResponse(responseCode = "400", description = "Bad Request - requisição mal feita.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))}),
     @ApiResponse(responseCode = "401", description = "Unauthorized: cliente não autenticado.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))}),
     @ApiResponse(responseCode = "403", description = "Forbidden - cliente autenticado, mas sem autorização para acessar recurso.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))}),
@@ -33,15 +40,18 @@ public final class FotoProdutoDeleteController implements IFotoProdutoController
     @ApiResponse(responseCode = "500", description = "Internal Server Error - situação inesperada no servidor.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))})
   })
   @Override
-  public ResponseEntity<Object> deletarPorId(
+  public ResponseEntity<PagamentoDtoResponse> confirmarPagamento(
     @Parameter(name = "id", description = "Chave de identificação", example = "22", required = true)
-    @PathVariable(name = "id") final Long id) {
+    @PathVariable(name = "idPedido") final Long idPedido) {
 
-    this.fotoProdutoDeleteService.deletarPorId(id);
+    var response = Optional.of(idPedido)
+      .map(id -> this.pagamentoPutService.confirmarPagamento(id))
+      .map(model -> this.mapper.converterOrigemParaDestino(model, PagamentoDtoResponse.class))
+      .orElseThrow();
 
     return ResponseEntity
-      .noContent()
-      .build();
+      .ok()
+      .body(response);
   }
 }
 

@@ -1,6 +1,5 @@
 package com.techchallenge.devnet.core.application.ports.saida;
 
-import com.techchallenge.devnet.adapter.driven_secundario.entities.PedidoEntity;
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import com.techchallenge.devnet.core.domain.value_objects.filtros.PedidoFiltro;
 import org.springframework.data.domain.Page;
@@ -12,7 +11,7 @@ import java.util.Optional;
 public interface IPedidoRepositoryPort {
 
   interface PostRepository {
-    PedidoEntity salvar(PedidoEntity pedido);
+    PedidoModel salvar(PedidoModel pedidoModel);
   }
 
   interface GetRepository {

@@ -1,6 +1,5 @@
 package com.techchallenge.devnet.adapter.driven_secundario.entities;
 
-import com.techchallenge.devnet.core.domain.models.ProdutoModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -49,13 +48,13 @@ public final class ItemPedidoEntity implements Serializable {
 
   @ManyToOne
   @JoinColumn(name = "produto_id", referencedColumnName = "id", nullable = false)
-  private ProdutoModel produto;
+  private ProdutoEntity produto;
 
-  public void calcularPrecoParcial() {
-    var precoUnitario = this.produto.getPreco();
-    var quantidade = this.quantidade;
-
-    this.setPrecoParcial(precoUnitario.multiply(new BigDecimal(quantidade)));
-  }
+//  public void calcularPrecoParcial() {
+//    var precoUnitario = this.produto.getPreco();
+//    var quantidade = this.quantidade;
+//
+//    this.setPrecoParcial(precoUnitario.multiply(new BigDecimal(quantidade)));
+//  }
 }
 

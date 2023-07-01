@@ -1,7 +1,6 @@
 package com.techchallenge.devnet.adapter.driven_secundario.entities;
 
 import com.techchallenge.devnet.core.domain.base.auditoria.AuditoriaDataJpa;
-import com.techchallenge.devnet.core.domain.models.ProdutoModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -41,7 +40,7 @@ public final class FotoProdutoEntity extends AuditoriaDataJpa implements Seriali
 
   @MapsId
   @OneToOne(fetch = FetchType.LAZY)
-  private ProdutoModel produto;
+  private ProdutoEntity produto;
 
   @Column(name = "nome", nullable = false)
   private String nome;
