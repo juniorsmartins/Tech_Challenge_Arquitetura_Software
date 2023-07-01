@@ -25,10 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
-@Tag(name = "ClienteGetController", description = "Adaptador para buscar recurso Cliente.")
+@Tag(name = "ClienteGetControllerAdapter", description = "Adaptador para buscar recurso Cliente.")
 @RestController
 @RequestMapping(path = "/api/v1/clientes")
-public final class ClienteGetControllerAdapter implements IClienteController.GetController {
+public final class ClienteGetControllerAdapter implements IClienteControllerPort.GetController {
 
   @Autowired
   private IMapper mapper;
@@ -54,7 +54,7 @@ public final class ClienteGetControllerAdapter implements IClienteController.Get
     var response = Optional.of(filtroDto)
       .map(dto -> this.mapper.converterOrigemParaDestino(dto, ClienteFiltro.class))
       .map(filtro -> this.clienteGetService.pesquisar(filtro, paginacao))
-      .map(paginaClientes -> this.mapper.converterPaginaDeEntidadeParaPaginaDtoResponse(paginaClientes, ClienteDtoResponse.class))
+      .map(paginaClientes -> this.mapper.converterPaginaOrigemParaPaginaDestino(paginaClientes, ClienteDtoResponse.class))
       .orElseThrow();
 
     return ResponseEntity

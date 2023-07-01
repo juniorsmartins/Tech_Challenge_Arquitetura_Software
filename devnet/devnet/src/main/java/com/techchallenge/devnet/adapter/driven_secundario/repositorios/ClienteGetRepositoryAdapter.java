@@ -21,14 +21,14 @@ public class ClienteGetRepositoryAdapter implements IClienteRepositoryPort.GetRe
   private IMapper mapper;
 
   @Autowired
-  private ClienteRepositoryJpa repositoryJpa;
+  private ClienteRepositoryJpa jpa;
 
   @Override
-  public Page<ClienteModel> pesquisar(final ClienteFiltro filtro, final Pageable paginacao) {
+  public Page<ClienteModel> pesquisar(final ClienteFiltro clienteFiltro, final Pageable paginacao) {
 
-    return Optional.of(filtro)
-      .map(clienteFiltro -> this.mapper.converterOrigemParaDestino(clienteFiltro, ClienteFiltroDto.class))
-      .map(filtroDto -> this.repositoryJpa.findAll(ClienteSpecification.consultarDinamicamente(filtroDto), paginacao))
+    return Optional.of(clienteFiltro)
+      .map(filtro -> this.mapper.converterOrigemParaDestino(filtro, ClienteFiltroDto.class))
+      .map(filtroDto -> this.jpa.findAll(ClienteSpecification.consultarDinamicamente(filtroDto), paginacao))
       .map(paginaEntity -> this.mapper.converterPaginaOrigemParaPaginaDestino(paginaEntity, ClienteModel.class))
       .orElseThrow();
   }
@@ -36,14 +36,14 @@ public class ClienteGetRepositoryAdapter implements IClienteRepositoryPort.GetRe
   @Override
   public Optional<ClienteModel> consultarPorId(final Long id) {
 
-    return this.repositoryJpa.findById(id)
+    return this.jpa.findById(id)
       .map(entity -> this.mapper.converterOrigemParaDestino(entity, ClienteModel.class));
   }
 
   @Override
   public Optional<ClienteModel> consultarPorCpf(final String cpf) {
 
-    return this.repositoryJpa.findByCpf(cpf)
+    return this.jpa.findByCpf(cpf)
       .map(entity -> this.mapper.converterOrigemParaDestino(entity, ClienteModel.class));
   }
 }

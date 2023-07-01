@@ -1,7 +1,5 @@
 package com.techchallenge.devnet.core.application.ports.entrada;
 
-import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ProdutoDtoRequest;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ProdutoDtoResponse;
 import com.techchallenge.devnet.core.domain.models.ProdutoModel;
 import com.techchallenge.devnet.core.domain.value_objects.filtros.ProdutoFiltro;
 import org.springframework.data.domain.Page;
@@ -14,11 +12,11 @@ public interface IProdutoServicePort {
   }
 
   interface PutService {
-    ProdutoDtoResponse atualizar(Long id, ProdutoDtoRequest dtoRequest);
+    ProdutoModel atualizar(Long id, ProdutoModel produtoModel);
   }
 
   interface GetService {
-    Page<ProdutoDtoResponse> pesquisar(ProdutoFiltro filtro, Pageable paginacao);
+    Page<ProdutoModel> pesquisar(ProdutoFiltro filtro, Pageable paginacao);
   }
 
   interface DeleteService {

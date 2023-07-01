@@ -26,7 +26,7 @@ import java.util.Optional;
 @Tag(name = "ClientePostController", description = "Adaptador para criar recurso Cliente.")
 @RestController
 @RequestMapping(path = "/api/v1/clientes")
-public final class ClientePostControllerAdapter implements IClienteController.PostController {
+public final class ClientePostControllerAdapter implements IClienteControllerPort.PostController {
 
   @Autowired
   private IMapper mapper;

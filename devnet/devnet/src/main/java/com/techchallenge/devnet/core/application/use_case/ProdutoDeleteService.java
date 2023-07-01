@@ -32,8 +32,8 @@ public class ProdutoDeleteService implements IProdutoServicePort.DeleteService {
 
     this.produtoGetRepository.consultarPorId(id)
       .map(this::verificarUsoDoProduto)
-      .map(produto -> {
-        this.produtoDeleteRepository.deletar(produto);
+      .map(model -> {
+        this.produtoDeleteRepository.deletar(model);
         return true;
       })
       .orElseThrow(() -> {
@@ -42,10 +42,9 @@ public class ProdutoDeleteService implements IProdutoServicePort.DeleteService {
       });
   }
 
-  private ProdutoModel verificarUsoDoProduto(final ProdutoModel produto) {
+  private ProdutoModel verificarUsoDoProduto(final ProdutoModel produtoModel) {
 
-    var idProduto = produto.getId();
-
+    var idProduto = produtoModel.getId();
     var existeItemPedidoComEsseProduto = this.itemPedidoGetRepository.consultarPorIdDeProduto(idProduto)
       .isEmpty();
 
@@ -54,7 +53,7 @@ public class ProdutoDeleteService implements IProdutoServicePort.DeleteService {
       throw new DeletarBloqueadoPoUso(idProduto);
     }
 
-    return produto;
+    return produtoModel;
   }
 }
 

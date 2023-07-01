@@ -1,6 +1,5 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.core.application.ports.entrada.IClienteServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IClienteRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
@@ -16,9 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @Service
 public class ClientePutService implements IClienteServicePort.PutService {
-
-  @Autowired
-  private IMapper mapper;
 
   @Autowired
   private IClienteRepositoryPort.GetRepository clienteGetRepository;

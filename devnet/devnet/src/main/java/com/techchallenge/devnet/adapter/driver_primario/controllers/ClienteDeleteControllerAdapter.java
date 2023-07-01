@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "ClienteDeleteController", description = "Adaptador para apagar recurso Cliente.")
 @RestController
 @RequestMapping(path = "/api/v1/clientes")
-public final class ClienteDeleteControllerAdapter implements IClienteController.DeleteController {
+public final class ClienteDeleteControllerAdapter implements IClienteControllerPort.DeleteController {
 
   @Autowired
   private IClienteServicePort.DeleteService deleteService;

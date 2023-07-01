@@ -17,7 +17,7 @@ public class ClienteDeleteRepositoryAdapter implements IClienteRepositoryPort.De
   private IMapper mapper;
 
   @Autowired
-  private ClienteRepositoryJpa repositoryJpa;
+  private ClienteRepositoryJpa jpa;
 
   @Override
   public void deletar(final ClienteModel clienteModel) {
@@ -25,7 +25,7 @@ public class ClienteDeleteRepositoryAdapter implements IClienteRepositoryPort.De
     Optional.of(clienteModel)
       .map(model -> {
         var clienteEntity = this.mapper.converterOrigemParaDestino(model, ClienteEntity.class);
-        this.repositoryJpa.delete(clienteEntity);
+        this.jpa.delete(clienteEntity);
         return true;
       })
       .orElseThrow();
