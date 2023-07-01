@@ -1,6 +1,7 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
-import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.IndicadoresDtoResponse;
+import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
+import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.IndicadorDtoResponse;
 import com.techchallenge.devnet.core.application.ports.entrada.IAdminService;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.filtros.ClienteFiltroDto;
@@ -16,10 +17,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Tag(name = "AdminGetController", description = "Adaptador para buscar dados administrativos.")
+import java.util.Optional;
+
+@Tag(name = "AdminGetControllerAdapter", description = "Adaptador para buscar dados administrativos.")
 @RestController
 @RequestMapping(path = "/api/v1/admin")
-public final class AdminGetController implements IAdminController.GetController {
+public final class AdminGetControllerAdapter implements IAdminControllerPort.GetController {
+
+  @Autowired
+  private IMapper mapper;
 
   @Autowired
   private IAdminService.GetService adminGetService;
@@ -34,9 +40,11 @@ public final class AdminGetController implements IAdminController.GetController 
     @ApiResponse(responseCode = "500", description = "Internal Server Error - situação inesperada no servidor.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))})
   })
   @Override
-  public ResponseEntity<IndicadoresDtoResponse> buscarIndicadores() {
+  public ResponseEntity<IndicadorDtoResponse> buscarIndicadores() {
 
-    var response = this.adminGetService.buscarIndicadores();
+    var response = Optional.of(this.adminGetService.buscarIndicadores())
+      .map(indicador -> this.mapper.converterOrigemParaDestino(indicador, IndicadorDtoResponse.class))
+      .orElseThrow();
 
     return ResponseEntity
       .ok()

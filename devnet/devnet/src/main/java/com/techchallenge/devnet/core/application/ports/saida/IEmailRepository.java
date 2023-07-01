@@ -1,11 +1,11 @@
 package com.techchallenge.devnet.core.application.ports.saida;
 
-import com.techchallenge.devnet.core.domain.models.Email;
+import com.techchallenge.devnet.core.domain.models.EmailModel;
 
 public interface IEmailRepository {
 
   interface PostRepository {
-    Email salvar(Email email);
+    EmailModel salvar(EmailModel email);
   }
 }
 

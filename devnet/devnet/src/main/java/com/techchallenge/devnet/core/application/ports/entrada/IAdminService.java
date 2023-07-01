@@ -1,11 +1,11 @@
 package com.techchallenge.devnet.core.application.ports.entrada;
 
-import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.IndicadoresDtoResponse;
+import com.techchallenge.devnet.core.domain.value_objects.Indicador;
 
 public interface IAdminService {
 
   interface GetService {
-    IndicadoresDtoResponse buscarIndicadores();
+    Indicador buscarIndicadores();
   }
 }
 

@@ -17,7 +17,7 @@ import java.time.OffsetDateTime;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public final class IndicadoresDtoResponse implements Serializable {
+public final class IndicadorDtoResponse implements Serializable {
 
   private static final long serialVersionUID = 1L;
 

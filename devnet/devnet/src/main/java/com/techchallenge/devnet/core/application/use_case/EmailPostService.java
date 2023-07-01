@@ -10,7 +10,7 @@ import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPo
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ClienteNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
-import com.techchallenge.devnet.core.domain.models.Email;
+import com.techchallenge.devnet.core.domain.models.EmailModel;
 import com.techchallenge.devnet.core.domain.models.enums.StatusEmailEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
@@ -46,7 +46,7 @@ public class EmailPostService implements IEmailService.EnviarService {
   public EmailDtoResponse enviar(EmailDtoRequest dtoRequest) {
 
     return Optional.of(dtoRequest)
-      .map(dto -> this.mapper.converterDtoRequestParaEntidade(dto, Email.class))
+      .map(dto -> this.mapper.converterDtoRequestParaEntidade(dto, EmailModel.class))
       .map(this::validarPedido)
       .map(this::validarCliente)
       .map(email -> {
@@ -74,7 +74,7 @@ public class EmailPostService implements IEmailService.EnviarService {
       .orElseThrow();
   }
 
-  private Email validarPedido(Email email) {
+  private EmailModel validarPedido(EmailModel email) {
     var idPedido = email.getPedido().getId();
 
     var pedido = this.pedidoGetRepository.consultarPorId(idPedido)
@@ -88,7 +88,7 @@ public class EmailPostService implements IEmailService.EnviarService {
     return email;
   }
 
-  private Email validarCliente(Email email) {
+  private EmailModel validarCliente(EmailModel email) {
 
     if (ObjectUtils.isNotEmpty(email.getPedido().getCliente())) {
       var idCliente = email.getPedido().getCliente().getId();

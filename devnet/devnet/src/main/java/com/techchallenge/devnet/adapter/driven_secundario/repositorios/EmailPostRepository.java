@@ -2,7 +2,7 @@ package com.techchallenge.devnet.adapter.driven_secundario.repositorios;
 
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.EmailRepositoryJpa;
 import com.techchallenge.devnet.core.application.ports.saida.IEmailRepository;
-import com.techchallenge.devnet.core.domain.models.Email;
+import com.techchallenge.devnet.core.domain.models.EmailModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +13,7 @@ public class EmailPostRepository implements IEmailRepository.PostRepository {
   private EmailRepositoryJpa emailRepositoryJpa;
 
   @Override
-  public Email salvar(final Email email) {
+  public EmailModel salvar(final EmailModel email) {
     return this.emailRepositoryJpa.save(email);
   }
 }
