@@ -7,6 +7,7 @@ import com.techchallenge.devnet.core.application.ports.saida.IClienteRepositoryP
 import com.techchallenge.devnet.core.domain.models.ClienteModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -19,12 +20,13 @@ public class ClientePostRepositoryAdapter implements IClienteRepositoryPort.Post
   @Autowired
   private ClienteRepositoryJpa jpa;
 
+  @Transactional
   @Override
   public ClienteModel salvar(final ClienteModel clienteModel) {
 
     return Optional.of(clienteModel)
       .map(model -> this.mapper.converterOrigemParaDestino(model, ClienteEntity.class))
-      .map(this.jpa::save)
+      .map(this.jpa::saveAndFlush)
       .map(entity -> this.mapper.converterOrigemParaDestino(entity, ClienteModel.class))
       .orElseThrow();
   }

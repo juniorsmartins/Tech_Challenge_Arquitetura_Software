@@ -17,6 +17,9 @@ public class ClientePutService implements IClienteServicePort.PutService {
   @Autowired
   private IClienteRepositoryPort.GetRepository clienteGetRepository;
 
+  @Autowired
+  private IClienteRepositoryPort.PostRepository clientePostRepository;
+
   @Override
   public ClienteModel atualizar(final Long id, final ClienteModel clienteModel) {
 
@@ -25,6 +28,7 @@ public class ClientePutService implements IClienteServicePort.PutService {
         BeanUtils.copyProperties(clienteModel, cliente, "id");
         return cliente;
       })
+      .map(this.clientePostRepository::salvar)
       .orElseThrow(() -> {
         log.info(String.format(MensagemPadrao.CLIENTE_NAO_ENCONTRADO, id));
         throw new ClienteNaoEncontradoException(id);

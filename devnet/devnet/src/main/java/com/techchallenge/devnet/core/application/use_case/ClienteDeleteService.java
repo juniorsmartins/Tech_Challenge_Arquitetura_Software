@@ -10,8 +10,6 @@ import com.techchallenge.devnet.core.domain.models.ClienteModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
@@ -26,7 +24,6 @@ public class ClienteDeleteService implements IClienteServicePort.DeleteService {
   @Autowired
   private IPedidoRepositoryPort.GetRepository pedidoGetRepository;
 
-  @Transactional(isolation = Isolation.SERIALIZABLE)
   @Override
   public void deletar(final Long id) {
 

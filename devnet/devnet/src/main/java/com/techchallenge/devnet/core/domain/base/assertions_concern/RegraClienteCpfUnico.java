@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public final class RegraClienteCpfUnico implements RegrasNegocioCliente {
+public final class RegraClienteCpfUnico implements RegrasCliente {
 
   @Autowired
   private IClienteRepositoryPort.GetRepository getRepository;
 
   @Override
-  public void executarRegrasDeNegocio(ClienteModel clienteModel) {
+  public void executar(ClienteModel clienteModel) {
 
     var existeCpfIgual = this.getRepository.consultarPorCpf(clienteModel.getCpf())
       .filter(cliente -> !cliente.getId().equals(clienteModel.getId()))

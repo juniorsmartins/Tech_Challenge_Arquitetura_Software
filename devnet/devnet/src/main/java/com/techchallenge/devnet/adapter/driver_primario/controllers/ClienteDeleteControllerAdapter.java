@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Tag(name = "ClienteDeleteController", description = "Adaptador para apagar recurso Cliente.")
+@Tag(name = "ClienteDeleteController", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/clientes")
 public final class ClienteDeleteControllerAdapter implements IClienteControllerPort.DeleteController {

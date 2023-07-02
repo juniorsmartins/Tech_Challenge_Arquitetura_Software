@@ -2,8 +2,8 @@ package com.techchallenge.devnet.core.domain.base.assertions_concern;
 
 import com.techchallenge.devnet.core.domain.models.ClienteModel;
 
-public interface RegrasNegocioCliente {
+public interface RegrasCliente {
 
-  void executarRegrasDeNegocio(ClienteModel clienteModel);
+  void executar(ClienteModel clienteModel);
 }
 

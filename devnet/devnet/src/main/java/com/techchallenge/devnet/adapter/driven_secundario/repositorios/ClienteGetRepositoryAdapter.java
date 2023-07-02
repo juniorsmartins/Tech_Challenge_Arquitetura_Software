@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -23,6 +24,7 @@ public class ClienteGetRepositoryAdapter implements IClienteRepositoryPort.GetRe
   @Autowired
   private ClienteRepositoryJpa jpa;
 
+  @Transactional(readOnly = true)
   @Override
   public Page<ClienteModel> pesquisar(final ClienteFiltro clienteFiltro, final Pageable paginacao) {
 
@@ -33,6 +35,7 @@ public class ClienteGetRepositoryAdapter implements IClienteRepositoryPort.GetRe
       .orElseThrow();
   }
 
+  @Transactional(readOnly = true)
   @Override
   public Optional<ClienteModel> consultarPorId(final Long id) {
 

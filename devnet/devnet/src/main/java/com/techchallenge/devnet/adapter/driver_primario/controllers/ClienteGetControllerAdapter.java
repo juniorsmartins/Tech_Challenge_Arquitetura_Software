@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
-@Tag(name = "ClienteGetControllerAdapter", description = "Adaptador para buscar recurso Cliente.")
+@Tag(name = "ClienteGetControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/clientes")
 public final class ClienteGetControllerAdapter implements IClienteControllerPort.GetController {
