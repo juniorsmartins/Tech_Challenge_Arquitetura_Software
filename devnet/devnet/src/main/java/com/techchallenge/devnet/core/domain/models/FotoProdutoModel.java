@@ -21,8 +21,6 @@ public final class FotoProdutoModel implements Serializable {
 
   private Long id;
 
-  private ProdutoModel produto;
-
   private String nome;
 
   private String descricao;
@@ -30,5 +28,7 @@ public final class FotoProdutoModel implements Serializable {
   private String tipo;
 
   private long tamanho;
+
+  private ProdutoModel produto;
 }
 

@@ -27,7 +27,10 @@ public final class QRCodeGenerator {
   public static InputStreamResource gerarQRCode(PedidoModel pedidoModel) throws WriterException, IOException {
 
     var nomeDaImagemQrCode = criarNomeDaImagemQrCode(pedidoModel);
+    System.out.println("\n\n\n---------- Nome da Imagem: " + nomeDaImagemQrCode + " ----------\n\n\n");
+
     var caminhoDaImagemQrCode = criarCaminhoComNomeDaImagemQrCode(nomeDaImagemQrCode);
+    System.out.println("\n\n\n---------- Caminho da Imagem: " + caminhoDaImagemQrCode + " ----------\n\n\n");
 
     var qrCodeWriter = new QRCodeWriter();
     BitMatrix bitMatrix = qrCodeWriter.encode("ID: " + pedidoModel.getId() + "\n" +

@@ -52,11 +52,13 @@ public final class FotoProdutoPutControllerAdapter implements IFotoProdutoContro
     var response = Optional.of(fotoProdutoDtoRequest)
       .map(dtoRequest -> this.mapper.converterOrigemParaDestino(dtoRequest, FotoProdutoArquivo.class))
       .map(arquivo -> {
+
         try {
           return this.service.inserirFotoNoProduto(produtoId, arquivo);
         } catch (IOException e) {
           throw new RuntimeException(e);
         }
+
       })
       .map(model -> this.mapper.converterOrigemParaDestino(model, FotoProdutoDtoResponse.class))
       .orElseThrow();
