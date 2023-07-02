@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
-@Tag(name = "PagamentoGetController", description = "Adaptador para buscar recurso Pagamento.")
+@Tag(name = "PagamentoGetControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/pagamentos")
 public final class PagamentoGetControllerAdapter implements IPagamentoControllerPort.GetController {

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
-@Tag(name = "PagamentoPutControllerAdapter", description = "Adaptador para atualizar recurso Pagamento.")
+@Tag(name = "PagamentoPutControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/pagamentos")
 public final class PagamentoPutControllerAdapter implements IPagamentoControllerPort.PutController {
@@ -40,12 +40,12 @@ public final class PagamentoPutControllerAdapter implements IPagamentoController
     @ApiResponse(responseCode = "500", description = "Internal Server Error - situação inesperada no servidor.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))})
   })
   @Override
-  public ResponseEntity<PagamentoDtoResponse> confirmarPagamento(
+  public ResponseEntity<PagamentoDtoResponse> verificarStatusNoGateway(
     @Parameter(name = "id", description = "Chave de identificação", example = "22", required = true)
     @PathVariable(name = "idPedido") final Long idPedido) {
 
     var response = Optional.of(idPedido)
-      .map(id -> this.service.confirmarPagamento(id))
+      .map(id -> this.service.verificarStatusNoGateway(id))
       .map(model -> this.mapper.converterOrigemParaDestino(model, PagamentoDtoResponse.class))
       .orElseThrow();
 

@@ -20,7 +20,7 @@ public interface IPagamentoServicePort {
   }
 
   interface PutService {
-    PagamentoModel confirmarPagamento(Long idPedido);
+    PagamentoModel verificarStatusNoGateway(Long idPedido);
   }
 }
 

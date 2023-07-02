@@ -1,6 +1,8 @@
 package com.techchallenge.devnet.core.application.use_case;
 
 import com.techchallenge.devnet.core.application.ports.entrada.IPagamentoServicePort;
+import com.techchallenge.devnet.core.application.ports.saida.IGatewayPagamentoPort;
+import com.techchallenge.devnet.core.application.ports.saida.IPagamentoRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
@@ -13,7 +15,6 @@ import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
@@ -26,14 +27,28 @@ public class PagamentoPutService implements IPagamentoServicePort.PutService {
   @Autowired
   private IPedidoRepositoryPort.GetRepository pedidoGetRepository;
 
-  @Transactional(isolation = Isolation.SERIALIZABLE)
+  @Autowired
+  private IGatewayPagamentoPort.GetGateway gatewayPagamento;
+
+  @Autowired
+  private IPagamentoRepositoryPort.PostRepository pagamentoPostRepository;
+
+  @Autowired
+  private IPedidoRepositoryPort.PostRepository pedidoPostRepository;
+
+  @Transactional
   @Override
-  public PagamentoModel confirmarPagamento(final Long idPedido) {
+  public PagamentoModel verificarStatusNoGateway(final Long idPedido) {
 
     return this.pedidoGetRepository.consultarPorId(idPedido)
       .map(order -> {
-        order = this.alterarStatusPagamentoParaPagoAndPedidoParaPreparacao(order);
-        order = this.utils.notificarPedidoEmPreparacao(order);
+
+        var foiPago = this.gatewayPagamento.verificarStatusNoGateway(order.getId());
+        if (foiPago) {
+          order = this.avancarStatusPagamentoPagoAndPedidoPreparacao(order);
+          order = this.utils.notificarPedidoEmPreparacao(order);
+        }
+
         return order.getPagamento();
       })
       .orElseThrow(() -> {
@@ -42,13 +57,15 @@ public class PagamentoPutService implements IPagamentoServicePort.PutService {
       });
   }
 
-  private PedidoModel alterarStatusPagamentoParaPagoAndPedidoParaPreparacao(PedidoModel pedidoModel) {
+  private PedidoModel avancarStatusPagamentoPagoAndPedidoPreparacao(PedidoModel pedidoModel) {
     if (!pedidoModel.getStatusPedido().equals(StatusPedidoEnum.RECEBIDO)) {
       log.info(String.format(MensagemPadrao.PAGAMENTO_BLOQUEADO, pedidoModel.getId(), pedidoModel.getStatusPedido()));
       throw new ConfirmarPagamentoBloqueadoException(pedidoModel.getId(), pedidoModel.getStatusPedido());
     }
     pedidoModel.getPagamento().setStatusPagamento(StatusPagamentoEnum.PAGO);
     pedidoModel.setStatusPedido(StatusPedidoEnum.PREPARACAO);
+    pedidoModel = this.pedidoPostRepository.salvar(pedidoModel);
+
     return pedidoModel;
   }
 }
