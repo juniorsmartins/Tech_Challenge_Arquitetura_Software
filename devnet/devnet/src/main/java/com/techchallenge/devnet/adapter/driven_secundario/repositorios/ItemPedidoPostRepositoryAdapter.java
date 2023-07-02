@@ -28,5 +28,10 @@ public class ItemPedidoPostRepositoryAdapter implements IItemPedidoRepository.Po
       .map(entity -> this.mapper.converterOrigemParaDestino(entity, ItemPedidoModel.class))
       .orElseThrow();
   }
+
+  @Override
+  public void flush() {
+    this.jpa.flush();
+  }
 }
 

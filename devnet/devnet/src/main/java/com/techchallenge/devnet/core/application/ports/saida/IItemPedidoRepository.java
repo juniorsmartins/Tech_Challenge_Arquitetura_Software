@@ -9,6 +9,8 @@ public interface IItemPedidoRepository {
 
   interface PostRepository {
     ItemPedidoModel salvar(ItemPedidoModel itemPedido);
+
+    void flush();
   }
 
   interface GetRepository {
@@ -19,6 +21,8 @@ public interface IItemPedidoRepository {
 
   interface DeleteRepository {
     void deletar(ItemPedidoModel itemPedido);
+
+    void deletarItensDoPedido(Long idPedido);
   }
 }
 

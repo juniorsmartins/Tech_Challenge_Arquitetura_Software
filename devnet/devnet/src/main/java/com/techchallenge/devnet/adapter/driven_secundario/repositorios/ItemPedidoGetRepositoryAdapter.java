@@ -6,6 +6,7 @@ import com.techchallenge.devnet.core.application.ports.saida.IItemPedidoReposito
 import com.techchallenge.devnet.core.domain.models.ItemPedidoModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,12 +20,14 @@ public class ItemPedidoGetRepositoryAdapter implements IItemPedidoRepository.Get
   @Autowired
   private ItemPedidoRepositoryJpa jpa;
 
+  @Transactional(readOnly = true)
   @Override
   public Optional<ItemPedidoModel> consultarPorId(final Long id) {
     return this.jpa.findById(id)
       .map(entity -> this.mapper.converterOrigemParaDestino(entity, ItemPedidoModel.class));
   }
 
+  @Transactional(readOnly = true)
   @Override
   public List<ItemPedidoModel> consultarPorIdDeProduto(final Long produtoId) {
 

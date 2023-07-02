@@ -26,7 +26,7 @@ public class PedidoPostRepositoryAdapter implements IPedidoRepositoryPort.PostRe
 
     return Optional.of(pedidoModel)
       .map(model -> this.mapper.converterOrigemParaDestino(model, PedidoEntity.class))
-      .map(this.jpa::save)
+      .map(this.jpa::saveAndFlush)
       .map(entity -> this.mapper.converterOrigemParaDestino(entity, PedidoModel.class))
       .orElseThrow();
   }

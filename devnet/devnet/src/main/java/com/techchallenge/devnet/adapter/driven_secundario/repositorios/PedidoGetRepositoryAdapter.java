@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +25,7 @@ public class PedidoGetRepositoryAdapter implements IPedidoRepositoryPort.GetRepo
   @Autowired
   private PedidoRepositoryJpa jpa;
 
+  @Transactional(readOnly = true)
   @Override
   public Page<PedidoModel> pesquisar(final PedidoFiltro pedidoFiltro, final Pageable paginacao) {
 
@@ -34,6 +36,7 @@ public class PedidoGetRepositoryAdapter implements IPedidoRepositoryPort.GetRepo
       .orElseThrow();
   }
 
+  @Transactional(readOnly = true)
   @Override
   public Optional<PedidoModel> consultarPorId(final Long id) {
 
@@ -41,6 +44,7 @@ public class PedidoGetRepositoryAdapter implements IPedidoRepositoryPort.GetRepo
       .map(entity -> this.mapper.converterOrigemParaDestino(entity, PedidoModel.class));
   }
 
+  @Transactional(readOnly = true)
   @Override
   public List<PedidoModel> consultarPorIdDeCliente(final Long clienteId) {
 
@@ -50,6 +54,7 @@ public class PedidoGetRepositoryAdapter implements IPedidoRepositoryPort.GetRepo
       .orElseThrow();
   }
 
+  @Transactional(readOnly = true)
   @Override
   public List<PedidoModel> listar() {
 
