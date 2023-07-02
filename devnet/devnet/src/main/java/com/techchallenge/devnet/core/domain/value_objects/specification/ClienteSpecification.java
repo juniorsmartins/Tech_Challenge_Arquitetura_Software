@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.core.domain.value_objects.specification;
 
-import com.techchallenge.devnet.core.domain.entities.Cliente;
-import com.techchallenge.devnet.core.domain.value_objects.filtros.ClienteFiltro;
+import com.techchallenge.devnet.adapter.driven_secundario.entities.ClienteEntity;
+import com.techchallenge.devnet.adapter.driver_primario.dtos.filtros.ClienteFiltroDto;
 import jakarta.persistence.criteria.Predicate;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.jpa.domain.Specification;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public final class ClienteSpecification {
 
-  public static Specification<Cliente> consultarDinamicamente(ClienteFiltro filtro) {
+  public static Specification<ClienteEntity> consultarDinamicamente(ClienteFiltroDto filtro) {
 
     return ((root, query, criteriaBuilder) -> {
 

@@ -1,14 +1,13 @@
 package com.techchallenge.devnet.core.domain.base.utilitarios;
 
-import com.techchallenge.devnet.adapter.driver_primario.dtos.PedidoDtoId;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.EmailDtoRequest;
-import com.techchallenge.devnet.core.application.ports.entrada.IEmailService;
-import com.techchallenge.devnet.core.application.ports.saida.IClienteRepository;
-import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepository;
+import com.techchallenge.devnet.core.application.ports.entrada.IEmailServicePort;
+import com.techchallenge.devnet.core.application.ports.saida.IClienteRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ClienteNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
-import com.techchallenge.devnet.core.domain.entities.Pedido;
+import com.techchallenge.devnet.core.domain.models.EmailModel;
+import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,134 +18,134 @@ public final class UtilsImpl implements IUtils {
   private static final String EMAIL_ORIGEM = "techchallenge6@gmail.com";
 
   @Autowired
-  private IClienteRepository.GetRepository clienteGetRepository;
+  private IClienteRepositoryPort.GetRepository clienteGetRepository;
 
   @Autowired
-  private IProdutoRepository.GetRepository produtoGetRepository;
+  private IProdutoRepositoryPort.GetRepository produtoGetRepository;
 
   @Autowired
-  private IEmailService.EnviarService emailEnviarService;
+  private IEmailServicePort.EnviarService emailEnviarService;
 
   @Override
-  public Pedido confirmarCliente(Pedido pedido) {
+  public PedidoModel confirmarCliente(PedidoModel pedidoModel) {
 
-    if (ObjectUtils.isNotEmpty(pedido.getCliente()) && ObjectUtils.isNotEmpty(pedido.getCliente().getId())) {
-      var idCliente = pedido.getCliente().getId();
+    if (ObjectUtils.isNotEmpty(pedidoModel.getCliente()) && ObjectUtils.isNotEmpty(pedidoModel.getCliente().getId())) {
+      var idCliente = pedidoModel.getCliente().getId();
       var cliente = this.clienteGetRepository.consultarPorId(idCliente)
         .orElseThrow(() -> new ClienteNaoEncontradoException(idCliente));
-      pedido.setCliente(cliente);
+      pedidoModel.setCliente(cliente);
 
-    } else if (ObjectUtils.isNotEmpty(pedido.getCliente()) && ObjectUtils.isNotEmpty(pedido.getCliente().getCpf())) {
-      var cpfCliente = pedido.getCliente().getCpf();
+    } else if (ObjectUtils.isNotEmpty(pedidoModel.getCliente()) && ObjectUtils.isNotEmpty(pedidoModel.getCliente().getCpf())) {
+      var cpfCliente = pedidoModel.getCliente().getCpf();
       var cliente = this.clienteGetRepository.consultarPorCpf(cpfCliente)
         .orElseThrow(() ->
           new ClienteNaoEncontradoException(String.format(MensagemPadrao.CPF_NAO_ENCONTRADO, cpfCliente)));
-      pedido.setCliente(cliente);
+      pedidoModel.setCliente(cliente);
     }
 
-    return pedido;
+    return pedidoModel;
   }
 
   @Override
-  public Pedido confirmarProdutos(Pedido pedido) {
+  public PedidoModel confirmarProdutos(PedidoModel pedidoModel) {
 
-    pedido.getItensPedido().forEach(item -> {
+    pedidoModel.getItensPedido().forEach(item -> {
       var idProduto = item.getProduto().getId();
       var produto = this.produtoGetRepository.consultarPorId(idProduto)
         .orElseThrow(() -> new ProdutoNaoEncontradoException(idProduto));
       item.setProduto(produto);
     });
 
-    pedido.calcularPrecoTotal();
-    return pedido;
+    pedidoModel.calcularPrecoTotal();
+    return pedidoModel;
   }
 
   @Override
-  public Pedido notificarPedidoRecebido(Pedido pedido) {
+  public PedidoModel notificarPedidoRecebido(PedidoModel pedidoModel) {
 
-    if (ObjectUtils.isNotEmpty(pedido.getCliente())) {
+    if (ObjectUtils.isNotEmpty(pedidoModel.getCliente())) {
 
-      var cliente = pedido.getCliente();
+      var cliente = pedidoModel.getCliente();
 
-      var emailDtoRequest = EmailDtoRequest.builder()
+      var emailModel = EmailModel.builder()
         .ownerRef(cliente.getNome())
         .emailFrom(EMAIL_ORIGEM)
         .emailTo(cliente.getEmail())
         .subject("Notificação - Pedido RECEBIDO.")
         .text(cliente.getNome() + ", teu Pedido foi RECEBIDO pela DevNet.")
-        .pedido(PedidoDtoId.builder().id(pedido.getId()).build())
+        .pedido(pedidoModel)
         .build();
 
-      this.emailEnviarService.enviar(emailDtoRequest);
+      this.emailEnviarService.enviar(emailModel);
     }
 
-    return pedido;
+    return pedidoModel;
   }
 
   @Override
-  public Pedido notificarPedidoEmPreparacao(Pedido pedido) {
+  public PedidoModel notificarPedidoEmPreparacao(PedidoModel pedidoModel) {
 
-    if (ObjectUtils.isNotEmpty(pedido.getCliente())) {
+    if (ObjectUtils.isNotEmpty(pedidoModel.getCliente())) {
 
-      var cliente = pedido.getCliente();
+      var cliente = pedidoModel.getCliente();
 
-      var emailDtoRequest = EmailDtoRequest.builder()
+      var emailModel = EmailModel.builder()
         .ownerRef(cliente.getNome())
         .emailFrom(EMAIL_ORIGEM)
         .emailTo(cliente.getEmail())
         .subject("Notificação - Pedido PAGO em PREPARAÇÃO.")
         .text(cliente.getNome() + ", teu Pedido foi PAGO e está em PREPARAÇÃO.")
-        .pedido(PedidoDtoId.builder().id(pedido.getId()).build())
+        .pedido(pedidoModel)
         .build();
 
-      this.emailEnviarService.enviar(emailDtoRequest);
+      this.emailEnviarService.enviar(emailModel);
     }
 
-    return pedido;
+    return pedidoModel;
   }
 
   @Override
-  public Pedido notificarPedidoPronto(Pedido pedido) {
+  public PedidoModel notificarPedidoPronto(PedidoModel pedidoModel) {
 
-    if (ObjectUtils.isNotEmpty(pedido.getCliente())) {
+    if (ObjectUtils.isNotEmpty(pedidoModel.getCliente())) {
 
-      var cliente = pedido.getCliente();
+      var cliente = pedidoModel.getCliente();
 
-      var emailDtoRequest = EmailDtoRequest.builder()
+      var emailModel = EmailModel.builder()
         .ownerRef(cliente.getNome())
         .emailFrom(EMAIL_ORIGEM)
         .emailTo(cliente.getEmail())
         .subject("Notificação - Pedido PRONTO.")
         .text(cliente.getNome() + ", teu Pedido está PRONTO e pode ser retirado.")
-        .pedido(PedidoDtoId.builder().id(pedido.getId()).build())
+        .pedido(pedidoModel)
         .build();
 
-      this.emailEnviarService.enviar(emailDtoRequest);
+      this.emailEnviarService.enviar(emailModel);
     }
 
-    return pedido;
+    return pedidoModel;
   }
 
   @Override
-  public Pedido notificarPedidoFinalizado(Pedido pedido) {
+  public PedidoModel notificarPedidoFinalizado(PedidoModel pedidoModel) {
 
-    if (ObjectUtils.isNotEmpty(pedido.getCliente())) {
+    if (ObjectUtils.isNotEmpty(pedidoModel.getCliente())) {
 
-      var cliente = pedido.getCliente();
+      var cliente = pedidoModel.getCliente();
 
-      var emailDtoRequest = EmailDtoRequest.builder()
+      var emailModel = EmailModel.builder()
         .ownerRef(cliente.getNome())
         .emailFrom(EMAIL_ORIGEM)
         .emailTo(cliente.getEmail())
         .subject("Notificação - Pedido FINALIZADO.")
         .text(cliente.getNome() + ", teu Pedido foi retirado e está FINALIZADO.")
-        .pedido(PedidoDtoId.builder().id(pedido.getId()).build())
+        .pedido(pedidoModel)
         .build();
 
-      this.emailEnviarService.enviar(emailDtoRequest);
+      this.emailEnviarService.enviar(emailModel);
     }
 
-    return pedido;
+    return pedidoModel;
   }
 }
 

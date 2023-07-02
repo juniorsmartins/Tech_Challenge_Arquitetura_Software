@@ -1,39 +1,34 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ProdutoDtoRequest;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ProdutoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.IProdutoService;
-import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepository;
+import com.techchallenge.devnet.core.application.ports.entrada.IProdutoServicePort;
+import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
-import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
+import com.techchallenge.devnet.core.domain.models.ProdutoModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
-public class ProdutoPutService implements IProdutoService.PutService {
+public class ProdutoPutService implements IProdutoServicePort.PutService {
 
   @Autowired
-  private IMapper mapper;
+  private IProdutoRepositoryPort.GetRepository produtoGetRepository;
 
   @Autowired
-  private IProdutoRepository.GetRepository produtoGetRepository;
+  private IProdutoRepositoryPort.PostRepository produtoPostRepository;
 
-  @Transactional(isolation = Isolation.SERIALIZABLE)
   @Override
-  public ProdutoDtoResponse atualizar(final Long id, final ProdutoDtoRequest dtoRequest) {
+  public ProdutoModel atualizar(final Long id, final ProdutoModel produtoModel) {
 
     return this.produtoGetRepository.consultarPorId(id)
       .map(produto -> {
-        BeanUtils.copyProperties(dtoRequest, produto, "id");
+        BeanUtils.copyProperties(produtoModel, produto, "id");
         return produto;
       })
-      .map(produto -> this.mapper.converterEntidadeParaDtoResponse(produto, ProdutoDtoResponse.class))
+      .map(this.produtoPostRepository::salvar)
       .orElseThrow(() -> {
         log.info(String.format(MensagemPadrao.PRODUTO_NAO_ENCONTRADO, id));
         throw new ProdutoNaoEncontradoException(id);

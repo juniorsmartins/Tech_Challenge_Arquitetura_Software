@@ -1,39 +1,36 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.core.application.ports.entrada.IClienteService;
-import com.techchallenge.devnet.core.application.ports.saida.IClienteRepository;
-import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepository;
+import com.techchallenge.devnet.core.application.ports.entrada.IClienteServicePort;
+import com.techchallenge.devnet.core.application.ports.saida.IClienteRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ClienteNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_409.DeletarBloqueadoPoUso;
-import com.techchallenge.devnet.core.domain.entities.Cliente;
+import com.techchallenge.devnet.core.domain.models.ClienteModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
-public class ClienteDeleteService implements IClienteService.DeleteService {
+public class ClienteDeleteService implements IClienteServicePort.DeleteService {
 
   @Autowired
-  private IClienteRepository.GetRepository clienteGetRepository;
+  private IClienteRepositoryPort.GetRepository clienteGetRepository;
 
   @Autowired
-  private IClienteRepository.DeleteRepository clienteDeleteRepository;
+  private IClienteRepositoryPort.DeleteRepository clienteDeleteRepository;
 
   @Autowired
-  private IPedidoRepository.GetRepository pedidoGetRepository;
+  private IPedidoRepositoryPort.GetRepository pedidoGetRepository;
 
-  @Transactional(isolation = Isolation.SERIALIZABLE)
   @Override
   public void deletar(final Long id) {
 
     this.clienteGetRepository.consultarPorId(id)
       .map(this::verificarUsoDoCliente)
-      .map(cliente -> {
-        this.clienteDeleteRepository.deletar(cliente);
+      .map(model -> {
+        this.clienteDeleteRepository.deletar(model);
         return true;
       })
       .orElseThrow(() -> {
@@ -42,10 +39,9 @@ public class ClienteDeleteService implements IClienteService.DeleteService {
       });
   }
 
-  private Cliente verificarUsoDoCliente(final Cliente cliente) {
+  private ClienteModel verificarUsoDoCliente(final ClienteModel clienteModel) {
 
-    var idCliente = cliente.getId();
-
+    var idCliente = clienteModel.getId();
     var existePedidoDesseCliente = this.pedidoGetRepository.consultarPorIdDeCliente(idCliente)
       .isEmpty();
 
@@ -54,7 +50,7 @@ public class ClienteDeleteService implements IClienteService.DeleteService {
       throw new DeletarBloqueadoPoUso(idCliente);
     }
 
-    return cliente;
+    return clienteModel;
   }
 }
 

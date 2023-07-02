@@ -1,17 +1,14 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.EmailDtoRequest;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.EmailDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.IEmailService;
-import com.techchallenge.devnet.core.application.ports.saida.IClienteRepository;
-import com.techchallenge.devnet.core.application.ports.saida.IEmailRepository;
-import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepository;
+import com.techchallenge.devnet.core.application.ports.entrada.IEmailServicePort;
+import com.techchallenge.devnet.core.application.ports.saida.IClienteRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.IEmailRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ClienteNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
-import com.techchallenge.devnet.core.domain.entities.Email;
-import com.techchallenge.devnet.core.domain.entities.enums.StatusEmailEnum;
+import com.techchallenge.devnet.core.domain.models.EmailModel;
+import com.techchallenge.devnet.core.domain.models.enums.StatusEmailEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,28 +22,24 @@ import java.util.Optional;
 
 @Slf4j
 @Service
-public class EmailPostService implements IEmailService.EnviarService {
+public class EmailPostService implements IEmailServicePort.EnviarService {
 
   @Autowired
-  private IMapper mapper;
+  private IPedidoRepositoryPort.GetRepository pedidoGetRepository;
 
   @Autowired
-  private IPedidoRepository.GetRepository pedidoGetRepository;
-
-  @Autowired
-  private IClienteRepository.GetRepository clienteGetRepository;
+  private IClienteRepositoryPort.GetRepository clienteGetRepository;
 
   @Autowired
   private JavaMailSender javaMailSender;
 
   @Autowired
-  private IEmailRepository.PostRepository emailPostRepository;
+  private IEmailRepositoryPort.PostRepository emailPostRepository;
 
   @Override
-  public EmailDtoResponse enviar(EmailDtoRequest dtoRequest) {
+  public EmailModel enviar(EmailModel emailModel) {
 
-    return Optional.of(dtoRequest)
-      .map(dto -> this.mapper.converterDtoRequestParaEntidade(dto, Email.class))
+    return Optional.of(emailModel)
       .map(this::validarPedido)
       .map(this::validarCliente)
       .map(email -> {
@@ -70,12 +63,11 @@ public class EmailPostService implements IEmailService.EnviarService {
 
         return email;
       })
-      .map(email -> this.mapper.converterEntidadeParaDtoResponse(email, EmailDtoResponse.class))
       .orElseThrow();
   }
 
-  private Email validarPedido(Email email) {
-    var idPedido = email.getPedido().getId();
+  private EmailModel validarPedido(EmailModel emailModel) {
+    var idPedido = emailModel.getPedido().getId();
 
     var pedido = this.pedidoGetRepository.consultarPorId(idPedido)
       .orElseThrow(() -> {
@@ -83,12 +75,12 @@ public class EmailPostService implements IEmailService.EnviarService {
         throw new PedidoNaoEncontradoException(idPedido);
       });
 
-    email.setPedido(pedido);
+    emailModel.setPedido(pedido);
 
-    return email;
+    return emailModel;
   }
 
-  private Email validarCliente(Email email) {
+  private EmailModel validarCliente(EmailModel email) {
 
     if (ObjectUtils.isNotEmpty(email.getPedido().getCliente())) {
       var idCliente = email.getPedido().getCliente().getId();

@@ -8,12 +8,12 @@ import com.techchallenge.devnet.adapter.driver_primario.dtos.ClienteDtoResumo;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.ProdutoDtoResumo;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ItemPedidoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.PedidoDtoRequest;
-import com.techchallenge.devnet.core.domain.entities.Cliente;
-import com.techchallenge.devnet.core.domain.entities.ItemPedido;
-import com.techchallenge.devnet.core.domain.entities.Pedido;
-import com.techchallenge.devnet.core.domain.entities.Produto;
-import com.techchallenge.devnet.core.domain.entities.enums.FormaPagamentoEnum;
-import com.techchallenge.devnet.core.domain.entities.enums.StatusPedidoEnum;
+import com.techchallenge.devnet.core.domain.models.ClienteModel;
+import com.techchallenge.devnet.core.domain.models.ItemPedidoModel;
+import com.techchallenge.devnet.adapter.driven_secundario.entities.PedidoEntity;
+import com.techchallenge.devnet.core.domain.models.ProdutoModel;
+import com.techchallenge.devnet.core.domain.models.enums.FormaPagamentoEnum;
+import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;
 import com.techchallenge.devnet.utils.CriadorDeObjetos;
 import com.techchallenge.devnet.utils.Utilitarios;
 import org.junit.jupiter.api.AfterEach;
@@ -58,11 +58,11 @@ class PedidoPutControllerIntegrationTest {
   @Autowired
   private PedidoRepositoryJpa pedidoRepositoryJpa;
 
-  private Cliente cliente;
+  private ClienteModel cliente;
 
-  private Produto produto;
+  private ProdutoModel produto;
 
-  private Pedido pedido;
+  private PedidoEntity pedido;
 
   @BeforeEach
   void criadorDeCenarios() {
@@ -75,13 +75,13 @@ class PedidoPutControllerIntegrationTest {
       .build();
     produto = this.produtoRepositoryJpa.save(produto);
 
-    var itemPedido = ItemPedido.builder()
+    var itemPedido = ItemPedidoModel.builder()
       .produto(produto)
       .quantidade(2)
       .build();
     itemPedido.calcularPrecoParcial();
 
-    pedido = Pedido.builder()
+    pedido = PedidoEntity.builder()
       .cliente(cliente)
       .itensPedido(List.of(itemPedido))
       .formaPagamento(FormaPagamentoEnum.PIX)

@@ -1,19 +1,19 @@
 package com.techchallenge.devnet.core.domain.base.utilitarios;
 
-import com.techchallenge.devnet.core.domain.entities.Pedido;
+import com.techchallenge.devnet.core.domain.models.PedidoModel;
 
 public interface IUtils {
 
-  Pedido confirmarCliente(Pedido pedido);
+  PedidoModel confirmarCliente(PedidoModel pedidoModel);
 
-  Pedido confirmarProdutos(Pedido pedido);
+  PedidoModel confirmarProdutos(PedidoModel pedidoModel);
 
-  Pedido notificarPedidoRecebido(Pedido pedido);
+  PedidoModel notificarPedidoRecebido(PedidoModel pedidoModel);
 
-  Pedido notificarPedidoEmPreparacao(Pedido pedido);
+  PedidoModel notificarPedidoEmPreparacao(PedidoModel pedidoModel);
 
-  Pedido notificarPedidoPronto(Pedido pedido);
+  PedidoModel notificarPedidoPronto(PedidoModel pedidoModel);
 
-  Pedido notificarPedidoFinalizado(Pedido pedido);
+  PedidoModel notificarPedidoFinalizado(PedidoModel pedidoModel);
 }
 

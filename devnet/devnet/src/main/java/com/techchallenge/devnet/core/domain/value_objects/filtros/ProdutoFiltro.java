@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.core.domain.value_objects.filtros;
 
-import com.techchallenge.devnet.core.domain.entities.enums.CategoriaEnum;
+import com.techchallenge.devnet.core.domain.models.enums.CategoriaEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
-public class ProdutoFiltro {
+public final class ProdutoFiltro {
 
   private String id;
 
