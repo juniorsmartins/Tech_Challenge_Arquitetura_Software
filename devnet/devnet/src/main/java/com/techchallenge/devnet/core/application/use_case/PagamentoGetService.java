@@ -13,7 +13,6 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -24,7 +23,6 @@ public class PagamentoGetService implements IPagamentoServicePort.GetService {
   @Autowired
   private IPagamentoRepositoryPort.GetRepository pagamentoGetRepository;
 
-  @Transactional(readOnly = true)
   @Override
   public Page<PagamentoModel> pesquisar(final PagamentoFiltro filtro, final Pageable paginacao) {
 
@@ -33,7 +31,6 @@ public class PagamentoGetService implements IPagamentoServicePort.GetService {
       .orElseThrow();
   }
 
-  @Transactional(readOnly = true)
   @Override
   public InputStreamResource buscarQrCodePorId(final Long id) {
 

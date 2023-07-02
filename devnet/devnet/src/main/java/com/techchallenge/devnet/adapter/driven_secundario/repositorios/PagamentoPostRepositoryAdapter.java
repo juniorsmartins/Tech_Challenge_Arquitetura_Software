@@ -7,6 +7,7 @@ import com.techchallenge.devnet.core.application.ports.saida.IPagamentoRepositor
 import com.techchallenge.devnet.core.domain.models.PagamentoModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -19,6 +20,7 @@ public class PagamentoPostRepositoryAdapter implements IPagamentoRepositoryPort.
   @Autowired
   private PagamentoRepositoryJpa jpa;
 
+  @Transactional
   @Override
   public PagamentoModel salvar(final PagamentoModel pagamentoModel) {
 
