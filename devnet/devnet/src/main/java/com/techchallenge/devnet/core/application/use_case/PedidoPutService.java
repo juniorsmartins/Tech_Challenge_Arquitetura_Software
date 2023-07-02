@@ -1,80 +1,72 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.PedidoDtoRequest;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PedidoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.IPedidoService;
+import com.techchallenge.devnet.core.application.ports.entrada.IPedidoServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IItemPedidoRepository;
-import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepository;
+import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_409.AtualizarPedidoBloqueadoException;
 import com.techchallenge.devnet.core.domain.base.utilitarios.IUtils;
-import com.techchallenge.devnet.core.domain.entities.Pedido;
-import com.techchallenge.devnet.core.domain.entities.enums.StatusPedidoEnum;
+import com.techchallenge.devnet.core.domain.models.PedidoModel;
+import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Slf4j
 @Service
-public class PedidoPutService implements IPedidoService.PutService {
+public class PedidoPutService implements IPedidoServicePort.PutService {
 
   @Autowired
-  private IMapper mapper;
+  private IPedidoRepositoryPort.GetRepository pedidoGetRepository;
 
   @Autowired
-  private IPedidoRepository.GetRepository pedidoGetRepository;
+  private IPedidoRepositoryPort.PostRepository pedidoPostRepository;
 
   @Autowired
   private IItemPedidoRepository.DeleteRepository itemPedidoDeleteRepository;
 
   @Autowired
+  private IItemPedidoRepository.PostRepository itemPedidoPostRepository;
+
+  @Autowired
   private IUtils utils;
 
-  @Transactional(isolation = Isolation.SERIALIZABLE)
   @Override
-  public PedidoDtoResponse atualizar(final Long id, final PedidoDtoRequest dtoRequest) {
+  public PedidoModel atualizar(final Long id, final PedidoModel pedidoModel) {
 
-    return Optional.of(dtoRequest)
-      .map(dto -> this.mapper.converterDtoRequestParaEntidade(dto, Pedido.class))
+    return Optional.of(pedidoModel)
       .map(this.utils::confirmarCliente)
       .map(this.utils::confirmarProdutos)
-      .map(pedido -> {
-        pedido.setStatusPedido(StatusPedidoEnum.RECEBIDO);
+      .map(model -> {
+        model.setStatusPedido(StatusPedidoEnum.RECEBIDO);
+        model.getItensPedido().forEach(item -> item.setPedido(model));
+        model.setId(id);
 
-        var pedidoDoBanco = this.pedidoGetRepository.consultarPorId(id)
-          .map(this::verificarPermissaoParaAtualizar)
-          .map(order -> {
-            order.getItensPedido().forEach(item -> this.itemPedidoDeleteRepository.deletar(item));
-            return order;
-          })
-          .orElseThrow(() -> {
-            log.info(String.format(MensagemPadrao.PEDIDO_NAO_ENCONTRADO, id));
-            throw new PedidoNaoEncontradoException(id);
-          });
+        this.removerItensPedidoDoPedidoPorId(id);
 
-        BeanUtils.copyProperties(pedido, pedidoDoBanco, "id");
-        pedidoDoBanco.getItensPedido().forEach(item -> item.setPedido(pedidoDoBanco));
-
-        return pedidoDoBanco;
+        return model;
       })
-      .map(pedido -> this.mapper.converterEntidadeParaDtoResponse(pedido, PedidoDtoResponse.class))
+      .map(this.pedidoPostRepository::salvar)
       .orElseThrow();
   }
 
-  private Pedido verificarPermissaoParaAtualizar(Pedido pedido) {
-    if (!pedido.getStatusPedido().equals(StatusPedidoEnum.RECEBIDO)) {
-      log.info(String.format(MensagemPadrao.PEDIDO_BLOQUEADO_PARA_ATUALIZAR, pedido.getId(), pedido.getStatusPedido()));
+  private PedidoModel verificarPermissaoParaAtualizar(PedidoModel pedidoModel) {
+    if (!pedidoModel.getStatusPedido().equals(StatusPedidoEnum.RECEBIDO)) {
+      log.info(String.format(MensagemPadrao.PEDIDO_BLOQUEADO_PARA_ATUALIZAR, pedidoModel.getId(), pedidoModel.getStatusPedido()));
       throw new AtualizarPedidoBloqueadoException(String
-        .format(MensagemPadrao.PEDIDO_BLOQUEADO_PARA_ATUALIZAR, pedido.getId(), pedido.getStatusPedido()));
+        .format(MensagemPadrao.PEDIDO_BLOQUEADO_PARA_ATUALIZAR, pedidoModel.getId(), pedidoModel.getStatusPedido()));
     }
-    return pedido;
+    return pedidoModel;
+  }
+
+  private void removerItensPedidoDoPedidoPorId(final Long idPedido) {
+    this.pedidoGetRepository.consultarPorId(idPedido)
+      .map(this::verificarPermissaoParaAtualizar)
+      .orElseThrow(() -> new PedidoNaoEncontradoException(idPedido));
+    this.itemPedidoDeleteRepository.deletarItensDoPedido(idPedido);
   }
 }
 

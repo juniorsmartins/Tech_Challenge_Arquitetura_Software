@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
 import com.techchallenge.devnet.DevnetApplication;
-import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.ClienteRepositoryJpa;
+import com.techchallenge.devnet.core.application.ports.saida.IClienteRepositoryPort;
 import com.techchallenge.devnet.utils.CriadorDeObjetos;
 import com.techchallenge.devnet.utils.Utilitarios;
 import org.junit.jupiter.api.DisplayName;
@@ -34,7 +34,7 @@ class ClientePostControllerIntegrationTest {
   private MockMvc mockMvc;
 
   @Autowired
-  private ClienteRepositoryJpa clienteRepositoryJpa;
+  private IClienteRepositoryPort.PostRepository clientePostRepository;
 
   @Test
   @Order(1)

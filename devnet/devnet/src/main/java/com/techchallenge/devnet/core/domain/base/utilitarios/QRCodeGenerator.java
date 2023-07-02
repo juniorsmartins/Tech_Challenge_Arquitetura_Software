@@ -7,7 +7,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.techchallenge.devnet.core.domain.base.exceptions.ArmazemException;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
-import com.techchallenge.devnet.core.domain.entities.Pedido;
+import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
 
@@ -24,14 +24,17 @@ public final class QRCodeGenerator {
 
   public static String sufixoDoNomeDaImagemDoQRCode = "-QRCODE.png";
 
-  public static InputStreamResource gerarQRCode(Pedido pedido) throws WriterException, IOException {
+  public static InputStreamResource gerarQRCode(PedidoModel pedidoModel) throws WriterException, IOException {
 
-    var nomeDaImagemQrCode = criarNomeDaImagemQrCode(pedido);
+    var nomeDaImagemQrCode = criarNomeDaImagemQrCode(pedidoModel);
+    System.out.println("\n\n\n---------- Nome da Imagem: " + nomeDaImagemQrCode + " ----------\n\n\n");
+
     var caminhoDaImagemQrCode = criarCaminhoComNomeDaImagemQrCode(nomeDaImagemQrCode);
+    System.out.println("\n\n\n---------- Caminho da Imagem: " + caminhoDaImagemQrCode + " ----------\n\n\n");
 
     var qrCodeWriter = new QRCodeWriter();
-    BitMatrix bitMatrix = qrCodeWriter.encode("ID: " + pedido.getId() + "\n" +
-        "Valor do Pagamento: " + pedido.getPrecoTotal() + "\n" +
+    BitMatrix bitMatrix = qrCodeWriter.encode("ID: " + pedidoModel.getId() + "\n" +
+        "Valor do Pagamento: " + pedidoModel.getPrecoTotal() + "\n" +
         "Banco do Brasil: " + "\n" +
         "Agência: 5588-8" + "\n" +
         "Conta: 8877797-10",
@@ -45,8 +48,8 @@ public final class QRCodeGenerator {
     return imagemQrCodeRetorno;
   }
 
-  public static String criarNomeDaImagemQrCode(Pedido pedido) {
-    return pedido.getId() + sufixoDoNomeDaImagemDoQRCode;
+  public static String criarNomeDaImagemQrCode(PedidoModel pedidoModel) {
+    return pedidoModel.getId() + sufixoDoNomeDaImagemDoQRCode;
   }
 
   private static Path criarCaminhoComNomeDaImagemQrCode(String nomeDaImagemQrCode) {

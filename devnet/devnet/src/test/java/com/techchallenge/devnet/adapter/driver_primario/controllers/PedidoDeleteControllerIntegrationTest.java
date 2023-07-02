@@ -4,12 +4,12 @@ import com.techchallenge.devnet.DevnetApplication;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.ClienteRepositoryJpa;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.PedidoRepositoryJpa;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.ProdutoRepositoryJpa;
-import com.techchallenge.devnet.core.domain.entities.Cliente;
-import com.techchallenge.devnet.core.domain.entities.ItemPedido;
-import com.techchallenge.devnet.core.domain.entities.Pedido;
-import com.techchallenge.devnet.core.domain.entities.Produto;
-import com.techchallenge.devnet.core.domain.entities.enums.FormaPagamentoEnum;
-import com.techchallenge.devnet.core.domain.entities.enums.StatusPedidoEnum;
+import com.techchallenge.devnet.core.domain.models.ClienteModel;
+import com.techchallenge.devnet.core.domain.models.ItemPedidoModel;
+import com.techchallenge.devnet.adapter.driven_secundario.entities.PedidoEntity;
+import com.techchallenge.devnet.core.domain.models.ProdutoModel;
+import com.techchallenge.devnet.core.domain.models.enums.FormaPagamentoEnum;
+import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;
 import com.techchallenge.devnet.utils.CriadorDeObjetos;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -53,9 +53,9 @@ class PedidoDeleteControllerIntegrationTest {
   @Autowired
   private ProdutoRepositoryJpa produtoRepositoryJpa;
 
-  private Cliente cliente;
+  private ClienteModel cliente;
 
-  private Produto produto;
+  private ProdutoModel produto;
 
   @BeforeEach
   void criadorDeCenarios() {
@@ -81,12 +81,12 @@ class PedidoDeleteControllerIntegrationTest {
   @DisplayName("Deletar - http 204")
   void deveRetornarHttp204_quandoDeletar() throws Exception {
 
-    var itemPedido = ItemPedido.builder()
+    var itemPedido = ItemPedidoModel.builder()
       .produto(produto)
       .quantidade(2)
       .build();
 
-    var pedido = Pedido.builder()
+    var pedido = PedidoEntity.builder()
       .statusPedido(StatusPedidoEnum.RECEBIDO)
       .formaPagamento(FormaPagamentoEnum.PIX)
       .itensPedido(List.of(itemPedido))

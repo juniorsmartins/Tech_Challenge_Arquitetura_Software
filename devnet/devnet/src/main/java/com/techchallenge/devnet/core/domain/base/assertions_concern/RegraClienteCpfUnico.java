@@ -1,26 +1,26 @@
 package com.techchallenge.devnet.core.domain.base.assertions_concern;
 
 import com.techchallenge.devnet.core.domain.base.exceptions.http_409.RegraClienteCpfUnicoException;
-import com.techchallenge.devnet.core.domain.entities.Cliente;
-import com.techchallenge.devnet.core.application.ports.saida.IClienteRepository;
+import com.techchallenge.devnet.core.domain.models.ClienteModel;
+import com.techchallenge.devnet.core.application.ports.saida.IClienteRepositoryPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public final class RegraClienteCpfUnico implements RegrasNegocioCliente {
+public final class RegraClienteCpfUnico implements RegrasCliente {
 
   @Autowired
-  private IClienteRepository.GetRepository consultarRepository;
+  private IClienteRepositoryPort.GetRepository getRepository;
 
   @Override
-  public void executarRegrasDeNegocio(Cliente entidade) {
+  public void executar(ClienteModel clienteModel) {
 
-    var existeCpfIgual = this.consultarRepository.consultarPorCpf(entidade.getCpf())
-      .filter(cliente -> !cliente.getId().equals(entidade.getId()))
+    var existeCpfIgual = this.getRepository.consultarPorCpf(clienteModel.getCpf())
+      .filter(cliente -> !cliente.getId().equals(clienteModel.getId()))
       .isPresent();
 
     if (existeCpfIgual) {
-      throw new RegraClienteCpfUnicoException(entidade.getCpf());
+      throw new RegraClienteCpfUnicoException(clienteModel.getCpf());
     }
   }
 }

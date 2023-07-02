@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.adapter.driver_primario.dtos.resposta;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.techchallenge.devnet.core.domain.entities.enums.StatusPagamentoEnum;
+import com.techchallenge.devnet.core.domain.models.enums.StatusPagamentoEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;

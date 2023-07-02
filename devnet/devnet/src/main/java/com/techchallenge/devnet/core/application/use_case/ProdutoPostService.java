@@ -1,34 +1,28 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ProdutoDtoRequest;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ProdutoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.IProdutoService;
-import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepository;
 import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
-import com.techchallenge.devnet.core.domain.entities.Produto;
+import com.techchallenge.devnet.core.application.ports.entrada.IProdutoServicePort;
+import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepositoryPort;
+import com.techchallenge.devnet.core.domain.models.ProdutoModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Service
-public class ProdutoPostService implements IProdutoService.PostService {
+public class ProdutoPostService implements IProdutoServicePort.PostService {
 
   @Autowired
   private IMapper mapper;
 
   @Autowired
-  private IProdutoRepository.PostRepository produtoPostRepository;
+  private IProdutoRepositoryPort.PostRepository produtoPostRepository;
 
-  @Transactional
   @Override
-  public ProdutoDtoResponse cadastrar(final ProdutoDtoRequest dtoRequest) {
+  public ProdutoModel cadastrar(final ProdutoModel produtoModel) {
 
-    return Optional.of(dtoRequest)
-      .map(dto -> this.mapper.converterDtoRequestParaEntidade(dto, Produto.class))
+    return Optional.of(produtoModel)
       .map(this.produtoPostRepository::salvar)
-      .map(produto -> this.mapper.converterEntidadeParaDtoResponse(produto, ProdutoDtoResponse.class))
       .orElseThrow();
   }
 }

@@ -1,44 +1,33 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ClienteDtoRequest;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ClienteDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.IClienteService;
-import com.techchallenge.devnet.core.application.ports.saida.IClienteRepository;
-import com.techchallenge.devnet.core.domain.base.assertions_concern.RegrasNegocioCliente;
-import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
-import com.techchallenge.devnet.core.domain.entities.Cliente;
+import com.techchallenge.devnet.core.application.ports.entrada.IClienteServicePort;
+import com.techchallenge.devnet.core.application.ports.saida.IClienteRepositoryPort;
+import com.techchallenge.devnet.core.domain.base.assertions_concern.RegrasCliente;
+import com.techchallenge.devnet.core.domain.models.ClienteModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ClientePostService implements IClienteService.PostService {
+public class ClientePostService implements IClienteServicePort.PostService {
 
   @Autowired
-  private IMapper mapper;
+  private IClienteRepositoryPort.PostRepository clientePostRepository;
 
   @Autowired
-  private IClienteRepository.PostRepository clientePostRepository;
+  private List<RegrasCliente> regras;
 
-  @Autowired
-  private List<RegrasNegocioCliente> regrasDeNegocio;
-
-  @Transactional
   @Override
-  public ClienteDtoResponse cadastrar(final ClienteDtoRequest dtoRequest) {
+  public ClienteModel cadastrar(final ClienteModel clienteModel) {
 
-    return Optional.of(dtoRequest)
-      .map(dto -> this.mapper.converterDtoRequestParaEntidade(dto, Cliente.class))
-      .map(cliente -> {
-        this.regrasDeNegocio.forEach(regra -> regra.executarRegrasDeNegocio(cliente));
-
-        return cliente;
+    return Optional.of(clienteModel)
+      .map(model -> {
+        this.regras.forEach(regra -> regra.executar(model));
+        return model;
       })
       .map(this.clientePostRepository::salvar)
-      .map(cliente -> this.mapper.converterEntidadeParaDtoResponse(cliente, ClienteDtoResponse.class))
       .orElseThrow();
   }
 }

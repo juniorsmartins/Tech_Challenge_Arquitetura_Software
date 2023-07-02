@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.core.domain.value_objects.filtros;
 
-import com.techchallenge.devnet.core.domain.entities.enums.FormaPagamentoEnum;
-import com.techchallenge.devnet.core.domain.entities.enums.StatusPedidoEnum;
+import com.techchallenge.devnet.core.domain.models.enums.FormaPagamentoEnum;
+import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,7 +16,5 @@ public final class PedidoFiltro {
   private String cliente;
 
   private FormaPagamentoEnum formaPagamento;
-
-
 }
 

@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.core.application.ports.saida;
 
-import com.techchallenge.devnet.core.domain.entities.ItemPedido;
+import com.techchallenge.devnet.core.domain.models.ItemPedidoModel;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,17 +8,21 @@ import java.util.Optional;
 public interface IItemPedidoRepository {
 
   interface PostRepository {
-    ItemPedido salvar(ItemPedido itemPedido);
+    ItemPedidoModel salvar(ItemPedidoModel itemPedido);
+
+    void flush();
   }
 
   interface GetRepository {
-    Optional<ItemPedido> consultarPorId(Long id);
+    Optional<ItemPedidoModel> consultarPorId(Long id);
 
-    List<ItemPedido> consultarPorIdDeProduto(Long idProduto);
+    List<ItemPedidoModel> consultarPorIdDeProduto(Long idProduto);
   }
 
   interface DeleteRepository {
-    void deletar(ItemPedido itemPedido);
+    void deletar(ItemPedidoModel itemPedido);
+
+    void deletarItensDoPedido(Long idPedido);
   }
 }
 

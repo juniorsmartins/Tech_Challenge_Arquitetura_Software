@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao;
 
-import com.techchallenge.devnet.core.domain.entities.enums.CategoriaEnum;
+import com.techchallenge.devnet.core.domain.models.enums.CategoriaEnum;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;

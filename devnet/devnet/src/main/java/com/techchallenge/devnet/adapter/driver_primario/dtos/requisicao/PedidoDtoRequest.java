@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao;
 
 import com.techchallenge.devnet.adapter.driver_primario.dtos.ClienteDtoResumo;
-import com.techchallenge.devnet.core.domain.entities.enums.FormaPagamentoEnum;
+import com.techchallenge.devnet.core.domain.models.enums.FormaPagamentoEnum;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.Valid;

@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.core.domain.base.exceptions.http_409;
 
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
-import com.techchallenge.devnet.core.domain.entities.enums.StatusPedidoEnum;
+import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;
 
 public final class CancelamentoBloqueadoException extends RegraDeNegocioVioladaException {
 
