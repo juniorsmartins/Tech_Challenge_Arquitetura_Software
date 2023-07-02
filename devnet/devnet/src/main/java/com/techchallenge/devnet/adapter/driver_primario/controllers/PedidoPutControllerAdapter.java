@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
-@Tag(name = "PedidoPutController", description = "Adaptador para atualizar recurso Pedido.")
+@Tag(name = "PedidoPutControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/pedidos")
 public final class PedidoPutControllerAdapter implements IPedidoControllerPort.PutController {

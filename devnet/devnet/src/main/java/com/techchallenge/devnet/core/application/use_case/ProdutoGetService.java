@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -18,7 +17,6 @@ public class ProdutoGetService implements IProdutoServicePort.GetService {
   @Autowired
   private IProdutoRepositoryPort.GetRepository produtoGetRepository;
 
-  @Transactional(readOnly = true)
   @Override
   public Page<ProdutoModel> pesquisar(final ProdutoFiltro filtro, final Pageable paginacao) {
 

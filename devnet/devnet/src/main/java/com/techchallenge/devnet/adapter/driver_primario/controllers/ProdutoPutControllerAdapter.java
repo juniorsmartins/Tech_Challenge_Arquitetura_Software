@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
-@Tag(name = "ProdutoPutControllerAdapter", description = "Adaptador para atualizar recurso Produto.")
+@Tag(name = "ProdutoPutControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/produtos")
 public final class ProdutoPutControllerAdapter implements IProdutoControllerPort.PutController {

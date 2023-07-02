@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Tag(name = "ProdutoDeleteControllerAdapter", description = "Adaptador para apagar recurso Produto.")
+@Tag(name = "ProdutoDeleteControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/produtos")
 public final class ProdutoDeleteControllerAdapter implements IProdutoControllerPort.DeleteController {

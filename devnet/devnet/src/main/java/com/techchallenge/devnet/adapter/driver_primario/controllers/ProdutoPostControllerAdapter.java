@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.net.URI;
 import java.util.Optional;
 
-@Tag(name = "ProdutoPostControllerAdapter", description = "Adaptador para criar recurso Produto.")
+@Tag(name = "ProdutoPostControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/produtos")
 public final class ProdutoPostControllerAdapter implements IProdutoControllerPort.PostController {

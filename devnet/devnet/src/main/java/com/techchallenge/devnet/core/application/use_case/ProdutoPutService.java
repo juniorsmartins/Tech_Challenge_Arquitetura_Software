@@ -9,8 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
@@ -19,7 +17,9 @@ public class ProdutoPutService implements IProdutoServicePort.PutService {
   @Autowired
   private IProdutoRepositoryPort.GetRepository produtoGetRepository;
 
-  @Transactional(isolation = Isolation.SERIALIZABLE)
+  @Autowired
+  private IProdutoRepositoryPort.PostRepository produtoPostRepository;
+
   @Override
   public ProdutoModel atualizar(final Long id, final ProdutoModel produtoModel) {
 
@@ -28,6 +28,7 @@ public class ProdutoPutService implements IProdutoServicePort.PutService {
         BeanUtils.copyProperties(produtoModel, produto, "id");
         return produto;
       })
+      .map(this.produtoPostRepository::salvar)
       .orElseThrow(() -> {
         log.info(String.format(MensagemPadrao.PRODUTO_NAO_ENCONTRADO, id));
         throw new ProdutoNaoEncontradoException(id);

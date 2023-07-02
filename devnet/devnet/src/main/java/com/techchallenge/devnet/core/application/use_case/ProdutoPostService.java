@@ -6,7 +6,6 @@ import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepositoryP
 import com.techchallenge.devnet.core.domain.models.ProdutoModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -19,7 +18,6 @@ public class ProdutoPostService implements IProdutoServicePort.PostService {
   @Autowired
   private IProdutoRepositoryPort.PostRepository produtoPostRepository;
 
-  @Transactional
   @Override
   public ProdutoModel cadastrar(final ProdutoModel produtoModel) {
 

@@ -43,6 +43,7 @@ public class ClienteGetRepositoryAdapter implements IClienteRepositoryPort.GetRe
       .map(entity -> this.mapper.converterOrigemParaDestino(entity, ClienteModel.class));
   }
 
+  @Transactional(readOnly = true)
   @Override
   public Optional<ClienteModel> consultarPorCpf(final String cpf) {
 

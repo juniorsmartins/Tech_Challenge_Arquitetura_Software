@@ -7,6 +7,8 @@ import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepositoryP
 import com.techchallenge.devnet.core.domain.models.ProdutoModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -19,6 +21,7 @@ public class ProdutoDeleteRepositoryAdapter implements IProdutoRepositoryPort.De
   @Autowired
   private ProdutoRepositoryJpa jpa;
 
+  @Transactional(isolation = Isolation.SERIALIZABLE)
   @Override
   public void deletar(final ProdutoModel produtoModel) {
 
