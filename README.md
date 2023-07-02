@@ -177,14 +177,15 @@ Além dos eventos, o Event Storming também pode incluir outras informações re
 
 1. Intellij Idea (programação);
 2. Maven (gerenciamento de dependências);
-3. Git e GitHub (versionamento);
-4. Postman (testes manuais);
-5. StarUML (Diagramas);
-6. Egon.io (Linguagem Pictográfica);
-7. Miro (Event Storming);
-8. ChatGPT (pesquisa);
-9. YouTube (pesquisa);
-10. Google (pesquisa);
+3. Git (versionamento);
+4. GitHub (repositório);
+5. Postman (testes manuais);
+6. StarUML (Diagramas);
+7. Egon.io (Linguagem Pictográfica);
+8. Miro (Event Storming);
+9. ChatGPT (pesquisa);
+10. YouTube (pesquisa);
+11. Google (pesquisa).
 
 #### Diagramas
 
