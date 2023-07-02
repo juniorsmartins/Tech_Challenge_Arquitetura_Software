@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
-@Tag(name = "CopaPutController", description = "Adaptador para atualizar recurso Pedido.")
+@Tag(name = "CopaPutController", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/copa")
 public final class CopaPutControllerAdapter implements ICopaControllerPort.PutController {
