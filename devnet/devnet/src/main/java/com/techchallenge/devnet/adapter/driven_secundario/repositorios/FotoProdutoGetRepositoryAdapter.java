@@ -6,6 +6,7 @@ import com.techchallenge.devnet.core.application.ports.saida.IFotoProdutoReposit
 import com.techchallenge.devnet.core.domain.models.FotoProdutoModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -18,6 +19,7 @@ public class FotoProdutoGetRepositoryAdapter implements IFotoProdutoRepositoryPo
   @Autowired
   private FotoProdutoRepositoryJpa jpa;
 
+  @Transactional(readOnly = true)
   @Override
   public Optional<FotoProdutoModel> consultarPorId(final Long id) {
 

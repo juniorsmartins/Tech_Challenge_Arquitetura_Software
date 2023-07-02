@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.util.Optional;
 
-@Tag(name = "FotoProdutoPutControllerAdapter", description = "Adaptador para atualizar recurso FotoProduto.")
+@Tag(name = "FotoProdutoPutControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/fotos")
 public final class FotoProdutoPutControllerAdapter implements IFotoProdutoControllerPort.PutController {

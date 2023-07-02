@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
-@Tag(name = "FotoProdutoGetController", description = "Adaptador para buscar recurso FotoProduto.")
+@Tag(name = "FotoProdutoGetControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/fotos")
 public final class FotoProdutoGetControllerAdapter implements IFotoProdutoControllerPort.GetController {
