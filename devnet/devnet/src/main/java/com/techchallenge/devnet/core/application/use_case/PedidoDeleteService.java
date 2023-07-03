@@ -20,6 +20,9 @@ public class PedidoDeleteService implements IPedidoServicePort.DeleteService {
   @Autowired
   private IPedidoRepositoryPort.GetRepository pedidoGetRepository;
 
+  @Autowired
+  private IPedidoRepositoryPort.PostRepository pedidoPostRepository;
+
   @Transactional(isolation = Isolation.SERIALIZABLE)
   @Override
   public void cancelarPorId(final Long id) {
@@ -34,8 +37,9 @@ public class PedidoDeleteService implements IPedidoServicePort.DeleteService {
         model.setStatusPedido(StatusPedidoEnum.CANCELADO);
         model.getPagamento().setStatusPagamento(StatusPagamentoEnum.CANCELADO);
 
-        return true;
+        return model;
       })
+      .map(this.pedidoPostRepository::salvar)
       .orElseThrow(() -> {
         log.info(String.format(MensagemPadrao.PEDIDO_NAO_ENCONTRADO, id));
         throw new PedidoNaoEncontradoException(id);

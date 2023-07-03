@@ -24,7 +24,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 import java.util.Optional;
 
-@Tag(name = "PedidoPostControllerAdapter", description = "Adaptador para padronizar requisição de Pedido.")
+@Tag(name = "PedidoPostControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/pedidos")
 public final class PedidoPostControllerAdapter implements IPedidoControllerPort.PostController {

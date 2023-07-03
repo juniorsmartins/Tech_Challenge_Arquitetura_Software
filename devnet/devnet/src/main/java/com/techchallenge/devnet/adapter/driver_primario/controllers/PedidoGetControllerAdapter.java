@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
-@Tag(name = "PedidoGetControllerAdapter", description = "Adaptador para buscar recurso Pedido.")
+@Tag(name = "PedidoGetControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/pedidos")
 public final class PedidoGetControllerAdapter implements IPedidoControllerPort.GetController {
