@@ -5,6 +5,7 @@ import com.techchallenge.devnet.adapter.driven_secundario.entities.ClienteEntity
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.ClienteRepositoryJpa;
 import com.techchallenge.devnet.utils.CriadorDeObjetos;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
@@ -63,6 +64,22 @@ class ClienteDeleteControllerIntegrationTest {
         .accept(MediaType.APPLICATION_JSON))
       .andExpect(MockMvcResultMatchers.status().isNoContent())
       .andDo(MockMvcResultHandlers.print());
+  }
+
+  @Test
+  @Order(2)
+  @DisplayName("Deletar - http 204 e apagar no banco")
+  void deveApagarNoBanco_quandoDeletar() throws Exception {
+
+    this.mockMvc.perform(MockMvcRequestBuilders.delete(END_POINT.concat("/") + clienteEntity.getId())
+        .contentType(MediaType.APPLICATION_JSON)
+        .characterEncoding(UTF8)
+        .accept(MediaType.APPLICATION_JSON))
+      .andExpect(MockMvcResultMatchers.status().isNoContent())
+      .andDo(MockMvcResultHandlers.print());
+
+    var existe = this.clienteRepositoryJpa.existsById(clienteEntity.getId());
+    Assertions.assertEquals(false, existe);
   }
 
   @Test
