@@ -4,5 +4,7 @@ WORKDIR /tech/challenge
 
 COPY target/devnet-0.0.1.jar devnet.jar
 
+VOLUME /app/armazem
+
 ENTRYPOINT ["java", "-jar", "/tech/challenge/devnet.jar"]
 
