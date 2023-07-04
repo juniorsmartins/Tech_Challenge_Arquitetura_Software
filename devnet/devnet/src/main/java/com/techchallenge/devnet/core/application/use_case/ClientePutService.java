@@ -31,6 +31,7 @@ public class ClientePutService implements IClienteServicePort.PutService {
 
     return this.clienteGetRepository.consultarPorId(id)
       .map(model -> {
+        clienteModel.setId(id);
         this.regras.forEach(regra -> regra.executar(clienteModel));
         BeanUtils.copyProperties(clienteModel, model, "id");
         return model;

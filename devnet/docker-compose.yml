@@ -20,7 +20,6 @@ services:
       - rede-internet
     volumes:
       - pg-data:/var/lib/postgresql/data
-
   devnet:
     image: devnet:0.0.1
     restart: always
@@ -45,11 +44,14 @@ services:
     command: mvn spring-boot:run
     depends_on:
       - db
+    volumes:
+      - armazem:/app/armazem
     networks:
       - rede-internet
 
 volumes:
   pg-data:
+  armazem:
 
 networks:
   rede-internet:
