@@ -4,12 +4,14 @@ import com.github.javafaker.Faker;
 import com.techchallenge.devnet.adapter.driven_secundario.entities.ClienteEntity;
 import com.techchallenge.devnet.adapter.driven_secundario.entities.ProdutoEntity;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ClienteDtoRequest;
+import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ItemPedidoDtoRequest;
+import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.PedidoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ProdutoDtoRequest;
-import com.techchallenge.devnet.core.domain.models.ClienteModel;
-import com.techchallenge.devnet.core.domain.models.ProdutoModel;
 import com.techchallenge.devnet.core.domain.models.enums.CategoriaEnum;
+import com.techchallenge.devnet.core.domain.models.enums.FormaPagamentoEnum;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public final class CriadorDeObjetos {
 
@@ -25,14 +27,6 @@ public final class CriadorDeObjetos {
       .email(faker.internet().emailAddress());
   }
 
-  public static ClienteModel.ClienteModelBuilder gerarClienteModelBuilder() {
-
-    return ClienteModel.builder()
-      .nome(faker.name().fullName())
-      .cpf(cpfGenerator.cpf(false))
-      .email(faker.internet().emailAddress());
-  }
-
   public static ProdutoEntity.ProdutoEntityBuilder gerarProdutoEntityBuilder() {
 
     var preco = (Math.random() + 1) * 12;
@@ -41,18 +35,7 @@ public final class CriadorDeObjetos {
       .nome(faker.food().fruit())
       .categoria(CategoriaEnum.ACOMPANHAMENTO)
       .descricao(faker.lorem().characters(10, 250))
-      .preco(BigDecimal.valueOf(preco));
-  }
-
-  public static ProdutoModel.ProdutoModelBuilder gerarProdutoModelBuilder() {
-
-    var preco = (Math.random() + 1) * 12;
-
-    return ProdutoModel.builder()
-      .nome(faker.food().fruit())
-      .categoria(CategoriaEnum.ACOMPANHAMENTO)
-      .descricao(faker.lorem().characters(10, 250))
-      .preco(BigDecimal.valueOf(preco));
+      .preco(BigDecimal.valueOf(preco).setScale(2, RoundingMode.HALF_UP));
   }
 
   public static ClienteDtoRequest.ClienteDtoRequestBuilder gerarClienteDtoRequestBuilder() {
@@ -71,7 +54,23 @@ public final class CriadorDeObjetos {
       .nome(faker.food().fruit())
       .categoria(CategoriaEnum.ACOMPANHAMENTO)
       .descricao(faker.lorem().characters(10, 250))
-      .preco(BigDecimal.valueOf(preco));
+      .preco(BigDecimal.valueOf(preco).setScale(2, RoundingMode.HALF_UP));
+  }
+
+  public static PedidoDtoRequest.PedidoDtoRequestBuilder gerarPedidoDtoRequestBuilder() {
+
+    // Preencher com ItemPedidoDtoRequest
+
+    return PedidoDtoRequest.builder()
+      .formaPagamento(FormaPagamentoEnum.PIX);
+  }
+
+  public static ItemPedidoDtoRequest.ItemPedidoDtoRequestBuilder gerarItemPedidoDtoRequestBuilder() {
+
+    // Preencher com ProdutoDtoResumo
+
+    return ItemPedidoDtoRequest.builder()
+      .quantidade(Integer.parseInt(faker.numerify("#")));
   }
 }
 
