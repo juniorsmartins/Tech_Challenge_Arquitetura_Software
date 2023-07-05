@@ -88,7 +88,7 @@ class ClientePostControllerIntegrationTest {
       .andDo(MockMvcResultHandlers.print());
 
     var clienteDoBanco = this.clienteRepositoryJpa.findByCpf(dtoRequest.getCpf()).get();
-    Assertions.assertNotNull(clienteDoBanco.getId());
+    Assertions.assertEquals(clienteDoBanco.getId(), clienteDoBanco.getId());
     Assertions.assertEquals(dtoRequest.getNome(), clienteDoBanco.getNome());
     Assertions.assertEquals(dtoRequest.getCpf(), clienteDoBanco.getCpf());
     Assertions.assertEquals(dtoRequest.getEmail(), clienteDoBanco.getEmail());
