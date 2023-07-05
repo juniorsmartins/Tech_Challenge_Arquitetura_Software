@@ -24,8 +24,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.math.RoundingMode;
-
 @SpringBootTest(classes = DevnetApplication.class)
 @AutoConfigureMockMvc
 @ExtendWith(SpringExtension.class)
@@ -94,7 +92,7 @@ class ProdutoPutControllerIntegrationTest {
     Assertions.assertEquals(dtoRequest.getNome(), produtoDoBanco.getNome());
     Assertions.assertEquals(dtoRequest.getDescricao(), produtoDoBanco.getDescricao());
     Assertions.assertEquals(dtoRequest.getCategoria(), produtoDoBanco.getCategoria());
-    Assertions.assertEquals(dtoRequest.getPreco().setScale(2, RoundingMode.HALF_UP), produtoDoBanco.getPreco());
+    Assertions.assertEquals(dtoRequest.getPreco(), produtoDoBanco.getPreco());
   }
 
   @Test
