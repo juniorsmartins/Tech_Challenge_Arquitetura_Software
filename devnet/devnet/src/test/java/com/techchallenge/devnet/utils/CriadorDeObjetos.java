@@ -4,6 +4,7 @@ import com.github.javafaker.Faker;
 import com.techchallenge.devnet.adapter.driven_secundario.entities.ClienteEntity;
 import com.techchallenge.devnet.adapter.driven_secundario.entities.ProdutoEntity;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ClienteDtoRequest;
+import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.EmailDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ItemPedidoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.PedidoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ProdutoDtoRequest;
@@ -71,6 +72,16 @@ public final class CriadorDeObjetos {
 
     return ItemPedidoDtoRequest.builder()
       .quantidade(Integer.parseInt(faker.numerify("#")));
+  }
+
+  public static EmailDtoRequest.EmailDtoRequestBuilder gerarEmailDtoRequestBuilder() {
+
+    return EmailDtoRequest.builder()
+      .ownerRef(faker.name().fullName())
+      .emailFrom("techchallenge6@gmail.com")
+      .emailTo("juniorsoaresmartins@gmail.com")
+      .subject("DevNet - Teste Automatizado")
+      .text("Olá! Somos a DevNet. Venha nos conhecer.");
   }
 }
 
