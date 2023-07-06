@@ -39,8 +39,8 @@ Descrição: aplicação desenvolvida para compor nota no processo avaliativo da
 
 3. Documentação de Utilização do Projeto;
     1. Documentação Swagger/OpenAPI;
-    2. EndPoints e formato de Json;
-    3. Arquivo de requisições do Postman;
+    2. Arquivo de requisições do Postman;
+    3. Verbos, EndPoints e Json;
     4. Como testar.
 
 4. Autoria.
@@ -203,10 +203,21 @@ Obs: rode o container ou a aplicação anteriormente para ver a documentação S
 
 #### Arquivo de requisições do Postman
 
-Disponibilizado o Script do Postaman para facilitar os testes manuais. Esse Script pode ser baixado e feito upload no Posman. Nele estão definidos os endpoints e respectivos Jsons. Clique logo abaixo para ir até a pasta onde está o Script, o arquivo foi nomeado: TechChallenge.postman_collection.json.
+Disponibilizado o Script do Postman para os testes manuais. Esse Script pode ser baixado e importado no Posman. Nele estão definidos os endpoints e respectivos Jsons. Clique logo abaixo para ir até a pasta onde está o Script, o arquivo foi nomeado: TechChallenge.postman_collection.json. Porém, é necessário criar uma variável de ambiente chamada {{baseUrl}} com o endpoint: http://localhost:8080 ou, uma alternativa, é substituir a variável de ambiente pelo http://localhost:8080.
 
-[Clique Aqui!](https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/tree/master/Documentacao)
+[Clique Aqui! Para ver a pasta do Script.](https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/tree/master/Documentacao)
 
+#### Verbos, EndPoints e Json
+
+```
+CLIENTES
+
+GET
+http://localhost:8080/api/v1/clientes
+É possível pesquisar todos ou por ID, Nome, CPF e Email. Esse endpoint foi construído com o uso de filtros de Specification.
+
+
+```
 
 ### Autoria
 
