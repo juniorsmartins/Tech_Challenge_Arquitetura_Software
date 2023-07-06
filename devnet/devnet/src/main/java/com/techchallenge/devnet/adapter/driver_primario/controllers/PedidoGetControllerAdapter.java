@@ -5,7 +5,7 @@ import com.techchallenge.devnet.adapter.driver_primario.dtos.filtros.PedidoFiltr
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PedidoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.entrada.IPedidoServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
-import com.techchallenge.devnet.core.domain.value_objects.filtros.PedidoFiltro;
+import com.techchallenge.devnet.core.domain.objects.filtros.PedidoFiltro;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;

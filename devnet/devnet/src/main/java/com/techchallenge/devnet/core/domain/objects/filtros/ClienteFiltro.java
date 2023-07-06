@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.core.domain.value_objects.filtros;
+package com.techchallenge.devnet.core.domain.objects.filtros;
 
 import lombok.Getter;
 import lombok.Setter;
