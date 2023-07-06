@@ -5,7 +5,7 @@ import com.techchallenge.devnet.adapter.driver_primario.dtos.filtros.ProdutoFilt
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ProdutoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.entrada.IProdutoServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
-import com.techchallenge.devnet.core.domain.value_objects.filtros.ProdutoFiltro;
+import com.techchallenge.devnet.core.domain.objects.filtros.ProdutoFiltro;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;

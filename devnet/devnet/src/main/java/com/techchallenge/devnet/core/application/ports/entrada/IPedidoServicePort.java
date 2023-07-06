@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.core.application.ports.entrada;
 
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
-import com.techchallenge.devnet.core.domain.value_objects.filtros.PedidoFiltro;
+import com.techchallenge.devnet.core.domain.objects.filtros.PedidoFiltro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
