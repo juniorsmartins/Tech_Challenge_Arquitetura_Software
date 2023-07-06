@@ -203,7 +203,7 @@ Obs: rode o container ou a aplicação anteriormente para ver a documentação S
 
 #### Arquivo de requisições do Postman
 
-[Clique aqui! Para ir até a pasta onde está o Script do Postman. O arquivo está nomeado: TechChallenge.postman_collection.json.]([http://localhost:8080/swagger-ui/index.html#/](https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/tree/master/Documentacao))
+[Clique aqui! Para ir até a pasta onde está o Script do Postman. O arquivo está nomeado: TechChallenge.postman_collection.json.](https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/tree/master/Documentacao)
 
 O Script do Postman pode ser importado para o Postman e, desta forma, facilitar a realização de testes manuais. 
 
