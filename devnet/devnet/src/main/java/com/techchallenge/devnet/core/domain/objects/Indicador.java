@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.core.domain.value_objects;
+package com.techchallenge.devnet.core.domain.objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

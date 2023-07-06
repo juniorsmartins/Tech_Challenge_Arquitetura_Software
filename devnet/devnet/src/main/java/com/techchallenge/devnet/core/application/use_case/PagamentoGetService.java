@@ -6,7 +6,7 @@ import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PagamentoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.utilitarios.QRCodeGenerator;
 import com.techchallenge.devnet.core.domain.models.PagamentoModel;
-import com.techchallenge.devnet.core.domain.value_objects.filtros.PagamentoFiltro;
+import com.techchallenge.devnet.core.domain.objects.filtros.PagamentoFiltro;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;

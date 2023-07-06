@@ -4,7 +4,7 @@ import com.techchallenge.devnet.core.application.ports.entrada.IAdminService;
 import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPagamentoEnum;
-import com.techchallenge.devnet.core.domain.value_objects.Indicador;
+import com.techchallenge.devnet.core.domain.objects.Indicador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

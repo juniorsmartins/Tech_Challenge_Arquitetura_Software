@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.core.domain.value_objects.specification;
+package com.techchallenge.devnet.core.domain.objects.specification;
 
 import com.techchallenge.devnet.adapter.driven_secundario.entities.PagamentoEntity;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.filtros.PagamentoFiltroDto;
