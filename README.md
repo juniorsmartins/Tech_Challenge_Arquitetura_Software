@@ -214,10 +214,75 @@ CLIENTES
 
 GET
 http://localhost:8080/api/v1/clientes
-É possível pesquisar todos ou por ID, Nome, CPF e Email. Esse endpoint foi construído com o uso de filtros de Specification.
+É possível pesquisar todos ou por ID, Nome, CPF e Email. Esse endpoint foi construído com o uso de filtros de Specification e a resposta é paginada.
 
+POST
+http://localhost:8080/api/v1/clientes
+{
+    "nome":"Robert Martin",
+    "cpf":"12883391009",
+    "email":"coloque_seu_email_aqui@gmail.com"
+}
+
+PUT
+http://localhost:8080/api/v1/clientes/1
+{
+    "nome":"Robert Atualizado Martin",
+    "cpf":"78616571086",
+    "email":"coloque_seu_email_aqui@gmail.com"
+}
+
+DELETE
+http://localhost:8080/api/v1/clientes/1
+```
 
 ```
+PRODUTOS
+
+GET
+http://localhost:8080/api/v1/produtos
+É possível pesquisar todos ou por ID, Categoria, Nome, Descrição e Preço. Esse endpoint foi construído com o uso de filtros de Specification e a resposta é paginada.
+
+POST
+http://localhost:8080/api/v1/produtos
+{
+    "categoria": "BEBIDA",
+    "nome":"Coca-Cola 3L",
+    "descricao":"Refrigerante",
+    "preco": 15.00
+}
+
+POST
+http://localhost:8080/api/v1/produtos
+{
+    "categoria": "LANCHE",
+    "nome":"Hamburguer Filé de Peixe",
+    "descricao":"Pão de hamburguer com gergelin e filé de peixe, maionese, queijo, tomate e alface",
+    "preco": 30.00
+}
+
+POST
+http://localhost:8080/api/v1/produtos
+{
+    "categoria": "SOBREMESA",
+    "nome":"Pudim",
+    "descricao":"Leite integral, ovos de galinha caipira, baunilha, açúcas e água.",
+    "preco": 20.00
+}
+
+PUT
+http://localhost:8080/api/v1/produtos/3
+{
+    "categoria": "SOBREMESA",
+    "nome":"Pudim ao Coco",
+    "descricao":"Leite integral, ovos de galinha caipira, baunilha, açúcar, coco e água.",
+    "preco": 22.50
+}
+
+DELETE
+http://localhost:8080/api/v1/produtos/3
+```
+
 
 ### Autoria
 
