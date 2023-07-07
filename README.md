@@ -4,32 +4,30 @@ Nome: Tech-Challenge-DevNet;
   
 Descrição: aplicação desenvolvida para compor nota no processo avaliativo da primeira fase da pós-graduação em Arquitetura de Software na Fiap/Alura. E visa construir simulacro de app para uma Lanchonete, nomeada DevNet.
 
+  
 ## Índice
-
-```
-
+  
 1. Documentação de Arquitetura do Projeto
     1. Linguagem Ubíqua;
     2. Linguagem Pictográfica (Domain Storytelling);
     3. Domínio (Subdomínio Principal, Subdomínio Genérico e Subdomínio de Suporte);
     4. Event Storming;
     5. Bounded Context e Context Maps.
-
+  
 2. Documentação de Desenvolvimento do Projeto;
     1. Tecnologias;
     2. Ferramentas;
     3. Diagramas.
-
+  
 3. Documentação de Utilização do Projeto;
     1. Documentação Swagger/OpenAPI;
     2. Arquivo de requisições do Postman;
     3. Verbos, EndPoints e Jsons;
     4. Como testar.
-
+  
 4. Autoria.
-
-```
-
+  
+  
 ### Documentação de Arquitetura do Projeto
 
 
