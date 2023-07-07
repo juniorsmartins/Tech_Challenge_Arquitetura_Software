@@ -429,7 +429,7 @@ Esse endpoint gera indicadores administrativos. Neste caso, estão prontos os in
    3.3. Faça os testes. (não precisa startar a aplicação na IDE. Só certifique-se do container estar startado.)
 
 4. Documentação Swagger
-  4.1 Você pode olhar a documentação Swagger para lhe auxiliar. [Clique para ver a documentação via Swagger/OpenAPI](http://localhost:8080/swagger-ui/index.html#/)
+  4.1 Você pode olhar a documentação Swagger para lhe auxiliar. Link disponível mais acima nesta documentação.
 ```
 
 ### Autoria
