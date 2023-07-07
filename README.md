@@ -431,6 +431,10 @@ http://localhost:8080/api/v1/admin/indicadores
 Esse endpoint gera indicadores administrativos. Neste caso, estão prontos os indicadores de Pagamentos.
 ```
 
+#### Como testar
+
+Acrescentar instruções para teste.
+
 ### Autoria
 
 [Junior Martins](https://www.linkedin.com/in/juniorsmartins/)
