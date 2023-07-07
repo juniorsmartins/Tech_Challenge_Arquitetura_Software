@@ -26,7 +26,7 @@ Descrição: aplicação desenvolvida para compor nota no processo avaliativo da
     4. Como testar.
   
 4. Autoria.
-  
+
   
 ### Documentação de Arquitetura do Projeto
 
