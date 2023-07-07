@@ -39,8 +39,8 @@ Descrição: aplicação desenvolvida para compor nota no processo avaliativo da
 
 3. Documentação de Utilização do Projeto;
     1. Documentação Swagger/OpenAPI;
-    2. EndPoints e formato de Json;
-    3. Arquivo de requisições do Postman;
+    2. Arquivo de requisições do Postman;
+    3. Verbos, EndPoints e Json;
     4. Como testar.
 
 4. Autoria.
@@ -199,7 +199,178 @@ Além dos eventos, o Event Storming também pode incluir outras informações re
 
 [Clique para ver a documentação via Swagger/OpenAPI](http://localhost:8080/swagger-ui/index.html#/)
 
-Obs: rode a aplicação antes de acessar a documentação.
+Obs: rode o container ou a aplicação anteriormente para ver a documentação Swagger. 
+
+#### Arquivo de requisições do Postman
+
+Disponibilizado o Script do Postman para os testes manuais. Esse Script pode ser baixado e importado no Posman. Nele estão definidos os endpoints e respectivos Jsons. Clique logo abaixo para ir até a pasta onde está o Script, o arquivo foi nomeado: TechChallenge.postman_collection.json. Porém, é necessário criar uma variável de ambiente chamada {{baseUrl}} com o endpoint: http://localhost:8080 ou, uma alternativa, é substituir a variável de ambiente pelo http://localhost:8080.
+
+[Clique Aqui! Para ver a pasta do Script.](https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/tree/master/Documentacao)
+
+#### Verbos, EndPoints e Json
+
+```
+CLIENTES
+
+GET
+http://localhost:8080/api/v1/clientes
+É possível pesquisar todos ou por ID, Nome, CPF e Email. Esse endpoint foi construído com o uso de filtros de Specification e a resposta é paginada.
+
+POST
+http://localhost:8080/api/v1/clientes
+{
+    "nome":"Robert Martin",
+    "cpf":"12883391009",
+    "email":"coloque_seu_email_aqui@gmail.com"
+}
+
+PUT
+http://localhost:8080/api/v1/clientes/1
+{
+    "nome":"Robert Atualizado Martin",
+    "cpf":"78616571086",
+    "email":"coloque_seu_email_aqui@gmail.com"
+}
+
+DELETE
+http://localhost:8080/api/v1/clientes/1
+```
+
+```
+PRODUTOS
+
+GET
+http://localhost:8080/api/v1/produtos
+É possível pesquisar todos ou por ID, Categoria, Nome, Descrição e Preço. Esse endpoint foi construído com o uso de filtros de Specification e a resposta é paginada.
+
+POST
+http://localhost:8080/api/v1/produtos
+{
+    "categoria": "BEBIDA",
+    "nome":"Coca-Cola 3L",
+    "descricao":"Refrigerante",
+    "preco": 15.00
+}
+
+POST
+http://localhost:8080/api/v1/produtos
+{
+    "categoria": "LANCHE",
+    "nome":"Hamburguer Filé de Peixe",
+    "descricao":"Pão de hamburguer com gergelin e filé de peixe, maionese, queijo, tomate e alface",
+    "preco": 30.00
+}
+
+POST
+http://localhost:8080/api/v1/produtos
+{
+    "categoria": "SOBREMESA",
+    "nome":"Pudim",
+    "descricao":"Leite integral, ovos de galinha caipira, baunilha, açúcas e água.",
+    "preco": 20.00
+}
+
+PUT
+http://localhost:8080/api/v1/produtos/3
+{
+    "categoria": "SOBREMESA",
+    "nome":"Pudim ao Coco",
+    "descricao":"Leite integral, ovos de galinha caipira, baunilha, açúcar, coco e água.",
+    "preco": 22.50
+}
+
+DELETE
+http://localhost:8080/api/v1/produtos/3
+```
+
+```
+PEDIDOS
+
+GET
+http://localhost:8080/api/v1/pedidos
+É possível pesquisar todos ou por ID, StatusPedidos, Cliente e FormaPagamento. Esse endpoint foi construído com o uso de filtros de Specification e a resposta é paginada.
+
+POST
+http://localhost:8080/api/v1/pedidos
+Json de Pedido com Cliente logado/identificado por ID. É possível fazer pedido de três formas. Com Cliente logado na aplicação enviando ID no Json, mas também de outras duas formas. Sem o Cliente estar logado, mas informando o CPF. E também sem informar o Cliente e, dessa forma, o Pedido é acompanhado apenas pelo seu código/chave primária.
+{
+  "cliente": {
+      "id": 1
+  },
+  "itensPedido": [
+      {
+          "produto": {
+              "id": 1
+          },
+          "quantidade": 2
+      }
+  ],
+  "formaPagamento": "PIX"
+}
+
+POST
+http://localhost:8080/api/v1/pedidos
+Json de Pedido com Cliente não logado, mas identificado por CPF.
+{
+  "cliente": {
+      "cpf":"55985127001"
+  },
+  "itensPedido": [
+      {
+          "produto": {
+              "id": 2
+          },
+          "quantidade": 3
+      }
+  ],
+  "formaPagamento": "CREDITO"
+}
+
+POST
+http://localhost:8080/api/v1/pedidos
+Json de Pedido sem Cliente. É possível fazer Pedido sem identificação do Cliente. Porém, não receberá notificações via e-mail informando o status do Pedido.
+{
+  "itensPedido": [
+      {
+          "produto": {
+              "id": 3
+          },
+          "quantidade": 2
+      },
+      {
+          "produto": {
+              "id": 2
+          },
+          "quantidade": 1
+      },
+            {
+          "produto": {
+              "id": 1
+          },
+          "quantidade": 1
+      }
+  ],
+  "formaPagamento": "DEBITO"
+}
+
+PUT
+http://localhost:8080/api/v1/pedidos/3
+Ao atualizar o Pedido 3, por exemplo, que é um Pedido sem cliente identificado, é possível também, além de alterar os Itens, adicionar o Cliente.
+{
+  "itensPedido": [
+      {
+          "produto": {
+              "id": 1
+          },
+          "quantidade": 1
+      }
+  ],
+  "formaPagamento": "DINHEIRO"
+}
+
+DELETE
+http://localhost:8080/api/v1/pedidos/3
+```
 
 ### Autoria
 
