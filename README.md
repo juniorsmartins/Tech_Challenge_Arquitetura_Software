@@ -433,7 +433,15 @@ Esse endpoint gera indicadores administrativos. Neste caso, estão prontos os in
 
 #### Como testar
 
-Acrescentar instruções para teste.
+1. Clone o projeto;
+2. Digite os comandos abaixo, no terminal do projeto em sua IDE, para construir o container:
+   2.1. mvn clean package -DskipTests
+   2.2. docker build -t devnet .
+   2.3. docker compose up -d --build
+3. Abra o Postman;
+   3.1. Faça o download do Script do Postman. [Clique Aqui! Para ver a pasta do Script.](https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/tree/master/Documentacao)
+   3.2. Importe esse Script para o Postman
+   3.3. Faça os testes. (não precisa startar a aplicação na IDE. Só certifique-se do container estar startado.)
 
 ### Autoria
 
