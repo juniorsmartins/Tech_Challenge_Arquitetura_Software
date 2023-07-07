@@ -350,10 +350,10 @@ http://localhost:8080/api/v1/pedidos/3
 ```
 PUT
 http://localhost:8080/api/v1/fotos/1
+```
 <img width=600 src=https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/Postman-coca-cola.png>
 
 
-```
 
 ### Autoria
 
