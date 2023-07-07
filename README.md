@@ -345,14 +345,29 @@ Ao atualizar o Pedido 3, por exemplo, que é um Pedido sem cliente identificado,
 
 DELETE
 http://localhost:8080/api/v1/pedidos/3
+Essa funcionalidade não apaga o pedido. Ela apenas cancela o Pedido e o Pagamento aberto. Somente Pedido com Status Aberto podem ser cancelados.
 ```
 
 ```
 PUT
 http://localhost:8080/api/v1/fotos/1
+A imagem abaixo mostra como enviar o arquivo da Foto e sua respectiva descrição (limitado a PNG e JPEG). 
 ```
 <img width=600 src=https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/Postman-coca-cola.png>
 
+```
+GET
+http://localhost:8080/api/v1/fotos/1 
+A imagem abaixo mostra como consultar o registro da Foto no banco de dados. Não é consultar a Foto/imagem, mas apenas seus dados registrados.
+```
+<img width=600 src=https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/Postman-consultarPorId.png>
+
+```
+GET
+http://localhost:8080/api/v1/fotos/1
+A imagem abaixo mostra como consultar a foto/imagem no Volume do container. Aqui se consulta a imagem mesmo (limitado a PNG e JPEG).
+```
+<img width=600 src=https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/Postman-consultarFotoPorId.png>
 
 
 ### Autoria
