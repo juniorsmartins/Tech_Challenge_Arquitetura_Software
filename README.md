@@ -1,22 +1,8 @@
 # Tech_Challenge
 
 ```
-
 Nome: Tech-Challenge-DevNet;
 
-FASE 1
-Data de Início: 05/2023;
-Previsão de Término: 06/2023;
-
-FASE 2
-Data de Início: 07/2023;
-Previsão de Término: 08/2023;
-
-FASE 3
-FASE 4
-FASE 5
-
-```
 Descrição: aplicação desenvolvida para compor nota no processo avaliativo da pós-graduação em Arquitetura de Software na Fiap/Alura. E visa construir simulacro de app para uma Lanchonete, nomeada DevNet. 
 
 
