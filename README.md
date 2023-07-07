@@ -33,14 +33,13 @@ Descrição: aplicação desenvolvida para compor nota no processo avaliativo da
 
 2. Documentação de Desenvolvimento do Projeto;
     1. Tecnologias;
-    2. Funcionalidades;
-    3. Ferramentas;
-    4. Diagramas.
+    2. Ferramentas;
+    3. Diagramas.
 
 3. Documentação de Utilização do Projeto;
     1. Documentação Swagger/OpenAPI;
     2. Arquivo de requisições do Postman;
-    3. Verbos, EndPoints e Json;
+    3. Verbos, EndPoints e Jsons;
     4. Como testar.
 
 4. Autoria.
@@ -149,30 +148,6 @@ Além dos eventos, o Event Storming também pode incluir outras informações re
 13. PostgreSQL;
 14. JavaFaker (1.0.2);
 
-### Funcionalidades: 
-
-> - [x] Cadastrar Cliente;
-> - [x] Atualizar Cliente;
-> - [x] Pesquisar Cliente;
-> - [x] Deletar Cliente;
-> - [x] Cadastrar Produto;
-> - [x] Atualizar Produto;
-> - [x] Pesquisar Produto;
-> - [x] Deletar Produto;
-> - [x] Cadastrar Pedido;
-> - [x] Atualizar Pedido;
-> - [x] Pesquisar Pedido;
-> - [x] Deletar Pedido;
-> - [x] Cadastrar Pagamento;
-> - [x] Atualizar Pagamento;
-> - [x] Pesquisar Pagamento;
-> - [x] Atualizar FotoProduto;
-> - [x] Pesquisar FotoProduto;
-> - [x] Deletar FotoProduto;
-> - [x] Atualizar Copa;
-> - [x] Pesquisar Admin;
-> - [x] Enviar Email;
-
 #### Ferramentas:
 
 1. Intellij Idea (programação);
@@ -207,7 +182,7 @@ Disponibilizado o Script do Postman para os testes manuais. Esse Script pode ser
 
 [Clique Aqui! Para ver a pasta do Script.](https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/tree/master/Documentacao)
 
-#### Verbos, EndPoints e Json
+#### Verbos, EndPoints e Jsons
 
 ```
 CLIENTES
@@ -371,6 +346,14 @@ Ao atualizar o Pedido 3, por exemplo, que é um Pedido sem cliente identificado,
 DELETE
 http://localhost:8080/api/v1/pedidos/3
 ```
+
+```
+PUT
+http://localhost:8080/api/v1/fotos/1
+```
+<img width=600 src=https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/Postman-coca-cola.png>
+
+
 
 ### Autoria
 
