@@ -283,6 +283,94 @@ DELETE
 http://localhost:8080/api/v1/produtos/3
 ```
 
+```
+PEDIDOS
+
+GET
+http://localhost:8080/api/v1/pedidos
+É possível pesquisar todos ou por ID, StatusPedidos, Cliente e FormaPagamento. Esse endpoint foi construído com o uso de filtros de Specification e a resposta é paginada.
+
+POST
+http://localhost:8080/api/v1/pedidos
+Json de Pedido com Cliente logado/identificado por ID. É possível fazer pedido de três formas. Com Cliente logado na aplicação enviando ID no Json, mas também de outras duas formas. Sem o Cliente estar logado, mas informando o CPF. E também sem informar o Cliente e, dessa forma, o Pedido é acompanhado apenas pelo seu código/chave primária.
+{
+  "cliente": {
+      "id": 1
+  },
+  "itensPedido": [
+      {
+          "produto": {
+              "id": 1
+          },
+          "quantidade": 2
+      }
+  ],
+  "formaPagamento": "PIX"
+}
+
+POST
+http://localhost:8080/api/v1/pedidos
+Json de Pedido com Cliente não logado, mas identificado por CPF.
+{
+  "cliente": {
+      "cpf":"55985127001"
+  },
+  "itensPedido": [
+      {
+          "produto": {
+              "id": 2
+          },
+          "quantidade": 3
+      }
+  ],
+  "formaPagamento": "CREDITO"
+}
+
+POST
+http://localhost:8080/api/v1/pedidos
+Json de Pedido sem Cliente. É possível fazer Pedido sem identificação do Cliente. Porém, não receberá notificações via e-mail informando o status do Pedido.
+{
+  "itensPedido": [
+      {
+          "produto": {
+              "id": 3
+          },
+          "quantidade": 2
+      },
+      {
+          "produto": {
+              "id": 2
+          },
+          "quantidade": 1
+      },
+            {
+          "produto": {
+              "id": 1
+          },
+          "quantidade": 1
+      }
+  ],
+  "formaPagamento": "DEBITO"
+}
+
+PUT
+http://localhost:8080/api/v1/pedidos/3
+Ao atualizar o Pedido 3, por exemplo, que é um Pedido sem cliente identificado, é possível também, além de alterar os Itens, adicionar o Cliente.
+{
+  "itensPedido": [
+      {
+          "produto": {
+              "id": 1
+          },
+          "quantidade": 1
+      }
+  ],
+  "formaPagamento": "DINHEIRO"
+}
+
+DELETE
+http://localhost:8080/api/v1/pedidos/3
+```
 
 ### Autoria
 
