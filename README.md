@@ -405,6 +405,28 @@ http://localhost:8080/api/v1/copa/status-finalizado/1
 Esse endpoint altera o status do Pedido para FINALIZADO. Um Pedido é finalizado após a retirada dele pelo Cliente.
 ```
 
+```
+EMAILS
+
+POST
+http://localhost:8080/api/v1/emails
+Endpoint para enviar alguma notificação aleatório ou promoção. 
+{
+    "ownerRef": "Fulano",
+    "emailFrom": "techchallenge6@gmail.com",
+    "emailTo": "<coloque-aqui-teu-email>",
+    "subject": "Teste - Envio de Email",
+    "text": "Teste de Envio de Email via Spring Email",
+    "pedido": {
+        "id": 1
+    }
+}
+```
+```
+GET
+http://localhost:8080/api/v1/admin/indicadores
+Esse endpoint gera indicadores administrativos. Neste caso, estão prontos os indicadores de Pagamentos.
+```
 
 ### Autoria
 
