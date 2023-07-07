@@ -193,6 +193,7 @@ http://localhost:8080/api/v1/clientes
 
 POST
 http://localhost:8080/api/v1/clientes
+Importante cadastrar o Cliente com email real para receber as notificações de acompanhamento do Pedido. Toda alteração de status de Pedido gera notificação no email.
 {
     "nome":"Robert Martin",
     "cpf":"12883391009",
@@ -349,6 +350,8 @@ Essa funcionalidade não apaga o pedido. Ela apenas cancela o Pedido e o Pagamen
 ```
 
 ```
+FOTOS
+
 PUT
 http://localhost:8080/api/v1/fotos/1
 A imagem abaixo mostra como enviar o arquivo da Foto e sua respectiva descrição (limitado a PNG e JPEG). 
@@ -365,9 +368,42 @@ A imagem abaixo mostra como consultar o registro da Foto no banco de dados. Não
 ```
 GET
 http://localhost:8080/api/v1/fotos/1
-A imagem abaixo mostra como consultar a foto/imagem no Volume do container. Aqui se consulta a imagem mesmo (limitado a PNG e JPEG).
+A imagem abaixo mostra como consultar a foto/imagem num diretório no Volume do container. Aqui se consulta a imagem mesmo (limitado a PNG e JPEG).
 ```
 <img width=600 src=https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/Postman-consultarFotoPorId.png>
+```
+DELETE
+http://localhost:8080/api/v1/fotos/2 
+Esse delete apaga o registro da imagem no banco de dados e apaga a imagem armazenada num diretório no Volume do container. 
+```
+
+```
+PAGAMENTOS
+
+GET
+http://localhost:8080/api/v1/pagamentos
+É possível pesquisar todos ou por ID, StatusPagamento e nomeImagemQRCode. Esse endpoint foi construído com o uso de filtros de Specification e a resposta é paginada.
+
+GET
+http://localhost:8080/api/v1/pagamentos/1?Accept=image/png
+Endpoint para buscar o QRCode por ID. Os QRCodes são armazenados em PNG num diretório no Volume do container. 
+
+PUT
+http://localhost:8080/api/v1/pagamentos/status/1
+Esse endpoint consulta o Gateway de Pagamento para verificar se o Pedido foi pago. E, em caso de pago, é confirmado o Pagamento e o Pedido avança de RECEBIDO para PREPARACAO.
+```
+
+```
+COPA
+
+PUT
+http://localhost:8080/api/v1/copa/status-pronto/1
+Esse endpoint altera o status do Pedido para PRONTO. Toda alteração de status gera notificação via e-mail. Então é importante cadastrar o Cliente com email real para ver as notificações.
+
+PUT
+http://localhost:8080/api/v1/copa/status-finalizado/1
+Esse endpoint altera o status do Pedido para FINALIZADO. Um Pedido é finalizado após a retirada dele pelo Cliente.
+```
 
 
 ### Autoria
