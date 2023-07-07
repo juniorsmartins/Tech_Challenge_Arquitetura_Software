@@ -371,6 +371,7 @@ http://localhost:8080/api/v1/fotos/1
 A imagem abaixo mostra como consultar a foto/imagem num diretório no Volume do container. Aqui se consulta a imagem mesmo (limitado a PNG e JPEG).
 ```
 <img width=600 src=https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/Postman-consultarFotoPorId.png>
+
 ```
 DELETE
 http://localhost:8080/api/v1/fotos/2 
@@ -423,6 +424,8 @@ Endpoint para enviar alguma notificação aleatório ou promoção.
 }
 ```
 ```
+INDICADORES
+
 GET
 http://localhost:8080/api/v1/admin/indicadores
 Esse endpoint gera indicadores administrativos. Neste caso, estão prontos os indicadores de Pagamentos.
