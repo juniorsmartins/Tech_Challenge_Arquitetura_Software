@@ -11,8 +11,7 @@ Descrição: aplicação desenvolvida para compor nota no processo avaliativo da
     1. Linguagem Ubíqua;
     2. Linguagem Pictográfica (Domain Storytelling);
     3. Domínio (Subdomínio Principal, Subdomínio Genérico e Subdomínio de Suporte);
-    4. Event Storming;
-    5. Bounded Context e Context Maps.
+    4. Event Storming.
   
 2. Documentação de Desenvolvimento do Projeto;
     1. Tecnologias;
