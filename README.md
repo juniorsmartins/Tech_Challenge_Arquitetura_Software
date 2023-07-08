@@ -1,52 +1,32 @@
 # Tech_Challenge
 
-```
+Nome: Tech-Challenge-DevNet;  
+  
+Descrição: aplicação desenvolvida para compor nota no processo avaliativo da primeira fase da pós-graduação em Arquitetura de Software na Fiap/Alura. E visa construir simulacro de app para uma Lanchonete, nomeada DevNet.
 
-Nome: Tech-Challenge-DevNet;
-
-FASE 1
-Data de Início: 05/2023;
-Previsão de Término: 06/2023;
-
-FASE 2
-Data de Início: 07/2023;
-Previsão de Término: 08/2023;
-
-FASE 3
-FASE 4
-FASE 5
-
-```
-Descrição: aplicação desenvolvida para compor nota no processo avaliativo da pós-graduação em Arquitetura de Software na Fiap/Alura. E visa construir simulacro de app para uma Lanchonete, nomeada DevNet. 
-
-
+  
 ## Índice
-
-```
-
+  
 1. Documentação de Arquitetura do Projeto
     1. Linguagem Ubíqua;
     2. Linguagem Pictográfica (Domain Storytelling);
     3. Domínio (Subdomínio Principal, Subdomínio Genérico e Subdomínio de Suporte);
-    4. Event Storming;
-    5. Bounded Context e Context Maps.
-
+    4. Event Storming.
+  
 2. Documentação de Desenvolvimento do Projeto;
     1. Tecnologias;
-    2. Funcionalidades;
-    3. Ferramentas;
-    4. Diagramas.
-
+    2. Ferramentas;
+    3. Diagramas.
+  
 3. Documentação de Utilização do Projeto;
     1. Documentação Swagger/OpenAPI;
-    2. EndPoints e formato de Json;
-    3. Arquivo de requisições do Postman;
+    2. Arquivo de requisições do Postman;
+    3. Verbos, EndPoints e Jsons;
     4. Como testar.
-
+  
 4. Autoria.
 
-```
-
+  
 ### Documentação de Arquitetura do Projeto
 
 
@@ -111,6 +91,8 @@ O Event Storming é realizado em uma sessão de workshop envolvendo todas as par
 
 Além dos eventos, o Event Storming também pode incluir outras informações relevantes, como comandos, agregados, políticas, restrições e outras anotações que ajudam a capturar o conhecimento do domínio e a compreensão do sistema.
 
+[Link para Miro](https://miro.com/app/board/uXjVMG0U7lM=/?share_link_id=195453670852)  
+ou  
 [Link para Miro](https://miro.com/app/board/uXjVMG0U7lM=/)
 
 > Cliente
@@ -149,30 +131,6 @@ Além dos eventos, o Event Storming também pode incluir outras informações re
 13. PostgreSQL;
 14. JavaFaker (1.0.2);
 
-### Funcionalidades: 
-
-> - [x] Cadastrar Cliente;
-> - [x] Atualizar Cliente;
-> - [x] Pesquisar Cliente;
-> - [x] Deletar Cliente;
-> - [x] Cadastrar Produto;
-> - [x] Atualizar Produto;
-> - [x] Pesquisar Produto;
-> - [x] Deletar Produto;
-> - [x] Cadastrar Pedido;
-> - [x] Atualizar Pedido;
-> - [x] Pesquisar Pedido;
-> - [x] Deletar Pedido;
-> - [x] Cadastrar Pagamento;
-> - [x] Atualizar Pagamento;
-> - [x] Pesquisar Pagamento;
-> - [x] Atualizar FotoProduto;
-> - [x] Pesquisar FotoProduto;
-> - [x] Deletar FotoProduto;
-> - [x] Atualizar Copa;
-> - [x] Pesquisar Admin;
-> - [x] Enviar Email;
-
 #### Ferramentas:
 
 1. Intellij Idea (programação);
@@ -192,6 +150,12 @@ Além dos eventos, o Event Storming também pode incluir outras informações re
 ##### Diagrama Entidade Relacionamento - DER
 <img width=800 src=https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/BancoDeDados-29-06-23.png>
 
+##### Diagrama de Pacotes
+<img width=800 src=https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/DiagramaPacotes.png>
+
+##### Diagrama de Classe
+CLIENTES  
+<img width=800 src=https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/DiagramaClasses-Cliente.png>
 
 ### Documentação de Utilização do Projeto;
 
@@ -199,7 +163,281 @@ Além dos eventos, o Event Storming também pode incluir outras informações re
 
 [Clique para ver a documentação via Swagger/OpenAPI](http://localhost:8080/swagger-ui/index.html#/)
 
-Obs: rode a aplicação antes de acessar a documentação.
+Obs: rode o container ou a aplicação anteriormente para ver a documentação Swagger. 
+
+#### Arquivo de requisições do Postman
+
+Disponibilizado o Script do Postman para os testes manuais. Esse Script pode ser baixado e importado no Posman. Nele estão definidos os endpoints e respectivos Jsons. Clique logo abaixo para ir até a pasta onde está o Script, o arquivo foi nomeado: TechChallenge.postman_collection.json. Porém, é necessário criar uma variável de ambiente chamada {{baseUrl}} com o endpoint: http://localhost:8080 ou, uma alternativa, é substituir a variável de ambiente pelo http://localhost:8080.
+
+[Clique Aqui! Para ver a pasta do Script.](https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/tree/master/Documentacao)
+
+#### Verbos, EndPoints e Jsons
+
+```
+CLIENTES
+
+GET
+http://localhost:8080/api/v1/clientes
+É possível pesquisar todos ou por ID, Nome, CPF e Email. Esse endpoint foi construído com o uso de filtros de Specification e a resposta é paginada.
+
+POST
+http://localhost:8080/api/v1/clientes
+Importante cadastrar o Cliente com email real para receber as notificações de acompanhamento do Pedido. Toda alteração de status de Pedido gera notificação no email.
+{
+    "nome":"Robert Martin",
+    "cpf":"12883391009",
+    "email":"coloque_seu_email_aqui@gmail.com"
+}
+
+PUT
+http://localhost:8080/api/v1/clientes/1
+{
+    "nome":"Robert Atualizado Martin",
+    "cpf":"78616571086",
+    "email":"coloque_seu_email_aqui@gmail.com"
+}
+
+DELETE
+http://localhost:8080/api/v1/clientes/1
+```
+
+```
+PRODUTOS
+
+GET
+http://localhost:8080/api/v1/produtos
+É possível pesquisar todos ou por ID, Categoria, Nome, Descrição e Preço. Esse endpoint foi construído com o uso de filtros de Specification e a resposta é paginada.
+
+POST
+http://localhost:8080/api/v1/produtos
+{
+    "categoria": "BEBIDA",
+    "nome":"Coca-Cola 3L",
+    "descricao":"Refrigerante",
+    "preco": 15.00
+}
+
+POST
+http://localhost:8080/api/v1/produtos
+{
+    "categoria": "LANCHE",
+    "nome":"Hamburguer Filé de Peixe",
+    "descricao":"Pão de hamburguer com gergelin e filé de peixe, maionese, queijo, tomate e alface",
+    "preco": 30.00
+}
+
+POST
+http://localhost:8080/api/v1/produtos
+{
+    "categoria": "SOBREMESA",
+    "nome":"Pudim",
+    "descricao":"Leite integral, ovos de galinha caipira, baunilha, açúcas e água.",
+    "preco": 20.00
+}
+
+PUT
+http://localhost:8080/api/v1/produtos/3
+{
+    "categoria": "SOBREMESA",
+    "nome":"Pudim ao Coco",
+    "descricao":"Leite integral, ovos de galinha caipira, baunilha, açúcar, coco e água.",
+    "preco": 22.50
+}
+
+DELETE
+http://localhost:8080/api/v1/produtos/3
+```
+
+```
+PEDIDOS
+
+GET
+http://localhost:8080/api/v1/pedidos
+É possível pesquisar todos ou por ID, StatusPedidos, Cliente e FormaPagamento. Esse endpoint foi construído com o uso de filtros de Specification e a resposta é paginada.
+
+POST
+http://localhost:8080/api/v1/pedidos
+Json de Pedido com Cliente logado/identificado por ID. É possível fazer pedido de três formas. Com Cliente logado na aplicação enviando ID no Json, mas também de outras duas formas. Sem o Cliente estar logado, mas informando o CPF. E também sem informar o Cliente e, dessa forma, o Pedido é acompanhado apenas pelo seu código/chave primária.
+{
+  "cliente": {
+      "id": 1
+  },
+  "itensPedido": [
+      {
+          "produto": {
+              "id": 1
+          },
+          "quantidade": 2
+      }
+  ],
+  "formaPagamento": "PIX"
+}
+
+POST
+http://localhost:8080/api/v1/pedidos
+Json de Pedido com Cliente não logado, mas identificado por CPF.
+{
+  "cliente": {
+      "cpf":"55985127001"
+  },
+  "itensPedido": [
+      {
+          "produto": {
+              "id": 2
+          },
+          "quantidade": 3
+      }
+  ],
+  "formaPagamento": "CREDITO"
+}
+
+POST
+http://localhost:8080/api/v1/pedidos
+Json de Pedido sem Cliente. É possível fazer Pedido sem identificação do Cliente. Porém, não receberá notificações via e-mail informando o status do Pedido.
+{
+  "itensPedido": [
+      {
+          "produto": {
+              "id": 3
+          },
+          "quantidade": 2
+      },
+      {
+          "produto": {
+              "id": 2
+          },
+          "quantidade": 1
+      },
+            {
+          "produto": {
+              "id": 1
+          },
+          "quantidade": 1
+      }
+  ],
+  "formaPagamento": "DEBITO"
+}
+
+PUT
+http://localhost:8080/api/v1/pedidos/3
+Ao atualizar o Pedido 3, por exemplo, que é um Pedido sem cliente identificado, é possível também, além de alterar os Itens, adicionar o Cliente.
+{
+  "itensPedido": [
+      {
+          "produto": {
+              "id": 1
+          },
+          "quantidade": 1
+      }
+  ],
+  "formaPagamento": "DINHEIRO"
+}
+
+DELETE
+http://localhost:8080/api/v1/pedidos/3
+Essa funcionalidade não apaga o pedido. Ela apenas cancela o Pedido e o Pagamento aberto. Somente Pedido com Status Aberto podem ser cancelados.
+```
+
+```
+FOTOS
+
+PUT
+http://localhost:8080/api/v1/fotos/1
+A imagem abaixo mostra como enviar o arquivo da Foto e sua respectiva descrição (limitado a PNG e JPEG). 
+```
+<img width=600 src=https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/Postman-coca-cola.png>
+
+```
+GET
+http://localhost:8080/api/v1/fotos/1 
+A imagem abaixo mostra como consultar o registro da Foto no banco de dados. Não é consultar a Foto/imagem, mas apenas seus dados registrados.
+```
+<img width=600 src=https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/Postman-consultarPorId.png>
+
+```
+GET
+http://localhost:8080/api/v1/fotos/1
+A imagem abaixo mostra como consultar a foto/imagem num diretório no Volume do container. Aqui se consulta a imagem mesmo (limitado a PNG e JPEG).
+```
+<img width=600 src=https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/Postman-consultarFotoPorId.png>
+
+```
+DELETE
+http://localhost:8080/api/v1/fotos/2 
+Esse delete apaga o registro da imagem no banco de dados e apaga a imagem armazenada num diretório no Volume do container. 
+```
+
+```
+PAGAMENTOS
+
+GET
+http://localhost:8080/api/v1/pagamentos
+É possível pesquisar todos ou por ID, StatusPagamento e nomeImagemQRCode. Esse endpoint foi construído com o uso de filtros de Specification e a resposta é paginada.
+
+GET
+http://localhost:8080/api/v1/pagamentos/1?Accept=image/png
+Endpoint para buscar o QRCode por ID. Os QRCodes são armazenados em PNG num diretório no Volume do container. 
+
+PUT
+http://localhost:8080/api/v1/pagamentos/status/1
+Esse endpoint consulta o Gateway de Pagamento para verificar se o Pedido foi pago. E, em caso de pago, é confirmado o Pagamento e o Pedido avança de RECEBIDO para PREPARACAO.
+```
+
+```
+COPA
+
+PUT
+http://localhost:8080/api/v1/copa/status-pronto/1
+Esse endpoint altera o status do Pedido para PRONTO. Toda alteração de status gera notificação via e-mail. Então é importante cadastrar o Cliente com email real para ver as notificações.
+
+PUT
+http://localhost:8080/api/v1/copa/status-finalizado/1
+Esse endpoint altera o status do Pedido para FINALIZADO. Um Pedido é finalizado após a retirada dele pelo Cliente.
+```
+
+```
+EMAILS
+
+POST
+http://localhost:8080/api/v1/emails
+Endpoint para enviar alguma notificação aleatório ou promoção. 
+{
+    "ownerRef": "Fulano",
+    "emailFrom": "techchallenge6@gmail.com",
+    "emailTo": "<coloque-aqui-teu-email>",
+    "subject": "Teste - Envio de Email",
+    "text": "Teste de Envio de Email via Spring Email",
+    "pedido": {
+        "id": 1
+    }
+}
+```
+```
+INDICADORES
+
+GET
+http://localhost:8080/api/v1/admin/indicadores
+Esse endpoint gera indicadores administrativos. Neste caso, estão prontos os indicadores de Pagamentos.
+```
+
+#### Como testar
+
+```
+1. Clone o projeto;
+  
+2. Digite os comandos abaixo, no terminal do projeto em sua IDE, para construir o container:
+   2.1. mvn clean package -DskipTests
+   2.2. docker build -t devnet .
+   2.3. docker compose up -d --build
+  
+3. Abra o Postman;
+   3.1. Faça o download do Script do Postman. [Clique Aqui! Para ver a pasta do Script.](https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/tree/master/Documentacao)
+   3.2. Importe esse Script para o Postman
+   3.3. Faça os testes. (não precisa startar a aplicação na IDE. Só certifique-se do container estar startado.)
+
+4. Documentação Swagger
+  4.1 Você pode olhar a documentação Swagger para lhe auxiliar. Link disponível mais acima nesta documentação.
+```
 
 ### Autoria
 
