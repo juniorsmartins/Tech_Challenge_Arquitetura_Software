@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driven_secundario.repositorios;
 
-import com.techchallenge.devnet.adapter.driven_secundario.conversor_saida.IMapperSaida;
+import com.techchallenge.devnet.adapter.driven_secundario.conversores_saida.IMapperSaida;
 import com.techchallenge.devnet.adapter.driven_secundario.entities.PedidoEntity;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.PedidoRepositoryJpa;
 import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;

@@ -1,10 +1,10 @@
-package com.techchallenge.devnet.adapter.driver_primario.conversor_entrada;
+package com.techchallenge.devnet.adapter.driven_secundario.conversores_saida;
 
 import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-public interface IMapperEntrada {
+public interface IMapperSaida {
 
   <O, D> D converterOrigemParaDestino(O origem, Class<D> destino);
 

@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driven_secundario.repositorios;
 
-import com.techchallenge.devnet.adapter.driven_secundario.conversor_saida.IMapperSaida;
+import com.techchallenge.devnet.adapter.driven_secundario.conversores_saida.IMapperSaida;
 import com.techchallenge.devnet.adapter.driven_secundario.entities.FotoProdutoEntity;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.FotoProdutoRepositoryJpa;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.ProdutoRepositoryJpa;

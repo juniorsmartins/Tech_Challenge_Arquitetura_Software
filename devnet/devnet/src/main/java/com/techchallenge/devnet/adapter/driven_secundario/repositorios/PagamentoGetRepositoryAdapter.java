@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driven_secundario.repositorios;
 
-import com.techchallenge.devnet.adapter.driven_secundario.conversor_saida.IMapperSaida;
+import com.techchallenge.devnet.adapter.driven_secundario.conversores_saida.IMapperSaida;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.PagamentoRepositoryJpa;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.filtros.PagamentoFiltroDto;
 import com.techchallenge.devnet.core.application.ports.saida.IPagamentoRepositoryPort;
