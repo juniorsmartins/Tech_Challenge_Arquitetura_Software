@@ -151,10 +151,15 @@ ou
 ##### Diagrama Entidade Relacionamento - DER
 <img width=800 src=https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/BancoDeDados-29-06-23.png>
 
+##### Diagrama de Pacotes
+
+
 ##### Diagrama de Classe
+CLIENTES
 <img width=800 src=https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/DiagramaClasses-Cliente.png>
 
 ### Documentação de Utilização do Projeto;
+<img width=800 src=https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/DiagramaPacotes.png>
 
 #### Documentação
 
