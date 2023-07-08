@@ -1,8 +1,8 @@
 package com.techchallenge.devnet.adapter.driven_secundario.repositorios;
 
+import com.techchallenge.devnet.adapter.driven_secundario.conversor_saida.IMapperSaida;
 import com.techchallenge.devnet.adapter.driven_secundario.entities.PagamentoEntity;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.PagamentoRepositoryJpa;
-import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.core.application.ports.saida.IPagamentoRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.PagamentoModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import java.util.Optional;
 public class PagamentoPostRepositoryAdapter implements IPagamentoRepositoryPort.PostRepository {
 
   @Autowired
-  private IMapper mapper;
+  private IMapperSaida mapper;
 
   @Autowired
   private PagamentoRepositoryJpa jpa;

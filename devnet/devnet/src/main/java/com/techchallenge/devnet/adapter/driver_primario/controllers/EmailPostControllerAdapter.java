@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
-import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
+import com.techchallenge.devnet.adapter.driver_primario.conversor_entrada.IMapperEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.EmailDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.EmailDtoResponse;
 import com.techchallenge.devnet.core.application.ports.entrada.IEmailServicePort;
@@ -30,7 +30,7 @@ import java.util.Optional;
 public final class EmailPostControllerAdapter implements IEmailControllerPort.PostController {
 
   @Autowired
-  private IMapper mapper;
+  private IMapperEntrada mapper;
 
   @Autowired
   private IEmailServicePort.EnviarService service;

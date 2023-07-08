@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.adapter.driven_secundario.repositorios;
 
+import com.techchallenge.devnet.adapter.driven_secundario.conversor_saida.IMapperSaida;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.PedidoRepositoryJpa;
-import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.filtros.PedidoFiltroDto;
 import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
@@ -20,7 +20,7 @@ import java.util.Optional;
 public class PedidoGetRepositoryAdapter implements IPedidoRepositoryPort.GetRepository {
 
   @Autowired
-  private IMapper mapper;
+  private IMapperSaida mapper;
 
   @Autowired
   private PedidoRepositoryJpa jpa;
