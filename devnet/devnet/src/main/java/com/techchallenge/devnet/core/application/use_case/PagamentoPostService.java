@@ -3,7 +3,7 @@ package com.techchallenge.devnet.core.application.use_case;
 import com.google.zxing.WriterException;
 import com.techchallenge.devnet.core.application.ports.entrada.IPagamentoServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IPagamentoRepositoryPort;
-import com.techchallenge.devnet.core.domain.base.utilitarios.QRCodeGenerator;
+import com.techchallenge.devnet.core.domain.base.utilitarios.IQRCodeGenerator;
 import com.techchallenge.devnet.core.domain.models.PagamentoModel;
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPagamentoEnum;
@@ -16,6 +16,9 @@ import java.util.Optional;
 
 @Service
 public class PagamentoPostService implements IPagamentoServicePort.PostService {
+
+  @Autowired
+  private IQRCodeGenerator qrCodeGenerator;
 
   @Autowired
   private IPagamentoRepositoryPort.PostRepository pagamentoPostRepository;
@@ -35,7 +38,7 @@ public class PagamentoPostService implements IPagamentoServicePort.PostService {
   private InputStreamResource criarQRCode(PedidoModel pedidoModel) {
 
     try {
-      return QRCodeGenerator.gerarQRCode(pedidoModel);
+      return this.qrCodeGenerator.gerarQRCode(pedidoModel);
 
     } catch (WriterException | IOException e) {
       throw new RuntimeException(e);
@@ -47,7 +50,7 @@ public class PagamentoPostService implements IPagamentoServicePort.PostService {
     var pagamento = PagamentoModel.builder()
       .statusPagamento(StatusPagamentoEnum.ABERTO)
       .pedido(pedidoModel)
-      .nomeImagemQRCode(QRCodeGenerator.criarNomeDaImagemQrCode(pedidoModel))
+      .nomeImagemQRCode(this.qrCodeGenerator.criarNomeDaImagemQrCode(pedidoModel))
       .build();
     this.pagamentoPostRepository.salvar(pagamento);
     pedidoModel.setPagamento(pagamento);
