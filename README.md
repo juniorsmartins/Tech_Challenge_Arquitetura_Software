@@ -161,7 +161,7 @@ PRODUTOS
 <img width=800 src=https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/DiagramaClasses-Produto-09-07-23.png>  
 
 PEDIDOS  
-<img width=800 src=https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/DiagramaClasses-Pedido-09-07-23.png> 
+<img width=800 src=https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/DiagramaClasses-Pedido-09-7-23.png> 
 
 ### Documentação de Utilização do Projeto;
 
