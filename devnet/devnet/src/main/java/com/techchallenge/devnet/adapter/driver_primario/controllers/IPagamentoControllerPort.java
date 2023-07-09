@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 public interface IPagamentoControllerPort {
 
+  interface PutController {
+    @PutMapping(path = "/status/{idPedido}")
+    ResponseEntity<PagamentoDtoResponse> verificarStatusNoGateway(Long idPedido);
+  }
+
   interface GetController {
     @GetMapping
     ResponseEntity<Page<PagamentoDtoResponse>> pesquisar(PagamentoFiltroDto pagamentoFiltroDto, Pageable paginacao);
 
     @GetMapping(path = "/{id}", produces = MediaType.IMAGE_PNG_VALUE)
     ResponseEntity<InputStreamResource> buscarQrCodePorId(Long id);
-  }
-
-  interface PutController {
-    @PutMapping(path = "/status/{idPedido}")
-    ResponseEntity<PagamentoDtoResponse> verificarStatusNoGateway(Long idPedido);
   }
 }
 

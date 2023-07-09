@@ -19,10 +19,10 @@ public class PedidoPostService implements IPedidoServicePort.PostService {
   private IUtils utils;
 
   @Autowired
-  private IPagamentoServicePort.PostService pagamentoPostService;
+  private IPedidoRepositoryPort.PostRepository pedidoPostRepository;
 
   @Autowired
-  private IPedidoRepositoryPort.PostRepository pedidoPostRepository;
+  private IPagamentoServicePort.PostService pagamentoPostService;
 
   @Transactional
   @Override

@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.core.application.use_case;
 
 import com.techchallenge.devnet.core.application.ports.entrada.IProdutoServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.IItemPedidoRepository;
+import com.techchallenge.devnet.core.application.ports.saida.IItemPedidoRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
@@ -22,7 +22,7 @@ public class ProdutoDeleteService implements IProdutoServicePort.DeleteService {
   private IProdutoRepositoryPort.DeleteRepository produtoDeleteRepository;
 
   @Autowired
-  private IItemPedidoRepository.GetRepository itemPedidoGetRepository;
+  private IItemPedidoRepositoryPort.GetRepository itemPedidoGetRepository;
 
   @Override
   public void deletar(final Long id) {

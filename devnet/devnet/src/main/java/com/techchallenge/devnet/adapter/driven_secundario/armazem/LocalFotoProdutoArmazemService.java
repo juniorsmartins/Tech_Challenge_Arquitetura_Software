@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driven_secundario.armazem;
 
-import com.techchallenge.devnet.core.application.ports.saida.ILocalFotoProdutoArmazemService;
+import com.techchallenge.devnet.core.application.ports.saida.ILocalFotoProdutoArmazemServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.ArmazemException;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Service
-public class LocalFotoProdutoArmazemService implements ILocalFotoProdutoArmazemService {
+public class LocalFotoProdutoArmazemService implements ILocalFotoProdutoArmazemServicePort {
 
 //  private Path caminhoDoDiretorio = Paths.get("C:\\Users\\junio\\OneDrive\\Documentos\\diretorio-fotos");
   private Path caminhoDoDiretorio = Paths.get("/app/armazem");

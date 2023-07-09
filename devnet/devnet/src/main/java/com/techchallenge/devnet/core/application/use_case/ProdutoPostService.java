@@ -1,6 +1,5 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.adapter.driver_primario.conversores_entrada.IMapperEntrada;
 import com.techchallenge.devnet.core.application.ports.entrada.IProdutoServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.ProdutoModel;
@@ -11,9 +10,6 @@ import java.util.Optional;
 
 @Service
 public class ProdutoPostService implements IProdutoServicePort.PostService {
-
-  @Autowired
-  private IMapperEntrada mapper;
 
   @Autowired
   private IProdutoRepositoryPort.PostRepository produtoPostRepository;

@@ -2,7 +2,6 @@ package com.techchallenge.devnet.core.application.use_case;
 
 import com.techchallenge.devnet.core.application.ports.entrada.IPagamentoServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IGatewayPagamentoPort;
-import com.techchallenge.devnet.core.application.ports.saida.IPagamentoRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
@@ -25,16 +24,13 @@ public class PagamentoPutService implements IPagamentoServicePort.PutService {
   private IUtils utils;
 
   @Autowired
+  private IPedidoRepositoryPort.PostRepository pedidoPostRepository;
+
+  @Autowired
   private IPedidoRepositoryPort.GetRepository pedidoGetRepository;
 
   @Autowired
   private IGatewayPagamentoPort.GetGateway gatewayPagamento;
-
-  @Autowired
-  private IPagamentoRepositoryPort.PostRepository pagamentoPostRepository;
-
-  @Autowired
-  private IPedidoRepositoryPort.PostRepository pedidoPostRepository;
 
   @Transactional
   @Override
