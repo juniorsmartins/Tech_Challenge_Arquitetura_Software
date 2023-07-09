@@ -164,7 +164,7 @@ PEDIDOS
 <img width=800 src=https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/DiagramaClasses-Pedido-09-7-23.png> 
 
 PAGAMENTOS   
-<img width=800 src=https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/DiagramaClasses-Pagamento-09-7-23.png> 
+<img width=800 src=https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/DiagramaClasses-Pagamento-09-07-23.png> 
 
 ### Documentação de Utilização do Projeto;
 
