@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
-import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
+import com.techchallenge.devnet.adapter.driver_primario.conversores_entrada.IMapperEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ProdutoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ProdutoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.entrada.IProdutoServicePort;
@@ -29,7 +29,7 @@ import java.util.Optional;
 public final class ProdutoPostControllerAdapter implements IProdutoControllerPort.PostController {
 
   @Autowired
-  private IMapper mapper;
+  private IMapperEntrada mapper;
 
   @Autowired
   private IProdutoServicePort.PostService service;

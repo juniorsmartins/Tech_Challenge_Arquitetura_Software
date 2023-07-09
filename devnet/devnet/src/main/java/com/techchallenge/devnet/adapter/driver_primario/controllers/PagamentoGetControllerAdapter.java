@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
-import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
+import com.techchallenge.devnet.adapter.driver_primario.conversores_entrada.IMapperEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.filtros.PagamentoFiltroDto;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PagamentoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.entrada.IPagamentoServicePort;
@@ -34,7 +34,7 @@ import java.util.Optional;
 public final class PagamentoGetControllerAdapter implements IPagamentoControllerPort.GetController {
 
   @Autowired
-  private IMapper mapper;
+  private IMapperEntrada mapper;
 
   @Autowired
   private IPagamentoServicePort.GetService service;

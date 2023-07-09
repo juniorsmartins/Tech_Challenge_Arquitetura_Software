@@ -1,8 +1,8 @@
 package com.techchallenge.devnet.adapter.driven_secundario.repositorios;
 
+import com.techchallenge.devnet.adapter.driven_secundario.conversores_saida.IMapperSaida;
 import com.techchallenge.devnet.adapter.driven_secundario.entities.ProdutoEntity;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.ProdutoRepositoryJpa;
-import com.techchallenge.devnet.adapter.driver_primario.conversores.IMapper;
 import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.ProdutoModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import java.util.Optional;
 public class ProdutoPostRepositoryAdapter implements IProdutoRepositoryPort.PostRepository {
 
   @Autowired
-  private IMapper mapper;
+  private IMapperSaida mapper;
 
   @Autowired
   private ProdutoRepositoryJpa jpa;
