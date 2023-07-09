@@ -155,7 +155,10 @@ ou
 
 ##### Diagrama de Classe
 CLIENTES  
-<img width=800 src=https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/DiagramaClasses-Cliente.png>
+<img width=800 src=https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/DiagramaClasses-Cliente-09-07-23.png>
+
+PRODUTOS  
+<img width=800 src=https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/DiagramaClasses-Produto-09-07-23.png>  
 
 ### Documentação de Utilização do Projeto;
 
