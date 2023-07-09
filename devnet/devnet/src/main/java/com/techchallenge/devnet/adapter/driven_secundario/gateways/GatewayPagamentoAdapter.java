@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 public class GatewayPagamentoAdapter implements IGatewayPagamentoPort.GetGateway {
 
   @Override
-  public Boolean verificarStatusNoGateway(Long idPedido) {
+  public Boolean verificarStatusNoGateway(final Long idPedido) {
     return true;
   }
 }
