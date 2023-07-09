@@ -4,18 +4,17 @@ import com.techchallenge.devnet.adapter.driven_secundario.conversores_saida.IMap
 import com.techchallenge.devnet.adapter.driven_secundario.entities.ItemPedidoEntity;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.ItemPedidoRepositoryJpa;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.PedidoRepositoryJpa;
-import com.techchallenge.devnet.core.application.ports.saida.IItemPedidoRepository;
+import com.techchallenge.devnet.core.application.ports.saida.IItemPedidoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.models.ItemPedidoModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Repository
-public class ItemPedidoDeleteRepositoryAdapter implements IItemPedidoRepository.DeleteRepository {
+public class ItemPedidoDeleteRepositoryAdapter implements IItemPedidoRepositoryPort.DeleteRepository {
 
   @Autowired
   private IMapperSaida mapper;
@@ -39,9 +38,9 @@ public class ItemPedidoDeleteRepositoryAdapter implements IItemPedidoRepository.
       .orElseThrow();
   }
 
-  @Transactional(isolation = Isolation.SERIALIZABLE)
+  @Transactional
   @Override
-  public void deletarItensDoPedido(Long idPedido) {
+  public void deletarItensDoPedido(final Long idPedido) {
 
     var pedidoEntity = this.pedidoJpa.findById(idPedido)
       .map(entity -> {

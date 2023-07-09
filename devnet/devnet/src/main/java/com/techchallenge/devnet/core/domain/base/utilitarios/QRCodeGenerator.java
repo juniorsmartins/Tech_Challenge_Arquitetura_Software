@@ -18,14 +18,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 @Service
-public final class QRCodeGenerator {
+public class QRCodeGenerator implements IQRCodeGenerator {
 
 //  public static String localParaArmazenarQRCode = "D:\\AreaEstudo\\PosTech-Fiap-Alura\\ArquiteturaDeSoftware\\TechChallenge-Soat\\devnet\\devnet\\qrcode_store\\";
   public static String localParaArmazenarQRCode = "/app/armazem";
 
   public static String sufixoDoNomeDaImagemDoQRCode = "-QRCODE.png";
 
-  public static InputStreamResource gerarQRCode(PedidoModel pedidoModel) throws WriterException, IOException {
+  @Override
+  public InputStreamResource gerarQRCode(PedidoModel pedidoModel) throws WriterException, IOException {
 
     var nomeDaImagemQrCode = criarNomeDaImagemQrCode(pedidoModel);
 
@@ -47,15 +48,13 @@ public final class QRCodeGenerator {
     return imagemQrCodeRetorno;
   }
 
-  public static String criarNomeDaImagemQrCode(PedidoModel pedidoModel) {
+  @Override
+  public String criarNomeDaImagemQrCode(final PedidoModel pedidoModel) {
     return pedidoModel.getId() + sufixoDoNomeDaImagemDoQRCode;
   }
 
-  private static Path criarCaminhoComNomeDaImagemQrCode(String nomeDaImagemQrCode) {
-    return FileSystems.getDefault().getPath(localParaArmazenarQRCode + "/" + nomeDaImagemQrCode);
-  }
-
-  public static InputStream recuperarImagemQrCode(String nomeDaImagemQrCode) {
+  @Override
+  public InputStream recuperarImagemQrCode(final String nomeDaImagemQrCode) {
 
     try {
       var caminhoDaImagemQrCode = criarCaminhoComNomeDaImagemQrCode(nomeDaImagemQrCode);
@@ -64,6 +63,10 @@ public final class QRCodeGenerator {
     } catch (IOException e) {
       throw new ArmazemException(MensagemPadrao.QRCODE_NAO_RECUPERADO_DO_ARMAZENAMENTO, e);
     }
+  }
+
+  private Path criarCaminhoComNomeDaImagemQrCode(String nomeDaImagemQrCode) {
+    return FileSystems.getDefault().getPath(localParaArmazenarQRCode + "/" + nomeDaImagemQrCode);
   }
 
 //  public String pegarQrCode() {

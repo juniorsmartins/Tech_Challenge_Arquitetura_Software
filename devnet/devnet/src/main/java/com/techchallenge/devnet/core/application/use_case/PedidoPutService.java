@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.core.application.use_case;
 
 import com.techchallenge.devnet.core.application.ports.entrada.IPedidoServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.IItemPedidoRepository;
+import com.techchallenge.devnet.core.application.ports.saida.IItemPedidoRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
@@ -20,19 +20,16 @@ import java.util.Optional;
 public class PedidoPutService implements IPedidoServicePort.PutService {
 
   @Autowired
+  private IUtils utils;
+
+  @Autowired
   private IPedidoRepositoryPort.GetRepository pedidoGetRepository;
 
   @Autowired
   private IPedidoRepositoryPort.PostRepository pedidoPostRepository;
 
   @Autowired
-  private IItemPedidoRepository.DeleteRepository itemPedidoDeleteRepository;
-
-  @Autowired
-  private IItemPedidoRepository.PostRepository itemPedidoPostRepository;
-
-  @Autowired
-  private IUtils utils;
+  private IItemPedidoRepositoryPort.DeleteRepository itemPedidoDeleteRepository;
 
   @Override
   public PedidoModel atualizar(final Long id, final PedidoModel pedidoModel) {
