@@ -13,14 +13,14 @@ public interface IPagamentoServicePort {
     PedidoModel iniciarCobrancaDePagamento(PedidoModel pedidoModel);
   }
 
+  interface PutService {
+    PagamentoModel verificarStatusNoGateway(Long idPedido);
+  }
+
   interface GetService {
     Page<PagamentoModel> pesquisar(PagamentoFiltro filtro, Pageable paginacao);
 
     InputStreamResource buscarQrCodePorId(Long id);
-  }
-
-  interface PutService {
-    PagamentoModel verificarStatusNoGateway(Long idPedido);
   }
 }
 

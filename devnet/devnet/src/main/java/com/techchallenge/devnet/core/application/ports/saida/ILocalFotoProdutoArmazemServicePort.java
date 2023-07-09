@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 
-public interface ILocalFotoProdutoArmazemService {
+public interface ILocalFotoProdutoArmazemServicePort {
 
   void armazenar(NovaFoto novaFoto);
 
