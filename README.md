@@ -46,7 +46,7 @@ Core: É o núcleo central do sistema, onde se encontra a lógica de negócio e 
 
 A Arquitetura Ports and Adapters busca promover a manutenibilidade, a testabilidade e a evolução independente das partes do sistema. Ela oferece uma estrutura flexível para o desenvolvimento de software, permitindo que as mudanças nas tecnologias e nos requisitos do sistema sejam incorporadas de forma mais fácil e modular.
 
-Neste projeto, em específico, também serão acrescidos alguns princípios da Clean Architecture. Como, por exemplo, Solid. 
+Neste projeto, em específico, também serão acrescidos alguns princípios da Clean Architecture. Como, por exemplo, Solid, entre outros. 
 
 #### Linguagem Ubíqua:
 
