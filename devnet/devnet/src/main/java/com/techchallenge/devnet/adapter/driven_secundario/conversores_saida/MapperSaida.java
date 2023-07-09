@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.adapter.driver_primario.conversores;
+package com.techchallenge.devnet.adapter.driven_secundario.conversores_saida;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public final class MapperImpl implements IMapper {
+public final class MapperSaida implements IMapperSaida {
 
   @Autowired
   private ModelMapper modelMapper;
@@ -30,19 +30,5 @@ public final class MapperImpl implements IMapper {
       .map(origem -> this.modelMapper.map(origem, destino))
       .collect(Collectors.toList());
   }
-
-  @Override
-  public <D, E> E converterDtoRequestParaEntidade(D dtoRequest, Class<E> eClass) {
-    return this.modelMapper.map(dtoRequest, eClass);
-  }
-
-  @Override
-  public <E, R> R converterEntidadeParaDtoResponse(E entity, Class<R> eClass) {
-    return this.modelMapper.map(entity, eClass);
-  }
-
-  @Override
-  public <E, R> Page<R> converterPaginaDeEntidadeParaPaginaDtoResponse(Page<E> entidades, Class<R> eClass) {
-    return entidades.map(entidade -> this.converterEntidadeParaDtoResponse(entidade, eClass));
-  }
 }
+
