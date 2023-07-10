@@ -2,7 +2,7 @@ package com.techchallenge.devnet.core.application.use_case;
 
 import com.techchallenge.devnet.core.application.ports.entrada.IFotoProdutoServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IFotoProdutoRepositoryPort;
-import com.techchallenge.devnet.core.application.ports.saida.ILocalFotoProdutoArmazemServicePort;
+import com.techchallenge.devnet.core.application.ports.entrada.IArmazemFotoProdutoServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.models.FotoProdutoArquivo;
@@ -27,7 +27,7 @@ public class FotoProdutoPutService implements IFotoProdutoServicePort.PutService
   private IFotoProdutoRepositoryPort.PostRepository fotoProdutoPostRepository;
 
   @Autowired
-  private ILocalFotoProdutoArmazemServicePort localFotoProdutoArmazemService;
+  private IArmazemFotoProdutoServicePort armazemFotoProdutoService;
 
   @Override
   public FotoProdutoModel inserirFotoNoProduto(final Long id, final FotoProdutoArquivo fotoProdutoArquivo) throws IOException {
@@ -38,7 +38,7 @@ public class FotoProdutoPutService implements IFotoProdutoServicePort.PutService
     MultipartFile arquivoFoto = fotoProdutoArquivo.getFoto();
 
     var fotoProdutoModelPraSalvar = FotoProdutoModel.builder()
-      .nome(this.localFotoProdutoArmazemService.gerarNomeArquivoParaArmazenar(id, fotoProdutoArquivo.getFoto().getOriginalFilename()))
+      .nome(this.armazemFotoProdutoService.gerarNomeArquivoParaArmazenar(id, fotoProdutoArquivo.getFoto().getOriginalFilename()))
       .descricao(fotoProdutoArquivo.getDescricao())
       .tipo(arquivoFoto.getContentType())
       .tamanho(arquivoFoto.getSize())
