@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ClientePostService implements IClienteCadastrarServicePort {
+public class ClienteCadastrartService implements IClienteCadastrarServicePort {
 
   @Autowired
   private IClienteRepositoryPort.PostRepository clientePostRepository;

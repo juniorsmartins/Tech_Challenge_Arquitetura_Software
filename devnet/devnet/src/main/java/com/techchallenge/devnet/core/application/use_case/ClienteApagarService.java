@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class ClienteDeleteService implements IClienteApagarServicePort {
+public class ClienteApagarService implements IClienteApagarServicePort {
 
   @Autowired
   private IClienteRepositoryPort.GetRepository clienteGetRepository;

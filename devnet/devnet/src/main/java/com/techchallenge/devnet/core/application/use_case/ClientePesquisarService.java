@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class ClienteGetService implements IClientePesquisarServicePort {
+public class ClientePesquisarService implements IClientePesquisarServicePort {
 
   @Autowired
   private IClienteRepositoryPort.GetRepository clienteGetRepository;
