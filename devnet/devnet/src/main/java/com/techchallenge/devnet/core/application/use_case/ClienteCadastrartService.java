@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.core.application.use_case;
 
 import com.techchallenge.devnet.core.application.ports.entrada.cliente.IClienteCadastrarServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.IClienteRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteSalvarRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.assertions_concern.RegrasCliente;
 import com.techchallenge.devnet.core.domain.models.ClienteModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.util.Optional;
 public class ClienteCadastrartService implements IClienteCadastrarServicePort {
 
   @Autowired
-  private IClienteRepositoryPort.PostRepository clientePostRepository;
+  private IClienteSalvarRepositoryPort clientePostRepository;
 
   @Autowired
   private List<RegrasCliente> regras;

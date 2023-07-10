@@ -2,6 +2,7 @@ package com.techchallenge.devnet.core.application.use_case;
 
 import com.techchallenge.devnet.core.application.ports.entrada.cliente.IClienteAtualizarServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IClienteRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteSalvarRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.assertions_concern.RegrasCliente;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ClienteNaoEncontradoException;
@@ -21,7 +22,7 @@ public class ClienteAtualizarService implements IClienteAtualizarServicePort {
   private IClienteRepositoryPort.GetRepository clienteGetRepository;
 
   @Autowired
-  private IClienteRepositoryPort.PostRepository clientePostRepository;
+  private IClienteSalvarRepositoryPort clienteSalvarRepository;
 
   @Autowired
   private List<RegrasCliente> regras;
@@ -36,7 +37,7 @@ public class ClienteAtualizarService implements IClienteAtualizarServicePort {
         BeanUtils.copyProperties(clienteModel, model, "id");
         return model;
       })
-      .map(this.clientePostRepository::salvar)
+      .map(this.clienteSalvarRepository::salvar)
       .orElseThrow(() -> {
         log.info(String.format(MensagemPadrao.CLIENTE_NAO_ENCONTRADO, id));
         throw new ClienteNaoEncontradoException(id);
