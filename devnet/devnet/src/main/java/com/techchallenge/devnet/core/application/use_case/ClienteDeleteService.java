@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.core.application.ports.entrada.IClienteServicePort;
+import com.techchallenge.devnet.core.application.ports.entrada.cliente.IClienteApagarServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IClienteRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class ClienteDeleteService implements IClienteServicePort.DeleteService {
+public class ClienteDeleteService implements IClienteApagarServicePort {
 
   @Autowired
   private IClienteRepositoryPort.GetRepository clienteGetRepository;

@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
-import com.techchallenge.devnet.core.application.ports.entrada.IClienteServicePort;
+import com.techchallenge.devnet.core.application.ports.entrada.cliente.IClienteApagarServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public final class ClienteDeleteControllerAdapter implements IClienteControllerPort.DeleteController {
 
   @Autowired
-  private IClienteServicePort.DeleteService service;
+  private IClienteApagarServicePort service;
 
   @Operation(summary = "Deletar Cliente", description = "Este recurso destina-se a apagar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {
