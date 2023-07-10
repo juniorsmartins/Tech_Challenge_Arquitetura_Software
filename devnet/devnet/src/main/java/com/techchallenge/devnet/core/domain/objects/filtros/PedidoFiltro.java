@@ -16,5 +16,7 @@ public final class PedidoFiltro {
   private String cliente;
 
   private FormaPagamentoEnum formaPagamento;
+
+  private PagamentoFiltro pagamento;
 }
 
