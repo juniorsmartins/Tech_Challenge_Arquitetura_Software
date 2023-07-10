@@ -1,10 +1,10 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
 import com.techchallenge.devnet.adapter.driver_primario.conversores_entrada.IMapperEntrada;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ClienteDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.IClienteServicePort;
-import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.filtros.ClienteFiltroDto;
+import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ClienteDtoResponse;
+import com.techchallenge.devnet.core.application.ports.entrada.cliente.IClientePesquisarServicePort;
+import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.core.domain.objects.filtros.ClienteFiltro;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -34,7 +34,7 @@ public final class ClienteGetControllerAdapter implements IClienteControllerPort
   private IMapperEntrada mapper;
 
   @Autowired
-  private IClienteServicePort.GetService service;
+  private IClientePesquisarServicePort service;
 
   @Operation(summary = "Pesquisar Cliente", description = "Este recurso permite consultar Cliente por diversas propriedades com retorno paginado.")
   @ApiResponses(value = {
