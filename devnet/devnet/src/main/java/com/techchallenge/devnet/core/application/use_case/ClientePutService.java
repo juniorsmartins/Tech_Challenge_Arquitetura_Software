@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.core.application.ports.entrada.IClienteServicePort;
+import com.techchallenge.devnet.core.application.ports.entrada.cliente.IClienteAtualizarServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IClienteRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.assertions_concern.RegrasCliente;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class ClientePutService implements IClienteServicePort.PutService {
+public class ClientePutService implements IClienteAtualizarServicePort {
 
   @Autowired
   private IClienteRepositoryPort.GetRepository clienteGetRepository;

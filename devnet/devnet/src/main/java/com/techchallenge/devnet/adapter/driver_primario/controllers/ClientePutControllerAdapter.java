@@ -3,7 +3,7 @@ package com.techchallenge.devnet.adapter.driver_primario.controllers;
 import com.techchallenge.devnet.adapter.driver_primario.conversores_entrada.IMapperEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ClienteDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ClienteDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.IClienteServicePort;
+import com.techchallenge.devnet.core.application.ports.entrada.cliente.IClienteAtualizarServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.core.domain.models.ClienteModel;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,7 +33,7 @@ public final class ClientePutControllerAdapter implements IClienteControllerPort
   private IMapperEntrada mapper;
 
   @Autowired
-  private IClienteServicePort.PutService service;
+  private IClienteAtualizarServicePort service;
 
   @Operation(summary = "Atualizar Cliente", description = "Este recurso destina-se a atualizar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {
