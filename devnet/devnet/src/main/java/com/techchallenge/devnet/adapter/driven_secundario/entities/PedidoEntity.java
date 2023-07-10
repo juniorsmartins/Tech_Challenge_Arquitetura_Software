@@ -68,15 +68,5 @@ public final class PedidoEntity extends AuditoriaDataJpa implements Serializable
 
   @OneToOne(mappedBy = "pedido", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
   private PagamentoEntity pagamento;
-
-//  public void calcularPrecoTotal() {
-//    this.getItensPedido().forEach(ItemPedido::calcularPrecoParcial);
-//
-//    var total = this.getItensPedido().stream()
-//      .map(ItemPedido::getPrecoParcial)
-//      .reduce(BigDecimal.ZERO, BigDecimal::add);
-//
-//    this.setPrecoTotal(total);
-//  }
 }
 

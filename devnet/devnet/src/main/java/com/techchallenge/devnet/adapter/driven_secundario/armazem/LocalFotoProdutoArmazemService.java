@@ -14,8 +14,8 @@ import java.nio.file.Paths;
 @Service
 public class LocalFotoProdutoArmazemService implements ILocalFotoProdutoArmazemServicePort {
 
-//  private Path caminhoDoDiretorio = Paths.get("C:\\Users\\junio\\OneDrive\\Documentos\\diretorio-fotos");
-  private Path caminhoDoDiretorio = Paths.get("/app/armazem");
+  private Path caminhoDoDiretorio = Paths.get("C:\\Users\\junio\\OneDrive\\Documentos\\diretorio-devnet");
+//  private Path caminhoDoDiretorio = Paths.get("/app/armazem");
 
   @Override
   public void armazenar(NovaFoto novaFoto) {

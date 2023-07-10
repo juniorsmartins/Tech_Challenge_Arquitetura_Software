@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.List;
+
 public interface IPedidoControllerPort {
 
   interface PostController {
@@ -27,6 +29,9 @@ public interface IPedidoControllerPort {
   interface GetController {
     @GetMapping
     ResponseEntity<Page<PedidoDtoResponse>> pesquisar(PedidoFiltroDto pedidoFiltroDto, Pageable paginacao);
+
+    @GetMapping(path = "/ordenado")
+    ResponseEntity<List<PedidoDtoResponse>> listarOrdenadoPorStatusAndDataHoraCadastro();
   }
 
   interface DeleteController {
