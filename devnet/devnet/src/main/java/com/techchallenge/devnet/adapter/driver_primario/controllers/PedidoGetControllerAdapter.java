@@ -23,6 +23,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Optional;
 
 @Tag(name = "PedidoGetControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
@@ -55,6 +56,18 @@ public final class PedidoGetControllerAdapter implements IPedidoControllerPort.G
       .map(dto -> this.mapper.converterOrigemParaDestino(dto, PedidoFiltro.class))
       .map(parametrosDePesquisa -> this.service.pesquisar(parametrosDePesquisa, paginacao))
       .map(paginaPedidos -> this.mapper.converterPaginaOrigemParaPaginaDestino(paginaPedidos, PedidoDtoResponse.class))
+      .orElseThrow();
+
+    return ResponseEntity
+      .ok()
+      .body(response);
+  }
+
+  @Override
+  public ResponseEntity<List<PedidoDtoResponse>> listarOrdenadoPorStatusAndDataHoraCadastro() {
+
+    var response = Optional.of(this.service.listarOrdenadoPorStatusAndDataHoraCadastro())
+      .map(models -> this.mapper.converterListaOrigemParaListaDestino(models, PedidoDtoResponse.class))
       .orElseThrow();
 
     return ResponseEntity

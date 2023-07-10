@@ -20,8 +20,8 @@ import java.nio.file.Path;
 @Service
 public class QRCodeGenerator implements IQRCodeGenerator {
 
-//  public static String localParaArmazenarQRCode = "D:\\AreaEstudo\\PosTech-Fiap-Alura\\ArquiteturaDeSoftware\\TechChallenge-Soat\\devnet\\devnet\\qrcode_store\\";
-  public static String localParaArmazenarQRCode = "/app/armazem";
+  public static String localParaArmazenarQRCode = "C:\\Users\\junio\\OneDrive\\Documentos\\diretorio-devnet";
+//  public static String localParaArmazenarQRCode = "/app/armazem";
 
   public static String sufixoDoNomeDaImagemDoQRCode = "-QRCODE.png";
 

@@ -2,7 +2,7 @@ package com.techchallenge.devnet.core.application.use_case;
 
 import com.techchallenge.devnet.core.application.ports.entrada.IFotoProdutoServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IFotoProdutoRepositoryPort;
-import com.techchallenge.devnet.core.application.ports.saida.ILocalFotoProdutoArmazemServicePort;
+import com.techchallenge.devnet.core.application.ports.entrada.IArmazemFotoProdutoServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.FotoProdutoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.models.FotoProdutoModel;
@@ -25,7 +25,7 @@ public class FotoProdutoGetService implements IFotoProdutoServicePort.GetService
   private IFotoProdutoRepositoryPort.GetRepository fotoProdutoGetRepository;
 
   @Autowired
-  private ILocalFotoProdutoArmazemServicePort localFotoProdutoArmazemService;
+  private IArmazemFotoProdutoServicePort armazemFotoProdutoService;
 
   @Transactional(readOnly = true)
   @Override
@@ -51,7 +51,7 @@ public class FotoProdutoGetService implements IFotoProdutoServicePort.GetService
           throw new RuntimeException(e);
         }
 
-        var imagem = this.localFotoProdutoArmazemService.recuperar(fotoProduto.getNome());
+        var imagem = this.armazemFotoProdutoService.recuperar(fotoProduto.getNome());
 
         var imagemModel = ImagemModel.builder()
           .imagem(new InputStreamResource(imagem))

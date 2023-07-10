@@ -2,7 +2,7 @@ package com.techchallenge.devnet.core.application.use_case;
 
 import com.techchallenge.devnet.core.application.ports.entrada.IFotoProdutoServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IFotoProdutoRepositoryPort;
-import com.techchallenge.devnet.core.application.ports.saida.ILocalFotoProdutoArmazemServicePort;
+import com.techchallenge.devnet.core.application.ports.entrada.IArmazemFotoProdutoServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.FotoProdutoNaoEncontradoException;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +25,7 @@ public class FotoProdutoDeleteService implements IFotoProdutoServicePort.DeleteS
   private IFotoProdutoRepositoryPort.DeleteRepository fotoProdutoDeleteRepository;
 
   @Autowired
-  private ILocalFotoProdutoArmazemServicePort localFotoProdutoArmazemService;
+  private IArmazemFotoProdutoServicePort armazemFotoProdutoService;
 
   @Transactional(isolation = Isolation.SERIALIZABLE)
   @Override
@@ -36,7 +36,7 @@ public class FotoProdutoDeleteService implements IFotoProdutoServicePort.DeleteS
 
         this.fotoProdutoDeleteRepository.deletar(model);
         this.fotoProdutoPostRepository.flush();
-        this.localFotoProdutoArmazemService.remover(model.getNome());
+        this.armazemFotoProdutoService.remover(model.getNome());
 
         return model;
       })

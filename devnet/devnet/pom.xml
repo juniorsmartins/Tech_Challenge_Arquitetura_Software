@@ -63,6 +63,7 @@
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
 
+
 		<!-- Gerador de QR Code -->
 		<dependency>
 			<groupId>com.github.hiwepy</groupId>

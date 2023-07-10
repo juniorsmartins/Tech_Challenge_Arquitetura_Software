@@ -5,7 +5,7 @@ import com.techchallenge.devnet.adapter.driven_secundario.entities.FotoProdutoEn
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.FotoProdutoRepositoryJpa;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.ProdutoRepositoryJpa;
 import com.techchallenge.devnet.core.application.ports.saida.IFotoProdutoRepositoryPort;
-import com.techchallenge.devnet.core.application.ports.saida.ILocalFotoProdutoArmazemServicePort;
+import com.techchallenge.devnet.core.application.ports.entrada.IArmazemFotoProdutoServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.models.FotoProdutoModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class FotoProdutoPostRepositoryAdapter implements IFotoProdutoRepositoryP
   private ProdutoRepositoryJpa produtoJpa;
 
   @Autowired
-  private ILocalFotoProdutoArmazemServicePort localFotoProdutoArmazemService;
+  private IArmazemFotoProdutoServicePort armazemFotoProdutoService;
 
   @Transactional
   @Override
@@ -56,12 +56,12 @@ public class FotoProdutoPostRepositoryAdapter implements IFotoProdutoRepositoryP
       .map(entity -> this.mapper.converterOrigemParaDestino(entity, FotoProdutoModel.class))
       .orElseThrow();
 
-    var novaFoto = ILocalFotoProdutoArmazemServicePort.NovaFoto.builder()
+    var novaFoto = IArmazemFotoProdutoServicePort.NovaFoto.builder()
       .nomeArquivo(fotoProdutoModelSalvo.getNome())
       .inputStream(dadosArquivo)
       .build();
 
-    this.localFotoProdutoArmazemService.substituir(nomeFotoExistente, novaFoto);
+    this.armazemFotoProdutoService.substituir(nomeFotoExistente, novaFoto);
 
     return fotoProdutoModelSalvo;
   }

@@ -1,6 +1,6 @@
-package com.techchallenge.devnet.adapter.driven_secundario.armazem;
+package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.core.application.ports.saida.ILocalFotoProdutoArmazemServicePort;
+import com.techchallenge.devnet.core.application.ports.entrada.IArmazemFotoProdutoServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.ArmazemException;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import org.springframework.stereotype.Service;
@@ -12,10 +12,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Service
-public class LocalFotoProdutoArmazemService implements ILocalFotoProdutoArmazemServicePort {
+public class ArmazemFotoProdutoService implements IArmazemFotoProdutoServicePort {
 
-//  private Path caminhoDoDiretorio = Paths.get("C:\\Users\\junio\\OneDrive\\Documentos\\diretorio-fotos");
-  private Path caminhoDoDiretorio = Paths.get("/app/armazem");
+  private Path caminhoDoDiretorio = Paths.get("C:\\Users\\junio\\OneDrive\\Documentos\\diretorio-devnet");
+//  private Path caminhoDoDiretorio = Paths.get("/app/armazem");
 
   @Override
   public void armazenar(NovaFoto novaFoto) {
