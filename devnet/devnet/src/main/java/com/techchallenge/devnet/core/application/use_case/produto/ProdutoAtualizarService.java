@@ -1,7 +1,8 @@
-package com.techchallenge.devnet.core.application.use_case;
+package com.techchallenge.devnet.core.application.use_case.produto;
 
-import com.techchallenge.devnet.core.application.ports.entrada.IProdutoServicePort;
+import com.techchallenge.devnet.core.application.ports.entrada.produto.IProdutoAtualizarServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.produto.IProdutoSalvarRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.models.ProdutoModel;
@@ -12,13 +13,13 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class ProdutoPutService implements IProdutoServicePort.PutService {
+public class ProdutoAtualizarService implements IProdutoAtualizarServicePort {
 
   @Autowired
   private IProdutoRepositoryPort.GetRepository produtoGetRepository;
 
   @Autowired
-  private IProdutoRepositoryPort.PostRepository produtoPostRepository;
+  private IProdutoSalvarRepositoryPort produtoSalvarRepository;
 
   @Override
   public ProdutoModel atualizar(final Long id, final ProdutoModel produtoModel) {
@@ -28,7 +29,7 @@ public class ProdutoPutService implements IProdutoServicePort.PutService {
         BeanUtils.copyProperties(produtoModel, produto, "id");
         return produto;
       })
-      .map(this.produtoPostRepository::salvar)
+      .map(this.produtoSalvarRepository::salvar)
       .orElseThrow(() -> {
         log.info(String.format(MensagemPadrao.PRODUTO_NAO_ENCONTRADO, id));
         throw new ProdutoNaoEncontradoException(id);

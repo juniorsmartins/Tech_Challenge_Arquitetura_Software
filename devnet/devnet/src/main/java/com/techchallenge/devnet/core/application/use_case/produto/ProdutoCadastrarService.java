@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.core.application.use_case;
+package com.techchallenge.devnet.core.application.use_case.produto;
 
 import com.techchallenge.devnet.core.application.ports.entrada.produto.IProdutoCadastrarServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.produto.IProdutoSalvarRepositoryPort;

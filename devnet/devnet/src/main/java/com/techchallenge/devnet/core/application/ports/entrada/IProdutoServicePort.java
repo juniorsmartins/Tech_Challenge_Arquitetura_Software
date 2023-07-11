@@ -7,10 +7,6 @@ import org.springframework.data.domain.Pageable;
 
 public interface IProdutoServicePort {
 
-  interface PostService {
-    ProdutoModel cadastrar(ProdutoModel produtoModel);
-  }
-
   interface PutService {
     ProdutoModel atualizar(Long id, ProdutoModel produtoModel);
   }

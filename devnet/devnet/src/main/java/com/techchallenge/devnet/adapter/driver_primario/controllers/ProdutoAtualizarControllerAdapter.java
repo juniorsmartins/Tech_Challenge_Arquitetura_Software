@@ -3,7 +3,7 @@ package com.techchallenge.devnet.adapter.driver_primario.controllers;
 import com.techchallenge.devnet.adapter.driver_primario.conversores_entrada.IMapperEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ProdutoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ProdutoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.IProdutoServicePort;
+import com.techchallenge.devnet.core.application.ports.entrada.produto.IProdutoAtualizarServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.core.domain.models.ProdutoModel;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,13 +27,13 @@ import java.util.Optional;
 @Tag(name = "ProdutoPutControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/produtos")
-public final class ProdutoPutControllerAdapter implements IProdutoControllerPort.PutController {
+public final class ProdutoAtualizarControllerAdapter implements IProdutoControllerPort.PutController {
 
   @Autowired
   private IMapperEntrada mapper;
 
   @Autowired
-  private IProdutoServicePort.PutService service;
+  private IProdutoAtualizarServicePort service;
 
   @Operation(summary = "Atualizar Produto", description = "Este recurso destina-se a atualizar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {
