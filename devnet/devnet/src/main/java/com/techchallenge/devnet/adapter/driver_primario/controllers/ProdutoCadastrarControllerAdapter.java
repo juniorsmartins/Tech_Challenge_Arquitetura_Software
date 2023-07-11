@@ -3,7 +3,7 @@ package com.techchallenge.devnet.adapter.driver_primario.controllers;
 import com.techchallenge.devnet.adapter.driver_primario.conversores_entrada.IMapperEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ProdutoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ProdutoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.IProdutoServicePort;
+import com.techchallenge.devnet.core.application.ports.entrada.produto.IProdutoCadastrarServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.core.domain.models.ProdutoModel;
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,13 +26,13 @@ import java.util.Optional;
 @Tag(name = "ProdutoPostControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/produtos")
-public final class ProdutoPostControllerAdapter implements IProdutoControllerPort.PostController {
+public final class ProdutoCadastrarControllerAdapter implements IProdutoControllerPort.PostController {
 
   @Autowired
   private IMapperEntrada mapper;
 
   @Autowired
-  private IProdutoServicePort.PostService service;
+  private IProdutoCadastrarServicePort service;
 
   @Operation(summary = "Cadastrar Produto", description = "Este recurso destina-se a cadastrar.")
   @ApiResponses(value = {
