@@ -1,8 +1,9 @@
 package com.techchallenge.devnet.core.domain.base.utilitarios;
 
 import com.techchallenge.devnet.core.application.ports.entrada.IEmailServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.IClienteRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteConsultarPorCpfRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ClienteNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
@@ -18,7 +19,10 @@ public final class UtilsImpl implements IUtils {
   private static final String EMAIL_ORIGEM = "techchallenge6@gmail.com";
 
   @Autowired
-  private IClienteRepositoryPort.GetRepository clienteGetRepository;
+  private IClienteConsultarPorIdRepositoryPort clienteConsultarPorIdRepository;
+
+  @Autowired
+  private IClienteConsultarPorCpfRepositoryPort clienteConsultarPorCpfRepository;
 
   @Autowired
   private IProdutoRepositoryPort.GetRepository produtoGetRepository;
@@ -31,13 +35,13 @@ public final class UtilsImpl implements IUtils {
 
     if (ObjectUtils.isNotEmpty(pedidoModel.getCliente()) && ObjectUtils.isNotEmpty(pedidoModel.getCliente().getId())) {
       var idCliente = pedidoModel.getCliente().getId();
-      var cliente = this.clienteGetRepository.consultarPorId(idCliente)
+      var cliente = this.clienteConsultarPorIdRepository.consultarPorId(idCliente)
         .orElseThrow(() -> new ClienteNaoEncontradoException(idCliente));
       pedidoModel.setCliente(cliente);
 
     } else if (ObjectUtils.isNotEmpty(pedidoModel.getCliente()) && ObjectUtils.isNotEmpty(pedidoModel.getCliente().getCpf())) {
       var cpfCliente = pedidoModel.getCliente().getCpf();
-      var cliente = this.clienteGetRepository.consultarPorCpf(cpfCliente)
+      var cliente = this.clienteConsultarPorCpfRepository.consultarPorCpf(cpfCliente)
         .orElseThrow(() ->
           new ClienteNaoEncontradoException(String.format(MensagemPadrao.CPF_NAO_ENCONTRADO, cpfCliente)));
       pedidoModel.setCliente(cliente);

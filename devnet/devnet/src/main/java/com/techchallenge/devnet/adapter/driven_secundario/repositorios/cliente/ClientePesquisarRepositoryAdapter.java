@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.adapter.driven_secundario.repositorios;
+package com.techchallenge.devnet.adapter.driven_secundario.repositorios.cliente;
 
 import com.techchallenge.devnet.adapter.driven_secundario.conversores_saida.IMapperSaida;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.ClienteRepositoryJpa;
@@ -33,14 +33,6 @@ public class ClientePesquisarRepositoryAdapter implements IClientePesquisarRepos
       .map(filtroDto -> this.jpa.findAll(ClienteSpecification.consultarDinamicamente(filtroDto), paginacao))
       .map(paginaEntity -> this.mapper.converterPaginaOrigemParaPaginaDestino(paginaEntity, ClienteModel.class))
       .orElseThrow();
-  }
-
-  @Transactional(readOnly = true)
-  @Override
-  public Optional<ClienteModel> consultarPorCpf(final String cpf) {
-
-    return this.jpa.findByCpf(cpf)
-      .map(entity -> this.mapper.converterOrigemParaDestino(entity, ClienteModel.class));
   }
 }
 

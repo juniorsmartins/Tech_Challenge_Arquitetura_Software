@@ -1,9 +1,8 @@
 package com.techchallenge.devnet.adapter.driven_secundario.repositorios.cliente;
 
 import com.techchallenge.devnet.adapter.driven_secundario.conversores_saida.IMapperSaida;
-import com.techchallenge.devnet.adapter.driven_secundario.entities.ClienteEntity;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.ClienteRepositoryJpa;
-import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteSalvarRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteConsultarPorCpfRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.ClienteModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -12,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
-public class ClienteSalvarRepositoryAdapter implements IClienteSalvarRepositoryPort {
+public class ClienteConsultarPorCpfRepositoryAdapter implements IClienteConsultarPorCpfRepositoryPort {
 
   @Autowired
   private IMapperSaida mapper;
@@ -20,15 +19,12 @@ public class ClienteSalvarRepositoryAdapter implements IClienteSalvarRepositoryP
   @Autowired
   private ClienteRepositoryJpa jpa;
 
-  @Transactional
+  @Transactional(readOnly = true)
   @Override
-  public ClienteModel salvar(final ClienteModel clienteModel) {
+  public Optional<ClienteModel> consultarPorCpf(final String cpf) {
 
-    return Optional.of(clienteModel)
-      .map(model -> this.mapper.converterOrigemParaDestino(model, ClienteEntity.class))
-      .map(this.jpa::saveAndFlush)
-      .map(entity -> this.mapper.converterOrigemParaDestino(entity, ClienteModel.class))
-      .orElseThrow();
+    return this.jpa.findByCpf(cpf)
+      .map(entity -> this.mapper.converterOrigemParaDestino(entity, ClienteModel.class));
   }
 }
 

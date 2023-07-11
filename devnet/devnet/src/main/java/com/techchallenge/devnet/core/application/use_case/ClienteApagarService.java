@@ -1,8 +1,9 @@
 package com.techchallenge.devnet.core.application.use_case;
 
 import com.techchallenge.devnet.core.application.ports.entrada.cliente.IClienteApagarServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.IClienteRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteApagarRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ClienteNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_409.DeletarBloqueadoPoUso;
@@ -16,10 +17,10 @@ import org.springframework.stereotype.Service;
 public class ClienteApagarService implements IClienteApagarServicePort {
 
   @Autowired
-  private IClienteRepositoryPort.GetRepository clienteGetRepository;
+  private IClienteConsultarPorIdRepositoryPort clienteConsultarPorIdRepository;
 
   @Autowired
-  private IClienteRepositoryPort.DeleteRepository clienteDeleteRepository;
+  private IClienteApagarRepositoryPort clienteApagarRepository;
 
   @Autowired
   private IPedidoRepositoryPort.GetRepository pedidoGetRepository;
@@ -27,10 +28,10 @@ public class ClienteApagarService implements IClienteApagarServicePort {
   @Override
   public void deletar(final Long id) {
 
-    this.clienteGetRepository.consultarPorId(id)
+    this.clienteConsultarPorIdRepository.consultarPorId(id)
       .map(this::verificarUsoDoCliente)
       .map(model -> {
-        this.clienteDeleteRepository.deletar(model);
+        this.clienteApagarRepository.deletar(model);
         return true;
       })
       .orElseThrow(() -> {
