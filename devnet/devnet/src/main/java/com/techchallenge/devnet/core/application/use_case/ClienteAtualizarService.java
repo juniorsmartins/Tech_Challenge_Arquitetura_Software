@@ -1,7 +1,8 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.core.application.ports.entrada.IClienteServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.IClienteRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.entrada.cliente.IClienteAtualizarServicePort;
+import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteConsultarPorIdRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteSalvarRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.assertions_concern.RegrasCliente;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ClienteNaoEncontradoException;
@@ -15,13 +16,13 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class ClientePutService implements IClienteServicePort.PutService {
+public class ClienteAtualizarService implements IClienteAtualizarServicePort {
 
   @Autowired
-  private IClienteRepositoryPort.GetRepository clienteGetRepository;
+  private IClienteConsultarPorIdRepositoryPort clienteConsultarPorIdRepository;
 
   @Autowired
-  private IClienteRepositoryPort.PostRepository clientePostRepository;
+  private IClienteSalvarRepositoryPort clienteSalvarRepository;
 
   @Autowired
   private List<RegrasCliente> regras;
@@ -29,14 +30,14 @@ public class ClientePutService implements IClienteServicePort.PutService {
   @Override
   public ClienteModel atualizar(final Long id, final ClienteModel clienteModel) {
 
-    return this.clienteGetRepository.consultarPorId(id)
+    return this.clienteConsultarPorIdRepository.consultarPorId(id)
       .map(model -> {
         clienteModel.setId(id);
         this.regras.forEach(regra -> regra.executar(clienteModel));
         BeanUtils.copyProperties(clienteModel, model, "id");
         return model;
       })
-      .map(this.clientePostRepository::salvar)
+      .map(this.clienteSalvarRepository::salvar)
       .orElseThrow(() -> {
         log.info(String.format(MensagemPadrao.CLIENTE_NAO_ENCONTRADO, id));
         throw new ClienteNaoEncontradoException(id);

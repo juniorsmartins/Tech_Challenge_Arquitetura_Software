@@ -3,7 +3,7 @@ package com.techchallenge.devnet.adapter.driver_primario.controllers;
 import com.techchallenge.devnet.adapter.driver_primario.conversores_entrada.IMapperEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ClienteDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ClienteDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.IClienteServicePort;
+import com.techchallenge.devnet.core.application.ports.entrada.cliente.IClienteCadastrarServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.core.domain.models.ClienteModel;
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,13 +26,13 @@ import java.util.Optional;
 @Tag(name = "ClientePostControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/clientes")
-public final class ClientePostControllerAdapter implements IClienteControllerPort.PostController {
+public final class ClienteCadastrarControllerAdapter implements IClienteControllerPort.PostController {
 
   @Autowired
   private IMapperEntrada mapper;
 
   @Autowired
-  private IClienteServicePort.PostService service;
+  private IClienteCadastrarServicePort service;
 
   @Operation(summary = "Cadastrar Cliente", description = "Este recurso destina-se a cadastrar.")
   @ApiResponses(value = {

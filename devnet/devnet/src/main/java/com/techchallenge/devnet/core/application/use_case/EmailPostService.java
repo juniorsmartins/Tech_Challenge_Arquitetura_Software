@@ -1,9 +1,9 @@
 package com.techchallenge.devnet.core.application.use_case;
 
 import com.techchallenge.devnet.core.application.ports.entrada.IEmailServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.IClienteRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.IEmailRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ClienteNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
@@ -28,7 +28,7 @@ public class EmailPostService implements IEmailServicePort.EnviarService {
   private IPedidoRepositoryPort.GetRepository pedidoGetRepository;
 
   @Autowired
-  private IClienteRepositoryPort.GetRepository clienteGetRepository;
+  private IClienteConsultarPorIdRepositoryPort clienteConsultarPorIdRepository;
 
   @Autowired
   private JavaMailSender javaMailSender;
@@ -85,7 +85,7 @@ public class EmailPostService implements IEmailServicePort.EnviarService {
     if (ObjectUtils.isNotEmpty(email.getPedido().getCliente())) {
       var idCliente = email.getPedido().getCliente().getId();
 
-      var cliente = this.clienteGetRepository.consultarPorId(idCliente)
+      var cliente = this.clienteConsultarPorIdRepository.consultarPorId(idCliente)
         .orElseThrow(() -> {
           log.info(String.format(MensagemPadrao.CLIENTE_NAO_ENCONTRADO, idCliente));
           throw new ClienteNaoEncontradoException(idCliente);

@@ -1,9 +1,9 @@
-package com.techchallenge.devnet.adapter.driven_secundario.repositorios;
+package com.techchallenge.devnet.adapter.driven_secundario.repositorios.cliente;
 
 import com.techchallenge.devnet.adapter.driven_secundario.conversores_saida.IMapperSaida;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.ClienteRepositoryJpa;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.filtros.ClienteFiltroDto;
-import com.techchallenge.devnet.core.application.ports.saida.IClienteRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.cliente.IClientePesquisarRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.ClienteModel;
 import com.techchallenge.devnet.core.domain.objects.filtros.ClienteFiltro;
 import com.techchallenge.devnet.core.domain.objects.specification.ClienteSpecification;
@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
-public class ClienteGetRepositoryAdapter implements IClienteRepositoryPort.GetRepository {
+public class ClientePesquisarRepositoryAdapter implements IClientePesquisarRepositoryPort {
 
   @Autowired
   private IMapperSaida mapper;
@@ -33,22 +33,6 @@ public class ClienteGetRepositoryAdapter implements IClienteRepositoryPort.GetRe
       .map(filtroDto -> this.jpa.findAll(ClienteSpecification.consultarDinamicamente(filtroDto), paginacao))
       .map(paginaEntity -> this.mapper.converterPaginaOrigemParaPaginaDestino(paginaEntity, ClienteModel.class))
       .orElseThrow();
-  }
-
-  @Transactional(readOnly = true)
-  @Override
-  public Optional<ClienteModel> consultarPorId(final Long id) {
-
-    return this.jpa.findById(id)
-      .map(entity -> this.mapper.converterOrigemParaDestino(entity, ClienteModel.class));
-  }
-
-  @Transactional(readOnly = true)
-  @Override
-  public Optional<ClienteModel> consultarPorCpf(final String cpf) {
-
-    return this.jpa.findByCpf(cpf)
-      .map(entity -> this.mapper.converterOrigemParaDestino(entity, ClienteModel.class));
   }
 }
 

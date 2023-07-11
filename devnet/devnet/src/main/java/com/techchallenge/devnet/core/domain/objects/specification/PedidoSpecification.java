@@ -45,6 +45,16 @@ public final class PedidoSpecification {
         predicados.add(criteriaBuilder.equal(root.get("formaPagamento"), filtro.getFormaPagamento()));
       }
 
+
+      // ---------- FILTRO DE PAGAMENTO ----------//
+      if (ObjectUtils.isNotEmpty(filtro.getPagamento()) &&
+        ObjectUtils.isNotEmpty(filtro.getPagamento().getStatusPagamento())) {
+
+        predicados.add(criteriaBuilder.equal(root.get("pagamento").get("statusPagamento"),
+          filtro.getPagamento().getStatusPagamento()));
+      }
+
+
       return criteriaBuilder.and(predicados.toArray(new Predicate[0]));
     });
   }

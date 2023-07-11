@@ -22,11 +22,7 @@ public final class PedidoDtoResponse implements Serializable {
 
   private Long id;
 
-  private ClienteDtoResponse cliente;
-
   private StatusPedidoEnum statusPedido;
-
-  private List<ItemPedidoDtoResponse> itensPedido;
 
   private FormaPagamentoEnum formaPagamento;
 
@@ -35,6 +31,10 @@ public final class PedidoDtoResponse implements Serializable {
   private OffsetDateTime dataHoraCadastro;
 
   private OffsetDateTime dataHoraAtualizacao;
+
+  private List<ItemPedidoDtoResponse> itensPedido;
+
+  private ClienteDtoResponse cliente;
 
   private PagamentoDtoResponse pagamento;
 }
