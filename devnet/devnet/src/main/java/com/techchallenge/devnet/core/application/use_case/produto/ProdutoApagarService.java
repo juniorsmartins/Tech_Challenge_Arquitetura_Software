@@ -1,8 +1,9 @@
-package com.techchallenge.devnet.core.application.use_case;
+package com.techchallenge.devnet.core.application.use_case.produto;
 
-import com.techchallenge.devnet.core.application.ports.entrada.IProdutoServicePort;
+import com.techchallenge.devnet.core.application.ports.entrada.produto.IProdutoApagarServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IItemPedidoRepositoryPort;
-import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.produto.IProdutoApagarRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.produto.IProdutoConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_409.DeletarBloqueadoPoUso;
@@ -13,13 +14,13 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class ProdutoDeleteService implements IProdutoServicePort.DeleteService {
+public class ProdutoApagarService implements IProdutoApagarServicePort {
 
   @Autowired
-  private IProdutoRepositoryPort.GetRepository produtoGetRepository;
+  private IProdutoConsultarPorIdRepositoryPort produtoConsultarPorIdRepository;
 
   @Autowired
-  private IProdutoRepositoryPort.DeleteRepository produtoDeleteRepository;
+  private IProdutoApagarRepositoryPort produtoApagarRepository;
 
   @Autowired
   private IItemPedidoRepositoryPort.GetRepository itemPedidoGetRepository;
@@ -27,10 +28,10 @@ public class ProdutoDeleteService implements IProdutoServicePort.DeleteService {
   @Override
   public void deletar(final Long id) {
 
-    this.produtoGetRepository.consultarPorId(id)
+    this.produtoConsultarPorIdRepository.consultarPorId(id)
       .map(this::verificarUsoDoProduto)
       .map(model -> {
-        this.produtoDeleteRepository.deletar(model);
+        this.produtoApagarRepository.deletar(model);
         return true;
       })
       .orElseThrow(() -> {

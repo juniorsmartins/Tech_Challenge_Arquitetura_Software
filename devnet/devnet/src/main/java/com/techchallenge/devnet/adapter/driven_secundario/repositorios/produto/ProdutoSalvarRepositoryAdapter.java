@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.adapter.driven_secundario.repositorios;
+package com.techchallenge.devnet.adapter.driven_secundario.repositorios.produto;
 
 import com.techchallenge.devnet.adapter.driven_secundario.conversores_saida.IMapperSaida;
 import com.techchallenge.devnet.adapter.driven_secundario.entities.ProdutoEntity;

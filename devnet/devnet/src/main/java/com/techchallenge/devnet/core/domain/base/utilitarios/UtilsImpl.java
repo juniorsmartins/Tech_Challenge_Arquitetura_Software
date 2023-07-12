@@ -1,7 +1,6 @@
 package com.techchallenge.devnet.core.domain.base.utilitarios;
 
 import com.techchallenge.devnet.core.application.ports.entrada.IEmailServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteConsultarPorCpfRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;

@@ -3,7 +3,6 @@ package com.techchallenge.devnet.core.application.use_case;
 import com.techchallenge.devnet.core.application.ports.entrada.IFotoProdutoServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IFotoProdutoRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.entrada.IArmazemFotoProdutoServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.models.FotoProdutoArquivo;
 import com.techchallenge.devnet.core.domain.models.FotoProdutoModel;
