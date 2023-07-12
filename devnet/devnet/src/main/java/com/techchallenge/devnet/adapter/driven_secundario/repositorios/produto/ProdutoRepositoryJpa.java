@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa;
+package com.techchallenge.devnet.adapter.driven_secundario.repositorios.produto;
 
 import com.techchallenge.devnet.adapter.driven_secundario.entities.ProdutoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

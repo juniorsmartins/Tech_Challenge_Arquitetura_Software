@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.core.domain.base.utilitarios;
 
-import com.techchallenge.devnet.core.application.ports.entrada.IEmailServicePort;
+import com.techchallenge.devnet.core.application.ports.entrada.email.IEmailEnviarServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteConsultarPorCpfRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.produto.IProdutoConsultarPorIdRepositoryPort;
@@ -28,7 +28,7 @@ public final class UtilsImpl implements IUtils {
   private IProdutoConsultarPorIdRepositoryPort produtoConsultarPorIdRepository;
 
   @Autowired
-  private IEmailServicePort.EnviarService emailEnviarService;
+  private IEmailEnviarServicePort emailEnviarService;
 
   @Override
   public PedidoModel confirmarCliente(PedidoModel pedidoModel) {

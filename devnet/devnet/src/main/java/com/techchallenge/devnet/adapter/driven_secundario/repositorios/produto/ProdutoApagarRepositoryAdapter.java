@@ -1,8 +1,7 @@
-package com.techchallenge.devnet.adapter.driven_secundario.repositorios;
+package com.techchallenge.devnet.adapter.driven_secundario.repositorios.produto;
 
 import com.techchallenge.devnet.adapter.driven_secundario.conversores_saida.IMapperSaida;
 import com.techchallenge.devnet.adapter.driven_secundario.entities.ProdutoEntity;
-import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.ProdutoRepositoryJpa;
 import com.techchallenge.devnet.core.application.ports.saida.produto.IProdutoApagarRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.ProdutoModel;
 import org.springframework.beans.factory.annotation.Autowired;

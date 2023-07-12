@@ -1,7 +1,6 @@
 package com.techchallenge.devnet.adapter.driven_secundario.repositorios.produto;
 
 import com.techchallenge.devnet.adapter.driven_secundario.conversores_saida.IMapperSaida;
-import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.ProdutoRepositoryJpa;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.filtros.ProdutoFiltroDto;
 import com.techchallenge.devnet.core.application.ports.saida.produto.IProdutoPesquisarRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.ProdutoModel;

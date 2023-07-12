@@ -1,9 +1,9 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.core.application.ports.entrada.IEmailServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.IEmailRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.entrada.email.IEmailEnviarServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteConsultarPorIdRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.email.IEmailSalvarRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ClienteNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
@@ -22,7 +22,7 @@ import java.util.Optional;
 
 @Slf4j
 @Service
-public class EmailPostService implements IEmailServicePort.EnviarService {
+public class EmailEnviarService implements IEmailEnviarServicePort {
 
   @Autowired
   private IPedidoRepositoryPort.GetRepository pedidoGetRepository;
@@ -34,7 +34,7 @@ public class EmailPostService implements IEmailServicePort.EnviarService {
   private JavaMailSender javaMailSender;
 
   @Autowired
-  private IEmailRepositoryPort.PostRepository emailPostRepository;
+  private IEmailSalvarRepositoryPort emailSalvarRepository;
 
   @Override
   public EmailModel enviar(EmailModel emailModel) {
@@ -58,7 +58,7 @@ public class EmailPostService implements IEmailServicePort.EnviarService {
           log.info(MensagemPadrao.EMAIL_NAO_ENVIADO_POR_EXCECAO);
           email.setStatusEmail(StatusEmailEnum.ERROR);
         } finally {
-          this.emailPostRepository.salvar(email);
+          this.emailSalvarRepository.salvar(email);
         }
 
         return email;
