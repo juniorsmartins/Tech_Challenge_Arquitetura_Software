@@ -1,9 +1,8 @@
-package com.techchallenge.devnet.adapter.driven_secundario.repositorios;
+package com.techchallenge.devnet.adapter.driven_secundario.repositorios.produto;
 
 import com.techchallenge.devnet.adapter.driven_secundario.conversores_saida.IMapperSaida;
-import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.ProdutoRepositoryJpa;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.filtros.ProdutoFiltroDto;
-import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.produto.IProdutoPesquisarRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.ProdutoModel;
 import com.techchallenge.devnet.core.domain.objects.filtros.ProdutoFiltro;
 import com.techchallenge.devnet.core.domain.objects.specification.ProdutoSpecification;
@@ -16,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
-public class ProdutoGetRepositoryAdapter implements IProdutoRepositoryPort.GetRepository {
+public class ProdutoPesquisarRepositoryAdapter implements IProdutoPesquisarRepositoryPort {
 
   @Autowired
   private IMapperSaida mapper;
@@ -33,14 +32,6 @@ public class ProdutoGetRepositoryAdapter implements IProdutoRepositoryPort.GetRe
       .map(filtroDto -> this.jpa.findAll(ProdutoSpecification.consultarDinamicamente(filtroDto), paginacao))
       .map(paginaEntity -> this.mapper.converterPaginaOrigemParaPaginaDestino(paginaEntity, ProdutoModel.class))
       .orElseThrow();
-  }
-
-  @Transactional(readOnly = true)
-  @Override
-  public Optional<ProdutoModel> consultarPorId(final Long id) {
-
-    return this.jpa.findById(id)
-      .map(entity -> this.mapper.converterOrigemParaDestino(entity, ProdutoModel.class));
   }
 }
 

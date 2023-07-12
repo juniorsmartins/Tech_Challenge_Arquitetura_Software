@@ -1,9 +1,9 @@
 package com.techchallenge.devnet.core.domain.base.utilitarios;
 
-import com.techchallenge.devnet.core.application.ports.entrada.IEmailServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.entrada.email.IEmailEnviarServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteConsultarPorCpfRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteConsultarPorIdRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.produto.IProdutoConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ClienteNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
@@ -25,10 +25,10 @@ public final class UtilsImpl implements IUtils {
   private IClienteConsultarPorCpfRepositoryPort clienteConsultarPorCpfRepository;
 
   @Autowired
-  private IProdutoRepositoryPort.GetRepository produtoGetRepository;
+  private IProdutoConsultarPorIdRepositoryPort produtoConsultarPorIdRepository;
 
   @Autowired
-  private IEmailServicePort.EnviarService emailEnviarService;
+  private IEmailEnviarServicePort emailEnviarService;
 
   @Override
   public PedidoModel confirmarCliente(PedidoModel pedidoModel) {
@@ -55,7 +55,7 @@ public final class UtilsImpl implements IUtils {
 
     pedidoModel.getItensPedido().forEach(item -> {
       var idProduto = item.getProduto().getId();
-      var produto = this.produtoGetRepository.consultarPorId(idProduto)
+      var produto = this.produtoConsultarPorIdRepository.consultarPorId(idProduto)
         .orElseThrow(() -> new ProdutoNaoEncontradoException(idProduto));
       item.setProduto(produto);
     });

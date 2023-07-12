@@ -1,7 +1,6 @@
 package com.techchallenge.devnet.adapter.driven_secundario.repositorios.cliente;
 
 import com.techchallenge.devnet.adapter.driven_secundario.conversores_saida.IMapperSaida;
-import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.ClienteRepositoryJpa;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.filtros.ClienteFiltroDto;
 import com.techchallenge.devnet.core.application.ports.saida.cliente.IClientePesquisarRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.ClienteModel;

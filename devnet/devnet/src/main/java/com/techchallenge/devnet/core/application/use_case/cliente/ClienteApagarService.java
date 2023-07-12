@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.core.application.use_case;
+package com.techchallenge.devnet.core.application.use_case.cliente;
 
 import com.techchallenge.devnet.core.application.ports.entrada.cliente.IClienteApagarServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;

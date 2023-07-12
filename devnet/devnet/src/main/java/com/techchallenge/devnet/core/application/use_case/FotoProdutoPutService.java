@@ -1,9 +1,9 @@
 package com.techchallenge.devnet.core.application.use_case;
 
+import com.techchallenge.devnet.core.application.ports.entrada.IArmazemFotoProdutoServicePort;
 import com.techchallenge.devnet.core.application.ports.entrada.IFotoProdutoServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IFotoProdutoRepositoryPort;
-import com.techchallenge.devnet.core.application.ports.entrada.IArmazemFotoProdutoServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.IProdutoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.produto.IProdutoConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.models.FotoProdutoArquivo;
 import com.techchallenge.devnet.core.domain.models.FotoProdutoModel;
@@ -21,7 +21,7 @@ public class FotoProdutoPutService implements IFotoProdutoServicePort.PutService
   public static String diretorioDeFotos = "D:\\AreaEstudo\\PosTech-Fiap-Alura\\ArquiteturaDeSoftware\\TechChallenge-Soat\\devnet\\devnet\\foto_store\\";
 
   @Autowired
-  private IProdutoRepositoryPort.GetRepository produtoGetRepository;
+  private IProdutoConsultarPorIdRepositoryPort produtoConsultarPorIdRepository;
 
   @Autowired
   private IFotoProdutoRepositoryPort.PostRepository fotoProdutoPostRepository;
@@ -32,7 +32,7 @@ public class FotoProdutoPutService implements IFotoProdutoServicePort.PutService
   @Override
   public FotoProdutoModel inserirFotoNoProduto(final Long id, final FotoProdutoArquivo fotoProdutoArquivo) throws IOException {
 
-    var produtoModel = this.produtoGetRepository.consultarPorId(id)
+    var produtoModel = this.produtoConsultarPorIdRepository.consultarPorId(id)
       .orElseThrow(() -> new ProdutoNaoEncontradoException(id));
 
     MultipartFile arquivoFoto = fotoProdutoArquivo.getFoto();
