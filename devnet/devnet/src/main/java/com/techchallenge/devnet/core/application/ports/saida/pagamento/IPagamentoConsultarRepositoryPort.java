@@ -2,8 +2,10 @@ package com.techchallenge.devnet.core.application.ports.saida.pagamento;
 
 import com.techchallenge.devnet.core.domain.models.PagamentoModel;
 
-public interface IPagamentoSalvarRepositoryPort {
+import java.util.Optional;
 
-  PagamentoModel salvar(PagamentoModel pagamentoModel);
+public interface IPagamentoConsultarRepositoryPort {
+
+  Optional<PagamentoModel> consultarPorId(Long id);
 }
 

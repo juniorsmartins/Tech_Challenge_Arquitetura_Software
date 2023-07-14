@@ -17,10 +17,12 @@ public interface IPagamentoControllerPort {
     ResponseEntity<PagamentoDtoResponse> verificarStatusNoGateway(Long idPedido);
   }
 
-  interface GetController {
+  interface PesquisarController {
     @GetMapping
     ResponseEntity<Page<PagamentoDtoResponse>> pesquisar(PagamentoFiltroDto pagamentoFiltroDto, Pageable paginacao);
+  }
 
+  interface BuscarQrCodeController {
     @GetMapping(path = "/{id}", produces = MediaType.IMAGE_PNG_VALUE)
     ResponseEntity<InputStreamResource> buscarQrCodePorId(Long id);
   }

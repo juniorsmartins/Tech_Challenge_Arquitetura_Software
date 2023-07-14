@@ -1,11 +1,9 @@
-package com.techchallenge.devnet.core.application.ports.entrada;
+package com.techchallenge.devnet.core.application.ports.entrada.pagamento;
 
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 
-public interface IPagamentoServicePort {
+public interface IPagamentoCadastrarServicePort {
 
-  interface PostService {
-    PedidoModel iniciarCobrancaDePagamento(PedidoModel pedidoModel);
-  }
+  PedidoModel iniciarCobrancaDePagamento(PedidoModel pedidoModel);
 }
 

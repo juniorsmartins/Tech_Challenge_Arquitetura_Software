@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa;
+package com.techchallenge.devnet.adapter.driven_secundario.repositorios.pagamento;
 
 import com.techchallenge.devnet.adapter.driven_secundario.entities.PagamentoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

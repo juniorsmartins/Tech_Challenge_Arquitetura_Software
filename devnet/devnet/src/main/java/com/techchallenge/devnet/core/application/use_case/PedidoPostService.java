@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.core.application.ports.entrada.IPagamentoServicePort;
+import com.techchallenge.devnet.core.application.ports.entrada.pagamento.IPagamentoCadastrarServicePort;
 import com.techchallenge.devnet.core.application.ports.entrada.IPedidoServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.utilitarios.IUtils;
@@ -22,7 +22,7 @@ public class PedidoPostService implements IPedidoServicePort.PostService {
   private IPedidoRepositoryPort.PostRepository pedidoPostRepository;
 
   @Autowired
-  private IPagamentoServicePort.PostService pagamentoPostService;
+  private IPagamentoCadastrarServicePort pagamentoPostService;
 
   @Transactional
   @Override

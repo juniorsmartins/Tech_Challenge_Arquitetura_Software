@@ -4,7 +4,7 @@ import com.techchallenge.devnet.DevnetApplication;
 import com.techchallenge.devnet.adapter.driven_secundario.entities.PagamentoEntity;
 import com.techchallenge.devnet.adapter.driven_secundario.entities.PedidoEntity;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.email.EmailRepositoryJpa;
-import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.PagamentoRepositoryJpa;
+import com.techchallenge.devnet.adapter.driven_secundario.repositorios.pagamento.PagamentoRepositoryJpa;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.PedidoRepositoryJpa;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.PedidoDtoId;
 import com.techchallenge.devnet.core.domain.models.enums.FormaPagamentoEnum;
