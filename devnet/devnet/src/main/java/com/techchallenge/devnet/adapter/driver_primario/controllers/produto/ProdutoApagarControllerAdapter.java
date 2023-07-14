@@ -1,5 +1,6 @@
-package com.techchallenge.devnet.adapter.driver_primario.controllers;
+package com.techchallenge.devnet.adapter.driver_primario.controllers.produto;
 
+import com.techchallenge.devnet.adapter.driver_primario.controllers.IProdutoControllerPort;
 import com.techchallenge.devnet.core.application.ports.entrada.produto.IProdutoApagarServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import io.swagger.v3.oas.annotations.Operation;
