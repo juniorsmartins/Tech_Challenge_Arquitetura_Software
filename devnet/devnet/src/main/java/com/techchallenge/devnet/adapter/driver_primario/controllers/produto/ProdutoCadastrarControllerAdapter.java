@@ -1,5 +1,6 @@
-package com.techchallenge.devnet.adapter.driver_primario.controllers;
+package com.techchallenge.devnet.adapter.driver_primario.controllers.produto;
 
+import com.techchallenge.devnet.adapter.driver_primario.controllers.IProdutoControllerPort;
 import com.techchallenge.devnet.adapter.driver_primario.conversores_entrada.IMapperEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ProdutoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ProdutoDtoResponse;
