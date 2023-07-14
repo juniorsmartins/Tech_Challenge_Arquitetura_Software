@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.core.application.ports.entrada.IPagamentoServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.IGatewayPagamentoPort;
+import com.techchallenge.devnet.core.application.ports.entrada.pagamento.IPagamentoAtualizarServicePort;
+import com.techchallenge.devnet.core.application.ports.saida.pagamento.IGatewayPagamentoPort;
 import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
-public class PagamentoPutService implements IPagamentoServicePort.PutService {
+public class PagamentoAtualizarService implements IPagamentoAtualizarServicePort {
 
   @Autowired
   private IUtils utils;
@@ -30,7 +30,7 @@ public class PagamentoPutService implements IPagamentoServicePort.PutService {
   private IPedidoRepositoryPort.GetRepository pedidoGetRepository;
 
   @Autowired
-  private IGatewayPagamentoPort.GetGateway gatewayPagamento;
+  private IGatewayPagamentoPort gatewayPagamento;
 
   @Transactional
   @Override

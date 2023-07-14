@@ -1,10 +1,10 @@
 package com.techchallenge.devnet.adapter.driven_secundario.gateways;
 
-import com.techchallenge.devnet.core.application.ports.saida.IGatewayPagamentoPort;
+import com.techchallenge.devnet.core.application.ports.saida.pagamento.IGatewayPagamentoPort;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GatewayPagamentoAdapter implements IGatewayPagamentoPort.GetGateway {
+public class GatewayPagamentoAdapter implements IGatewayPagamentoPort {
 
   @Override
   public Boolean verificarStatusNoGateway(final Long idPedido) {

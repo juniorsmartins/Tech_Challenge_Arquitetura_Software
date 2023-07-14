@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.core.application.use_case;
 
 import com.google.zxing.WriterException;
-import com.techchallenge.devnet.core.application.ports.entrada.IPagamentoServicePort;
+import com.techchallenge.devnet.core.application.ports.entrada.pagamento.IPagamentoCadastrarServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IPagamentoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.utilitarios.IQRCodeGenerator;
 import com.techchallenge.devnet.core.domain.models.PagamentoModel;
@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 @Service
-public class PagamentoPostService implements IPagamentoServicePort.PostService {
+public class PagamentoPostService implements IPagamentoCadastrarServicePort.PostService {
 
   @Autowired
   private IQRCodeGenerator qrCodeGenerator;
