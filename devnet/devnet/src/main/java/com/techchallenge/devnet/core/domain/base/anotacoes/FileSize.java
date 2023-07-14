@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = {FileSizeValidator.class})
 public @interface FileSize {
 
-  String message() default "tamanho do arquivo inválido. Excede o limite permitido.";
+  String message() default "Tamanho do arquivo inválido. Excede o limite permitido.";
 
   Class<?>[] groups() default {};
 
