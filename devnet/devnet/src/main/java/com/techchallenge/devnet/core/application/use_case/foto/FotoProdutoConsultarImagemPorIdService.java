@@ -1,8 +1,8 @@
-package com.techchallenge.devnet.core.application.use_case;
+package com.techchallenge.devnet.core.application.use_case.foto;
 
-import com.techchallenge.devnet.core.application.ports.entrada.IFotoProdutoServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.IFotoProdutoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.entrada.foto.IFotoProdutoConsultarImagemPorIdServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.foto.IArmazemFotoProdutoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.FotoProdutoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.models.FotoProdutoModel;
@@ -19,30 +19,19 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class FotoProdutoGetService implements IFotoProdutoServicePort.GetService {
+public class FotoProdutoConsultarImagemPorIdService implements IFotoProdutoConsultarImagemPorIdServicePort {
 
   @Autowired
-  private IFotoProdutoRepositoryPort.GetRepository fotoProdutoGetRepository;
+  private IFotoProdutoConsultarPorIdRepositoryPort fotoProdutoConsultarPorIdRepository;
 
   @Autowired
   private IArmazemFotoProdutoRepositoryPort armazemFotoProdutoService;
 
   @Transactional(readOnly = true)
   @Override
-  public FotoProdutoModel consultarPorId(final Long id) {
-
-    return this.fotoProdutoGetRepository.consultarPorId(id)
-      .orElseThrow(() -> {
-        log.info(String.format(MensagemPadrao.FOTO_PRODUTO_NAO_ENCONTRADO, id));
-        throw new FotoProdutoNaoEncontradoException(id);
-      });
-  }
-
-  @Transactional(readOnly = true)
-  @Override
   public ImagemModel consultarImagemPorId(final Long id, final String acceptHeader) {
 
-    return this.fotoProdutoGetRepository.consultarPorId(id)
+    return this.fotoProdutoConsultarPorIdRepository.consultarPorId(id)
       .map(fotoProduto -> {
 
         try {
