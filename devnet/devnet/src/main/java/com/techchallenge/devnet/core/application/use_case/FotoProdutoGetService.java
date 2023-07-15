@@ -2,7 +2,7 @@ package com.techchallenge.devnet.core.application.use_case;
 
 import com.techchallenge.devnet.core.application.ports.entrada.IFotoProdutoServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IFotoProdutoRepositoryPort;
-import com.techchallenge.devnet.core.application.ports.entrada.IArmazemFotoProdutoServicePort;
+import com.techchallenge.devnet.core.application.ports.saida.foto.IArmazemFotoProdutoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.FotoProdutoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.models.FotoProdutoModel;
@@ -25,7 +25,7 @@ public class FotoProdutoGetService implements IFotoProdutoServicePort.GetService
   private IFotoProdutoRepositoryPort.GetRepository fotoProdutoGetRepository;
 
   @Autowired
-  private IArmazemFotoProdutoServicePort armazemFotoProdutoService;
+  private IArmazemFotoProdutoRepositoryPort armazemFotoProdutoService;
 
   @Transactional(readOnly = true)
   @Override

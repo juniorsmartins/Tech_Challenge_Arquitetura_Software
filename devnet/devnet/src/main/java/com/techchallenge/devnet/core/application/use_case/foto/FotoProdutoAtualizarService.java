@@ -1,8 +1,8 @@
-package com.techchallenge.devnet.core.application.use_case;
+package com.techchallenge.devnet.core.application.use_case.foto;
 
-import com.techchallenge.devnet.core.application.ports.entrada.IArmazemFotoProdutoServicePort;
-import com.techchallenge.devnet.core.application.ports.entrada.IFotoProdutoServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.IFotoProdutoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.foto.IArmazemFotoProdutoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.entrada.foto.IFotoProdutoAtualizarServicePort;
+import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoSalvarRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.produto.IProdutoConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.models.FotoProdutoArquivo;
@@ -16,7 +16,7 @@ import java.io.IOException;
 
 @Slf4j
 @Service
-public class FotoProdutoPutService implements IFotoProdutoServicePort.PutService {
+public class FotoProdutoAtualizarService implements IFotoProdutoAtualizarServicePort {
 
   public static String diretorioDeFotos = "D:\\AreaEstudo\\PosTech-Fiap-Alura\\ArquiteturaDeSoftware\\TechChallenge-Soat\\devnet\\devnet\\foto_store\\";
 
@@ -24,10 +24,10 @@ public class FotoProdutoPutService implements IFotoProdutoServicePort.PutService
   private IProdutoConsultarPorIdRepositoryPort produtoConsultarPorIdRepository;
 
   @Autowired
-  private IFotoProdutoRepositoryPort.PostRepository fotoProdutoPostRepository;
+  private IFotoProdutoSalvarRepositoryPort fotoProdutoPostRepository;
 
   @Autowired
-  private IArmazemFotoProdutoServicePort armazemFotoProdutoService;
+  private IArmazemFotoProdutoRepositoryPort armazemFotoProdutoService;
 
   @Override
   public FotoProdutoModel inserirFotoNoProduto(final Long id, final FotoProdutoArquivo fotoProdutoArquivo) throws IOException {

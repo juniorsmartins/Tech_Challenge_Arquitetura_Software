@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.adapter.driven_secundario.repositorios;
 
 import com.techchallenge.devnet.adapter.driven_secundario.conversores_saida.IMapperSaida;
-import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.FotoProdutoRepositoryJpa;
+import com.techchallenge.devnet.adapter.driven_secundario.repositorios.foto.FotoProdutoRepositoryJpa;
 import com.techchallenge.devnet.core.application.ports.saida.IFotoProdutoRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.FotoProdutoModel;
 import org.springframework.beans.factory.annotation.Autowired;

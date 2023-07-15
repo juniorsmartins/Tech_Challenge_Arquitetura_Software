@@ -1,9 +1,10 @@
-package com.techchallenge.devnet.adapter.driver_primario.controllers;
+package com.techchallenge.devnet.adapter.driver_primario.controllers.foto;
 
+import com.techchallenge.devnet.adapter.driver_primario.controllers.IFotoProdutoControllerPort;
 import com.techchallenge.devnet.adapter.driver_primario.conversores_entrada.IMapperEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.FotoProdutoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.FotoProdutoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.IFotoProdutoServicePort;
+import com.techchallenge.devnet.core.application.ports.entrada.foto.IFotoProdutoAtualizarServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.core.domain.models.FotoProdutoArquivo;
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,13 +27,13 @@ import java.util.Optional;
 @Tag(name = "FotoProdutoPutControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/fotos")
-public final class FotoProdutoPutControllerAdapter implements IFotoProdutoControllerPort.PutController {
+public final class FotoProdutoAtualizarControllerAdapter implements IFotoProdutoControllerPort.PutController {
 
   @Autowired
   private IMapperEntrada mapper;
 
   @Autowired
-  private IFotoProdutoServicePort.PutService service;
+  private IFotoProdutoAtualizarServicePort service;
 
   @Operation(summary = "Atualizar Cliente", description = "Este recurso destina-se a atualizar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {
