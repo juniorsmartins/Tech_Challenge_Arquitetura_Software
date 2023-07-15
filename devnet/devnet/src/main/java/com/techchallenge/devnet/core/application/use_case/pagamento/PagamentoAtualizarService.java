@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.core.application.use_case;
+package com.techchallenge.devnet.core.application.use_case.pagamento;
 
 import com.techchallenge.devnet.core.application.ports.entrada.pagamento.IPagamentoAtualizarServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.pagamento.IGatewayPagamentoPort;

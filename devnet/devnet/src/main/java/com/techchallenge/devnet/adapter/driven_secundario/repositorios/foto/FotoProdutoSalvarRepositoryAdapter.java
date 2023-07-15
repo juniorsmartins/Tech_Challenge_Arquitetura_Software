@@ -64,5 +64,10 @@ public class FotoProdutoSalvarRepositoryAdapter implements IFotoProdutoSalvarRep
 
     return fotoProdutoModelSalvo;
   }
+
+  @Override
+  public void flush() {
+    this.jpa.flush();
+  }
 }
 

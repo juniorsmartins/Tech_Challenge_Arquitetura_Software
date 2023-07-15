@@ -16,10 +16,12 @@ public interface IFotoProdutoControllerPort {
     ResponseEntity<FotoProdutoDtoResponse> inserirFotoNoProduto(Long produtoId, FotoProdutoDtoRequest fotoProdutoDtoRequest);
   }
 
-  interface GetController {
+  interface ConsultarPorIdController {
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<FotoProdutoDtoResponse> consultarPorId(Long id);
+  }
 
+  interface ConsultarImagemPorIdController {
     @GetMapping(path = "/{id}")
     ResponseEntity<InputStreamResource> consultarImagemPorId(Long id, String acceptHeader);
   }

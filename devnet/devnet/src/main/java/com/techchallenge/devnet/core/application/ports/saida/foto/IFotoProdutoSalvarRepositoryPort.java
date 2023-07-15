@@ -7,5 +7,7 @@ import java.io.InputStream;
 public interface IFotoProdutoSalvarRepositoryPort {
 
   FotoProdutoModel salvar(FotoProdutoModel fotoProdutoModel, InputStream dadosArquivo);
+
+  void flush();
 }
 
