@@ -25,7 +25,7 @@ import java.util.Optional;
 @Tag(name = "FotoProdutoGetControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/fotos")
-public final class FotoProdutoGetControllerAdapter implements IFotoProdutoControllerPort.GetController {
+public final class FotoProdutoGetControllerAdapter implements IFotoProdutoControllerPort.ConsultarPorIdController {
 
   @Autowired
   private IMapperEntrada mapper;

@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.core.application.ports.entrada.IFotoProdutoServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.IFotoProdutoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.entrada.foto.IFotoProdutoApagarServicePort;
+import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoApagarRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.foto.IArmazemFotoProdutoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.FotoProdutoNaoEncontradoException;
@@ -13,16 +13,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
-public class FotoProdutoDeleteService implements IFotoProdutoServicePort.DeleteService {
+public class FotoProdutoDeleteService implements IFotoProdutoApagarServicePort.DeleteService {
 
   @Autowired
-  private IFotoProdutoRepositoryPort.GetRepository fotoProdutoGetRepository;
+  private IFotoProdutoApagarRepositoryPort.GetRepository fotoProdutoGetRepository;
 
   @Autowired
-  private IFotoProdutoRepositoryPort.PostRepository fotoProdutoPostRepository;
+  private IFotoProdutoApagarRepositoryPort.PostRepository fotoProdutoPostRepository;
 
   @Autowired
-  private IFotoProdutoRepositoryPort.DeleteRepository fotoProdutoDeleteRepository;
+  private IFotoProdutoApagarRepositoryPort.DeleteRepository fotoProdutoDeleteRepository;
 
   @Autowired
   private IArmazemFotoProdutoRepositoryPort armazemFotoProdutoService;
