@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Builder
 @NoArgsConstructor
@@ -26,6 +27,8 @@ public final class PedidoModel implements Serializable {
   public static final long serialVersionUID = 1L;
 
   private Long id;
+
+  private UUID codigo = UUID.randomUUID();
 
   private StatusPedidoEnum statusPedido;
 

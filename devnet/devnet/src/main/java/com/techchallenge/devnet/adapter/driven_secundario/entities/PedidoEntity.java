@@ -29,6 +29,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "pedidos")
@@ -47,6 +48,9 @@ public final class PedidoEntity extends AuditoriaDataJpa implements Serializable
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
   private Long id;
+
+  @Column(name = "codigo", unique = true, nullable = false)
+  private UUID codigo;
 
   @Enumerated(EnumType.STRING)
   @Column(name = "status_pedido", nullable = false)

@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -21,6 +22,8 @@ public final class PedidoDtoResponse implements Serializable {
   private static final long serialVersionUID = 1L;
 
   private Long id;
+
+  private UUID codigo;
 
   private StatusPedidoEnum statusPedido;
 
