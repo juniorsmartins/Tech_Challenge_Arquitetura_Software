@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.core.application.use_case;
+package com.techchallenge.devnet.core.application.use_case.email;
 
 import com.techchallenge.devnet.core.application.ports.entrada.email.IEmailEnviarServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;

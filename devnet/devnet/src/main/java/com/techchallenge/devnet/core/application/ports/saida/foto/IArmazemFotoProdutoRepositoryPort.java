@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.core.application.ports.entrada;
+package com.techchallenge.devnet.core.application.ports.saida.foto;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 
-public interface IArmazemFotoProdutoServicePort {
+public interface IArmazemFotoProdutoRepositoryPort {
 
   void armazenar(NovaFoto novaFoto);
 

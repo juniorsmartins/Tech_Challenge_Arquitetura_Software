@@ -1,11 +1,10 @@
-package com.techchallenge.devnet.adapter.driven_secundario.repositorios;
+package com.techchallenge.devnet.adapter.driven_secundario.repositorios.foto;
 
 import com.techchallenge.devnet.adapter.driven_secundario.conversores_saida.IMapperSaida;
 import com.techchallenge.devnet.adapter.driven_secundario.entities.FotoProdutoEntity;
-import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.FotoProdutoRepositoryJpa;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.produto.ProdutoRepositoryJpa;
-import com.techchallenge.devnet.core.application.ports.saida.IFotoProdutoRepositoryPort;
-import com.techchallenge.devnet.core.application.ports.entrada.IArmazemFotoProdutoServicePort;
+import com.techchallenge.devnet.core.application.ports.saida.foto.IArmazemFotoProdutoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoSalvarRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.models.FotoProdutoModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ import java.io.InputStream;
 import java.util.Optional;
 
 @Repository
-public class FotoProdutoPostRepositoryAdapter implements IFotoProdutoRepositoryPort.PostRepository {
+public class FotoProdutoSalvarRepositoryAdapter implements IFotoProdutoSalvarRepositoryPort {
 
   @Autowired
   private IMapperSaida mapper;
@@ -28,7 +27,7 @@ public class FotoProdutoPostRepositoryAdapter implements IFotoProdutoRepositoryP
   private ProdutoRepositoryJpa produtoJpa;
 
   @Autowired
-  private IArmazemFotoProdutoServicePort armazemFotoProdutoService;
+  private IArmazemFotoProdutoRepositoryPort armazemFotoProdutoService;
 
   @Transactional
   @Override
@@ -56,7 +55,7 @@ public class FotoProdutoPostRepositoryAdapter implements IFotoProdutoRepositoryP
       .map(entity -> this.mapper.converterOrigemParaDestino(entity, FotoProdutoModel.class))
       .orElseThrow();
 
-    var novaFoto = IArmazemFotoProdutoServicePort.NovaFoto.builder()
+    var novaFoto = IArmazemFotoProdutoRepositoryPort.NovaFoto.builder()
       .nomeArquivo(fotoProdutoModelSalvo.getNome())
       .inputStream(dadosArquivo)
       .build();
@@ -71,3 +70,4 @@ public class FotoProdutoPostRepositoryAdapter implements IFotoProdutoRepositoryP
     this.jpa.flush();
   }
 }
+
