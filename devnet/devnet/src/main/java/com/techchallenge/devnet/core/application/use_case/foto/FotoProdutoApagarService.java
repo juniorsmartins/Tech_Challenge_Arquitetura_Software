@@ -1,8 +1,10 @@
-package com.techchallenge.devnet.core.application.use_case;
+package com.techchallenge.devnet.core.application.use_case.foto;
 
 import com.techchallenge.devnet.core.application.ports.entrada.foto.IFotoProdutoApagarServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoApagarRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.foto.IArmazemFotoProdutoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoApagarRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoConsultarPorIdRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoSalvarRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.FotoProdutoNaoEncontradoException;
 import lombok.extern.slf4j.Slf4j;
@@ -13,16 +15,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
-public class FotoProdutoDeleteService implements IFotoProdutoApagarServicePort.DeleteService {
+public class FotoProdutoApagarService implements IFotoProdutoApagarServicePort {
 
   @Autowired
-  private IFotoProdutoApagarRepositoryPort.GetRepository fotoProdutoGetRepository;
+  private IFotoProdutoConsultarPorIdRepositoryPort fotoProdutoConsultarPorIdRepository;
 
   @Autowired
-  private IFotoProdutoApagarRepositoryPort.PostRepository fotoProdutoPostRepository;
+  private IFotoProdutoSalvarRepositoryPort fotoProdutoSalvarRepository;
 
   @Autowired
-  private IFotoProdutoApagarRepositoryPort.DeleteRepository fotoProdutoDeleteRepository;
+  private IFotoProdutoApagarRepositoryPort fotoProdutoApagarRepository;
 
   @Autowired
   private IArmazemFotoProdutoRepositoryPort armazemFotoProdutoService;
@@ -31,11 +33,11 @@ public class FotoProdutoDeleteService implements IFotoProdutoApagarServicePort.D
   @Override
   public void deletarPorId(final Long id) {
 
-    this.fotoProdutoGetRepository.consultarPorId(id)
+    this.fotoProdutoConsultarPorIdRepository.consultarPorId(id)
       .map(model -> {
 
-        this.fotoProdutoDeleteRepository.deletar(model);
-        this.fotoProdutoPostRepository.flush();
+        this.fotoProdutoApagarRepository.deletar(model);
+        this.fotoProdutoSalvarRepository.flush();
         this.armazemFotoProdutoService.remover(model.getNome());
 
         return model;

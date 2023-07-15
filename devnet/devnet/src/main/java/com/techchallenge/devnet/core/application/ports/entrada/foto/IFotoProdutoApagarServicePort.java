@@ -1,18 +1,7 @@
-package com.techchallenge.devnet.core.application.ports.entrada;
+package com.techchallenge.devnet.core.application.ports.entrada.foto;
 
-import com.techchallenge.devnet.core.domain.models.FotoProdutoModel;
-import com.techchallenge.devnet.core.domain.models.ImagemModel;
+public interface IFotoProdutoApagarServicePort {
 
-public interface IFotoProdutoServicePort {
-
-  interface GetService {
-    FotoProdutoModel consultarPorId(Long id);
-
-    ImagemModel consultarImagemPorId(Long id, String acceptHeader);
-  }
-
-  interface DeleteService {
-    void deletarPorId(Long id);
-  }
+  void deletarPorId(Long id);
 }
 
