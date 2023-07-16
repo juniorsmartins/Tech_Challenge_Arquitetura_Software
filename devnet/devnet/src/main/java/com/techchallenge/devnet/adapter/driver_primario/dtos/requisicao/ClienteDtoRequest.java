@@ -1,5 +1,6 @@
 package com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,6 +31,7 @@ public final class ClienteDtoRequest implements Serializable {
   private String cpf;
 
   @NotBlank
+  @Email
   @Length(max = 100)
   private String email;
 }
