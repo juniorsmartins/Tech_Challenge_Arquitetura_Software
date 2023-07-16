@@ -33,6 +33,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @SpringBootTest(classes = DevnetApplication.class)
 @AutoConfigureMockMvc
@@ -61,6 +62,7 @@ class EmailPostControllerAdapterIntegrationTest {
   @BeforeEach
   void criadorDeCenarios() {
     pedidoEntity = PedidoEntity.builder()
+      .codigo(UUID.randomUUID())
       .statusPedido(StatusPedidoEnum.RECEBIDO)
       .formaPagamento(FormaPagamentoEnum.PIX)
       .precoTotal(BigDecimal.valueOf(50))
