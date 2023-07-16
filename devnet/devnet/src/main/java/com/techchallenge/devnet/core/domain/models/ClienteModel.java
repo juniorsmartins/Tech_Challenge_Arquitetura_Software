@@ -1,6 +1,7 @@
 package com.techchallenge.devnet.core.domain.models;
 
 import com.techchallenge.devnet.core.domain.base.value_objects.CadastroPessoaFisica;
+import com.techchallenge.devnet.core.domain.base.value_objects.CorreioEletronico;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -27,7 +28,7 @@ public final class ClienteModel implements Serializable {
 
   private CadastroPessoaFisica cpf;
 
-  private String email;
+  private CorreioEletronico email;
 
   private OffsetDateTime dataHoraCadastro;
 
@@ -39,6 +40,14 @@ public final class ClienteModel implements Serializable {
 
   public String getCpf() {
     return this.cpf.getCpf();
+  }
+
+  public void setEmail(String email) {
+    this.email = new CorreioEletronico(email);
+  }
+
+  public String getEmail() {
+    return this.email.getEmail();
   }
 }
 
