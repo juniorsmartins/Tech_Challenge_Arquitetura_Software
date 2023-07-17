@@ -2,7 +2,7 @@ package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
 import com.techchallenge.devnet.DevnetApplication;
 import com.techchallenge.devnet.adapter.driven_secundario.entities.ClienteEntity;
-import com.techchallenge.devnet.adapter.driven_secundario.repositorios.cliente.ClienteRepositoryJpa;
+import com.techchallenge.devnet.adapter.driven_secundario.gateways.cliente.ClienteRepositoryJpa;
 import com.techchallenge.devnet.utils.CriadorDeObjetos;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;

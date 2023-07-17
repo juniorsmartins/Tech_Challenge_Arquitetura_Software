@@ -2,7 +2,7 @@ package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
 import com.techchallenge.devnet.DevnetApplication;
 import com.techchallenge.devnet.adapter.driven_secundario.entities.ProdutoEntity;
-import com.techchallenge.devnet.adapter.driven_secundario.repositorios.produto.ProdutoRepositoryJpa;
+import com.techchallenge.devnet.adapter.driven_secundario.gateways.produto.ProdutoRepositoryJpa;
 import com.techchallenge.devnet.utils.CriadorDeObjetos;
 import com.techchallenge.devnet.utils.Utilitarios;
 import org.junit.jupiter.api.AfterEach;
