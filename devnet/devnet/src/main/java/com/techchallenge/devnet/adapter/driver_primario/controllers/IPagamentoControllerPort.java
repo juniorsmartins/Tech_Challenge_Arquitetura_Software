@@ -12,9 +12,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 public interface IPagamentoControllerPort {
 
-  interface PutController {
+  interface AtualizarController {
     @PutMapping(path = "/status/{idPedido}")
     ResponseEntity<PagamentoDtoResponse> verificarStatusNoGateway(Long idPedido);
+  }
+
+  interface NotificacaoPagamento {
+    @PutMapping(path = "{id}")
+    void notificarPagamento(Long id);
   }
 
   interface PesquisarController {
