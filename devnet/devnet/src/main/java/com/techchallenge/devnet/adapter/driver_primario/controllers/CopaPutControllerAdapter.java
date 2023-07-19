@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
-import com.techchallenge.devnet.adapter.driver_primario.conversores_entrada.IMapperEntrada;
+import com.techchallenge.devnet.adapter.driver_primario.adapters.IAdapterEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PedidoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.entrada.ICopaServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
@@ -25,7 +25,7 @@ import java.util.Optional;
 public final class CopaPutControllerAdapter implements ICopaControllerPort.PutController {
 
   @Autowired
-  private IMapperEntrada mapper;
+  private IAdapterEntrada mapper;
 
   @Autowired
   private ICopaServicePort.PutService service;

@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers.cliente;
 
-import com.techchallenge.devnet.adapter.driver_primario.conversores_entrada.IMapperEntrada;
+import com.techchallenge.devnet.adapter.driver_primario.adapters.IAdapterEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.filtros.ClienteFiltroDto;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ClienteDtoResponse;
 import com.techchallenge.devnet.adapter.driver_primario.presenters.IGetPresenter;
@@ -31,7 +31,7 @@ import java.util.Optional;
 public final class ClienteGetController implements IClienteControllerPort.GetController {
 
   @Autowired
-  private IMapperEntrada mapper;
+  private IAdapterEntrada mapper;
 
   @Autowired
   private IClientePesquisarServicePort service;

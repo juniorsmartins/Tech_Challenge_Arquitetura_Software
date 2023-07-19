@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers.foto;
 
-import com.techchallenge.devnet.adapter.driver_primario.conversores_entrada.IMapperEntrada;
+import com.techchallenge.devnet.adapter.driver_primario.adapters.IAdapterEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.FotoProdutoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.FotoProdutoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.entrada.foto.IFotoProdutoAtualizarServicePort;
@@ -29,7 +29,7 @@ import java.util.Optional;
 public final class FotoProdutoAtualizarControllerAdapter implements IFotoProdutoControllerPort.PutController {
 
   @Autowired
-  private IMapperEntrada mapper;
+  private IAdapterEntrada mapper;
 
   @Autowired
   private IFotoProdutoAtualizarServicePort service;

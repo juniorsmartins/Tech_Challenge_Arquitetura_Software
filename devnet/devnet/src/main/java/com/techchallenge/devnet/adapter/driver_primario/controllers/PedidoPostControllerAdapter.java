@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
-import com.techchallenge.devnet.adapter.driver_primario.conversores_entrada.IMapperEntrada;
+import com.techchallenge.devnet.adapter.driver_primario.adapters.IAdapterEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.PedidoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PedidoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.entrada.IPedidoServicePort;
@@ -30,7 +30,7 @@ import java.util.Optional;
 public final class PedidoPostControllerAdapter implements IPedidoControllerPort.PostController {
 
   @Autowired
-  private IMapperEntrada mapper;
+  private IAdapterEntrada mapper;
 
   @Autowired
   private IPedidoServicePort.PostService service;

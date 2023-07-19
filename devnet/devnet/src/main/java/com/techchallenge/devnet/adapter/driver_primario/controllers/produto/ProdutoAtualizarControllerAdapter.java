@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers.produto;
 
-import com.techchallenge.devnet.adapter.driver_primario.conversores_entrada.IMapperEntrada;
+import com.techchallenge.devnet.adapter.driver_primario.adapters.IAdapterEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ProdutoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ProdutoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.entrada.produto.IProdutoAtualizarServicePort;
@@ -30,7 +30,7 @@ import java.util.Optional;
 public final class ProdutoAtualizarControllerAdapter implements IProdutoControllerPort.PutController {
 
   @Autowired
-  private IMapperEntrada mapper;
+  private IAdapterEntrada mapper;
 
   @Autowired
   private IProdutoAtualizarServicePort service;

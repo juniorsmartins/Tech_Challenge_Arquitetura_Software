@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.adapter.driver_primario.conversores_entrada;
+package com.techchallenge.devnet.adapter.driver_primario.adapters;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public final class MapperEntrada implements IMapperEntrada {
+public final class AdapterEntrada implements IAdapterEntrada {
 
   @Autowired
   private ModelMapper modelMapper;
