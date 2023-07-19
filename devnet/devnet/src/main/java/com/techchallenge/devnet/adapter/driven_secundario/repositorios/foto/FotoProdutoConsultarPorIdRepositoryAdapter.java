@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driven_secundario.repositorios.foto;
 
-import com.techchallenge.devnet.adapter.driven_secundario.conversores_saida.IMapperSaida;
+import com.techchallenge.devnet.adapter.driven_secundario.adapters_saida.IAdapterSaida;
 import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.FotoProdutoModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import java.util.Optional;
 public class FotoProdutoConsultarPorIdRepositoryAdapter implements IFotoProdutoConsultarPorIdRepositoryPort {
 
   @Autowired
-  private IMapperSaida mapper;
+  private IAdapterSaida mapper;
 
   @Autowired
   private FotoProdutoRepositoryJpa jpa;

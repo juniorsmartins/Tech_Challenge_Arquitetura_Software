@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers.foto;
 
-import com.techchallenge.devnet.adapter.driver_primario.adapters.IAdapterEntrada;
+import com.techchallenge.devnet.adapter.driver_primario.adapters_entrada.IAdapterEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.FotoProdutoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.entrada.foto.IFotoProdutoConsultarPorIdServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;

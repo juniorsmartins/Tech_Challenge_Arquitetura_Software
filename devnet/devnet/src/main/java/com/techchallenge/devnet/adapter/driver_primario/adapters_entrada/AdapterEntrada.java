@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.adapter.driver_primario.adapters;
+package com.techchallenge.devnet.adapter.driver_primario.adapters_entrada;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

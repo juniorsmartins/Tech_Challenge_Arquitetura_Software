@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driven_secundario.repositorios.foto;
 
-import com.techchallenge.devnet.adapter.driven_secundario.conversores_saida.IMapperSaida;
+import com.techchallenge.devnet.adapter.driven_secundario.adapters_saida.IAdapterSaida;
 import com.techchallenge.devnet.adapter.driven_secundario.entities.FotoProdutoEntity;
 import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoApagarRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.FotoProdutoModel;
@@ -15,7 +15,7 @@ import java.util.Optional;
 public class FotoProdutoApagarRepositoryAdapter implements IFotoProdutoApagarRepositoryPort {
 
   @Autowired
-  private IMapperSaida mapper;
+  private IAdapterSaida mapper;
 
   @Autowired
   private FotoProdutoRepositoryJpa jpa;

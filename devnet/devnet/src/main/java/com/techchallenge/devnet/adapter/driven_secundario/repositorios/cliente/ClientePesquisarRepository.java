@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driven_secundario.repositorios.cliente;
 
-import com.techchallenge.devnet.adapter.driven_secundario.conversores_saida.IMapperSaida;
+import com.techchallenge.devnet.adapter.driven_secundario.adapters_saida.IAdapterSaida;
 import com.techchallenge.devnet.adapter.driver_primario.filtros.ClienteFiltroDto;
 import com.techchallenge.devnet.core.application.ports.saida.cliente.IClientePesquisarRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.ClienteModel;
@@ -15,10 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
-public class ClientePesquisarRepositoryAdapter implements IClientePesquisarRepositoryPort {
+public class ClientePesquisarRepository implements IClientePesquisarRepositoryPort {
 
   @Autowired
-  private IMapperSaida mapper;
+  private IAdapterSaida mapper;
 
   @Autowired
   private ClienteRepositoryJpa jpa;

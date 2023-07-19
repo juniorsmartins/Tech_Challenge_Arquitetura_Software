@@ -1,10 +1,10 @@
-package com.techchallenge.devnet.adapter.driver_primario.adapters;
+package com.techchallenge.devnet.adapter.driven_secundario.adapters_saida;
 
 import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-public interface IAdapterEntrada {
+public interface IAdapterSaida {
 
   <O, D> D converterOrigemParaDestino(O origem, Class<D> destino);
 

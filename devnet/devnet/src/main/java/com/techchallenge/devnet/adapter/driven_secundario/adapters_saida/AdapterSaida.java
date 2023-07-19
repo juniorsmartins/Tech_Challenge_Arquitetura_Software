@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.adapter.driven_secundario.conversores_saida;
+package com.techchallenge.devnet.adapter.driven_secundario.adapters_saida;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public final class MapperSaida implements IMapperSaida {
+public final class AdapterSaida implements IAdapterSaida {
 
   @Autowired
   private ModelMapper modelMapper;

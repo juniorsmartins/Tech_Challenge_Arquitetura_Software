@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers.produto;
 
-import com.techchallenge.devnet.adapter.driver_primario.adapters.IAdapterEntrada;
+import com.techchallenge.devnet.adapter.driver_primario.adapters_entrada.IAdapterEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.filtros.ProdutoFiltroDto;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ProdutoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.entrada.produto.IProdutoPesquisarServicePort;
