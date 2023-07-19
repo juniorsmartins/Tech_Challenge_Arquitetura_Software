@@ -1,6 +1,5 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers.email;
 
-import com.techchallenge.devnet.adapter.driver_primario.controllers.IEmailControllerPort;
 import com.techchallenge.devnet.adapter.driver_primario.conversores_entrada.IMapperEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.EmailDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.EmailDtoResponse;

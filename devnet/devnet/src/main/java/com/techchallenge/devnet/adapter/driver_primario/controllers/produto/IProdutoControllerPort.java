@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.adapter.driver_primario.controllers;
+package com.techchallenge.devnet.adapter.driver_primario.controllers.produto;
 
 import com.techchallenge.devnet.adapter.driver_primario.dtos.filtros.ProdutoFiltroDto;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ProdutoDtoRequest;

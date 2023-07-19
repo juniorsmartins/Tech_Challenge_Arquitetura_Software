@@ -1,6 +1,5 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers.foto;
 
-import com.techchallenge.devnet.adapter.driver_primario.controllers.IFotoProdutoControllerPort;
 import com.techchallenge.devnet.adapter.driver_primario.conversores_entrada.IMapperEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.FotoProdutoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.FotoProdutoDtoResponse;
