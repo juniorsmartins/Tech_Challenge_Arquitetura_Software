@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers.cliente;
 
-import com.techchallenge.devnet.adapter.driver_primario.controllers.IClienteControllerPort;
+import com.techchallenge.devnet.adapter.driver_primario.controllers.IClienteCadastroControllerPort;
 import com.techchallenge.devnet.core.application.ports.entrada.cliente.IClienteApagarServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import io.swagger.v3.oas.annotations.Operation;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "ClienteDeleteController", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/clientes")
-public final class ClienteApagarControllerAdapter implements IClienteControllerPort.DeleteController {
+public final class ClienteApagarControllerAdapter implements IClienteCadastroControllerPort.ApagarController {
 
   @Autowired
   private IClienteApagarServicePort service;

@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers.cliente;
 
-import com.techchallenge.devnet.adapter.driver_primario.controllers.IClienteControllerPort;
+import com.techchallenge.devnet.adapter.driver_primario.controllers.IClienteCadastroControllerPort;
 import com.techchallenge.devnet.adapter.driver_primario.conversores_entrada.IMapperEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.filtros.ClienteFiltroDto;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ClienteDtoResponse;
@@ -29,7 +29,7 @@ import java.util.Optional;
 @Tag(name = "ClienteGetControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/clientes")
-public final class ClientePesquisarControllerAdapter implements IClienteControllerPort.GetController {
+public final class ClientePesquisarControllerAdapter implements IClienteCadastroControllerPort.PesquisarController {
 
   @Autowired
   private IMapperEntrada mapper;

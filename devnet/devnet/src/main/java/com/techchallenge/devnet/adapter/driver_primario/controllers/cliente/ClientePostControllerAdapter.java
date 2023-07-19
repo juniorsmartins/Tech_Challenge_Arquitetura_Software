@@ -1,9 +1,10 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers.cliente;
 
-import com.techchallenge.devnet.adapter.driver_primario.controllers.IClienteControllerPort;
+import com.techchallenge.devnet.adapter.driver_primario.controllers.IClienteCadastroControllerPort;
 import com.techchallenge.devnet.adapter.driver_primario.conversores_entrada.IMapperEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ClienteDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ClienteDtoResponse;
+import com.techchallenge.devnet.adapter.driver_primario.presenters.IPostPresenter;
 import com.techchallenge.devnet.core.application.ports.entrada.cliente.IClienteCadastrarServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.core.domain.models.ClienteModel;
@@ -21,19 +22,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.net.URI;
 import java.util.Optional;
 
 @Tag(name = "ClientePostControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/clientes")
-public final class ClienteCadastrarControllerAdapter implements IClienteControllerPort.PostController {
+public final class ClientePostControllerAdapter implements IClienteCadastroControllerPort.CriarController {
 
   @Autowired
   private IMapperEntrada mapper;
 
   @Autowired
   private IClienteCadastrarServicePort service;
+
+  @Autowired
+  private IPostPresenter presenter;
 
   @Operation(summary = "Cadastrar Cliente", description = "Este recurso destina-se a cadastrar.")
   @ApiResponses(value = {
@@ -45,19 +48,16 @@ public final class ClienteCadastrarControllerAdapter implements IClienteControll
     @ApiResponse(responseCode = "500", description = "Internal Server Error - situação inesperada no servidor.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))})
   })
   @Override
-  public ResponseEntity<ClienteDtoResponse> cadastrar(
+  public ResponseEntity<Object> cadastrar(
     @Parameter(name = "ClienteDtoRequest", description = "Estrutura de dados para transporte de informações de entrada.", required = true)
     @RequestBody @Valid final ClienteDtoRequest dtoRequest) {
 
-    var response = Optional.of(dtoRequest)
+    return Optional.of(dtoRequest)
       .map(dto -> this.mapper.converterOrigemParaDestino(dto, ClienteModel.class))
       .map(this.service::cadastrar)
       .map(model -> this.mapper.converterOrigemParaDestino(model, ClienteDtoResponse.class))
+      .map(dto -> this.presenter.post(dto.getId(), dto))
       .orElseThrow();
-
-    return ResponseEntity
-      .created(URI.create("/api/v1/clientes/" + response.getId()))
-      .body(response);
   }
 }
 

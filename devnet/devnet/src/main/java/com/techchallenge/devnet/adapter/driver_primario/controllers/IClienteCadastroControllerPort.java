@@ -11,24 +11,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
-public interface IClienteControllerPort {
+public interface IClienteCadastroControllerPort {
 
-  interface PostController {
+  interface CriarController {
     @PostMapping
-    ResponseEntity<ClienteDtoResponse> cadastrar(ClienteDtoRequest dtoRequest);
+    ResponseEntity<Object> cadastrar(ClienteDtoRequest dtoRequest);
   }
 
-  interface PutController {
+  interface AtualizarController {
     @PutMapping(path = "/{id}")
     ResponseEntity<ClienteDtoResponse> atualizar(Long id, ClienteDtoRequest dtoRequest);
   }
 
-  interface GetController {
+  interface PesquisarController {
     @GetMapping
     ResponseEntity<Page<ClienteDtoResponse>> pesquisar(ClienteFiltroDto filtro, Pageable paginacao);
   }
 
-  interface DeleteController {
+  interface ApagarController {
     @DeleteMapping(path = "/{id}")
     ResponseEntity<Object> deletarPorId(Long id);
   }
