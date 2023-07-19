@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.adapter.driver_primario.adapters_entrada;
+package com.techchallenge.devnet.adapter.driver_primario.adapter_entrada;
 
 import org.springframework.data.domain.Page;
 

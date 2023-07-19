@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driven_secundario.repositorios.email;
 
-import com.techchallenge.devnet.adapter.driven_secundario.adapters_saida.IAdapterSaida;
+import com.techchallenge.devnet.adapter.driven_secundario.adapter_saida.IAdapterSaida;
 import com.techchallenge.devnet.adapter.driven_secundario.entities.EmailEntity;
 import com.techchallenge.devnet.core.application.ports.saida.email.IEmailSalvarRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.EmailModel;

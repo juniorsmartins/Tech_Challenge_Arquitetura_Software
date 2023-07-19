@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.adapter.driven_secundario.adapters_saida;
+package com.techchallenge.devnet.adapter.driven_secundario.adapter_saida;
 
 import org.springframework.data.domain.Page;
 

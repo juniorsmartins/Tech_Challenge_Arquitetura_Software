@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers.pagamento;
 
-import com.techchallenge.devnet.adapter.driver_primario.adapters_entrada.IAdapterEntrada;
+import com.techchallenge.devnet.adapter.driver_primario.adapter_entrada.IAdapterEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.filtros.PagamentoFiltroDto;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PagamentoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.entrada.pagamento.IPagamentoPesquisarServicePort;

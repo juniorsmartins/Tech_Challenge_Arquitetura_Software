@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driven_secundario.repositorios.foto;
 
-import com.techchallenge.devnet.adapter.driven_secundario.adapters_saida.IAdapterSaida;
+import com.techchallenge.devnet.adapter.driven_secundario.adapter_saida.IAdapterSaida;
 import com.techchallenge.devnet.adapter.driven_secundario.entities.FotoProdutoEntity;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.produto.ProdutoRepositoryJpa;
 import com.techchallenge.devnet.core.application.ports.saida.foto.IArmazemFotoProdutoRepositoryPort;
