@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers.cliente;
 
 import com.techchallenge.devnet.adapter.driver_primario.adapters.IAdapterEntrada;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.filtros.ClienteFiltroDto;
+import com.techchallenge.devnet.adapter.driver_primario.filtros.ClienteFiltroDto;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ClienteDtoResponse;
 import com.techchallenge.devnet.adapter.driver_primario.presenters.IGetPresenter;
 import com.techchallenge.devnet.core.application.ports.entrada.cliente.IClientePesquisarServicePort;

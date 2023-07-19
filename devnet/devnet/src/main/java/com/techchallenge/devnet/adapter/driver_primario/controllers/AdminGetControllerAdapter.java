@@ -4,7 +4,7 @@ import com.techchallenge.devnet.adapter.driver_primario.adapters.IAdapterEntrada
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.IndicadorDtoResponse;
 import com.techchallenge.devnet.core.application.ports.entrada.IAdminService;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.filtros.ClienteFiltroDto;
+import com.techchallenge.devnet.adapter.driver_primario.filtros.ClienteFiltroDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;

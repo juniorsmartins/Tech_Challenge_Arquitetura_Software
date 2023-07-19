@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.adapter.driver_primario.dtos.filtros;
+package com.techchallenge.devnet.adapter.driver_primario.filtros;
 
 import com.techchallenge.devnet.core.domain.models.enums.FormaPagamentoEnum;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;

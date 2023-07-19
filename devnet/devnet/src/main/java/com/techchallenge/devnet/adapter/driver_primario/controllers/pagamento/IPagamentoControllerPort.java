@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers.pagamento;
 
-import com.techchallenge.devnet.adapter.driver_primario.dtos.filtros.PagamentoFiltroDto;
+import com.techchallenge.devnet.adapter.driver_primario.filtros.PagamentoFiltroDto;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PagamentoDtoResponse;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
