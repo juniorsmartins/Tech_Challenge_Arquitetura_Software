@@ -1,6 +1,7 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers.cliente;
 
-import com.techchallenge.devnet.adapter.driver_primario.controllers.IClienteCadastroControllerPort;
+import com.techchallenge.devnet.adapter.driver_primario.controllers.IClienteControllerPort;
+import com.techchallenge.devnet.adapter.driver_primario.presenters.IDeletePresenter;
 import com.techchallenge.devnet.core.application.ports.entrada.cliente.IClienteApagarServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import io.swagger.v3.oas.annotations.Operation;
@@ -19,10 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "ClienteDeleteController", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/clientes")
-public final class ClienteApagarControllerAdapter implements IClienteCadastroControllerPort.ApagarController {
+public final class ClienteDeleteControllerAdapter implements IClienteControllerPort.DeleteController {
 
   @Autowired
   private IClienteApagarServicePort service;
+
+  @Autowired
+  private IDeletePresenter presenter;
 
   @Operation(summary = "Deletar Cliente", description = "Este recurso destina-se a apagar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {
@@ -39,10 +43,7 @@ public final class ClienteApagarControllerAdapter implements IClienteCadastroCon
     @PathVariable(name = "id") final Long clienteId) {
 
     this.service.deletar(clienteId);
-
-    return ResponseEntity
-      .noContent()
-      .build();
+    return this.presenter.delete();
   }
 }
 

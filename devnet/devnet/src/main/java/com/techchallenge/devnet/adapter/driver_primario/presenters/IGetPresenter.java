@@ -2,8 +2,8 @@ package com.techchallenge.devnet.adapter.driver_primario.presenters;
 
 import org.springframework.http.ResponseEntity;
 
-public interface IPostPresenter {
+public interface IGetPresenter {
 
-  ResponseEntity<Object> post(Long id, Object dto);
+  ResponseEntity<Object> get(Object objeto);
 }
 
