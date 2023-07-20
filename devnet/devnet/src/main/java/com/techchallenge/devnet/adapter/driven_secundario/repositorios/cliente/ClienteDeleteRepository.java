@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
-public class ClienteApagarRepository implements IClienteApagarRepositoryPort {
+public class ClienteDeleteRepository implements IClienteApagarRepositoryPort {
 
   @Autowired
   private IAdapterSaida mapper;

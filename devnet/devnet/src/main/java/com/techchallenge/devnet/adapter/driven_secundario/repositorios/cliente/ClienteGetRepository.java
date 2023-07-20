@@ -2,6 +2,8 @@ package com.techchallenge.devnet.adapter.driven_secundario.repositorios.cliente;
 
 import com.techchallenge.devnet.adapter.driven_secundario.adapter_saida.IAdapterSaida;
 import com.techchallenge.devnet.adapter.driver_primario.filtros.ClienteFiltroDto;
+import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteConsultarPorCpfRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.cliente.IClientePesquisarRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.ClienteModel;
 import com.techchallenge.devnet.core.domain.objects.filtros.ClienteFiltro;
@@ -15,13 +17,22 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
-public class ClientePesquisarRepository implements IClientePesquisarRepositoryPort {
+public class ClienteGetRepository implements IClientePesquisarRepositoryPort,
+  IClienteConsultarPorIdRepositoryPort, IClienteConsultarPorCpfRepositoryPort {
 
   @Autowired
   private IAdapterSaida mapper;
 
   @Autowired
   private ClienteRepositoryJpa jpa;
+
+  @Transactional(readOnly = true)
+  @Override
+  public Optional<ClienteModel> consultarPorId(final Long id) {
+
+    return this.jpa.findById(id)
+      .map(entity -> this.mapper.converterOrigemParaDestino(entity, ClienteModel.class));
+  }
 
   @Transactional(readOnly = true)
   @Override
@@ -32,6 +43,14 @@ public class ClientePesquisarRepository implements IClientePesquisarRepositoryPo
       .map(filtroDto -> this.jpa.findAll(ClienteSpecification.consultarDinamicamente(filtroDto), paginacao))
       .map(paginaEntity -> this.mapper.converterPaginaOrigemParaPaginaDestino(paginaEntity, ClienteModel.class))
       .orElseThrow();
+  }
+
+  @Transactional(readOnly = true)
+  @Override
+  public Optional<ClienteModel> consultarPorCpf(final String cpf) {
+
+    return this.jpa.findByCpf(cpf)
+      .map(entity -> this.mapper.converterOrigemParaDestino(entity, ClienteModel.class));
   }
 }
 
