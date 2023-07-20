@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
-public class ClienteSalvarRepository implements IClienteSalvarRepositoryPort {
+public class ClientePostRepository implements IClienteSalvarRepositoryPort {
 
   @Autowired
   private IAdapterSaida mapper;

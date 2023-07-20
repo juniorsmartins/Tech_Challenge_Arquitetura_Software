@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class ProdutoAtualizarService implements IProdutoAtualizarServicePort {
+public class ProdutoPutService implements IProdutoAtualizarServicePort {
 
   @Autowired
   private IProdutoConsultarPorIdRepositoryPort produtoConsultarPorIdRepository;

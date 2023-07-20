@@ -16,7 +16,7 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class ClienteAtualizarService implements IClienteAtualizarServicePort {
+public class ClientePutService implements IClienteAtualizarServicePort {
 
   @Autowired
   private IClienteConsultarPorIdRepositoryPort clienteConsultarPorIdRepository;

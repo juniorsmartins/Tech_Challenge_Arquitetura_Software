@@ -1,5 +1,6 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers.produto;
 
+import com.techchallenge.devnet.adapter.driver_primario.presenters.IDeletePresenter;
 import com.techchallenge.devnet.core.application.ports.entrada.produto.IProdutoApagarServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import io.swagger.v3.oas.annotations.Operation;
@@ -15,13 +16,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Tag(name = "ProdutoDeleteControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
+@Tag(name = "ProdutoDeleteController", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/produtos")
-public final class ProdutoApagarControllerAdapter implements IProdutoControllerPort.DeleteController {
+public final class ProdutoDeleteController implements IProdutoControllerPort.DeleteController {
 
   @Autowired
   private IProdutoApagarServicePort service;
+
+  @Autowired
+  private IDeletePresenter presenter;
 
   @Operation(summary = "Deletar Produto", description = "Este recurso destina-se a apagar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {
@@ -38,10 +42,7 @@ public final class ProdutoApagarControllerAdapter implements IProdutoControllerP
     @PathVariable(name = "id") final Long produtoId) {
 
     this.service.deletar(produtoId);
-
-    return ResponseEntity
-      .noContent()
-      .build();
+    return this.presenter.delete();
   }
 }
 

@@ -2,6 +2,7 @@ package com.techchallenge.devnet.adapter.driven_secundario.repositorios.produto;
 
 import com.techchallenge.devnet.adapter.driven_secundario.adapter_saida.IAdapterSaida;
 import com.techchallenge.devnet.adapter.driver_primario.filtros.ProdutoFiltroDto;
+import com.techchallenge.devnet.core.application.ports.saida.produto.IProdutoConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.produto.IProdutoPesquisarRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.ProdutoModel;
 import com.techchallenge.devnet.core.domain.objects.filtros.ProdutoFiltro;
@@ -15,13 +16,21 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
-public class ProdutoPesquisarRepositoryAdapter implements IProdutoPesquisarRepositoryPort {
+public class ProdutoGetRepository implements IProdutoConsultarPorIdRepositoryPort, IProdutoPesquisarRepositoryPort {
 
   @Autowired
   private IAdapterSaida mapper;
 
   @Autowired
   private ProdutoRepositoryJpa jpa;
+
+  @Transactional(readOnly = true)
+  @Override
+  public Optional<ProdutoModel> consultarPorId(final Long id) {
+
+    return this.jpa.findById(id)
+      .map(entity -> this.mapper.converterOrigemParaDestino(entity, ProdutoModel.class));
+  }
 
   @Transactional(readOnly = true)
   @Override
