@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class ProdutoCadastrarService implements IProdutoCadastrarServicePort {
+public class ProdutoPostService implements IProdutoCadastrarServicePort {
 
   @Autowired
   private IProdutoSalvarRepositoryPort produtoSalvarRepository;
