@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class ClienteApagarService implements IClienteApagarServicePort {
+public class ClienteDeleteService implements IClienteApagarServicePort {
 
   @Autowired
   private IClienteConsultarPorIdRepositoryPort clienteConsultarPorIdRepository;
