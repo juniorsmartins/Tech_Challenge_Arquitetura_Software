@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public class EmailSalvarRepositoryAdapter implements IEmailSalvarRepositoryPort {
+public class EmailPostRepository implements IEmailSalvarRepositoryPort {
 
   @Autowired
   private IAdapterSaida mapper;

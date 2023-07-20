@@ -3,6 +3,7 @@ package com.techchallenge.devnet.adapter.driver_primario.controllers.email;
 import com.techchallenge.devnet.adapter.driver_primario.adapter_entrada.IAdapterEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.EmailDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.EmailDtoResponse;
+import com.techchallenge.devnet.adapter.driver_primario.presenters.IPostPresenter;
 import com.techchallenge.devnet.core.application.ports.entrada.email.IEmailEnviarServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.core.domain.models.EmailModel;
@@ -21,19 +22,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.URI;
 import java.util.Optional;
 
 @Tag(name = "EmailPostControllerAdapter", description = "Adaptador para enviar recurso Email.")
 @RestController
 @RequestMapping(path = "/api/v1/emails")
-public final class EmailEnviarControllerAdapter implements IEmailControllerPort.PostController {
+public final class EmailPostController implements IEmailControllerPort.PostController {
 
   @Autowired
   private IAdapterEntrada mapper;
 
   @Autowired
   private IEmailEnviarServicePort service;
+
+  @Autowired
+  private IPostPresenter presenter;
 
   @Operation(summary = "Enviar Email", description = "Este recurso destina-se a enviar Email.")
   @ApiResponses(value = {
@@ -45,19 +48,16 @@ public final class EmailEnviarControllerAdapter implements IEmailControllerPort.
     @ApiResponse(responseCode = "500", description = "Internal Server Error - situação inesperada no servidor.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))})
   })
   @Override
-  public ResponseEntity<EmailDtoResponse> enviar(
+  public ResponseEntity<Object> enviar(
     @Parameter(name = "EmailDtoRequest", description = "Estrutura de dados para transporte de informações de entrada.", required = true)
     @RequestBody @Valid final EmailDtoRequest dtoRequest, final UriComponentsBuilder uriComponentsBuilder) {
 
-    var response = Optional.of(dtoRequest)
+    return Optional.of(dtoRequest)
       .map(dto -> this.mapper.converterOrigemParaDestino(dto, EmailModel.class))
       .map(this.service::enviar)
       .map(model -> this.mapper.converterOrigemParaDestino(model, EmailDtoResponse.class))
+      .map(dto -> this.presenter.post(dto.getId(), dto))
       .orElseThrow();
-
-    return ResponseEntity
-      .created(URI.create("/api/v1/emails/" + response.getId()))
-      .body(response);
   }
 }
 
