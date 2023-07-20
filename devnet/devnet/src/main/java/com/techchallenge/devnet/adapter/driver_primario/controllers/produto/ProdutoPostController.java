@@ -26,7 +26,7 @@ import java.util.Optional;
 @Tag(name = "ProdutoPostControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/produtos")
-public final class ProdutoCadastrarControllerAdapter implements IProdutoControllerPort.PostController {
+public final class ProdutoCadastrarController implements IProdutoControllerPort.PostController {
 
   @Autowired
   private IAdapterEntrada mapper;
