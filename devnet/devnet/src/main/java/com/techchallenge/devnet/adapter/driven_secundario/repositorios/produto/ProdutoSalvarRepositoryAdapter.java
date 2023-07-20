@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driven_secundario.repositorios.produto;
 
-import com.techchallenge.devnet.adapter.driven_secundario.conversores_saida.IMapperSaida;
+import com.techchallenge.devnet.adapter.driven_secundario.adapter_saida.IAdapterSaida;
 import com.techchallenge.devnet.adapter.driven_secundario.entities.ProdutoEntity;
 import com.techchallenge.devnet.core.application.ports.saida.produto.IProdutoSalvarRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.ProdutoModel;
@@ -14,7 +14,7 @@ import java.util.Optional;
 public class ProdutoSalvarRepositoryAdapter implements IProdutoSalvarRepositoryPort {
 
   @Autowired
-  private IMapperSaida mapper;
+  private IAdapterSaida mapper;
 
   @Autowired
   private ProdutoRepositoryJpa jpa;

@@ -1,6 +1,5 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers.foto;
 
-import com.techchallenge.devnet.adapter.driver_primario.controllers.IFotoProdutoControllerPort;
 import com.techchallenge.devnet.core.application.ports.entrada.foto.IFotoProdutoApagarServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import io.swagger.v3.oas.annotations.Operation;

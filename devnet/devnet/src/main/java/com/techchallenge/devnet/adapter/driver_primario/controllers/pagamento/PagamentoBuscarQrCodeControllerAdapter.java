@@ -1,6 +1,5 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers.pagamento;
 
-import com.techchallenge.devnet.adapter.driver_primario.controllers.IPagamentoControllerPort;
 import com.techchallenge.devnet.core.application.ports.entrada.pagamento.IPagamentoBuscarQrCodeServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import io.swagger.v3.oas.annotations.Operation;

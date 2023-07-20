@@ -1,7 +1,6 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers.pagamento;
 
-import com.techchallenge.devnet.adapter.driver_primario.controllers.IPagamentoControllerPort;
-import com.techchallenge.devnet.adapter.driver_primario.conversores_entrada.IMapperEntrada;
+import com.techchallenge.devnet.adapter.driver_primario.adapter_entrada.IAdapterEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PagamentoDtoResponse;
 import com.techchallenge.devnet.core.application.ports.entrada.pagamento.IPagamentoAtualizarServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
@@ -26,7 +25,7 @@ import java.util.Optional;
 public final class PagamentoAtualizarControllerAdapter implements IPagamentoControllerPort.PutController {
 
   @Autowired
-  private IMapperEntrada mapper;
+  private IAdapterEntrada mapper;
 
   @Autowired
   private IPagamentoAtualizarServicePort service;

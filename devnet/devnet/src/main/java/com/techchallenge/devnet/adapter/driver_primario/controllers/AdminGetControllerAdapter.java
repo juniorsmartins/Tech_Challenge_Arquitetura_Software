@@ -1,10 +1,10 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
-import com.techchallenge.devnet.adapter.driver_primario.conversores_entrada.IMapperEntrada;
+import com.techchallenge.devnet.adapter.driver_primario.adapter_entrada.IAdapterEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.IndicadorDtoResponse;
 import com.techchallenge.devnet.core.application.ports.entrada.IAdminService;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.filtros.ClienteFiltroDto;
+import com.techchallenge.devnet.adapter.driver_primario.filtros.ClienteFiltroDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -25,7 +25,7 @@ import java.util.Optional;
 public final class AdminGetControllerAdapter implements IAdminControllerPort.GetController {
 
   @Autowired
-  private IMapperEntrada mapper;
+  private IAdapterEntrada mapper;
 
   @Autowired
   private IAdminService.GetService service;

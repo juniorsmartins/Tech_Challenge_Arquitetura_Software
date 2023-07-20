@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.adapter.driver_primario.dtos.filtros;
+package com.techchallenge.devnet.adapter.driver_primario.filtros;
 
 import lombok.Getter;
 import lombok.Setter;

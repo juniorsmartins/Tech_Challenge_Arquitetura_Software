@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.adapter.driven_secundario.repositorios.pagamento;
 
-import com.techchallenge.devnet.adapter.driven_secundario.conversores_saida.IMapperSaida;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.filtros.PagamentoFiltroDto;
+import com.techchallenge.devnet.adapter.driven_secundario.adapter_saida.IAdapterSaida;
+import com.techchallenge.devnet.adapter.driver_primario.filtros.PagamentoFiltroDto;
 import com.techchallenge.devnet.core.application.ports.saida.pagamento.IPagamentoPesquisarRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.PagamentoModel;
 import com.techchallenge.devnet.core.domain.objects.filtros.PagamentoFiltro;
@@ -18,7 +18,7 @@ import java.util.Optional;
 public class PagamentoPesquisarRepositoryAdapter implements IPagamentoPesquisarRepositoryPort {
 
   @Autowired
-  private IMapperSaida mapper;
+  private IAdapterSaida mapper;
 
   @Autowired
   private PagamentoRepositoryJpa jpa;

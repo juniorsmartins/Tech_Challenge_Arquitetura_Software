@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driven_secundario.repositorios.pagamento;
 
-import com.techchallenge.devnet.adapter.driven_secundario.conversores_saida.IMapperSaida;
+import com.techchallenge.devnet.adapter.driven_secundario.adapter_saida.IAdapterSaida;
 import com.techchallenge.devnet.adapter.driven_secundario.entities.PagamentoEntity;
 import com.techchallenge.devnet.core.application.ports.saida.pagamento.IPagamentoSalvarRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.PagamentoModel;
@@ -14,7 +14,7 @@ import java.util.Optional;
 public class PagamentoSalvarRepositoryAdapter implements IPagamentoSalvarRepositoryPort {
 
   @Autowired
-  private IMapperSaida mapper;
+  private IAdapterSaida mapper;
 
   @Autowired
   private PagamentoRepositoryJpa jpa;

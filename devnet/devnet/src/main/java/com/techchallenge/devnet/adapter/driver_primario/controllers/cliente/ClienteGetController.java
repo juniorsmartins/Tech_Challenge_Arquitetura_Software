@@ -1,9 +1,9 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers.cliente;
 
-import com.techchallenge.devnet.adapter.driver_primario.controllers.IClienteControllerPort;
-import com.techchallenge.devnet.adapter.driver_primario.conversores_entrada.IMapperEntrada;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.filtros.ClienteFiltroDto;
+import com.techchallenge.devnet.adapter.driver_primario.adapter_entrada.IAdapterEntrada;
+import com.techchallenge.devnet.adapter.driver_primario.filtros.ClienteFiltroDto;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ClienteDtoResponse;
+import com.techchallenge.devnet.adapter.driver_primario.presenters.IGetPresenter;
 import com.techchallenge.devnet.core.application.ports.entrada.cliente.IClientePesquisarServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.core.domain.objects.filtros.ClienteFiltro;
@@ -16,7 +16,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -29,13 +28,16 @@ import java.util.Optional;
 @Tag(name = "ClienteGetControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/clientes")
-public final class ClientePesquisarControllerAdapter implements IClienteControllerPort.GetController {
+public final class ClienteGetController implements IClienteControllerPort.GetController {
 
   @Autowired
-  private IMapperEntrada mapper;
+  private IAdapterEntrada mapper;
 
   @Autowired
   private IClientePesquisarServicePort service;
+
+  @Autowired
+  private IGetPresenter presenter;
 
   @Operation(summary = "Pesquisar Cliente", description = "Este recurso permite consultar Cliente por diversas propriedades com retorno paginado.")
   @ApiResponses(value = {
@@ -47,20 +49,17 @@ public final class ClientePesquisarControllerAdapter implements IClienteControll
     @ApiResponse(responseCode = "500", description = "Internal Server Error - situação inesperada no servidor.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))})
   })
   @Override
-  public ResponseEntity<Page<ClienteDtoResponse>> pesquisar(
+  public ResponseEntity<Object> pesquisar(
     @Parameter(name = "ClienteFiltroDto", description = "Estrutura de dados usada como filtro de pesquisa.", required = false)
     final ClienteFiltroDto filtroDto,
     @PageableDefault(sort = "id", direction = Sort.Direction.DESC, page = 0, size = 10) final Pageable paginacao) {
 
-    var response = Optional.of(filtroDto)
+    return Optional.of(filtroDto)
       .map(dto -> this.mapper.converterOrigemParaDestino(dto, ClienteFiltro.class))
       .map(filtro -> this.service.pesquisar(filtro, paginacao))
       .map(paginaClientes -> this.mapper.converterPaginaOrigemParaPaginaDestino(paginaClientes, ClienteDtoResponse.class))
+      .map(this.presenter::get)
       .orElseThrow();
-
-    return ResponseEntity
-      .ok()
-      .body(response);
   }
 }
 

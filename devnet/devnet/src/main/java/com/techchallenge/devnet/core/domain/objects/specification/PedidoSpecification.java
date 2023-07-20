@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.core.domain.objects.specification;
 
 import com.techchallenge.devnet.adapter.driven_secundario.entities.PedidoEntity;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.filtros.PedidoFiltroDto;
+import com.techchallenge.devnet.adapter.driver_primario.filtros.PedidoFiltroDto;
 import jakarta.persistence.criteria.Predicate;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.jpa.domain.Specification;
