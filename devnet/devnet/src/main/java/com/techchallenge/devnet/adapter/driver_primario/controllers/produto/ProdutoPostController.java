@@ -3,6 +3,7 @@ package com.techchallenge.devnet.adapter.driver_primario.controllers.produto;
 import com.techchallenge.devnet.adapter.driver_primario.adapter_entrada.IAdapterEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ProdutoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ProdutoDtoResponse;
+import com.techchallenge.devnet.adapter.driver_primario.presenters.IPostPresenter;
 import com.techchallenge.devnet.core.application.ports.entrada.produto.IProdutoCadastrarServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.core.domain.models.ProdutoModel;
@@ -20,19 +21,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.net.URI;
 import java.util.Optional;
 
-@Tag(name = "ProdutoPostControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
+@Tag(name = "ProdutoPostController", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/produtos")
-public final class ProdutoCadastrarController implements IProdutoControllerPort.PostController {
+public final class ProdutoPostController implements IProdutoControllerPort.PostController {
 
   @Autowired
   private IAdapterEntrada mapper;
 
   @Autowired
   private IProdutoCadastrarServicePort service;
+
+  @Autowired
+  private IPostPresenter presenter;
 
   @Operation(summary = "Cadastrar Produto", description = "Este recurso destina-se a cadastrar.")
   @ApiResponses(value = {
@@ -44,19 +47,16 @@ public final class ProdutoCadastrarController implements IProdutoControllerPort.
     @ApiResponse(responseCode = "500", description = "Internal Server Error - situação inesperada no servidor.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))})
   })
   @Override
-  public ResponseEntity<ProdutoDtoResponse> cadastrar(
+  public ResponseEntity<Object> cadastrar(
     @Parameter(name = "ProdutoDtoRequest", description = "Estrutura de dados para transporte de informações de entrada.", required = true)
     @RequestBody @Valid final ProdutoDtoRequest dtoRequest) {
 
-    var response = Optional.of(dtoRequest)
+    return Optional.of(dtoRequest)
       .map(dto -> this.mapper.converterOrigemParaDestino(dto, ProdutoModel.class))
       .map(this.service::cadastrar)
       .map(model -> this.mapper.converterOrigemParaDestino(model, ProdutoDtoResponse.class))
+      .map(dto -> this.presenter.post(dto.getId(), dto))
       .orElseThrow();
-
-    return ResponseEntity
-      .created(URI.create("/api/v1/produtos" + response.getId()))
-      .body(response);
   }
 }
 

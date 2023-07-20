@@ -1,9 +1,7 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers.produto;
 
-import com.techchallenge.devnet.adapter.driver_primario.filtros.ProdutoFiltroDto;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ProdutoDtoRequest;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ProdutoDtoResponse;
-import org.springframework.data.domain.Page;
+import com.techchallenge.devnet.adapter.driver_primario.filtros.ProdutoFiltroDto;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,17 +13,17 @@ public interface IProdutoControllerPort {
 
   interface PostController {
     @PostMapping
-    ResponseEntity<ProdutoDtoResponse> cadastrar(ProdutoDtoRequest dtoRequest);
+    ResponseEntity<Object> cadastrar(ProdutoDtoRequest dtoRequest);
   }
 
   interface PutController {
     @PutMapping(path = "/{id}")
-    ResponseEntity<ProdutoDtoResponse> atualizar(Long id, ProdutoDtoRequest dtoRequest);
+    ResponseEntity<Object> atualizar(Long id, ProdutoDtoRequest dtoRequest);
   }
 
   interface GetController {
     @GetMapping
-    ResponseEntity<Page<ProdutoDtoResponse>> pesquisar(ProdutoFiltroDto filtroDto, Pageable paginacao);
+    ResponseEntity<Object> pesquisar(ProdutoFiltroDto filtroDto, Pageable paginacao);
   }
 
   interface DeleteController {
