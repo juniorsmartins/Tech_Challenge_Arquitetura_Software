@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.core.domain.base.utilitarios;
+package com.techchallenge.devnet.core.application.use_case.pagamento;
 
 import com.google.zxing.WriterException;
 import com.techchallenge.devnet.core.domain.models.PedidoModel;

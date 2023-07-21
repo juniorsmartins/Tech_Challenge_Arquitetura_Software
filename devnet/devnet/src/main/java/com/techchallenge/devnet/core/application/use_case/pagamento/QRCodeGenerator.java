@@ -1,10 +1,11 @@
-package com.techchallenge.devnet.core.domain.base.utilitarios;
+package com.techchallenge.devnet.core.application.use_case.pagamento;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+import com.techchallenge.devnet.core.application.use_case.pagamento.IQRCodeGenerator;
 import com.techchallenge.devnet.core.domain.base.exceptions.ArmazemException;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.models.PedidoModel;

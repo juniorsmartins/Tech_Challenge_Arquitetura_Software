@@ -1,8 +1,8 @@
 package com.techchallenge.devnet.core.application.use_case.pagamento;
 
 import com.techchallenge.devnet.core.application.ports.entrada.pagamento.IPagamentoAtualizarServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.pagamento.IGatewayPagamentoPort;
 import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.pagamento.IGatewayPagamentoPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_409.ConfirmarPagamentoBloqueadoException;
@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
-public class PagamentoAtualizarService implements IPagamentoAtualizarServicePort {
+public class PagamentoPutService implements IPagamentoAtualizarServicePort {
 
   @Autowired
   private IUtils utils;

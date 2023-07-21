@@ -2,6 +2,7 @@ package com.techchallenge.devnet.adapter.driven_secundario.repositorios.pagament
 
 import com.techchallenge.devnet.adapter.driven_secundario.adapter_saida.IAdapterSaida;
 import com.techchallenge.devnet.adapter.driver_primario.filtros.PagamentoFiltroDto;
+import com.techchallenge.devnet.core.application.ports.saida.pagamento.IPagamentoConsultarRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.pagamento.IPagamentoPesquisarRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.PagamentoModel;
 import com.techchallenge.devnet.core.domain.objects.filtros.PagamentoFiltro;
@@ -15,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
-public class PagamentoPesquisarRepositoryAdapter implements IPagamentoPesquisarRepositoryPort {
+public class PagamentoGetRepository implements IPagamentoPesquisarRepositoryPort, IPagamentoConsultarRepositoryPort {
 
   @Autowired
   private IAdapterSaida mapper;
@@ -32,6 +33,14 @@ public class PagamentoPesquisarRepositoryAdapter implements IPagamentoPesquisarR
       .map(filtroDto -> this.jpa.findAll(PagamentoSpecification.consultarDinamicamente(filtroDto), paginacao))
       .map(paginaEntity -> this.mapper.converterPaginaOrigemParaPaginaDestino(paginaEntity, PagamentoModel.class))
       .orElseThrow();
+  }
+
+  @Transactional(readOnly = true)
+  @Override
+  public Optional<PagamentoModel> consultarPorId(final Long id) {
+
+    return this.jpa.findById(id)
+      .map(entity -> this.mapper.converterOrigemParaDestino(entity, PagamentoModel.class));
   }
 }
 
