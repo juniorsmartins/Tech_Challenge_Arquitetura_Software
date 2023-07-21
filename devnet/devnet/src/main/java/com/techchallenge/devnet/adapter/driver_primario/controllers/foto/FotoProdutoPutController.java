@@ -1,9 +1,11 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers.foto;
 
 import com.techchallenge.devnet.adapter.driver_primario.adapter_entrada.IAdapterEntrada;
+import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.FotoProdutoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.FotoProdutoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.foto.IFotoProdutoConsultarPorIdServicePort;
+import com.techchallenge.devnet.core.application.ports.entrada.foto.IFotoProdutoAtualizarServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
+import com.techchallenge.devnet.core.domain.models.FotoProdutoArquivo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -11,26 +13,28 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.Optional;
 
-@Tag(name = "FotoProdutoGetControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
+@Tag(name = "FotoProdutoPutController", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/fotos")
-public final class FotoProdutoConsultarPorIdControllerAdapter implements IFotoProdutoControllerPort.ConsultarPorIdController {
+public final class FotoProdutoPutController implements IFotoProdutoControllerPort.PutController {
 
   @Autowired
   private IAdapterEntrada mapper;
 
   @Autowired
-  private IFotoProdutoConsultarPorIdServicePort service;
+  private IFotoProdutoAtualizarServicePort service;
 
-  @Operation(summary = "Pesquisar FotoProduto", description = "Este recurso permite consultar FotoProduto por diversas propriedades com retorno paginado.")
+  @Operation(summary = "Atualizar Cliente", description = "Este recurso destina-se a atualizar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {
     @ApiResponse(responseCode = "200", description = "OK - requisição bem sucedida e com retorno.", content = {@Content(mediaType = "application/json")}),
     @ApiResponse(responseCode = "400", description = "Bad Request - requisição mal feita.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))}),
@@ -40,12 +44,22 @@ public final class FotoProdutoConsultarPorIdControllerAdapter implements IFotoPr
     @ApiResponse(responseCode = "500", description = "Internal Server Error - situação inesperada no servidor.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))})
   })
   @Override
-  public ResponseEntity<FotoProdutoDtoResponse> consultarPorId(
+  public ResponseEntity<FotoProdutoDtoResponse> inserirFotoNoProduto(
     @Parameter(name = "id", description = "Chave de identificação", example = "22", required = true)
-    @PathVariable(name = "id") final Long id) {
+    @PathVariable(name = "id") final Long produtoId,
+    @Valid final FotoProdutoDtoRequest fotoProdutoDtoRequest) {
 
-    var response = Optional.of(id)
-      .map(codigo -> this.service.consultarPorId(codigo))
+    var response = Optional.of(fotoProdutoDtoRequest)
+      .map(dtoRequest -> this.mapper.converterOrigemParaDestino(dtoRequest, FotoProdutoArquivo.class))
+      .map(arquivo -> {
+
+        try {
+          return this.service.inserirFotoNoProduto(produtoId, arquivo);
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
+
+      })
       .map(model -> this.mapper.converterOrigemParaDestino(model, FotoProdutoDtoResponse.class))
       .orElseThrow();
 

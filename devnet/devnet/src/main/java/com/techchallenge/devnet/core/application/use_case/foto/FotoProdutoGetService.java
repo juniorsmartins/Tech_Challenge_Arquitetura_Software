@@ -1,7 +1,6 @@
 package com.techchallenge.devnet.core.application.use_case.foto;
 
 import com.techchallenge.devnet.core.application.ports.entrada.foto.IFotoProdutoConsultarPorIdServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.foto.IArmazemFotoProdutoRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.FotoProdutoNaoEncontradoException;
@@ -13,13 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
-public class FotoProdutoConsultarPorIdService implements IFotoProdutoConsultarPorIdServicePort {
+public class FotoProdutoGetService implements IFotoProdutoConsultarPorIdServicePort {
 
   @Autowired
   private IFotoProdutoConsultarPorIdRepositoryPort fotoProdutoGetRepository;
-
-  @Autowired
-  private IArmazemFotoProdutoRepositoryPort armazemFotoProdutoService;
 
   @Transactional(readOnly = true)
   @Override

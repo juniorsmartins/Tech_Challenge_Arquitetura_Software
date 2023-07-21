@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
-public class FotoProdutoApagarRepositoryAdapter implements IFotoProdutoApagarRepositoryPort {
+public class FotoProdutoDeleteRepository implements IFotoProdutoApagarRepositoryPort {
 
   @Autowired
   private IAdapterSaida mapper;

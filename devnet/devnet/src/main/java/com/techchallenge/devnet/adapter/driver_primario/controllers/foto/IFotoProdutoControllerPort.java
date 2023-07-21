@@ -23,7 +23,7 @@ public interface IFotoProdutoControllerPort {
 
   interface ConsultarImagemPorIdController {
     @GetMapping(path = "/{id}")
-    ResponseEntity<InputStreamResource> consultarImagemPorId(Long id, String acceptHeader);
+    ResponseEntity<InputStreamResource> buscarImagemPorId(Long id, String acceptHeader);
   }
 
   interface DeleteController {

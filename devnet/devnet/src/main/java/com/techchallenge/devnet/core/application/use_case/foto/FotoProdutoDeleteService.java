@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.core.application.use_case.foto;
 
 import com.techchallenge.devnet.core.application.ports.entrada.foto.IFotoProdutoApagarServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.foto.IArmazemFotoProdutoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoArmazemPort;
 import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoApagarRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoSalvarRepositoryPort;
@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
-public class FotoProdutoApagarService implements IFotoProdutoApagarServicePort {
+public class FotoProdutoDeleteService implements IFotoProdutoApagarServicePort {
 
   @Autowired
   private IFotoProdutoConsultarPorIdRepositoryPort fotoProdutoConsultarPorIdRepository;
@@ -27,7 +27,7 @@ public class FotoProdutoApagarService implements IFotoProdutoApagarServicePort {
   private IFotoProdutoApagarRepositoryPort fotoProdutoApagarRepository;
 
   @Autowired
-  private IArmazemFotoProdutoRepositoryPort armazemFotoProdutoService;
+  private IFotoProdutoArmazemPort armazemFotoProdutoService;
 
   @Transactional(isolation = Isolation.SERIALIZABLE)
   @Override

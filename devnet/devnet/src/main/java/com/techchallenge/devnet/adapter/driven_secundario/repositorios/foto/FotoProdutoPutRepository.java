@@ -3,7 +3,7 @@ package com.techchallenge.devnet.adapter.driven_secundario.repositorios.foto;
 import com.techchallenge.devnet.adapter.driven_secundario.adapter_saida.IAdapterSaida;
 import com.techchallenge.devnet.adapter.driven_secundario.entities.FotoProdutoEntity;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.produto.ProdutoRepositoryJpa;
-import com.techchallenge.devnet.core.application.ports.saida.foto.IArmazemFotoProdutoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoArmazemPort;
 import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoSalvarRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.models.FotoProdutoModel;
@@ -15,7 +15,7 @@ import java.io.InputStream;
 import java.util.Optional;
 
 @Repository
-public class FotoProdutoSalvarRepositoryAdapter implements IFotoProdutoSalvarRepositoryPort {
+public class FotoProdutoPutRepository implements IFotoProdutoSalvarRepositoryPort {
 
   @Autowired
   private IAdapterSaida mapper;
@@ -27,7 +27,7 @@ public class FotoProdutoSalvarRepositoryAdapter implements IFotoProdutoSalvarRep
   private ProdutoRepositoryJpa produtoJpa;
 
   @Autowired
-  private IArmazemFotoProdutoRepositoryPort armazemFotoProdutoService;
+  private IFotoProdutoArmazemPort armazemFotoProdutoService;
 
   @Transactional
   @Override
@@ -55,7 +55,7 @@ public class FotoProdutoSalvarRepositoryAdapter implements IFotoProdutoSalvarRep
       .map(entity -> this.mapper.converterOrigemParaDestino(entity, FotoProdutoModel.class))
       .orElseThrow();
 
-    var novaFoto = IArmazemFotoProdutoRepositoryPort.NovaFoto.builder()
+    var novaFoto = IFotoProdutoArmazemPort.NovaFoto.builder()
       .nomeArquivo(fotoProdutoModelSalvo.getNome())
       .inputStream(dadosArquivo)
       .build();

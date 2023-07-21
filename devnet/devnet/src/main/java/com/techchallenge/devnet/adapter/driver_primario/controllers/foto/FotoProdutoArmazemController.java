@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers.foto;
 
-import com.techchallenge.devnet.core.application.ports.entrada.foto.IFotoProdutoConsultarImagemPorIdServicePort;
+import com.techchallenge.devnet.core.application.ports.entrada.foto.IFotoProdutoBuscarImagemPorIdServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.FotoProdutoNaoEncontradoException;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,15 +17,15 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Tag(name = "FotoProdutoGetControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
+@Tag(name = "FotoProdutoImagemController", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/fotos")
-public final class FotoProdutoConsultarImagemPorIdControllerAdapter implements IFotoProdutoControllerPort.ConsultarImagemPorIdController {
+public final class FotoProdutoArmazemController implements IFotoProdutoControllerPort.ConsultarImagemPorIdController {
 
   @Autowired
-  private IFotoProdutoConsultarImagemPorIdServicePort service;
+  private IFotoProdutoBuscarImagemPorIdServicePort serviceImagem;
 
-  @Operation(summary = "Consultar ImagemPorId do FotoProduto", description = "Este recurso permite consultar Imagem do FotoProduto por diversas propriedades com retorno paginado.")
+  @Operation(summary = "Buscar ImagemPorId do FotoProduto", description = "Este recurso permite consultar Imagem do FotoProduto por diversas propriedades com retorno paginado.")
   @ApiResponses(value = {
     @ApiResponse(responseCode = "200", description = "OK - requisição bem sucedida e com retorno.", content = {@Content(mediaType = "application/json")}),
     @ApiResponse(responseCode = "400", description = "Bad Request - requisição mal feita.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))}),
@@ -35,21 +35,21 @@ public final class FotoProdutoConsultarImagemPorIdControllerAdapter implements I
     @ApiResponse(responseCode = "500", description = "Internal Server Error - situação inesperada no servidor.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))})
   })
   @Override
-  public ResponseEntity<InputStreamResource> consultarImagemPorId(@PathVariable(name = "id") final Long id,
-                                                      @RequestHeader(name = "accept") final String acceptHeader) {
+  public ResponseEntity<InputStreamResource> buscarImagemPorId(@PathVariable(name = "id") final Long id,
+                                             @RequestHeader(name = "accept") final String acceptHeader) {
     try {
-      var imagemModel = this.service.consultarImagemPorId(id, acceptHeader);
+    var imagemModel = this.serviceImagem.consultarImagemPorId(id, acceptHeader);
 
-      return ResponseEntity
-        .ok()
-        .contentType(imagemModel.getMediaTypeFoto())
-        .body(imagemModel.getImagem());
+    return ResponseEntity
+    .ok()
+    .contentType(imagemModel.getMediaTypeFoto())
+    .body(imagemModel.getImagem());
 
     } catch (FotoProdutoNaoEncontradoException fotoProdutoNaoEncontradoException) {
 
-      return ResponseEntity
-        .notFound()
-        .build();
+    return ResponseEntity
+    .notFound()
+    .build();
     }
   }
 }

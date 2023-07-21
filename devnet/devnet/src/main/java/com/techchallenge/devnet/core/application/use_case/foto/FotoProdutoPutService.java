@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.core.application.use_case.foto;
 
-import com.techchallenge.devnet.core.application.ports.saida.foto.IArmazemFotoProdutoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoArmazemPort;
 import com.techchallenge.devnet.core.application.ports.entrada.foto.IFotoProdutoAtualizarServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoSalvarRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.produto.IProdutoConsultarPorIdRepositoryPort;
@@ -16,9 +16,7 @@ import java.io.IOException;
 
 @Slf4j
 @Service
-public class FotoProdutoAtualizarService implements IFotoProdutoAtualizarServicePort {
-
-  public static String diretorioDeFotos = "D:\\AreaEstudo\\PosTech-Fiap-Alura\\ArquiteturaDeSoftware\\TechChallenge-Soat\\devnet\\devnet\\foto_store\\";
+public class FotoProdutoPutService implements IFotoProdutoAtualizarServicePort {
 
   @Autowired
   private IProdutoConsultarPorIdRepositoryPort produtoConsultarPorIdRepository;
@@ -27,7 +25,7 @@ public class FotoProdutoAtualizarService implements IFotoProdutoAtualizarService
   private IFotoProdutoSalvarRepositoryPort fotoProdutoPostRepository;
 
   @Autowired
-  private IArmazemFotoProdutoRepositoryPort armazemFotoProdutoService;
+  private IFotoProdutoArmazemPort armazemFotoProdutoService;
 
   @Override
   public FotoProdutoModel inserirFotoNoProduto(final Long id, final FotoProdutoArquivo fotoProdutoArquivo) throws IOException {

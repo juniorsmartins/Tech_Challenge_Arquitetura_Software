@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
-public class FotoProdutoConsultarPorIdRepositoryAdapter implements IFotoProdutoConsultarPorIdRepositoryPort {
+public class FotoProdutoGetRepository implements IFotoProdutoConsultarPorIdRepositoryPort {
 
   @Autowired
   private IAdapterSaida mapper;

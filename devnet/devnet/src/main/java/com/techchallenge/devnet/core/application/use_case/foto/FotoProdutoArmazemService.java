@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.core.application.use_case.foto;
 
-import com.techchallenge.devnet.core.application.ports.entrada.foto.IFotoProdutoConsultarImagemPorIdServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.foto.IArmazemFotoProdutoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.entrada.foto.IFotoProdutoBuscarImagemPorIdServicePort;
+import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoArmazemPort;
 import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.FotoProdutoNaoEncontradoException;
@@ -19,13 +19,13 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class FotoProdutoConsultarImagemPorIdService implements IFotoProdutoConsultarImagemPorIdServicePort {
+public class FotoProdutoArmazemService implements IFotoProdutoBuscarImagemPorIdServicePort {
 
   @Autowired
   private IFotoProdutoConsultarPorIdRepositoryPort fotoProdutoConsultarPorIdRepository;
 
   @Autowired
-  private IArmazemFotoProdutoRepositoryPort armazemFotoProdutoService;
+  private IFotoProdutoArmazemPort armazemFotoProdutoService;
 
   @Transactional(readOnly = true)
   @Override
