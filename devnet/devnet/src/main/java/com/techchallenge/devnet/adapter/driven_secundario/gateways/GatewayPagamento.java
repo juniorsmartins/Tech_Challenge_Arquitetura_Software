@@ -4,7 +4,7 @@ import com.techchallenge.devnet.core.application.ports.saida.pagamento.IGatewayP
 import org.springframework.stereotype.Component;
 
 @Component
-public class GatewayPagamentoAdapter implements IGatewayPagamentoPort {
+public class GatewayPagamento implements IGatewayPagamentoPort {
 
   @Override
   public Boolean verificarStatusNoGateway(final Long idPedido) {
