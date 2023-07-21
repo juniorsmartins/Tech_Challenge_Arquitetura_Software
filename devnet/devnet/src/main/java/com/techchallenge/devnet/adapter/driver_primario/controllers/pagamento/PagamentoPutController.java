@@ -2,6 +2,7 @@ package com.techchallenge.devnet.adapter.driver_primario.controllers.pagamento;
 
 import com.techchallenge.devnet.adapter.driver_primario.adapter_entrada.IAdapterEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PagamentoDtoResponse;
+import com.techchallenge.devnet.adapter.driver_primario.presenters.IPutPresenter;
 import com.techchallenge.devnet.core.application.ports.entrada.pagamento.IPagamentoAtualizarServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,13 +23,16 @@ import java.util.Optional;
 @Tag(name = "PagamentoPutControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/pagamentos")
-public final class PagamentoAtualizarControllerAdapter implements IPagamentoControllerPort.PutController {
+public final class PagamentoPutController implements IPagamentoControllerPort.PutController {
 
   @Autowired
   private IAdapterEntrada mapper;
 
   @Autowired
   private IPagamentoAtualizarServicePort service;
+
+  @Autowired
+  private IPutPresenter presenter;
 
   @Operation(summary = "Atualizar Cliente", description = "Este recurso destina-se a atualizar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {
@@ -40,18 +44,15 @@ public final class PagamentoAtualizarControllerAdapter implements IPagamentoCont
     @ApiResponse(responseCode = "500", description = "Internal Server Error - situação inesperada no servidor.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))})
   })
   @Override
-  public ResponseEntity<PagamentoDtoResponse> verificarStatusNoGateway(
+  public ResponseEntity<Object> verificarStatusNoGateway(
     @Parameter(name = "id", description = "Chave de identificação", example = "22", required = true)
     @PathVariable(name = "idPedido") final Long idPedido) {
 
-    var response = Optional.of(idPedido)
+    return Optional.of(idPedido)
       .map(id -> this.service.verificarStatusNoGateway(id))
       .map(model -> this.mapper.converterOrigemParaDestino(model, PagamentoDtoResponse.class))
+      .map(dto -> this.presenter.put( dto))
       .orElseThrow();
-
-    return ResponseEntity
-      .ok()
-      .body(response);
   }
 }
 

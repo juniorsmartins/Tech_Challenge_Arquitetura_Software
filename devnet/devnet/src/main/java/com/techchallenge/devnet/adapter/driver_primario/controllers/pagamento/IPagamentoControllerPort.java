@@ -14,7 +14,7 @@ public interface IPagamentoControllerPort {
 
   interface PutController {
     @PutMapping(path = "/status/{idPedido}")
-    ResponseEntity<PagamentoDtoResponse> verificarStatusNoGateway(Long idPedido);
+    ResponseEntity<Object> verificarStatusNoGateway(Long idPedido);
   }
 
   interface PesquisarController {
