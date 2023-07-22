@@ -1,6 +1,7 @@
-package com.techchallenge.devnet.core.application.use_case;
+package com.techchallenge.devnet.core.application.use_case.copa;
 
-import com.techchallenge.devnet.core.application.ports.entrada.ICopaServicePort;
+import com.techchallenge.devnet.core.application.ports.entrada.copa.ICopaPedidoFinalizadoServicePort;
+import com.techchallenge.devnet.core.application.ports.entrada.copa.ICopaPedidoProntoServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class CopaPutService implements ICopaServicePort.PutService {
+public class CopaPutService implements ICopaPedidoProntoServicePort, ICopaPedidoFinalizadoServicePort {
 
   @Autowired
   private IUtils utils;

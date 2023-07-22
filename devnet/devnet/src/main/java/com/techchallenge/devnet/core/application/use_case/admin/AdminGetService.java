@@ -1,6 +1,6 @@
-package com.techchallenge.devnet.core.application.use_case;
+package com.techchallenge.devnet.core.application.use_case.admin;
 
-import com.techchallenge.devnet.core.application.ports.entrada.IAdminService;
+import com.techchallenge.devnet.core.application.ports.entrada.admin.IAdminBuscarIndicadoresService;
 import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPagamentoEnum;
@@ -11,9 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class AdminGetService implements IAdminService.GetService {
+public class AdminGetService implements IAdminBuscarIndicadoresService {
 
   @Autowired
   private IPedidoRepositoryPort.GetRepository pedidoGetRepository;
@@ -22,16 +23,19 @@ public class AdminGetService implements IAdminService.GetService {
   @Override
   public Indicador buscarIndicadores() {
 
-    var pedidos = this.pedidoGetRepository.listar();
-    var totalPagamentoEmAberto = this.calcularTotalDePagamentoEmAberto(pedidos);
-    var totalPagamentoPago = this.calcularTotalDePagamentoPago(pedidos);
-    var totalPagamentoCancelado = this.calcularTotalDePagamentoCancelado(pedidos);
+    return Optional.of(this.pedidoGetRepository.listar())
+      .map(pedidos -> {
+        var totalPagamentoEmAberto = this.calcularTotalDePagamentoEmAberto(pedidos);
+        var totalPagamentoPago = this.calcularTotalDePagamentoPago(pedidos);
+        var totalPagamentoCancelado = this.calcularTotalDePagamentoCancelado(pedidos);
 
-    return Indicador.builder()
-      .totalPagamentoEmAberto(totalPagamentoEmAberto)
-      .totalPagamentoPago(totalPagamentoPago)
-      .totalPagamentoCancelado(totalPagamentoCancelado)
-      .build();
+        return Indicador.builder()
+          .totalPagamentoEmAberto(totalPagamentoEmAberto)
+          .totalPagamentoPago(totalPagamentoPago)
+          .totalPagamentoCancelado(totalPagamentoCancelado)
+          .build();
+      })
+      .orElseThrow();
   }
 
   private BigDecimal calcularTotalDePagamentoEmAberto(List<PedidoModel> pedidos) {
