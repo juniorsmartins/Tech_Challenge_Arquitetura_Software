@@ -3,7 +3,7 @@ package com.techchallenge.devnet.adapter.driven_secundario.repositorios;
 import com.techchallenge.devnet.adapter.driven_secundario.adapter_saida.IAdapterSaida;
 import com.techchallenge.devnet.adapter.driven_secundario.entities.ItemPedidoEntity;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.item_pedido.ItemPedidoRepositoryJpa;
-import com.techchallenge.devnet.core.application.ports.saida.IItemPedidoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.item_pedido.IItemPedidoSalvarRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.ItemPedidoModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
-public class ItemPedidoPostRepositoryAdapter implements IItemPedidoRepositoryPort.PostRepository {
+public class ItemPedidoPostRepository implements IItemPedidoSalvarRepositoryPort {
 
   @Autowired
   private IAdapterSaida mapper;
@@ -31,9 +31,9 @@ public class ItemPedidoPostRepositoryAdapter implements IItemPedidoRepositoryPor
       .orElseThrow();
   }
 
-  @Override
-  public void flush() {
-    this.jpa.flush();
-  }
+//  @Override
+//  public void flush() {
+//    this.jpa.flush();
+//  }
 }
 
