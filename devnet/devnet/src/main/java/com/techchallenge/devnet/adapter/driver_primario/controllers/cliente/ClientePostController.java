@@ -15,7 +15,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,14 +27,19 @@ import java.util.Optional;
 @RequestMapping(path = "/api/v1/clientes")
 public final class ClientePostController implements IClienteControllerPort.PostController {
 
-  @Autowired
-  private IAdapterEntrada mapper;
+  private final IAdapterEntrada mapper;
 
-  @Autowired
-  private IClienteCadastrarServicePort service;
+  private final IClienteCadastrarServicePort service;
 
-  @Autowired
-  private IPostPresenter presenter;
+  private final IPostPresenter presenter;
+
+  public ClientePostController(IAdapterEntrada mapper,
+                               IClienteCadastrarServicePort service,
+                               IPostPresenter presenter) {
+    this.mapper = mapper;
+    this.service = service;
+    this.presenter = presenter;
+  }
 
   @Operation(summary = "Cadastrar Cliente", description = "Este recurso destina-se a cadastrar.")
   @ApiResponses(value = {

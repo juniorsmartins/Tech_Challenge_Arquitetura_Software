@@ -16,7 +16,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,14 +29,19 @@ import java.util.Optional;
 @RequestMapping(path = "/api/v1/clientes")
 public final class ClientePutController implements IClienteControllerPort.PutController {
 
-  @Autowired
-  private IAdapterEntrada mapper;
+  private final IAdapterEntrada mapper;
 
-  @Autowired
-  private IClienteAtualizarServicePort service;
+  private final IClienteAtualizarServicePort service;
 
-  @Autowired
-  private IPutPresenter presenter;
+  private final IPutPresenter presenter;
+
+  public ClientePutController(IAdapterEntrada mapper,
+                              IClienteAtualizarServicePort service,
+                              IPutPresenter presenter) {
+    this.mapper = mapper;
+    this.service = service;
+    this.presenter = presenter;
+  }
 
   @Operation(summary = "Atualizar Cliente", description = "Este recurso destina-se a atualizar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {

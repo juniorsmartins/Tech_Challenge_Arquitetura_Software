@@ -15,7 +15,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -30,14 +29,19 @@ import java.util.Optional;
 @RequestMapping(path = "/api/v1/clientes")
 public final class ClienteGetController implements IClienteControllerPort.GetController {
 
-  @Autowired
-  private IAdapterEntrada mapper;
+  private final IAdapterEntrada mapper;
 
-  @Autowired
-  private IClientePesquisarServicePort service;
+  private final IClientePesquisarServicePort service;
 
-  @Autowired
-  private IGetPresenter presenter;
+  private final IGetPresenter presenter;
+
+  public ClienteGetController(IAdapterEntrada mapper,
+                              IClientePesquisarServicePort service,
+                              IGetPresenter presenter) {
+    this.mapper = mapper;
+    this.service = service;
+    this.presenter = presenter;
+  }
 
   @Operation(summary = "Pesquisar Cliente", description = "Este recurso permite consultar Cliente por diversas propriedades com retorno paginado.")
   @ApiResponses(value = {
