@@ -1,9 +1,9 @@
 package com.techchallenge.devnet.core.application.use_case.cliente;
 
 import com.techchallenge.devnet.core.application.ports.entrada.cliente.IClienteApagarServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoBuscarPorIdClienteRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteApagarRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteConsultarPorIdRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoBuscarPorIdClienteRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ClienteNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_409.DeletarBloqueadoPoUso;

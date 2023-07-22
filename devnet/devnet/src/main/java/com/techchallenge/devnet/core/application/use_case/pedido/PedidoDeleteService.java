@@ -19,16 +19,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class PedidoDeleteService implements IPedidoApagarServicePort {
 
   @Autowired
-  private IPedidoConsultarPorIdRepositoryPort pedidoGetRepository; //
+  private IPedidoConsultarPorIdRepositoryPort repositorioConsultar;
 
   @Autowired
-  private IPedidoSalvarRepositoryPort pedidoPostRepository;
+  private IPedidoSalvarRepositoryPort repositorioSalvar;
 
   @Transactional(isolation = Isolation.SERIALIZABLE)
   @Override
   public void cancelarPorId(final Long id) {
 
-    this.pedidoGetRepository.consultarPorId(id)
+    this.repositorioConsultar.consultarPorId(id)
       .map(model -> {
 
         if (!model.getStatusPedido().equals(StatusPedidoEnum.RECEBIDO)) {
@@ -40,7 +40,7 @@ public class PedidoDeleteService implements IPedidoApagarServicePort {
 
         return model;
       })
-      .map(this.pedidoPostRepository::salvar)
+      .map(this.repositorioSalvar::salvar)
       .orElseThrow(() -> {
         log.info(String.format(MensagemPadrao.PEDIDO_NAO_ENCONTRADO, id));
         throw new PedidoNaoEncontradoException(id);
