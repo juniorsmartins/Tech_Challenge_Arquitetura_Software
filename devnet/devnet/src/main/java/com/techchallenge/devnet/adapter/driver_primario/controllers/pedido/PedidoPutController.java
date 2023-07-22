@@ -16,7 +16,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,19 +24,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
-@Tag(name = "PedidoPutControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
+@Tag(name = "PedidoPutController", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/pedidos")
 public final class PedidoPutController implements IPedidoControllerPort.PutController {
 
-  @Autowired
-  private IAdapterEntrada mapper;
+  private final IAdapterEntrada mapper;
 
-  @Autowired
-  private IPedidoAtualizarServicePort service;
+  private final IPedidoAtualizarServicePort service;
 
-  @Autowired
-  private IPutPresenter presenter;
+  private final IPutPresenter presenter;
+
+  public PedidoPutController(IAdapterEntrada mapper,
+                             IPedidoAtualizarServicePort service,
+                             IPutPresenter presenter) {
+    this.mapper = mapper;
+    this.service = service;
+    this.presenter = presenter;
+  }
 
   @Operation(summary = "Atualizar Pedido", description = "Este recurso destina-se a atualizar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {

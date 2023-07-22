@@ -10,22 +10,25 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Tag(name = "PedidoDeleteControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
+@Tag(name = "PedidoDeleteController", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/pedidos")
 public final class PedidoDeleteController implements IPedidoControllerPort.DeleteController {
 
-  @Autowired
-  private IPedidoApagarServicePort service;
+  private final IPedidoApagarServicePort service;
 
-  @Autowired
-  private IDeletePresenter presenter;
+  private final IDeletePresenter presenter;
+
+  public PedidoDeleteController(IPedidoApagarServicePort service,
+                                IDeletePresenter presenter) {
+    this.service = service;
+    this.presenter = presenter;
+  }
 
   @Operation(summary = "Cancelar Pedido", description = "Este recurso destina-se a apagar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {
