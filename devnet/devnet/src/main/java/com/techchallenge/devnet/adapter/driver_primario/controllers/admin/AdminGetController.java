@@ -13,7 +13,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,14 +24,19 @@ import java.util.Optional;
 @RequestMapping(path = "/api/v1/admin")
 public final class AdminGetController implements IAdminControllerPort.GetController {
 
-  @Autowired
-  private IAdapterEntrada mapper;
+  private final IAdapterEntrada mapper;
 
-  @Autowired
-  private IAdminBuscarIndicadoresServicePort service;
+  private final IAdminBuscarIndicadoresServicePort service;
 
-  @Autowired
-  private IGetPresenter presenter;
+  private final IGetPresenter presenter;
+
+  public AdminGetController(IAdapterEntrada mapper,
+                            IAdminBuscarIndicadoresServicePort service,
+                            IGetPresenter presenter) {
+    this.mapper = mapper;
+    this.service = service;
+    this.presenter = presenter;
+  }
 
   @Operation(summary = "Pesquisar Cliente", description = "Este recurso permite consultar Cliente por diversas propriedades com retorno paginado.")
   @ApiResponses(value = {
