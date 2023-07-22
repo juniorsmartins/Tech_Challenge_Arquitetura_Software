@@ -1,6 +1,7 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
-import com.techchallenge.devnet.core.application.ports.entrada.IPedidoServicePort;
+import com.techchallenge.devnet.adapter.driver_primario.controllers.pedido.IPedidoControllerPort;
+import com.techchallenge.devnet.core.application.ports.entrada.pedido.IPedidoServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

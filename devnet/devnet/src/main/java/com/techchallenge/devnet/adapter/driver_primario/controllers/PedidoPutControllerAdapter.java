@@ -1,9 +1,10 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
 import com.techchallenge.devnet.adapter.driver_primario.adapter_entrada.IAdapterEntrada;
+import com.techchallenge.devnet.adapter.driver_primario.controllers.pedido.IPedidoControllerPort;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.PedidoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PedidoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.IPedidoServicePort;
+import com.techchallenge.devnet.core.application.ports.entrada.pedido.IPedidoServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import io.swagger.v3.oas.annotations.Operation;

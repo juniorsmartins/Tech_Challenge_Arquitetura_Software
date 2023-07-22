@@ -1,8 +1,9 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.core.application.ports.entrada.IPedidoServicePort;
+import com.techchallenge.devnet.core.application.ports.entrada.pedido.IPedidoServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IItemPedidoRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoSalvarRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_409.AtualizarPedidoBloqueadoException;
@@ -26,7 +27,7 @@ public class PedidoPutService implements IPedidoServicePort.PutService {
   private IPedidoRepositoryPort.GetRepository pedidoGetRepository;
 
   @Autowired
-  private IPedidoRepositoryPort.PostRepository pedidoPostRepository;
+  private IPedidoSalvarRepositoryPort pedidoPostRepository;
 
   @Autowired
   private IItemPedidoRepositoryPort.DeleteRepository itemPedidoDeleteRepository;

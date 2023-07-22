@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.core.application.use_case.admin;
 
-import com.techchallenge.devnet.core.application.ports.entrada.admin.IAdminBuscarIndicadoresService;
+import com.techchallenge.devnet.core.application.ports.entrada.admin.IAdminBuscarIndicadoresServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPagamentoEnum;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AdminGetService implements IAdminBuscarIndicadoresService {
+public class AdminGetService implements IAdminBuscarIndicadoresServicePort {
 
   @Autowired
   private IPedidoRepositoryPort.GetRepository pedidoGetRepository;

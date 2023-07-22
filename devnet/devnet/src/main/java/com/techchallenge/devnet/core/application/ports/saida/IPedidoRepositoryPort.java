@@ -10,10 +10,6 @@ import java.util.Optional;
 
 public interface IPedidoRepositoryPort {
 
-  interface PostRepository {
-    PedidoModel salvar(PedidoModel pedidoModel);
-  }
-
   interface GetRepository {
     Page<PedidoModel> pesquisar(PedidoFiltro filtro, Pageable paginacao);
 
