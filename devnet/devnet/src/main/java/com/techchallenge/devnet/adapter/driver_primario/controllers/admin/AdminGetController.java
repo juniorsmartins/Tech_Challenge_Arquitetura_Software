@@ -3,6 +3,7 @@ package com.techchallenge.devnet.adapter.driver_primario.controllers.admin;
 import com.techchallenge.devnet.adapter.driver_primario.adapter_entrada.IAdapterEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.IndicadorDtoResponse;
 import com.techchallenge.devnet.adapter.driver_primario.filtros.ClienteFiltroDto;
+import com.techchallenge.devnet.adapter.driver_primario.presenters.IGetPresenter;
 import com.techchallenge.devnet.core.application.ports.entrada.admin.IAdminBuscarIndicadoresService;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,6 +31,9 @@ public final class AdminGetController implements IAdminControllerPort.GetControl
   @Autowired
   private IAdminBuscarIndicadoresService service;
 
+  @Autowired
+  private IGetPresenter presenter;
+
   @Operation(summary = "Pesquisar Cliente", description = "Este recurso permite consultar Cliente por diversas propriedades com retorno paginado.")
   @ApiResponses(value = {
     @ApiResponse(responseCode = "200", description = "OK - requisição bem sucedida e com retorno.", content = {@Content(mediaType = "application/json", array = @ArraySchema(minItems = 1, schema = @Schema(implementation = ClienteFiltroDto.class), uniqueItems = true))}),
@@ -40,15 +44,12 @@ public final class AdminGetController implements IAdminControllerPort.GetControl
     @ApiResponse(responseCode = "500", description = "Internal Server Error - situação inesperada no servidor.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))})
   })
   @Override
-  public ResponseEntity<IndicadorDtoResponse> buscarIndicadores() {
+  public ResponseEntity<Object> buscarIndicadores() {
 
-    var response = Optional.of(this.service.buscarIndicadores())
+    return Optional.of(this.service.buscarIndicadores())
       .map(indicador -> this.mapper.converterOrigemParaDestino(indicador, IndicadorDtoResponse.class))
+      .map(this.presenter::get)
       .orElseThrow();
-
-    return ResponseEntity
-      .ok()
-      .body(response);
   }
 }
 

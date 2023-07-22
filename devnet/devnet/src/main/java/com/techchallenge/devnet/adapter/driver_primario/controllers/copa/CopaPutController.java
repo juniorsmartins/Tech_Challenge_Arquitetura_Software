@@ -1,8 +1,10 @@
-package com.techchallenge.devnet.adapter.driver_primario.controllers;
+package com.techchallenge.devnet.adapter.driver_primario.controllers.copa;
 
 import com.techchallenge.devnet.adapter.driver_primario.adapter_entrada.IAdapterEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PedidoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.ICopaServicePort;
+import com.techchallenge.devnet.adapter.driver_primario.presenters.IPutPresenter;
+import com.techchallenge.devnet.core.application.ports.entrada.copa.ICopaPedidoFinalizadoServicePort;
+import com.techchallenge.devnet.core.application.ports.entrada.copa.ICopaPedidoProntoServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -22,13 +24,19 @@ import java.util.Optional;
 @Tag(name = "CopaPutController", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/copa")
-public final class CopaPutControllerAdapter implements ICopaControllerPort.PutController {
+public final class CopaPutController implements ICopaControllerPort.PutController {
 
   @Autowired
   private IAdapterEntrada mapper;
 
   @Autowired
-  private ICopaServicePort.PutService service;
+  private ICopaPedidoProntoServicePort servicePronto;
+
+  @Autowired
+  private ICopaPedidoFinalizadoServicePort serviceFinalizado;
+
+  @Autowired
+  private IPutPresenter presenter;
 
   @Operation(summary = "Atualizar Cliente", description = "Este recurso destina-se a atualizar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {
@@ -40,18 +48,15 @@ public final class CopaPutControllerAdapter implements ICopaControllerPort.PutCo
     @ApiResponse(responseCode = "500", description = "Internal Server Error - situação inesperada no servidor.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))})
   })
   @Override
-  public ResponseEntity<PedidoDtoResponse> confirmarPedidoPronto(
+  public ResponseEntity<Object> confirmarPedidoPronto(
     @Parameter(name = "id", description = "Chave de identificação", example = "22", required = true)
     @PathVariable(name = "idPedido") final Long idPedido) {
 
-    var response = Optional.of(idPedido)
-      .map(id -> this.service.confirmarPedidoPronto(id))
+    return Optional.of(idPedido)
+      .map(id -> this.servicePronto.confirmarPedidoPronto(id))
       .map(model -> this.mapper.converterOrigemParaDestino(model, PedidoDtoResponse.class))
+      .map(this.presenter::put)
       .orElseThrow();
-
-    return ResponseEntity
-      .ok()
-      .body(response);
   }
 
   @Operation(summary = "Atualizar Cliente", description = "Este recurso destina-se a atualizar pelo identificador exclusivo (ID).")
@@ -64,18 +69,15 @@ public final class CopaPutControllerAdapter implements ICopaControllerPort.PutCo
     @ApiResponse(responseCode = "500", description = "Internal Server Error - situação inesperada no servidor.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))})
   })
   @Override
-  public ResponseEntity<PedidoDtoResponse> confirmarPedidoFinalizado(
+  public ResponseEntity<Object> confirmarPedidoFinalizado(
     @Parameter(name = "id", description = "Chave de identificação", example = "22", required = true)
     @PathVariable(name = "idPedido") final Long idPedido) {
 
-    var response = Optional.of(idPedido)
-      .map(id -> this.service.confirmarPedidoFinalizado(id))
+    return Optional.of(idPedido)
+      .map(id -> this.serviceFinalizado.confirmarPedidoFinalizado(id))
       .map(model -> this.mapper.converterOrigemParaDestino(model, PedidoDtoResponse.class))
+      .map(this.presenter::put)
       .orElseThrow();
-
-    return ResponseEntity
-      .ok()
-      .body(response);
   }
 }
 
