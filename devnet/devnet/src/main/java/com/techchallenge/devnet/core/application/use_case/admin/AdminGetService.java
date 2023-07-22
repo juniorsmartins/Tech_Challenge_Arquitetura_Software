@@ -5,7 +5,6 @@ import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoLista
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPagamentoEnum;
 import com.techchallenge.devnet.core.domain.objects.Indicador;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,14 +15,17 @@ import java.util.Optional;
 @Service
 public class AdminGetService implements IAdminBuscarIndicadoresServicePort {
 
-  @Autowired
-  private IPedidoListarRepositoryPort pedidoGetRepository;
+  private final IPedidoListarRepositoryPort repositorio;
+
+  public AdminGetService(IPedidoListarRepositoryPort repositorio) {
+    this.repositorio = repositorio;
+  }
 
   @Transactional(readOnly = true)
   @Override
   public Indicador buscarIndicadores() {
 
-    return Optional.of(this.pedidoGetRepository.listar())
+    return Optional.of(this.repositorio.listar())
       .map(pedidos -> {
         var totalPagamentoEmAberto = this.calcularTotalDePagamentoEmAberto(pedidos);
         var totalPagamentoPago = this.calcularTotalDePagamentoPago(pedidos);
