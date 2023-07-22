@@ -1,11 +1,11 @@
-package com.techchallenge.devnet.adapter.driver_primario.controllers;
+package com.techchallenge.devnet.adapter.driver_primario.controllers.pedido;
 
 import com.techchallenge.devnet.adapter.driver_primario.adapter_entrada.IAdapterEntrada;
-import com.techchallenge.devnet.adapter.driver_primario.controllers.pedido.IPedidoControllerPort;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PedidoDtoResponse;
 import com.techchallenge.devnet.adapter.driver_primario.filtros.PedidoFiltroDto;
 import com.techchallenge.devnet.adapter.driver_primario.presenters.IGetPresenter;
-import com.techchallenge.devnet.core.application.ports.entrada.pedido.IPedidoServicePort;
+import com.techchallenge.devnet.core.application.ports.entrada.pedido.IPedidoListarOrdenadoServicePort;
+import com.techchallenge.devnet.core.application.ports.entrada.pedido.IPedidoPesquisarServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.core.domain.objects.filtros.PedidoFiltro;
 import io.swagger.v3.oas.annotations.Operation;
@@ -35,7 +35,10 @@ public final class PedidoGetController implements IPedidoControllerPort.GetContr
   private IAdapterEntrada mapper;
 
   @Autowired
-  private IPedidoServicePort.GetService service;
+  private IPedidoPesquisarServicePort servicePesquisar;
+
+  @Autowired
+  private IPedidoListarOrdenadoServicePort serviceListar;
 
   @Autowired
   private IGetPresenter presenter;
@@ -57,14 +60,10 @@ public final class PedidoGetController implements IPedidoControllerPort.GetContr
 
     return Optional.of(filtroDto)
       .map(dto -> this.mapper.converterOrigemParaDestino(dto, PedidoFiltro.class))
-      .map(parametrosDePesquisa -> this.service.pesquisar(parametrosDePesquisa, paginacao))
+      .map(parametrosDePesquisa -> this.servicePesquisar.pesquisar(parametrosDePesquisa, paginacao))
       .map(paginaPedidos -> this.mapper.converterPaginaOrigemParaPaginaDestino(paginaPedidos, PedidoDtoResponse.class))
       .map(this.presenter::get)
       .orElseThrow();
-//
-//    return ResponseEntity
-//      .ok()
-//      .body(response);
   }
 
   @Operation(summary = "Listar Pedido Ordenado", description = "Este recurso permite listar Pedido ordenado por StatusPedido e por dataHora do recebimento.")
@@ -79,14 +78,10 @@ public final class PedidoGetController implements IPedidoControllerPort.GetContr
   @Override
   public ResponseEntity<Object> listarOrdenadoPorStatusAndDataHoraCadastro() {
 
-    return Optional.of(this.service.listarOrdenadoPorStatusAndDataHoraCadastro())
+    return Optional.of(this.serviceListar.listarOrdenadoPorStatusAndDataHoraCadastro())
       .map(models -> this.mapper.converterListaOrigemParaListaDestino(models, PedidoDtoResponse.class))
       .map(this.presenter::get)
       .orElseThrow();
-
-//    return ResponseEntity
-//      .ok()
-//      .body(response);
   }
 }
 

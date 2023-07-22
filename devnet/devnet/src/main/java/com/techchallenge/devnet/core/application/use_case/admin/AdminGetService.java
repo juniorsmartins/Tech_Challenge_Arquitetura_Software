@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.core.application.use_case.admin;
 
 import com.techchallenge.devnet.core.application.ports.entrada.admin.IAdminBuscarIndicadoresServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoListarRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPagamentoEnum;
 import com.techchallenge.devnet.core.domain.objects.Indicador;
@@ -17,7 +17,7 @@ import java.util.Optional;
 public class AdminGetService implements IAdminBuscarIndicadoresServicePort {
 
   @Autowired
-  private IPedidoRepositoryPort.GetRepository pedidoGetRepository;
+  private IPedidoListarRepositoryPort pedidoGetRepository;
 
   @Transactional(readOnly = true)
   @Override

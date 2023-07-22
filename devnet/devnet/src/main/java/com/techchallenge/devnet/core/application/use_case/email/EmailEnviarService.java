@@ -1,9 +1,9 @@
 package com.techchallenge.devnet.core.application.use_case.email;
 
 import com.techchallenge.devnet.core.application.ports.entrada.email.IEmailEnviarServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.email.IEmailSalvarRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ClienteNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
@@ -25,7 +25,7 @@ import java.util.Optional;
 public class EmailEnviarService implements IEmailEnviarServicePort {
 
   @Autowired
-  private IPedidoRepositoryPort.GetRepository pedidoGetRepository;
+  private IPedidoConsultarPorIdRepositoryPort pedidoGetRepository;
 
   @Autowired
   private IClienteConsultarPorIdRepositoryPort clienteConsultarPorIdRepository;

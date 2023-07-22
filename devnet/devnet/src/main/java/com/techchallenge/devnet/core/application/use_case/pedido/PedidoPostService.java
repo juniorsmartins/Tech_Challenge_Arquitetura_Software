@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.core.application.use_case;
+package com.techchallenge.devnet.core.application.use_case.pedido;
 
 import com.techchallenge.devnet.core.application.ports.entrada.pagamento.IPagamentoCadastrarServicePort;
 import com.techchallenge.devnet.core.application.ports.entrada.pedido.IPedidoCadastrarServicePort;

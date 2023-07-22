@@ -1,7 +1,9 @@
-package com.techchallenge.devnet.core.application.use_case;
+package com.techchallenge.devnet.core.application.use_case.pedido;
 
-import com.techchallenge.devnet.core.application.ports.entrada.pedido.IPedidoServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.entrada.pedido.IPedidoListarOrdenadoServicePort;
+import com.techchallenge.devnet.core.application.ports.entrada.pedido.IPedidoPesquisarServicePort;
+import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoListarRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoPesquisarRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;
 import com.techchallenge.devnet.core.domain.objects.filtros.PedidoFiltro;
@@ -17,17 +19,20 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class PedidoGetService implements IPedidoServicePort.GetService {
+public class PedidoGetService implements IPedidoPesquisarServicePort, IPedidoListarOrdenadoServicePort {
 
   @Autowired
-  private IPedidoRepositoryPort.GetRepository pedidoGetRepository;
+  private IPedidoPesquisarRepositoryPort repositorioPesquisar;
+
+  @Autowired
+  private IPedidoListarRepositoryPort repositorioListar;
 
   @Transactional(readOnly = true)
   @Override
   public Page<PedidoModel> pesquisar(final PedidoFiltro filtro, final Pageable paginacao) {
 
     return Optional.of(filtro)
-      .map(parametrosDePesquisa -> this.pedidoGetRepository.pesquisar(parametrosDePesquisa, paginacao))
+      .map(parametrosDePesquisa -> this.repositorioPesquisar.pesquisar(parametrosDePesquisa, paginacao))
       .orElseThrow();
   }
 
@@ -47,7 +52,7 @@ public class PedidoGetService implements IPedidoServicePort.GetService {
       }
     });
 
-    return this.pedidoGetRepository.listar()
+    return this.repositorioListar.listar()
       .stream()
       .filter(model -> !model.getStatusPedido().equals(StatusPedidoEnum.CANCELADO))
       .filter(model -> !model.getStatusPedido().equals(StatusPedidoEnum.FINALIZADO))

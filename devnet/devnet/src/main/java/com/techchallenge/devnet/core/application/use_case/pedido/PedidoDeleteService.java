@@ -1,7 +1,7 @@
-package com.techchallenge.devnet.core.application.use_case;
+package com.techchallenge.devnet.core.application.use_case.pedido;
 
-import com.techchallenge.devnet.core.application.ports.entrada.pedido.IPedidoServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.entrada.pedido.IPedidoApagarServicePort;
+import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoSalvarRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
@@ -16,10 +16,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
-public class PedidoDeleteService implements IPedidoServicePort.DeleteService {
+public class PedidoDeleteService implements IPedidoApagarServicePort {
 
   @Autowired
-  private IPedidoRepositoryPort.GetRepository pedidoGetRepository;
+  private IPedidoConsultarPorIdRepositoryPort pedidoGetRepository; //
 
   @Autowired
   private IPedidoSalvarRepositoryPort pedidoPostRepository;

@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.core.application.use_case.cliente;
 
 import com.techchallenge.devnet.core.application.ports.entrada.cliente.IClienteApagarServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoBuscarPorIdClienteRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteApagarRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
@@ -23,7 +23,7 @@ public class ClienteDeleteService implements IClienteApagarServicePort {
   private IClienteApagarRepositoryPort clienteApagarRepository;
 
   @Autowired
-  private IPedidoRepositoryPort.GetRepository pedidoGetRepository;
+  private IPedidoBuscarPorIdClienteRepositoryPort pedidoGetRepository;
 
   @Override
   public void deletar(final Long id) {
@@ -43,7 +43,7 @@ public class ClienteDeleteService implements IClienteApagarServicePort {
   private ClienteModel verificarUsoDoCliente(final ClienteModel clienteModel) {
 
     var idCliente = clienteModel.getId();
-    var existePedidoDesseCliente = this.pedidoGetRepository.consultarPorIdDeCliente(idCliente)
+    var existePedidoDesseCliente = this.pedidoGetRepository.buscarPorIdDeCliente(idCliente)
       .isEmpty();
 
     if (!existePedidoDesseCliente) {

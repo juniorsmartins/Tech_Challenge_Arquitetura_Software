@@ -1,8 +1,8 @@
 package com.techchallenge.devnet.core.application.use_case.pagamento;
 
 import com.techchallenge.devnet.core.application.ports.entrada.pagamento.IPagamentoAtualizarServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.pagamento.IGatewayPagamentoPort;
+import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoSalvarRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
@@ -28,7 +28,7 @@ public class PagamentoPutService implements IPagamentoAtualizarServicePort {
   private IPedidoSalvarRepositoryPort pedidoPostRepository;
 
   @Autowired
-  private IPedidoRepositoryPort.GetRepository pedidoGetRepository;
+  private IPedidoConsultarPorIdRepositoryPort pedidoGetRepository;
 
   @Autowired
   private IGatewayPagamentoPort gatewayPagamento;

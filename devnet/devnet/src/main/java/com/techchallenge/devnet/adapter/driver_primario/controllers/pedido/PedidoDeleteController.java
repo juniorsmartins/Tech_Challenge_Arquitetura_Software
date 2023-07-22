@@ -1,7 +1,7 @@
-package com.techchallenge.devnet.adapter.driver_primario.controllers;
+package com.techchallenge.devnet.adapter.driver_primario.controllers.pedido;
 
-import com.techchallenge.devnet.adapter.driver_primario.controllers.pedido.IPedidoControllerPort;
-import com.techchallenge.devnet.core.application.ports.entrada.pedido.IPedidoServicePort;
+import com.techchallenge.devnet.adapter.driver_primario.presenters.IDeletePresenter;
+import com.techchallenge.devnet.core.application.ports.entrada.pedido.IPedidoApagarServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -19,10 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "PedidoDeleteControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/pedidos")
-public final class PedidoDeleteControllerAdapter implements IPedidoControllerPort.DeleteController {
+public final class PedidoDeleteController implements IPedidoControllerPort.DeleteController {
 
   @Autowired
-  private IPedidoServicePort.DeleteService service;
+  private IPedidoApagarServicePort service;
+
+  @Autowired
+  private IDeletePresenter presenter;
 
   @Operation(summary = "Cancelar Pedido", description = "Este recurso destina-se a apagar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {
@@ -39,10 +42,7 @@ public final class PedidoDeleteControllerAdapter implements IPedidoControllerPor
     @PathVariable(name = "id") final Long pedidoId) {
 
     this.service.cancelarPorId(pedidoId);
-
-    return ResponseEntity
-      .noContent()
-      .build();
+    return this.presenter.delete();
   }
 }
 
