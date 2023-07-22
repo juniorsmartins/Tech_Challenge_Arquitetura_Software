@@ -1,9 +1,12 @@
-package com.techchallenge.devnet.adapter.driven_secundario.repositorios;
+package com.techchallenge.devnet.adapter.driven_secundario.repositorios.pedido;
 
 import com.techchallenge.devnet.adapter.driven_secundario.adapter_saida.IAdapterSaida;
-import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.PedidoRepositoryJpa;
+import com.techchallenge.devnet.adapter.driven_secundario.repositorios.pedido.PedidoRepositoryJpa;
 import com.techchallenge.devnet.adapter.driver_primario.filtros.PedidoFiltroDto;
-import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoBuscarPorIdClienteRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoConsultarPorIdRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoListarRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoPesquisarRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import com.techchallenge.devnet.core.domain.objects.filtros.PedidoFiltro;
 import com.techchallenge.devnet.core.domain.objects.specification.PedidoSpecification;
@@ -17,7 +20,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class PedidoGetRepositoryAdapter implements IPedidoRepositoryPort.GetRepository {
+public class PedidoGetRepository implements IPedidoPesquisarRepositoryPort, IPedidoConsultarPorIdRepositoryPort,
+  IPedidoListarRepositoryPort, IPedidoBuscarPorIdClienteRepositoryPort {
 
   @Autowired
   private IAdapterSaida mapper;
@@ -46,7 +50,7 @@ public class PedidoGetRepositoryAdapter implements IPedidoRepositoryPort.GetRepo
 
   @Transactional(readOnly = true)
   @Override
-  public List<PedidoModel> consultarPorIdDeCliente(final Long clienteId) {
+  public List<PedidoModel> buscarPorIdDeCliente(final Long clienteId) {
 
     return Optional.of(clienteId)
       .map(id -> this.jpa.findByClienteId(id))

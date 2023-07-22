@@ -1,13 +1,15 @@
-package com.techchallenge.devnet.adapter.driver_primario.controllers;
+package com.techchallenge.devnet.adapter.driver_primario.controllers.pedido;
 
 import com.techchallenge.devnet.adapter.driver_primario.adapter_entrada.IAdapterEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.PedidoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PedidoDtoResponse;
-import com.techchallenge.devnet.core.application.ports.entrada.IPedidoServicePort;
+import com.techchallenge.devnet.adapter.driver_primario.presenters.IPutPresenter;
+import com.techchallenge.devnet.core.application.ports.entrada.pedido.IPedidoAtualizarServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -16,48 +18,49 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.URI;
 import java.util.Optional;
 
-@Tag(name = "PedidoPostControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
+@Tag(name = "PedidoPutControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/pedidos")
-public final class PedidoPostControllerAdapter implements IPedidoControllerPort.PostController {
+public final class PedidoPutController implements IPedidoControllerPort.PutController {
 
   @Autowired
   private IAdapterEntrada mapper;
 
   @Autowired
-  private IPedidoServicePort.PostService service;
+  private IPedidoAtualizarServicePort service;
 
-  @Operation(summary = "Cadastrar Pedido", description = "Este recurso destina-se a cadastrar.")
+  @Autowired
+  private IPutPresenter presenter;
+
+  @Operation(summary = "Atualizar Pedido", description = "Este recurso destina-se a atualizar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {
-    @ApiResponse(responseCode = "201", description = "Created - novo recurso criado com sucesso!", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = PedidoDtoRequest.class))}),
+    @ApiResponse(responseCode = "200", description = "OK - requisição bem sucedida e com retorno.", content = {@Content(mediaType = "application/json", array = @ArraySchema(minItems = 1, schema = @Schema(implementation = PedidoDtoResponse.class), uniqueItems = true))}),
     @ApiResponse(responseCode = "400", description = "Bad Request - requisição mal feita.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))}),
-    @ApiResponse(responseCode = "401", description = "Unauthorized - cliente não autenticado.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))}),
+    @ApiResponse(responseCode = "401", description = "Unauthorized: cliente não autenticado.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))}),
     @ApiResponse(responseCode = "403", description = "Forbidden - cliente autenticado, mas sem autorização para acessar recurso.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))}),
-    @ApiResponse(responseCode = "409", description = "Conflict - requisição não concluída por conflito de estado do recurso.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))}),
+    @ApiResponse(responseCode = "404", description = "Not Found - recurso não encontrado no banco de dados.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))}),
     @ApiResponse(responseCode = "500", description = "Internal Server Error - situação inesperada no servidor.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))})
   })
   @Override
-  public ResponseEntity<PedidoDtoResponse> cadastrar(
-    @Parameter(name = "PedidoDtoRequest", description = "Estrutura de dados para transporte de informações de entrada.", required = true)
-    @RequestBody @Valid final PedidoDtoRequest dtoRequest, final UriComponentsBuilder uriComponentsBuilder) {
+  public ResponseEntity<Object> atualizar(
+    @Parameter(name = "id", description = "Chave de identificação", example = "22", required = true)
+    @PathVariable(name = "id") final Long pedidoId,
+    @Parameter(name = "PedidoDtoRequest", description = "Estrutura de dados para transporte de informações.", required = true)
+    @RequestBody @Valid final PedidoDtoRequest dtoRequest) {
 
-    var response = Optional.of(dtoRequest)
+    return Optional.of(dtoRequest)
       .map(dto -> this.mapper.converterOrigemParaDestino(dto, PedidoModel.class))
-      .map(this.service::cadastrar)
+      .map(model -> this.service.atualizar(pedidoId, model))
       .map(model -> this.mapper.converterOrigemParaDestino(model, PedidoDtoResponse.class))
+      .map(this.presenter::put)
       .orElseThrow();
-
-    return ResponseEntity
-      .created(URI.create("/api/v1/pedidos" + response.getId()))
-      .body(response);
   }
 }
 

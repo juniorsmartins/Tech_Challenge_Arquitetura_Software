@@ -2,7 +2,8 @@ package com.techchallenge.devnet.core.application.use_case.copa;
 
 import com.techchallenge.devnet.core.application.ports.entrada.copa.ICopaPedidoFinalizadoServicePort;
 import com.techchallenge.devnet.core.application.ports.entrada.copa.ICopaPedidoProntoServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoConsultarPorIdRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoSalvarRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_409.AtualizarPedidoBloqueadoException;
@@ -21,10 +22,10 @@ public class CopaPutService implements ICopaPedidoProntoServicePort, ICopaPedido
   private IUtils utils;
 
   @Autowired
-  private IPedidoRepositoryPort.GetRepository pedidoGetRepository;
+  private IPedidoConsultarPorIdRepositoryPort pedidoGetRepository;
 
   @Autowired
-  private IPedidoRepositoryPort.PostRepository pedidoPostRepository;
+  private IPedidoSalvarRepositoryPort pedidoPostRepository;
 
   @Override
   public PedidoModel confirmarPedidoPronto(final Long idPedido) {

@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa;
+package com.techchallenge.devnet.adapter.driven_secundario.repositorios.pedido;
 
 import com.techchallenge.devnet.adapter.driven_secundario.entities.PedidoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

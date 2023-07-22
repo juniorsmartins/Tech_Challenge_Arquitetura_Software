@@ -1,9 +1,8 @@
-package com.techchallenge.devnet.adapter.driven_secundario.repositorios;
+package com.techchallenge.devnet.adapter.driven_secundario.repositorios.pedido;
 
 import com.techchallenge.devnet.adapter.driven_secundario.adapter_saida.IAdapterSaida;
 import com.techchallenge.devnet.adapter.driven_secundario.entities.PedidoEntity;
-import com.techchallenge.devnet.adapter.driven_secundario.repositorios.jpa.PedidoRepositoryJpa;
-import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoSalvarRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -12,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
-public class PedidoPostRepositoryAdapter implements IPedidoRepositoryPort.PostRepository {
+public class PedidoPostRepository implements IPedidoSalvarRepositoryPort {
 
   @Autowired
   private IAdapterSaida mapper;

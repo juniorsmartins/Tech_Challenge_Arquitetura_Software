@@ -4,7 +4,7 @@ import com.techchallenge.devnet.adapter.driver_primario.adapter_entrada.IAdapter
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.IndicadorDtoResponse;
 import com.techchallenge.devnet.adapter.driver_primario.filtros.ClienteFiltroDto;
 import com.techchallenge.devnet.adapter.driver_primario.presenters.IGetPresenter;
-import com.techchallenge.devnet.core.application.ports.entrada.admin.IAdminBuscarIndicadoresService;
+import com.techchallenge.devnet.core.application.ports.entrada.admin.IAdminBuscarIndicadoresServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -29,7 +29,7 @@ public final class AdminGetController implements IAdminControllerPort.GetControl
   private IAdapterEntrada mapper;
 
   @Autowired
-  private IAdminBuscarIndicadoresService service;
+  private IAdminBuscarIndicadoresServicePort service;
 
   @Autowired
   private IGetPresenter presenter;

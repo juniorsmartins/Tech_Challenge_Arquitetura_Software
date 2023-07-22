@@ -1,7 +1,8 @@
-package com.techchallenge.devnet.core.application.use_case;
+package com.techchallenge.devnet.core.application.use_case.pedido;
 
-import com.techchallenge.devnet.core.application.ports.entrada.IPedidoServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.entrada.pedido.IPedidoApagarServicePort;
+import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoConsultarPorIdRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoSalvarRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_409.CancelamentoBloqueadoException;
@@ -15,19 +16,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
-public class PedidoDeleteService implements IPedidoServicePort.DeleteService {
+public class PedidoDeleteService implements IPedidoApagarServicePort {
 
   @Autowired
-  private IPedidoRepositoryPort.GetRepository pedidoGetRepository;
+  private IPedidoConsultarPorIdRepositoryPort repositorioConsultar;
 
   @Autowired
-  private IPedidoRepositoryPort.PostRepository pedidoPostRepository;
+  private IPedidoSalvarRepositoryPort repositorioSalvar;
 
   @Transactional(isolation = Isolation.SERIALIZABLE)
   @Override
   public void cancelarPorId(final Long id) {
 
-    this.pedidoGetRepository.consultarPorId(id)
+    this.repositorioConsultar.consultarPorId(id)
       .map(model -> {
 
         if (!model.getStatusPedido().equals(StatusPedidoEnum.RECEBIDO)) {
@@ -39,7 +40,7 @@ public class PedidoDeleteService implements IPedidoServicePort.DeleteService {
 
         return model;
       })
-      .map(this.pedidoPostRepository::salvar)
+      .map(this.repositorioSalvar::salvar)
       .orElseThrow(() -> {
         log.info(String.format(MensagemPadrao.PEDIDO_NAO_ENCONTRADO, id));
         throw new PedidoNaoEncontradoException(id);
