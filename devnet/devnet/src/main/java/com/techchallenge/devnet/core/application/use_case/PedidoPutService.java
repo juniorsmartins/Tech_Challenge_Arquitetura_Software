@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.core.application.use_case;
 
-import com.techchallenge.devnet.core.application.ports.entrada.pedido.IPedidoServicePort;
+import com.techchallenge.devnet.core.application.ports.entrada.pedido.IPedidoAtualizarServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.IItemPedidoRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.IPedidoRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoSalvarRepositoryPort;
@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @Slf4j
 @Service
-public class PedidoPutService implements IPedidoServicePort.PutService {
+public class PedidoPutService implements IPedidoAtualizarServicePort {
 
   @Autowired
   private IUtils utils;

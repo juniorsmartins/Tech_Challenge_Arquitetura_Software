@@ -2,8 +2,9 @@ package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
 import com.techchallenge.devnet.adapter.driver_primario.adapter_entrada.IAdapterEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.controllers.pedido.IPedidoControllerPort;
-import com.techchallenge.devnet.adapter.driver_primario.filtros.PedidoFiltroDto;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PedidoDtoResponse;
+import com.techchallenge.devnet.adapter.driver_primario.filtros.PedidoFiltroDto;
+import com.techchallenge.devnet.adapter.driver_primario.presenters.IGetPresenter;
 import com.techchallenge.devnet.core.application.ports.entrada.pedido.IPedidoServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.core.domain.objects.filtros.PedidoFiltro;
@@ -16,7 +17,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -24,19 +24,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Optional;
 
 @Tag(name = "PedidoGetControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/pedidos")
-public final class PedidoGetControllerAdapter implements IPedidoControllerPort.GetController {
+public final class PedidoGetController implements IPedidoControllerPort.GetController {
 
   @Autowired
   private IAdapterEntrada mapper;
 
   @Autowired
   private IPedidoServicePort.GetService service;
+
+  @Autowired
+  private IGetPresenter presenter;
 
   @Operation(summary = "Pesquisar Pedido", description = "Este recurso permite consultar Pedido por diversas propriedades com retorno paginado.")
   @ApiResponses(value = {
@@ -48,20 +50,21 @@ public final class PedidoGetControllerAdapter implements IPedidoControllerPort.G
     @ApiResponse(responseCode = "500", description = "Internal Server Error - situação inesperada no servidor.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))})
   })
   @Override
-  public ResponseEntity<Page<PedidoDtoResponse>> pesquisar(
+  public ResponseEntity<Object> pesquisar(
     @Parameter(name = "PedidoFiltro", description = "Estrutura de dados usada como filtro de pesquisa.", required = false)
     final PedidoFiltroDto filtroDto,
     @PageableDefault(sort = "id", direction = Sort.Direction.DESC, page = 0, size = 10) final Pageable paginacao) {
 
-    var response = Optional.of(filtroDto)
+    return Optional.of(filtroDto)
       .map(dto -> this.mapper.converterOrigemParaDestino(dto, PedidoFiltro.class))
       .map(parametrosDePesquisa -> this.service.pesquisar(parametrosDePesquisa, paginacao))
       .map(paginaPedidos -> this.mapper.converterPaginaOrigemParaPaginaDestino(paginaPedidos, PedidoDtoResponse.class))
+      .map(this.presenter::get)
       .orElseThrow();
-
-    return ResponseEntity
-      .ok()
-      .body(response);
+//
+//    return ResponseEntity
+//      .ok()
+//      .body(response);
   }
 
   @Operation(summary = "Listar Pedido Ordenado", description = "Este recurso permite listar Pedido ordenado por StatusPedido e por dataHora do recebimento.")
@@ -74,15 +77,16 @@ public final class PedidoGetControllerAdapter implements IPedidoControllerPort.G
     @ApiResponse(responseCode = "500", description = "Internal Server Error - situação inesperada no servidor.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))})
   })
   @Override
-  public ResponseEntity<List<PedidoDtoResponse>> listarOrdenadoPorStatusAndDataHoraCadastro() {
+  public ResponseEntity<Object> listarOrdenadoPorStatusAndDataHoraCadastro() {
 
-    var response = Optional.of(this.service.listarOrdenadoPorStatusAndDataHoraCadastro())
+    return Optional.of(this.service.listarOrdenadoPorStatusAndDataHoraCadastro())
       .map(models -> this.mapper.converterListaOrigemParaListaDestino(models, PedidoDtoResponse.class))
+      .map(this.presenter::get)
       .orElseThrow();
 
-    return ResponseEntity
-      .ok()
-      .body(response);
+//    return ResponseEntity
+//      .ok()
+//      .body(response);
   }
 }
 

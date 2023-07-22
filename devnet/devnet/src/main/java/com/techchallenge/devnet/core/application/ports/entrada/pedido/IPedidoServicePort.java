@@ -9,10 +9,6 @@ import java.util.List;
 
 public interface IPedidoServicePort {
 
-  interface PutService {
-    PedidoModel atualizar(Long id, PedidoModel pedidoModel);
-  }
-
   interface GetService {
     Page<PedidoModel> pesquisar(PedidoFiltro filtro, Pageable paginacao);
 
