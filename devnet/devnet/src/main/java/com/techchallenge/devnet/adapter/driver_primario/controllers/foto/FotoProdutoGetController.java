@@ -2,6 +2,7 @@ package com.techchallenge.devnet.adapter.driver_primario.controllers.foto;
 
 import com.techchallenge.devnet.adapter.driver_primario.adapter_entrada.IAdapterEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.FotoProdutoDtoResponse;
+import com.techchallenge.devnet.adapter.driver_primario.presenters.IGetPresenter;
 import com.techchallenge.devnet.core.application.ports.entrada.foto.IFotoProdutoConsultarPorIdServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import io.swagger.v3.oas.annotations.Operation;
@@ -11,7 +12,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,11 +24,19 @@ import java.util.Optional;
 @RequestMapping(path = "/api/v1/fotos")
 public final class FotoProdutoGetController implements IFotoProdutoControllerPort.ConsultarPorIdController {
 
-  @Autowired
-  private IAdapterEntrada mapper;
+  private final IAdapterEntrada mapper;
 
-  @Autowired
-  private IFotoProdutoConsultarPorIdServicePort serviceFotoProduto;
+  private final IFotoProdutoConsultarPorIdServicePort service;
+
+  private final IGetPresenter presenter;
+
+  public FotoProdutoGetController(IAdapterEntrada mapper,
+                                  IFotoProdutoConsultarPorIdServicePort service,
+                                  IGetPresenter presenter) {
+    this.mapper = mapper;
+    this.service = service;
+    this.presenter = presenter;
+  }
 
   @Operation(summary = "Pesquisar FotoProduto", description = "Este recurso permite consultar FotoProduto por diversas propriedades com retorno paginado.")
   @ApiResponses(value = {
@@ -40,18 +48,15 @@ public final class FotoProdutoGetController implements IFotoProdutoControllerPor
     @ApiResponse(responseCode = "500", description = "Internal Server Error - situação inesperada no servidor.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))})
   })
   @Override
-  public ResponseEntity<FotoProdutoDtoResponse> consultarPorId(
+  public ResponseEntity<Object> consultarPorId(
     @Parameter(name = "id", description = "Chave de identificação", example = "22", required = true)
     @PathVariable(name = "id") final Long id) {
 
-    var response = Optional.of(id)
-      .map(codigo -> this.serviceFotoProduto.consultarPorId(codigo))
+    return Optional.of(id)
+      .map(codigo -> this.service.consultarPorId(codigo))
       .map(model -> this.mapper.converterOrigemParaDestino(model, FotoProdutoDtoResponse.class))
+      .map(this.presenter::get)
       .orElseThrow();
-
-    return ResponseEntity
-      .ok()
-      .body(response);
   }
 }
 

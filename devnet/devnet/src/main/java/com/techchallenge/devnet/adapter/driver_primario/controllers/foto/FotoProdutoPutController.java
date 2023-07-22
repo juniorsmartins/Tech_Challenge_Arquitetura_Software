@@ -3,6 +3,7 @@ package com.techchallenge.devnet.adapter.driver_primario.controllers.foto;
 import com.techchallenge.devnet.adapter.driver_primario.adapter_entrada.IAdapterEntrada;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.FotoProdutoDtoRequest;
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.FotoProdutoDtoResponse;
+import com.techchallenge.devnet.adapter.driver_primario.presenters.IPutPresenter;
 import com.techchallenge.devnet.core.application.ports.entrada.foto.IFotoProdutoAtualizarServicePort;
 import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.core.domain.models.FotoProdutoArquivo;
@@ -14,7 +15,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,11 +28,19 @@ import java.util.Optional;
 @RequestMapping(path = "/api/v1/fotos")
 public final class FotoProdutoPutController implements IFotoProdutoControllerPort.PutController {
 
-  @Autowired
-  private IAdapterEntrada mapper;
+  private final IAdapterEntrada mapper;
 
-  @Autowired
-  private IFotoProdutoAtualizarServicePort service;
+  private final IFotoProdutoAtualizarServicePort service;
+
+  private final IPutPresenter presenter;
+
+  public FotoProdutoPutController(IAdapterEntrada mapper,
+                                  IFotoProdutoAtualizarServicePort service,
+                                  IPutPresenter presenter) {
+    this.mapper = mapper;
+    this.service = service;
+    this.presenter = presenter;
+  }
 
   @Operation(summary = "Atualizar Cliente", description = "Este recurso destina-se a atualizar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {
@@ -44,12 +52,12 @@ public final class FotoProdutoPutController implements IFotoProdutoControllerPor
     @ApiResponse(responseCode = "500", description = "Internal Server Error - situação inesperada no servidor.", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErro.class))})
   })
   @Override
-  public ResponseEntity<FotoProdutoDtoResponse> inserirFotoNoProduto(
+  public ResponseEntity<Object> inserirFotoNoProduto(
     @Parameter(name = "id", description = "Chave de identificação", example = "22", required = true)
     @PathVariable(name = "id") final Long produtoId,
     @Valid final FotoProdutoDtoRequest fotoProdutoDtoRequest) {
 
-    var response = Optional.of(fotoProdutoDtoRequest)
+    return Optional.of(fotoProdutoDtoRequest)
       .map(dtoRequest -> this.mapper.converterOrigemParaDestino(dtoRequest, FotoProdutoArquivo.class))
       .map(arquivo -> {
 
@@ -61,11 +69,8 @@ public final class FotoProdutoPutController implements IFotoProdutoControllerPor
 
       })
       .map(model -> this.mapper.converterOrigemParaDestino(model, FotoProdutoDtoResponse.class))
+      .map(this.presenter::put)
       .orElseThrow();
-
-    return ResponseEntity
-      .ok()
-      .body(response);
   }
 }
 
