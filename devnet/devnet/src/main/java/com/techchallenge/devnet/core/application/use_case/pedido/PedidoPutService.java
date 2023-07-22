@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.core.application.use_case.pedido;
 
 import com.techchallenge.devnet.core.application.ports.entrada.pedido.IPedidoAtualizarServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.IItemPedidoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.item_pedido.IItemPedidoDeletarItensRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoSalvarRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
@@ -30,7 +30,7 @@ public class PedidoPutService implements IPedidoAtualizarServicePort {
   private IPedidoSalvarRepositoryPort pedidoPostRepository;
 
   @Autowired
-  private IItemPedidoRepositoryPort.DeleteRepository itemPedidoDeleteRepository;
+  private IItemPedidoDeletarItensRepositoryPort itemPedidoDeleteRepository;
 
   @Override
   public PedidoModel atualizar(final Long id, final PedidoModel pedidoModel) {

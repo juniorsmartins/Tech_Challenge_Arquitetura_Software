@@ -1,7 +1,6 @@
-package com.techchallenge.devnet.adapter.driven_secundario.repositorios;
+package com.techchallenge.devnet.adapter.driven_secundario.repositorios.item_pedido;
 
 import com.techchallenge.devnet.adapter.driven_secundario.adapter_saida.IAdapterSaida;
-import com.techchallenge.devnet.adapter.driven_secundario.repositorios.item_pedido.ItemPedidoRepositoryJpa;
 import com.techchallenge.devnet.core.application.ports.saida.item_pedido.IItemPedidoBuscarPorIdProdutoRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.item_pedido.IItemPedidoConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.ItemPedidoModel;

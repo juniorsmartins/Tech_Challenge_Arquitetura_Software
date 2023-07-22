@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.core.application.use_case.produto;
 
 import com.techchallenge.devnet.core.application.ports.entrada.produto.IProdutoApagarServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.IItemPedidoRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.item_pedido.IItemPedidoBuscarPorIdProdutoRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.produto.IProdutoApagarRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.produto.IProdutoConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
@@ -23,7 +23,7 @@ public class ProdutoDeleteService implements IProdutoApagarServicePort {
   private IProdutoApagarRepositoryPort produtoApagarRepository;
 
   @Autowired
-  private IItemPedidoRepositoryPort.GetRepository itemPedidoGetRepository;
+  private IItemPedidoBuscarPorIdProdutoRepositoryPort itemPedidoGetRepository;
 
   @Override
   public void deletar(final Long id) {
@@ -43,7 +43,7 @@ public class ProdutoDeleteService implements IProdutoApagarServicePort {
   private ProdutoModel verificarUsoDoProduto(final ProdutoModel produtoModel) {
 
     var idProduto = produtoModel.getId();
-    var existeItemPedidoComEsseProduto = this.itemPedidoGetRepository.consultarPorIdDeProduto(idProduto)
+    var existeItemPedidoComEsseProduto = this.itemPedidoGetRepository.buscarPorIdDeProduto(idProduto)
       .isEmpty();
 
     if (!existeItemPedidoComEsseProduto) {
