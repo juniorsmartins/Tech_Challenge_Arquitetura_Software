@@ -15,7 +15,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,14 +27,19 @@ import java.util.Optional;
 @RequestMapping(path = "/api/v1/produtos")
 public final class ProdutoPostController implements IProdutoControllerPort.PostController {
 
-  @Autowired
-  private IAdapterEntrada mapper;
+  private final IAdapterEntrada mapper;
 
-  @Autowired
-  private IProdutoCadastrarServicePort service;
+  private final IProdutoCadastrarServicePort service;
 
-  @Autowired
-  private IPostPresenter presenter;
+  private final IPostPresenter presenter;
+
+  public ProdutoPostController(IAdapterEntrada mapper,
+                               IProdutoCadastrarServicePort service,
+                               IPostPresenter presenter) {
+    this.mapper = mapper;
+    this.service = service;
+    this.presenter = presenter;
+  }
 
   @Operation(summary = "Cadastrar Produto", description = "Este recurso destina-se a cadastrar.")
   @ApiResponses(value = {
