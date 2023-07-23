@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.core.domain.base.value_objects;
 
-import com.techchallenge.devnet.core.domain.base.exceptions.http_400.CpfInvalidoException;
+import com.techchallenge.devnet.core.application.exceptions.http_400.CpfInvalidoException;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

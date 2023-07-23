@@ -2,7 +2,7 @@ package com.techchallenge.devnet.adapter.driver_primario.controllers.cliente;
 
 import com.techchallenge.devnet.adapter.driver_primario.presenters.IDeletePresenter;
 import com.techchallenge.devnet.core.application.ports.entrada.cliente.IClienteApagarServicePort;
-import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
+import com.techchallenge.devnet.core.application.exceptions.RetornoDeErro;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;

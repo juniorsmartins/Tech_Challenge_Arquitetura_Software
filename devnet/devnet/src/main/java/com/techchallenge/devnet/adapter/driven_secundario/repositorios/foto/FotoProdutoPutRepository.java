@@ -5,7 +5,7 @@ import com.techchallenge.devnet.adapter.driven_secundario.entities.FotoProdutoEn
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.produto.ProdutoRepositoryJpa;
 import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoArmazemPort;
 import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoSalvarRepositoryPort;
-import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
+import com.techchallenge.devnet.core.application.exceptions.http_404.ProdutoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.models.FotoProdutoModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

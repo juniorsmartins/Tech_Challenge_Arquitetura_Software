@@ -5,7 +5,7 @@ import com.techchallenge.devnet.adapter.driven_secundario.entities.ItemPedidoEnt
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.pedido.PedidoRepositoryJpa;
 import com.techchallenge.devnet.core.application.ports.saida.item_pedido.IItemPedidoApagarRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.item_pedido.IItemPedidoDeletarItensRepositoryPort;
-import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
+import com.techchallenge.devnet.core.application.exceptions.http_404.PedidoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.models.ItemPedidoModel;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

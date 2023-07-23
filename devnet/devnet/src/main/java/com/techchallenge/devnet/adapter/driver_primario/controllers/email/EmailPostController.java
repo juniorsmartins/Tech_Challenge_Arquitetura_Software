@@ -5,7 +5,7 @@ import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.EmailDto
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.EmailDtoResponse;
 import com.techchallenge.devnet.adapter.driver_primario.presenters.IPostPresenter;
 import com.techchallenge.devnet.core.application.ports.entrada.email.IEmailEnviarServicePort;
-import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
+import com.techchallenge.devnet.core.application.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.core.domain.models.EmailModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

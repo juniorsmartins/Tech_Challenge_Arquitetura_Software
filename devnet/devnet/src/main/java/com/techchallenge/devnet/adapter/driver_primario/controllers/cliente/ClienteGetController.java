@@ -5,7 +5,7 @@ import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ClienteDto
 import com.techchallenge.devnet.adapter.driver_primario.filtros.ClienteFiltroDto;
 import com.techchallenge.devnet.adapter.driver_primario.presenters.IGetPresenter;
 import com.techchallenge.devnet.core.application.ports.entrada.cliente.IClientePesquisarServicePort;
-import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
+import com.techchallenge.devnet.core.application.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.core.domain.objects.filtros.ClienteFiltro;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

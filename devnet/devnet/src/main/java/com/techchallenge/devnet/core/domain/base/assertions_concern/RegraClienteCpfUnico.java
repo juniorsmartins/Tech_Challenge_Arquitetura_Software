@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.core.domain.base.assertions_concern;
 
 import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteConsultarPorCpfRepositoryPort;
-import com.techchallenge.devnet.core.domain.base.exceptions.http_409.RegraClienteCpfUnicoException;
+import com.techchallenge.devnet.core.application.exceptions.http_409.RegraClienteCpfUnicoException;
 import com.techchallenge.devnet.core.domain.models.ClienteModel;
 import org.springframework.stereotype.Service;
 

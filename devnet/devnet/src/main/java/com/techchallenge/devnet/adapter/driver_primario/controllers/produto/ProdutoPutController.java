@@ -5,7 +5,7 @@ import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ProdutoD
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ProdutoDtoResponse;
 import com.techchallenge.devnet.adapter.driver_primario.presenters.IPutPresenter;
 import com.techchallenge.devnet.core.application.ports.entrada.produto.IProdutoAtualizarServicePort;
-import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
+import com.techchallenge.devnet.core.application.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.core.domain.models.ProdutoModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

@@ -4,9 +4,9 @@ import com.techchallenge.devnet.core.application.ports.entrada.email.IEmailEnvia
 import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.email.IEmailSalvarRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoConsultarPorIdRepositoryPort;
-import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
-import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ClienteNaoEncontradoException;
-import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
+import com.techchallenge.devnet.core.application.exceptions.MensagemPadrao;
+import com.techchallenge.devnet.core.application.exceptions.http_404.ClienteNaoEncontradoException;
+import com.techchallenge.devnet.core.application.exceptions.http_404.PedidoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.models.EmailModel;
 import com.techchallenge.devnet.core.domain.models.enums.StatusEmailEnum;
 import lombok.extern.slf4j.Slf4j;

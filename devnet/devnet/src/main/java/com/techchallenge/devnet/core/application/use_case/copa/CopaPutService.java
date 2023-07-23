@@ -4,9 +4,9 @@ import com.techchallenge.devnet.core.application.ports.entrada.copa.ICopaPedidoF
 import com.techchallenge.devnet.core.application.ports.entrada.copa.ICopaPedidoProntoServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoSalvarRepositoryPort;
-import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
-import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
-import com.techchallenge.devnet.core.domain.base.exceptions.http_409.AtualizarPedidoBloqueadoException;
+import com.techchallenge.devnet.core.application.exceptions.MensagemPadrao;
+import com.techchallenge.devnet.core.application.exceptions.http_404.PedidoNaoEncontradoException;
+import com.techchallenge.devnet.core.application.exceptions.http_409.AtualizarPedidoBloqueadoException;
 import com.techchallenge.devnet.core.domain.base.utilitarios.IUtils;
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;

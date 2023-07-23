@@ -5,7 +5,7 @@ import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.PedidoDt
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.PedidoDtoResponse;
 import com.techchallenge.devnet.adapter.driver_primario.presenters.IPostPresenter;
 import com.techchallenge.devnet.core.application.ports.entrada.pedido.IPedidoCadastrarServicePort;
-import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
+import com.techchallenge.devnet.core.application.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

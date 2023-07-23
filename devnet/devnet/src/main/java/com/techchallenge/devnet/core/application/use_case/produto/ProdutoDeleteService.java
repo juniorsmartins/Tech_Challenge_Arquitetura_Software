@@ -4,9 +4,9 @@ import com.techchallenge.devnet.core.application.ports.entrada.produto.IProdutoA
 import com.techchallenge.devnet.core.application.ports.saida.item_pedido.IItemPedidoBuscarPorIdProdutoRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.produto.IProdutoApagarRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.produto.IProdutoConsultarPorIdRepositoryPort;
-import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
-import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
-import com.techchallenge.devnet.core.domain.base.exceptions.http_409.DeletarBloqueadoPoUso;
+import com.techchallenge.devnet.core.application.exceptions.MensagemPadrao;
+import com.techchallenge.devnet.core.application.exceptions.http_404.ProdutoNaoEncontradoException;
+import com.techchallenge.devnet.core.application.exceptions.http_409.DeletarBloqueadoPoUso;
 import com.techchallenge.devnet.core.domain.models.ProdutoModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

@@ -4,7 +4,7 @@ import com.techchallenge.devnet.adapter.driver_primario.adapter_entrada.IAdapter
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.FotoProdutoDtoResponse;
 import com.techchallenge.devnet.adapter.driver_primario.presenters.IGetPresenter;
 import com.techchallenge.devnet.core.application.ports.entrada.foto.IFotoProdutoConsultarPorIdServicePort;
-import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
+import com.techchallenge.devnet.core.application.exceptions.RetornoDeErro;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;

@@ -5,7 +5,7 @@ import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ClienteD
 import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.ClienteDtoResponse;
 import com.techchallenge.devnet.adapter.driver_primario.presenters.IPutPresenter;
 import com.techchallenge.devnet.core.application.ports.entrada.cliente.IClienteAtualizarServicePort;
-import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
+import com.techchallenge.devnet.core.application.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.core.domain.models.ClienteModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

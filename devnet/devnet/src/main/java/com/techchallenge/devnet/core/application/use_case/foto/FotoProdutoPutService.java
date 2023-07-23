@@ -4,7 +4,7 @@ import com.techchallenge.devnet.core.application.ports.entrada.foto.IFotoProduto
 import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoArmazemPort;
 import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoSalvarRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.produto.IProdutoConsultarPorIdRepositoryPort;
-import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
+import com.techchallenge.devnet.core.application.exceptions.http_404.ProdutoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.models.FotoProdutoArquivo;
 import com.techchallenge.devnet.core.domain.models.FotoProdutoModel;
 import lombok.extern.slf4j.Slf4j;

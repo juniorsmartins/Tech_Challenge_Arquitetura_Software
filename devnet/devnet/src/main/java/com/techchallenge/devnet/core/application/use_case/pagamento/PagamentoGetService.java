@@ -4,8 +4,8 @@ import com.techchallenge.devnet.core.application.ports.entrada.pagamento.IPagame
 import com.techchallenge.devnet.core.application.ports.entrada.pagamento.IPagamentoPesquisarServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.pagamento.IPagamentoConsultarRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.pagamento.IPagamentoPesquisarRepositoryPort;
-import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
-import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PagamentoNaoEncontradoException;
+import com.techchallenge.devnet.core.application.exceptions.MensagemPadrao;
+import com.techchallenge.devnet.core.application.exceptions.http_404.PagamentoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.models.PagamentoModel;
 import com.techchallenge.devnet.core.domain.objects.filtros.PagamentoFiltro;
 import lombok.extern.slf4j.Slf4j;

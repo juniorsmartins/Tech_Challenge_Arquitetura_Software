@@ -1,8 +1,8 @@
 package com.techchallenge.devnet.adapter.driven_secundario.repositorios.foto;
 
 import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoArmazemPort;
-import com.techchallenge.devnet.core.domain.base.exceptions.ArmazemException;
-import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
+import com.techchallenge.devnet.core.application.exceptions.ArmazemException;
+import com.techchallenge.devnet.core.application.exceptions.MensagemPadrao;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 

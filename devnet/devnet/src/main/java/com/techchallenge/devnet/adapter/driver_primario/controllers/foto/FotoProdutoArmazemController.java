@@ -1,8 +1,8 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers.foto;
 
 import com.techchallenge.devnet.core.application.ports.entrada.foto.IFotoProdutoBuscarImagemPorIdServicePort;
-import com.techchallenge.devnet.core.domain.base.exceptions.RetornoDeErro;
-import com.techchallenge.devnet.core.domain.base.exceptions.http_404.FotoProdutoNaoEncontradoException;
+import com.techchallenge.devnet.core.application.exceptions.RetornoDeErro;
+import com.techchallenge.devnet.core.application.exceptions.http_404.FotoProdutoNaoEncontradoException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
