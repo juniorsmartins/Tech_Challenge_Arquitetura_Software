@@ -8,7 +8,6 @@ import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ClienteNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.models.ClienteModel;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,8 +37,7 @@ public class ClientePutService implements IClienteAtualizarServicePort {
       .map(model -> {
         clienteModel.setId(id);
         this.regras.forEach(regra -> regra.executar(clienteModel));
-        BeanUtils.copyProperties(clienteModel, model, "id");
-        return model;
+        return clienteModel;
       })
       .map(this.repositorioSalvarCliente::salvar)
       .orElseThrow(() -> {

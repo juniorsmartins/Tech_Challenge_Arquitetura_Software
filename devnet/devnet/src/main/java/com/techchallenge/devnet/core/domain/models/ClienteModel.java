@@ -2,6 +2,7 @@ package com.techchallenge.devnet.core.domain.models;
 
 import com.techchallenge.devnet.core.domain.base.value_objects.CadastroPessoaFisica;
 import com.techchallenge.devnet.core.domain.base.value_objects.CorreioEletronico;
+import com.techchallenge.devnet.core.domain.base.value_objects.DataNascimento;
 import com.techchallenge.devnet.core.domain.base.value_objects.Telefone;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,6 +13,7 @@ import lombok.Setter;
 import org.apache.commons.lang3.ObjectUtils;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
 @Builder
@@ -33,6 +35,8 @@ public final class ClienteModel implements Serializable {
   private Telefone numeroTelefone;
 
   private CorreioEletronico email;
+
+  private DataNascimento dataNascimento;
 
   private OffsetDateTime dataHoraCadastro;
 
@@ -67,6 +71,22 @@ public final class ClienteModel implements Serializable {
 
   public String getEmail() {
     return this.email.getEmail();
+  }
+
+  public void setDataNascimentoString(String dataNascimento) {
+    this.dataNascimento = new DataNascimento(dataNascimento);
+  }
+
+  public void setDataNascimentoLocalDate(LocalDate dataNascimento) {
+    this.dataNascimento = new DataNascimento(dataNascimento);
+  }
+
+  public String getDataNascimentoString() {
+    return this.dataNascimento.getDataNascimentoString();
+  }
+
+  public LocalDate getDataNascimentoLocalDate() {
+    return this.dataNascimento.getDataNascimentoLocalDate();
   }
 }
 

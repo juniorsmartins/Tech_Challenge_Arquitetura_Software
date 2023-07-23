@@ -13,6 +13,7 @@ import com.techchallenge.devnet.core.domain.models.enums.FormaPagamentoEnum;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDate;
 
 public final class CriadorDeObjetos {
 
@@ -26,7 +27,8 @@ public final class CriadorDeObjetos {
       .nome(faker.name().fullName())
       .cpf(cpfGenerator.cpf(false))
       .numeroTelefone(faker.numerify("###########"))
-      .email(faker.internet().emailAddress());
+      .email(faker.internet().emailAddress())
+      .dataNascimentoLocalDate(LocalDate.now());
   }
 
   public static ClienteDtoRequest.ClienteDtoRequestBuilder gerarClienteDtoRequestBuilder() {
@@ -35,7 +37,8 @@ public final class CriadorDeObjetos {
       .nome(faker.name().fullName())
       .cpf(cpfGenerator.cpf(false))
       .numeroTelefone(faker.numerify("###########"))
-      .email(faker.internet().emailAddress());
+      .email(faker.internet().emailAddress())
+      .dataNascimentoString("1" + faker.numerify("#") + "/10/19" + faker.numerify("##"));
   }
 
   public static ProdutoEntity.ProdutoEntityBuilder gerarProdutoEntityBuilder() {
