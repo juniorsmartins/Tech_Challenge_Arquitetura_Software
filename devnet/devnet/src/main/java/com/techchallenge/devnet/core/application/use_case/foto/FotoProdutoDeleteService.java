@@ -1,14 +1,13 @@
 package com.techchallenge.devnet.core.application.use_case.foto;
 
 import com.techchallenge.devnet.core.application.ports.entrada.foto.IFotoProdutoApagarServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoArmazemPort;
 import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoApagarRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoArmazemPort;
 import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoSalvarRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.FotoProdutoNaoEncontradoException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,17 +16,23 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class FotoProdutoDeleteService implements IFotoProdutoApagarServicePort {
 
-  @Autowired
-  private IFotoProdutoConsultarPorIdRepositoryPort fotoProdutoConsultarPorIdRepository;
+  private final IFotoProdutoConsultarPorIdRepositoryPort fotoProdutoConsultarPorIdRepository;
 
-  @Autowired
-  private IFotoProdutoSalvarRepositoryPort fotoProdutoSalvarRepository;
+  private final IFotoProdutoSalvarRepositoryPort fotoProdutoSalvarRepository;
 
-  @Autowired
-  private IFotoProdutoApagarRepositoryPort fotoProdutoApagarRepository;
+  private final IFotoProdutoApagarRepositoryPort fotoProdutoApagarRepository;
 
-  @Autowired
-  private IFotoProdutoArmazemPort armazemFotoProdutoService;
+  private final IFotoProdutoArmazemPort armazemFotoProdutoService;
+
+  public FotoProdutoDeleteService(IFotoProdutoConsultarPorIdRepositoryPort fotoProdutoConsultarPorIdRepository,
+                                  IFotoProdutoSalvarRepositoryPort fotoProdutoSalvarRepository,
+                                  IFotoProdutoApagarRepositoryPort fotoProdutoApagarRepository,
+                                  IFotoProdutoArmazemPort armazemFotoProdutoService) {
+    this.fotoProdutoConsultarPorIdRepository = fotoProdutoConsultarPorIdRepository;
+    this.fotoProdutoSalvarRepository = fotoProdutoSalvarRepository;
+    this.fotoProdutoApagarRepository = fotoProdutoApagarRepository;
+    this.armazemFotoProdutoService = armazemFotoProdutoService;
+  }
 
   @Transactional(isolation = Isolation.SERIALIZABLE)
   @Override

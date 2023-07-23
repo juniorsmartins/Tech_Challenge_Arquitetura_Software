@@ -1,14 +1,13 @@
 package com.techchallenge.devnet.core.application.use_case.foto;
 
-import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoArmazemPort;
 import com.techchallenge.devnet.core.application.ports.entrada.foto.IFotoProdutoAtualizarServicePort;
+import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoArmazemPort;
 import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoSalvarRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.produto.IProdutoConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.models.FotoProdutoArquivo;
 import com.techchallenge.devnet.core.domain.models.FotoProdutoModel;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,14 +17,19 @@ import java.io.IOException;
 @Service
 public class FotoProdutoPutService implements IFotoProdutoAtualizarServicePort {
 
-  @Autowired
-  private IProdutoConsultarPorIdRepositoryPort produtoConsultarPorIdRepository;
+  private final IProdutoConsultarPorIdRepositoryPort produtoConsultarPorIdRepository;
 
-  @Autowired
-  private IFotoProdutoSalvarRepositoryPort fotoProdutoPostRepository;
+  private final IFotoProdutoSalvarRepositoryPort fotoProdutoPostRepository;
 
-  @Autowired
-  private IFotoProdutoArmazemPort armazemFotoProdutoService;
+  private final IFotoProdutoArmazemPort armazemFotoProdutoService;
+
+  public FotoProdutoPutService(IProdutoConsultarPorIdRepositoryPort produtoConsultarPorIdRepository,
+                               IFotoProdutoSalvarRepositoryPort fotoProdutoPostRepository,
+                               IFotoProdutoArmazemPort armazemFotoProdutoService) {
+    this.produtoConsultarPorIdRepository = produtoConsultarPorIdRepository;
+    this.fotoProdutoPostRepository = fotoProdutoPostRepository;
+    this.armazemFotoProdutoService = armazemFotoProdutoService;
+  }
 
   @Override
   public FotoProdutoModel inserirFotoNoProduto(final Long id, final FotoProdutoArquivo fotoProdutoArquivo) throws IOException {

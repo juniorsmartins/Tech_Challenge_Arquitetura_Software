@@ -6,7 +6,6 @@ import com.techchallenge.devnet.core.domain.base.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.FotoProdutoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.models.FotoProdutoModel;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,8 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class FotoProdutoGetService implements IFotoProdutoConsultarPorIdServicePort {
 
-  @Autowired
-  private IFotoProdutoConsultarPorIdRepositoryPort fotoProdutoGetRepository;
+  private final IFotoProdutoConsultarPorIdRepositoryPort fotoProdutoGetRepository;
+
+  public FotoProdutoGetService(IFotoProdutoConsultarPorIdRepositoryPort fotoProdutoGetRepository) {
+    this.fotoProdutoGetRepository = fotoProdutoGetRepository;
+  }
 
   @Transactional(readOnly = true)
   @Override

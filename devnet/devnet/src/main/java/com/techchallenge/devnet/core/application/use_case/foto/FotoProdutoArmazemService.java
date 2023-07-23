@@ -8,7 +8,6 @@ import com.techchallenge.devnet.core.domain.base.exceptions.http_404.FotoProduto
 import com.techchallenge.devnet.core.domain.models.FotoProdutoModel;
 import com.techchallenge.devnet.core.domain.models.ImagemModel;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -21,11 +20,15 @@ import java.util.List;
 @Service
 public class FotoProdutoArmazemService implements IFotoProdutoBuscarImagemPorIdServicePort {
 
-  @Autowired
-  private IFotoProdutoConsultarPorIdRepositoryPort fotoProdutoConsultarPorIdRepository;
+  private final IFotoProdutoConsultarPorIdRepositoryPort fotoProdutoConsultarPorIdRepository;
 
-  @Autowired
-  private IFotoProdutoArmazemPort armazemFotoProdutoService;
+  private final IFotoProdutoArmazemPort armazemFotoProdutoService;
+
+  public FotoProdutoArmazemService(IFotoProdutoConsultarPorIdRepositoryPort fotoProdutoConsultarPorIdRepository,
+                                   IFotoProdutoArmazemPort armazemFotoProdutoService) {
+    this.fotoProdutoConsultarPorIdRepository = fotoProdutoConsultarPorIdRepository;
+    this.armazemFotoProdutoService = armazemFotoProdutoService;
+  }
 
   @Transactional(readOnly = true)
   @Override

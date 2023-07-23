@@ -26,7 +26,7 @@ public final class ClienteDtoResponse implements Serializable {
 
   private String email;
 
-  private String dataNascimentoString;
+  private String dataNascimento;
 
   private OffsetDateTime dataHoraCadastro;
 

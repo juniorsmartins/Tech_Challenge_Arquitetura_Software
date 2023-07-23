@@ -74,19 +74,29 @@ public final class ClienteModel implements Serializable {
   }
 
   public void setDataNascimentoString(String dataNascimento) {
-    this.dataNascimento = new DataNascimento(dataNascimento);
+    if (ObjectUtils.isNotEmpty(dataNascimento)) {
+      this.dataNascimento = new DataNascimento(dataNascimento);
+    }
   }
 
   public void setDataNascimentoLocalDate(LocalDate dataNascimento) {
-    this.dataNascimento = new DataNascimento(dataNascimento);
+    if (ObjectUtils.isNotEmpty(dataNascimento)) {
+      this.dataNascimento = new DataNascimento(dataNascimento);
+    }
   }
 
-  public String getDataNascimentoString() {
-    return this.dataNascimento.getDataNascimentoString();
+  public String getDataNascimento() {
+    if (ObjectUtils.isNotEmpty(this.dataNascimento)) {
+      return this.dataNascimento.getDataNascimentoString();
+    }
+    return null;
   }
 
   public LocalDate getDataNascimentoLocalDate() {
-    return this.dataNascimento.getDataNascimentoLocalDate();
+    if (ObjectUtils.isNotEmpty(this.dataNascimento)) {
+      return this.dataNascimento.getDataNascimentoLocalDate();
+    }
+    return null;
   }
 }
 
