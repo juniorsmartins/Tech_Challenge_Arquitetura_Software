@@ -8,28 +8,31 @@ import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoE
 import com.techchallenge.devnet.core.domain.models.ProdutoModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
 public class ProdutoPutService implements IProdutoAtualizarServicePort {
 
-  @Autowired
-  private IProdutoConsultarPorIdRepositoryPort produtoConsultarPorIdRepository;
+  private final IProdutoConsultarPorIdRepositoryPort repositorioConsultarProdutoPorId;
 
-  @Autowired
-  private IProdutoSalvarRepositoryPort produtoSalvarRepository;
+  private final IProdutoSalvarRepositoryPort repositorioSalvarProduto;
+
+  public ProdutoPutService(IProdutoConsultarPorIdRepositoryPort repositorioConsultarProdutoPorId,
+                           IProdutoSalvarRepositoryPort repositorioSalvarProduto) {
+    this.repositorioConsultarProdutoPorId = repositorioConsultarProdutoPorId;
+    this.repositorioSalvarProduto = repositorioSalvarProduto;
+  }
 
   @Override
   public ProdutoModel atualizar(final Long id, final ProdutoModel produtoModel) {
 
-    return this.produtoConsultarPorIdRepository.consultarPorId(id)
+    return this.repositorioConsultarProdutoPorId.consultarPorId(id)
       .map(produto -> {
         BeanUtils.copyProperties(produtoModel, produto, "id");
         return produto;
       })
-      .map(this.produtoSalvarRepository::salvar)
+      .map(this.repositorioSalvarProduto::salvar)
       .orElseThrow(() -> {
         log.info(String.format(MensagemPadrao.PRODUTO_NAO_ENCONTRADO, id));
         throw new ProdutoNaoEncontradoException(id);

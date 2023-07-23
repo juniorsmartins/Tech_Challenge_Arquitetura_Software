@@ -9,29 +9,33 @@ import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoE
 import com.techchallenge.devnet.core.domain.base.exceptions.http_409.DeletarBloqueadoPoUso;
 import com.techchallenge.devnet.core.domain.models.ProdutoModel;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
 public class ProdutoDeleteService implements IProdutoApagarServicePort {
 
-  @Autowired
-  private IProdutoConsultarPorIdRepositoryPort produtoConsultarPorIdRepository;
+  private final IProdutoConsultarPorIdRepositoryPort repositorioConsultarProdutoPorId;
 
-  @Autowired
-  private IProdutoApagarRepositoryPort produtoApagarRepository;
+  private final IProdutoApagarRepositoryPort repositorioApagarProduto;
 
-  @Autowired
-  private IItemPedidoBuscarPorIdProdutoRepositoryPort itemPedidoGetRepository;
+  private final IItemPedidoBuscarPorIdProdutoRepositoryPort repositorioBuscarItemProdutoPorId;
+
+  public ProdutoDeleteService(IProdutoConsultarPorIdRepositoryPort repositorioConsultarProdutoPorId,
+                              IProdutoApagarRepositoryPort repositorioApagarProduto,
+                              IItemPedidoBuscarPorIdProdutoRepositoryPort repositorioBuscarItemProdutoPorId) {
+    this.repositorioConsultarProdutoPorId = repositorioConsultarProdutoPorId;
+    this.repositorioApagarProduto = repositorioApagarProduto;
+    this.repositorioBuscarItemProdutoPorId = repositorioBuscarItemProdutoPorId;
+  }
 
   @Override
   public void deletar(final Long id) {
 
-    this.produtoConsultarPorIdRepository.consultarPorId(id)
+    this.repositorioConsultarProdutoPorId.consultarPorId(id)
       .map(this::verificarUsoDoProduto)
       .map(model -> {
-        this.produtoApagarRepository.deletar(model);
+        this.repositorioApagarProduto.deletar(model);
         return true;
       })
       .orElseThrow(() -> {
@@ -43,7 +47,7 @@ public class ProdutoDeleteService implements IProdutoApagarServicePort {
   private ProdutoModel verificarUsoDoProduto(final ProdutoModel produtoModel) {
 
     var idProduto = produtoModel.getId();
-    var existeItemPedidoComEsseProduto = this.itemPedidoGetRepository.buscarPorIdDeProduto(idProduto)
+    var existeItemPedidoComEsseProduto = this.repositorioBuscarItemProdutoPorId.buscarPorIdDeProduto(idProduto)
       .isEmpty();
 
     if (!existeItemPedidoComEsseProduto) {
