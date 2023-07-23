@@ -25,6 +25,16 @@ public final class CriadorDeObjetos {
     return ClienteEntity.builder()
       .nome(faker.name().fullName())
       .cpf(cpfGenerator.cpf(false))
+      .numeroTelefone(faker.numerify("###########"))
+      .email(faker.internet().emailAddress());
+  }
+
+  public static ClienteDtoRequest.ClienteDtoRequestBuilder gerarClienteDtoRequestBuilder() {
+
+    return ClienteDtoRequest.builder()
+      .nome(faker.name().fullName())
+      .cpf(cpfGenerator.cpf(false))
+      .numeroTelefone(faker.numerify("###########"))
       .email(faker.internet().emailAddress());
   }
 
@@ -37,14 +47,6 @@ public final class CriadorDeObjetos {
       .categoria(CategoriaEnum.ACOMPANHAMENTO)
       .descricao(faker.lorem().characters(10, 250))
       .preco(BigDecimal.valueOf(preco).setScale(2, RoundingMode.HALF_UP));
-  }
-
-  public static ClienteDtoRequest.ClienteDtoRequestBuilder gerarClienteDtoRequestBuilder() {
-
-    return ClienteDtoRequest.builder()
-      .nome(faker.name().fullName())
-      .cpf(cpfGenerator.cpf(false))
-      .email(faker.internet().emailAddress());
   }
 
   public static ProdutoDtoRequest.ProdutoDtoRequestBuilder gerarProdutoDtoRequestBuilder() {

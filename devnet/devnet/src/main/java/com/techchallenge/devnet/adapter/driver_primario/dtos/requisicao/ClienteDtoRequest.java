@@ -30,6 +30,9 @@ public final class ClienteDtoRequest implements Serializable {
   @Length(max = 14)
   private String cpf;
 
+  @Length(min = 10, max = 11)
+  private String numeroTelefone;
+
   @NotBlank
   @Email
   @Length(max = 100)
