@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class PagamentoPutService implements IPagamentoAtualizarServicePort {
 
-  private final IUtilsEmail utils;
+  private final IUtilsEmail utilsEmail;
 
   private final IPedidoSalvarRepositoryPort pedidoPostRepository;
 
@@ -28,11 +28,11 @@ public class PagamentoPutService implements IPagamentoAtualizarServicePort {
 
   private final IGatewayPagamentoPort gatewayPagamento;
 
-  public PagamentoPutService(IUtilsEmail utils,
+  public PagamentoPutService(IUtilsEmail utilsEmail,
                              IPedidoSalvarRepositoryPort pedidoPostRepository,
                              IPedidoConsultarPorIdRepositoryPort pedidoGetRepository,
                              IGatewayPagamentoPort gatewayPagamento) {
-    this.utils = utils;
+    this.utilsEmail = utilsEmail;
     this.pedidoPostRepository = pedidoPostRepository;
     this.pedidoGetRepository = pedidoGetRepository;
     this.gatewayPagamento = gatewayPagamento;
@@ -48,7 +48,7 @@ public class PagamentoPutService implements IPagamentoAtualizarServicePort {
         var foiPago = this.gatewayPagamento.verificarStatusNoGateway(order.getId());
         if (foiPago) {
           order = this.avancarStatusPagamentoPagoAndPedidoPreparacao(order);
-          order = this.utils.notificarPedidoEmPreparacao(order);
+          order = this.utilsEmail.notificarPedidoEmPreparacao(order);
         }
 
         return order.getPagamento();

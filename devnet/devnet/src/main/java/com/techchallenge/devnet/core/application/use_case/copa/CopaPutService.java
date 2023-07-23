@@ -17,16 +17,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class CopaPutService implements ICopaPedidoProntoServicePort, ICopaPedidoFinalizadoServicePort {
 
-  private final IUtilsEmail utils;
+  private final IUtilsEmail utilsEmail;
 
   private final IPedidoConsultarPorIdRepositoryPort pedidoGetRepository;
 
   private final IPedidoSalvarRepositoryPort pedidoPostRepository;
 
-  public CopaPutService(IUtilsEmail utils,
+  public CopaPutService(IUtilsEmail utilsEmail,
                         IPedidoConsultarPorIdRepositoryPort pedidoGetRepository,
                         IPedidoSalvarRepositoryPort pedidoPostRepository) {
-    this.utils = utils;
+    this.utilsEmail = utilsEmail;
     this.pedidoGetRepository = pedidoGetRepository;
     this.pedidoPostRepository = pedidoPostRepository;
   }
@@ -36,7 +36,7 @@ public class CopaPutService implements ICopaPedidoProntoServicePort, ICopaPedido
 
     return this.pedidoGetRepository.consultarPorId(idPedido)
       .map(this::alterarStatusPedidoParaPronto)
-      .map(this.utils::notificarPedidoPronto)
+      .map(this.utilsEmail::notificarPedidoPronto)
       .orElseThrow(() -> {
         log.info(String.format(MensagemPadrao.PEDIDO_NAO_ENCONTRADO, idPedido));
         throw new PedidoNaoEncontradoException(idPedido);
@@ -48,7 +48,7 @@ public class CopaPutService implements ICopaPedidoProntoServicePort, ICopaPedido
 
     return this.pedidoGetRepository.consultarPorId(idPedido)
       .map(this::alterarStatusPedidoParaFinalizado)
-      .map(this.utils::notificarPedidoFinalizado)
+      .map(this.utilsEmail::notificarPedidoFinalizado)
       .orElseThrow(() -> {
         log.info(String.format(MensagemPadrao.PEDIDO_NAO_ENCONTRADO, idPedido));
         throw new PedidoNaoEncontradoException(idPedido);
