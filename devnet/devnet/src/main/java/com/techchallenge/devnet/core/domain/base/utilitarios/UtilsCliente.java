@@ -4,29 +4,32 @@ import com.techchallenge.devnet.core.application.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.application.exceptions.http_404.ClienteNaoEncontradoException;
 import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteConsultarPorCpfRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteConsultarPorIdRepositoryPort;
+import com.techchallenge.devnet.core.domain.models.ClienteModel;
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public final class UtilsCliente implements IUtilsCliente {
 
-  private final IClienteConsultarPorIdRepositoryPort repositorioconsultarClientePorId;
+  private final IClienteConsultarPorIdRepositoryPort repositorioConsultarClientePorId;
 
   private final IClienteConsultarPorCpfRepositoryPort repositorioConsultarClientePorCpf;
 
   public UtilsCliente(IClienteConsultarPorIdRepositoryPort repositorioconsultarClientePorId,
                       IClienteConsultarPorCpfRepositoryPort repositorioConsultarClientePorCpf) {
-    this.repositorioconsultarClientePorId = repositorioconsultarClientePorId;
+    this.repositorioConsultarClientePorId = repositorioconsultarClientePorId;
     this.repositorioConsultarClientePorCpf = repositorioConsultarClientePorCpf;
   }
 
   @Override
-  public PedidoModel confirmarCliente(PedidoModel pedidoModel) {
+  public PedidoModel checagemDeCliente(PedidoModel pedidoModel) {
 
     if (ObjectUtils.isNotEmpty(pedidoModel.getCliente()) && ObjectUtils.isNotEmpty(pedidoModel.getCliente().getId())) {
       var idCliente = pedidoModel.getCliente().getId();
-      var cliente = this.repositorioconsultarClientePorId.consultarPorId(idCliente)
+      var cliente = this.repositorioConsultarClientePorId.consultarPorId(idCliente)
         .orElseThrow(() -> new ClienteNaoEncontradoException(idCliente));
       pedidoModel.setCliente(cliente);
 
@@ -39,6 +42,17 @@ public final class UtilsCliente implements IUtilsCliente {
     }
 
     return pedidoModel;
+  }
+
+  @Override
+  public ClienteModel validarCliente(final ClienteModel clienteModel) {
+
+    var idCliente = clienteModel.getId();
+    return this.repositorioConsultarClientePorId.consultarPorId(idCliente)
+      .orElseThrow(() -> {
+        log.info(String.format(MensagemPadrao.CLIENTE_NAO_ENCONTRADO, idCliente));
+        throw new ClienteNaoEncontradoException(idCliente);
+      });
   }
 }
 

@@ -1,12 +1,10 @@
 package com.techchallenge.devnet.core.application.use_case.email;
 
-import com.techchallenge.devnet.core.application.ports.entrada.email.IEmailEnviarServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteConsultarPorIdRepositoryPort;
-import com.techchallenge.devnet.core.application.ports.saida.email.IEmailSalvarRepositoryPort;
-import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.core.application.exceptions.MensagemPadrao;
-import com.techchallenge.devnet.core.application.exceptions.http_404.ClienteNaoEncontradoException;
-import com.techchallenge.devnet.core.application.exceptions.http_404.PedidoNaoEncontradoException;
+import com.techchallenge.devnet.core.application.ports.entrada.email.IEmailEnviarServicePort;
+import com.techchallenge.devnet.core.application.ports.saida.email.IEmailSalvarRepositoryPort;
+import com.techchallenge.devnet.core.domain.base.utilitarios.IUtilsCliente;
+import com.techchallenge.devnet.core.domain.base.utilitarios.IUtilsPedido;
 import com.techchallenge.devnet.core.domain.models.EmailModel;
 import com.techchallenge.devnet.core.domain.models.enums.StatusEmailEnum;
 import lombok.extern.slf4j.Slf4j;
@@ -23,20 +21,20 @@ import java.util.Optional;
 @Service
 public class EmailPostService implements IEmailEnviarServicePort {
 
-  private final IPedidoConsultarPorIdRepositoryPort pedidoGetRepository;
+  private final IUtilsCliente utilsCliente;
 
-  private final IClienteConsultarPorIdRepositoryPort clienteConsultarPorIdRepository;
+  private final IUtilsPedido utilsPedido;
 
   private final JavaMailSender javaMailSender;
 
   private final IEmailSalvarRepositoryPort emailSalvarRepository;
 
-  public EmailPostService(IPedidoConsultarPorIdRepositoryPort pedidoGetRepository,
-                          IClienteConsultarPorIdRepositoryPort clienteConsultarPorIdRepository,
+  public EmailPostService(IUtilsCliente utilsCliente,
+                          IUtilsPedido utilsPedido,
                           JavaMailSender javaMailSender,
                           IEmailSalvarRepositoryPort emailSalvarRepository) {
-    this.pedidoGetRepository = pedidoGetRepository;
-    this.clienteConsultarPorIdRepository = clienteConsultarPorIdRepository;
+    this.utilsCliente = utilsCliente;
+    this.utilsPedido = utilsPedido;
     this.javaMailSender = javaMailSender;
     this.emailSalvarRepository = emailSalvarRepository;
   }
@@ -71,34 +69,19 @@ public class EmailPostService implements IEmailEnviarServicePort {
   }
 
   private EmailModel validarPedido(EmailModel emailModel) {
-    var idPedido = emailModel.getPedido().getId();
 
-    var pedido = this.pedidoGetRepository.consultarPorId(idPedido)
-      .orElseThrow(() -> {
-        log.info(String.format(MensagemPadrao.PEDIDO_NAO_ENCONTRADO, idPedido));
-        throw new PedidoNaoEncontradoException(idPedido);
-      });
-
+    var pedido = this.utilsPedido.validarPedido(emailModel.getPedido());
     emailModel.setPedido(pedido);
-
     return emailModel;
   }
 
-  private EmailModel validarCliente(EmailModel email) {
+  private EmailModel validarCliente(EmailModel emailModel) {
 
-    if (ObjectUtils.isNotEmpty(email.getPedido().getCliente())) {
-      var idCliente = email.getPedido().getCliente().getId();
-
-      var cliente = this.clienteConsultarPorIdRepository.consultarPorId(idCliente)
-        .orElseThrow(() -> {
-          log.info(String.format(MensagemPadrao.CLIENTE_NAO_ENCONTRADO, idCliente));
-          throw new ClienteNaoEncontradoException(idCliente);
-        });
-
-      email.getPedido().setCliente(cliente);
+    if (ObjectUtils.isNotEmpty(emailModel.getPedido().getCliente())) {
+      var cliente = this.utilsCliente.validarCliente(emailModel.getPedido().getCliente());
+      emailModel.getPedido().setCliente(cliente);
     }
-
-    return email;
+    return emailModel;
   }
 }
 
