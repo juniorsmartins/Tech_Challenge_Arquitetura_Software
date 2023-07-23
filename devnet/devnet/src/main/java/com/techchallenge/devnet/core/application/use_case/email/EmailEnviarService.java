@@ -11,7 +11,6 @@ import com.techchallenge.devnet.core.domain.models.EmailModel;
 import com.techchallenge.devnet.core.domain.models.enums.StatusEmailEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -24,19 +23,24 @@ import java.util.Optional;
 @Service
 public class EmailEnviarService implements IEmailEnviarServicePort {
 
-  @Autowired
-  private IPedidoConsultarPorIdRepositoryPort pedidoGetRepository;
+  private final IPedidoConsultarPorIdRepositoryPort pedidoGetRepository;
 
-  @Autowired
-  private IClienteConsultarPorIdRepositoryPort clienteConsultarPorIdRepository;
+  private final IClienteConsultarPorIdRepositoryPort clienteConsultarPorIdRepository;
 
-  @Autowired
-  private JavaMailSender javaMailSender;
+  private final JavaMailSender javaMailSender;
 
-  @Autowired
-  private IEmailSalvarRepositoryPort emailSalvarRepository;
+  private final IEmailSalvarRepositoryPort emailSalvarRepository;
 
-  @Override
+  public EmailEnviarService(IPedidoConsultarPorIdRepositoryPort pedidoGetRepository,
+                            IClienteConsultarPorIdRepositoryPort clienteConsultarPorIdRepository,
+                            JavaMailSender javaMailSender,
+                            IEmailSalvarRepositoryPort emailSalvarRepository) {
+    this.pedidoGetRepository = pedidoGetRepository;
+    this.clienteConsultarPorIdRepository = clienteConsultarPorIdRepository;
+    this.javaMailSender = javaMailSender;
+    this.emailSalvarRepository = emailSalvarRepository;
+  }
+
   public EmailModel enviar(EmailModel emailModel) {
 
     return Optional.of(emailModel)
