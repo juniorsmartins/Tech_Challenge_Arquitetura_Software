@@ -9,7 +9,6 @@ import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PagamentoNa
 import com.techchallenge.devnet.core.domain.models.PagamentoModel;
 import com.techchallenge.devnet.core.domain.objects.filtros.PagamentoFiltro;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,14 +20,19 @@ import java.util.Optional;
 @Service
 public class PagamentoGetService implements IPagamentoPesquisarServicePort, IPagamentoBuscarQrCodeServicePort {
 
-  @Autowired
-  private IQRCodeGenerator qrCodeGenerator;
+  private final IQRCodeGenerator qrCodeGenerator;
 
-  @Autowired
-  private IPagamentoPesquisarRepositoryPort pagamentoPesquisarRepository;
+  private final IPagamentoPesquisarRepositoryPort pagamentoPesquisarRepository;
 
-  @Autowired
-  private IPagamentoConsultarRepositoryPort pagamentoConsultarRepository;
+  private final IPagamentoConsultarRepositoryPort pagamentoConsultarRepository;
+
+  public PagamentoGetService(IQRCodeGenerator qrCodeGenerator,
+                             IPagamentoPesquisarRepositoryPort pagamentoPesquisarRepository,
+                             IPagamentoConsultarRepositoryPort pagamentoConsultarRepository) {
+    this.qrCodeGenerator = qrCodeGenerator;
+    this.pagamentoPesquisarRepository = pagamentoPesquisarRepository;
+    this.pagamentoConsultarRepository = pagamentoConsultarRepository;
+  }
 
   @Override
   public Page<PagamentoModel> pesquisar(final PagamentoFiltro filtro, final Pageable paginacao) {

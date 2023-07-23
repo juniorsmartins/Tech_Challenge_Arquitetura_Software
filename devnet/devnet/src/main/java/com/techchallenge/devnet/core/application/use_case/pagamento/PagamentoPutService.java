@@ -13,7 +13,6 @@ import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPagamentoEnum;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,17 +20,23 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class PagamentoPutService implements IPagamentoAtualizarServicePort {
 
-  @Autowired
-  private IUtils utils;
+  private final IUtils utils;
 
-  @Autowired
-  private IPedidoSalvarRepositoryPort pedidoPostRepository;
+  private final IPedidoSalvarRepositoryPort pedidoPostRepository;
 
-  @Autowired
-  private IPedidoConsultarPorIdRepositoryPort pedidoGetRepository;
+  private final IPedidoConsultarPorIdRepositoryPort pedidoGetRepository;
 
-  @Autowired
-  private IGatewayPagamentoPort gatewayPagamento;
+  private final IGatewayPagamentoPort gatewayPagamento;
+
+  public PagamentoPutService(IUtils utils,
+                             IPedidoSalvarRepositoryPort pedidoPostRepository,
+                             IPedidoConsultarPorIdRepositoryPort pedidoGetRepository,
+                             IGatewayPagamentoPort gatewayPagamento) {
+    this.utils = utils;
+    this.pedidoPostRepository = pedidoPostRepository;
+    this.pedidoGetRepository = pedidoGetRepository;
+    this.gatewayPagamento = gatewayPagamento;
+  }
 
   @Transactional
   @Override

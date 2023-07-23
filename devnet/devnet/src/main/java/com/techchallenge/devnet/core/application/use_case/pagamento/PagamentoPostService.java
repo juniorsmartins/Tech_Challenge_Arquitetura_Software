@@ -6,7 +6,6 @@ import com.techchallenge.devnet.core.application.ports.saida.pagamento.IPagament
 import com.techchallenge.devnet.core.domain.models.PagamentoModel;
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPagamentoEnum;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +15,15 @@ import java.util.Optional;
 @Service
 public class PagamentoPostService implements IPagamentoCadastrarServicePort {
 
-  @Autowired
-  private IQRCodeGenerator qrCodeGenerator;
+  private final IQRCodeGenerator qrCodeGenerator;
 
-  @Autowired
-  private IPagamentoSalvarRepositoryPort pagamentoSalvarRepository;
+  private final IPagamentoSalvarRepositoryPort pagamentoSalvarRepository;
+
+  public PagamentoPostService(IQRCodeGenerator qrCodeGenerator,
+                              IPagamentoSalvarRepositoryPort pagamentoSalvarRepository) {
+    this.qrCodeGenerator = qrCodeGenerator;
+    this.pagamentoSalvarRepository = pagamentoSalvarRepository;
+  }
 
   @Override
   public PedidoModel iniciarCobrancaDePagamento(final PedidoModel pedidoModel) {
