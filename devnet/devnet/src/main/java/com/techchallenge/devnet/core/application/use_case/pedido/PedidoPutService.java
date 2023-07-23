@@ -11,7 +11,6 @@ import com.techchallenge.devnet.core.domain.base.utilitarios.IUtils;
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -20,17 +19,23 @@ import java.util.Optional;
 @Service
 public class PedidoPutService implements IPedidoAtualizarServicePort {
 
-  @Autowired
-  private IUtils utils;
+  private final IUtils utils;
 
-  @Autowired
-  private IPedidoConsultarPorIdRepositoryPort pedidoGetRepository;
+  private final IPedidoConsultarPorIdRepositoryPort pedidoGetRepository;
 
-  @Autowired
-  private IPedidoSalvarRepositoryPort pedidoPostRepository;
+  private final IPedidoSalvarRepositoryPort pedidoPostRepository;
 
-  @Autowired
-  private IItemPedidoDeletarItensRepositoryPort itemPedidoDeleteRepository;
+  private final IItemPedidoDeletarItensRepositoryPort itemPedidoDeleteRepository;
+
+  public PedidoPutService(IUtils utils,
+                          IPedidoConsultarPorIdRepositoryPort pedidoGetRepository,
+                          IPedidoSalvarRepositoryPort pedidoPostRepository,
+                          IItemPedidoDeletarItensRepositoryPort itemPedidoDeleteRepository) {
+    this.utils = utils;
+    this.pedidoGetRepository = pedidoGetRepository;
+    this.pedidoPostRepository = pedidoPostRepository;
+    this.itemPedidoDeleteRepository = itemPedidoDeleteRepository;
+  }
 
   @Override
   public PedidoModel atualizar(final Long id, final PedidoModel pedidoModel) {

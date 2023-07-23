@@ -9,7 +9,6 @@ import com.techchallenge.devnet.core.domain.base.exceptions.http_409.Cancelament
 import com.techchallenge.devnet.core.domain.models.enums.StatusPagamentoEnum;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,11 +17,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class PedidoDeleteService implements IPedidoApagarServicePort {
 
-  @Autowired
-  private IPedidoConsultarPorIdRepositoryPort repositorioConsultar;
+  private final IPedidoConsultarPorIdRepositoryPort repositorioConsultar;
 
-  @Autowired
-  private IPedidoSalvarRepositoryPort repositorioSalvar;
+  private final IPedidoSalvarRepositoryPort repositorioSalvar;
+
+  public PedidoDeleteService(IPedidoConsultarPorIdRepositoryPort repositorioConsultar,
+                             IPedidoSalvarRepositoryPort repositorioSalvar) {
+    this.repositorioConsultar = repositorioConsultar;
+    this.repositorioSalvar = repositorioSalvar;
+  }
 
   @Transactional(isolation = Isolation.SERIALIZABLE)
   @Override

@@ -6,7 +6,6 @@ import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoSalva
 import com.techchallenge.devnet.core.domain.base.utilitarios.IUtils;
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,14 +14,19 @@ import java.util.Optional;
 @Service
 public class PedidoPostService implements IPedidoCadastrarServicePort {
 
-  @Autowired
-  private IUtils utils;
+  private final IUtils utils;
 
-  @Autowired
-  private IPedidoSalvarRepositoryPort pedidoPostRepository;
+  private final IPedidoSalvarRepositoryPort pedidoPostRepository;
 
-  @Autowired
-  private IPagamentoCadastrarServicePort pagamentoPostService;
+  private final IPagamentoCadastrarServicePort pagamentoPostService;
+
+  public PedidoPostService(IUtils utils,
+                           IPedidoSalvarRepositoryPort pedidoPostRepository,
+                           IPagamentoCadastrarServicePort pagamentoPostService) {
+    this.utils = utils;
+    this.pedidoPostRepository = pedidoPostRepository;
+    this.pagamentoPostService = pagamentoPostService;
+  }
 
   @Transactional
   @Override

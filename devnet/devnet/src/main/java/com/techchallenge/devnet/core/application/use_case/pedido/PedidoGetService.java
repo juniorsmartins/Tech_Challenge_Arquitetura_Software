@@ -7,7 +7,6 @@ import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoPesqu
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;
 import com.techchallenge.devnet.core.domain.objects.filtros.PedidoFiltro;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -21,11 +20,15 @@ import java.util.stream.Collectors;
 @Service
 public class PedidoGetService implements IPedidoPesquisarServicePort, IPedidoListarOrdenadoServicePort {
 
-  @Autowired
-  private IPedidoPesquisarRepositoryPort repositorioPesquisar;
+  private final IPedidoPesquisarRepositoryPort repositorioPesquisar;
 
-  @Autowired
-  private IPedidoListarRepositoryPort repositorioListar;
+  private final IPedidoListarRepositoryPort repositorioListar;
+
+  public PedidoGetService(IPedidoPesquisarRepositoryPort repositorioPesquisar,
+                          IPedidoListarRepositoryPort repositorioListar) {
+    this.repositorioPesquisar = repositorioPesquisar;
+    this.repositorioListar = repositorioListar;
+  }
 
   @Transactional(readOnly = true)
   @Override
