@@ -7,7 +7,7 @@ import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoSalva
 import com.techchallenge.devnet.core.application.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.application.exceptions.http_404.PedidoNaoEncontradoException;
 import com.techchallenge.devnet.core.application.exceptions.http_409.AtualizarPedidoBloqueadoException;
-import com.techchallenge.devnet.core.domain.base.utilitarios.IUtils;
+import com.techchallenge.devnet.core.domain.base.utilitarios.IUtilsEmail;
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;
 import lombok.extern.slf4j.Slf4j;
@@ -17,13 +17,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class CopaPutService implements ICopaPedidoProntoServicePort, ICopaPedidoFinalizadoServicePort {
 
-  private final IUtils utils;
+  private final IUtilsEmail utils;
 
   private final IPedidoConsultarPorIdRepositoryPort pedidoGetRepository;
 
   private final IPedidoSalvarRepositoryPort pedidoPostRepository;
 
-  public CopaPutService(IUtils utils,
+  public CopaPutService(IUtilsEmail utils,
                         IPedidoConsultarPorIdRepositoryPort pedidoGetRepository,
                         IPedidoSalvarRepositoryPort pedidoPostRepository) {
     this.utils = utils;

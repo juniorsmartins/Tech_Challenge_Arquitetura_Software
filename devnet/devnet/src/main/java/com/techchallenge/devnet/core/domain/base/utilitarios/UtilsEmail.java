@@ -1,72 +1,20 @@
 package com.techchallenge.devnet.core.domain.base.utilitarios;
 
 import com.techchallenge.devnet.core.application.ports.entrada.email.IEmailEnviarServicePort;
-import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteConsultarPorCpfRepositoryPort;
-import com.techchallenge.devnet.core.application.ports.saida.cliente.IClienteConsultarPorIdRepositoryPort;
-import com.techchallenge.devnet.core.application.ports.saida.produto.IProdutoConsultarPorIdRepositoryPort;
-import com.techchallenge.devnet.core.application.exceptions.MensagemPadrao;
-import com.techchallenge.devnet.core.application.exceptions.http_404.ClienteNaoEncontradoException;
-import com.techchallenge.devnet.core.application.exceptions.http_404.ProdutoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.models.EmailModel;
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Service;
 
 @Service
-public final class UtilsImpl implements IUtils {
+public final class UtilsEmail implements IUtilsEmail {
 
   private static final String EMAIL_ORIGEM = "techchallenge6@gmail.com";
 
-  private final IClienteConsultarPorIdRepositoryPort repositorioconsultarClientePorId;
-
-  private final IClienteConsultarPorCpfRepositoryPort repositorioConsultarClientePorCpf;
-
-  private final IProdutoConsultarPorIdRepositoryPort repositorioConsultarProdutoPorId;
-
   private final IEmailEnviarServicePort serviceEnviarEmail;
 
-  public UtilsImpl(IClienteConsultarPorIdRepositoryPort repositorioconsultarClientePorId,
-                   IClienteConsultarPorCpfRepositoryPort repositorioConsultarClientePorCpf,
-                   IProdutoConsultarPorIdRepositoryPort repositorioConsultarProdutoPorId,
-                   IEmailEnviarServicePort serviceEnviarEmail) {
-    this.repositorioconsultarClientePorId = repositorioconsultarClientePorId;
-    this.repositorioConsultarClientePorCpf = repositorioConsultarClientePorCpf;
-    this.repositorioConsultarProdutoPorId = repositorioConsultarProdutoPorId;
+  public UtilsEmail(IEmailEnviarServicePort serviceEnviarEmail) {
     this.serviceEnviarEmail = serviceEnviarEmail;
-  }
-
-  @Override
-  public PedidoModel confirmarCliente(PedidoModel pedidoModel) {
-
-    if (ObjectUtils.isNotEmpty(pedidoModel.getCliente()) && ObjectUtils.isNotEmpty(pedidoModel.getCliente().getId())) {
-      var idCliente = pedidoModel.getCliente().getId();
-      var cliente = this.repositorioconsultarClientePorId.consultarPorId(idCliente)
-        .orElseThrow(() -> new ClienteNaoEncontradoException(idCliente));
-      pedidoModel.setCliente(cliente);
-
-    } else if (ObjectUtils.isNotEmpty(pedidoModel.getCliente()) && ObjectUtils.isNotEmpty(pedidoModel.getCliente().getCpf())) {
-      var cpfCliente = pedidoModel.getCliente().getCpf();
-      var cliente = this.repositorioConsultarClientePorCpf.consultarPorCpf(cpfCliente)
-        .orElseThrow(() ->
-          new ClienteNaoEncontradoException(String.format(MensagemPadrao.CPF_NAO_ENCONTRADO, cpfCliente)));
-      pedidoModel.setCliente(cliente);
-    }
-
-    return pedidoModel;
-  }
-
-  @Override
-  public PedidoModel confirmarProdutos(PedidoModel pedidoModel) {
-
-    pedidoModel.getItensPedido().forEach(item -> {
-      var idProduto = item.getProduto().getId();
-      var produto = this.repositorioConsultarProdutoPorId.consultarPorId(idProduto)
-        .orElseThrow(() -> new ProdutoNaoEncontradoException(idProduto));
-      item.setProduto(produto);
-    });
-
-    pedidoModel.calcularPrecoTotal();
-    return pedidoModel;
   }
 
   @Override

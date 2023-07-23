@@ -2,11 +2,7 @@ package com.techchallenge.devnet.core.domain.base.utilitarios;
 
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 
-public interface IUtils {
-
-  PedidoModel confirmarCliente(PedidoModel pedidoModel);
-
-  PedidoModel confirmarProdutos(PedidoModel pedidoModel);
+public interface IUtilsEmail {
 
   PedidoModel notificarPedidoRecebido(PedidoModel pedidoModel);
 

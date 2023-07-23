@@ -7,7 +7,7 @@ import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoSalva
 import com.techchallenge.devnet.core.application.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.application.exceptions.http_404.PedidoNaoEncontradoException;
 import com.techchallenge.devnet.core.application.exceptions.http_409.ConfirmarPagamentoBloqueadoException;
-import com.techchallenge.devnet.core.domain.base.utilitarios.IUtils;
+import com.techchallenge.devnet.core.domain.base.utilitarios.IUtilsEmail;
 import com.techchallenge.devnet.core.domain.models.PagamentoModel;
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPagamentoEnum;
@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class PagamentoPutService implements IPagamentoAtualizarServicePort {
 
-  private final IUtils utils;
+  private final IUtilsEmail utils;
 
   private final IPedidoSalvarRepositoryPort pedidoPostRepository;
 
@@ -28,7 +28,7 @@ public class PagamentoPutService implements IPagamentoAtualizarServicePort {
 
   private final IGatewayPagamentoPort gatewayPagamento;
 
-  public PagamentoPutService(IUtils utils,
+  public PagamentoPutService(IUtilsEmail utils,
                              IPedidoSalvarRepositoryPort pedidoPostRepository,
                              IPedidoConsultarPorIdRepositoryPort pedidoGetRepository,
                              IGatewayPagamentoPort gatewayPagamento) {

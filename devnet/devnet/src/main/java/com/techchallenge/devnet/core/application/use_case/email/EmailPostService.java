@@ -21,7 +21,7 @@ import java.util.Optional;
 
 @Slf4j
 @Service
-public class EmailEnviarService implements IEmailEnviarServicePort {
+public class EmailPostService implements IEmailEnviarServicePort {
 
   private final IPedidoConsultarPorIdRepositoryPort pedidoGetRepository;
 
@@ -31,10 +31,10 @@ public class EmailEnviarService implements IEmailEnviarServicePort {
 
   private final IEmailSalvarRepositoryPort emailSalvarRepository;
 
-  public EmailEnviarService(IPedidoConsultarPorIdRepositoryPort pedidoGetRepository,
-                            IClienteConsultarPorIdRepositoryPort clienteConsultarPorIdRepository,
-                            JavaMailSender javaMailSender,
-                            IEmailSalvarRepositoryPort emailSalvarRepository) {
+  public EmailPostService(IPedidoConsultarPorIdRepositoryPort pedidoGetRepository,
+                          IClienteConsultarPorIdRepositoryPort clienteConsultarPorIdRepository,
+                          JavaMailSender javaMailSender,
+                          IEmailSalvarRepositoryPort emailSalvarRepository) {
     this.pedidoGetRepository = pedidoGetRepository;
     this.clienteConsultarPorIdRepository = clienteConsultarPorIdRepository;
     this.javaMailSender = javaMailSender;
