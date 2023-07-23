@@ -10,7 +10,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,11 +20,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/api/v1/clientes")
 public final class ClienteDeleteController implements IClienteControllerPort.DeleteController {
 
-  @Autowired
-  private IClienteApagarServicePort service;
+  private final IClienteApagarServicePort service;
 
-  @Autowired
-  private IDeletePresenter presenter;
+  private final IDeletePresenter presenter;
+
+  public ClienteDeleteController(IClienteApagarServicePort service,
+                                 IDeletePresenter presenter) {
+    this.service = service;
+    this.presenter = presenter;
+  }
 
   @Operation(summary = "Deletar Cliente", description = "Este recurso destina-se a apagar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {

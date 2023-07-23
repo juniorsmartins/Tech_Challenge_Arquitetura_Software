@@ -16,7 +16,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,14 +29,19 @@ import java.util.Optional;
 @RequestMapping(path = "/api/v1/produtos")
 public final class ProdutoPutController implements IProdutoControllerPort.PutController {
 
-  @Autowired
-  private IAdapterEntrada mapper;
+  private final IAdapterEntrada mapper;
 
-  @Autowired
-  private IProdutoAtualizarServicePort service;
+  private final IProdutoAtualizarServicePort service;
 
-  @Autowired
-  private IPutPresenter presenter;
+  private final IPutPresenter presenter;
+
+  public ProdutoPutController(IAdapterEntrada mapper,
+                              IProdutoAtualizarServicePort service,
+                              IPutPresenter presenter) {
+    this.mapper = mapper;
+    this.service = service;
+    this.presenter = presenter;
+  }
 
   @Operation(summary = "Atualizar Produto", description = "Este recurso destina-se a atualizar pelo identificador exclusivo (ID).")
   @ApiResponses(value = {

@@ -16,6 +16,7 @@ import lombok.Setter;
 import org.hibernate.envers.Audited;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "clientes")
@@ -41,7 +42,13 @@ public final class ClienteEntity extends AuditoriaDataJpa implements Serializabl
   @Column(name = "cpf", length = 14, nullable = false, unique = true)
   private String cpf;
 
+  @Column(name = "numero_telefone", length = 11, nullable = true)
+  private String numeroTelefone;
+
   @Column(name = "email", length = 100, nullable = false)
   private String email;
+
+  @Column(name = "data_nascimento", nullable = false)
+  private LocalDate dataNascimentoLocalDate;
 }
 

@@ -22,7 +22,11 @@ public final class ClienteDtoResponse implements Serializable {
 
   private String cpf;
 
+  private String numeroTelefone;
+
   private String email;
+
+  private String dataNascimentoString;
 
   private OffsetDateTime dataHoraCadastro;
 

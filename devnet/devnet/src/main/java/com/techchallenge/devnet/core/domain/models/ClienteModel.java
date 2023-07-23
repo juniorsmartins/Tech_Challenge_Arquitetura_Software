@@ -2,14 +2,18 @@ package com.techchallenge.devnet.core.domain.models;
 
 import com.techchallenge.devnet.core.domain.base.value_objects.CadastroPessoaFisica;
 import com.techchallenge.devnet.core.domain.base.value_objects.CorreioEletronico;
+import com.techchallenge.devnet.core.domain.base.value_objects.DataNascimento;
+import com.techchallenge.devnet.core.domain.base.value_objects.Telefone;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.apache.commons.lang3.ObjectUtils;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
 @Builder
@@ -28,7 +32,11 @@ public final class ClienteModel implements Serializable {
 
   private CadastroPessoaFisica cpf;
 
+  private Telefone numeroTelefone;
+
   private CorreioEletronico email;
+
+  private DataNascimento dataNascimento;
 
   private OffsetDateTime dataHoraCadastro;
 
@@ -42,12 +50,43 @@ public final class ClienteModel implements Serializable {
     return this.cpf.getCpf();
   }
 
+  public void setNumeroTelefone(String numeroTelefone) {
+    if (ObjectUtils.isNotEmpty(numeroTelefone)) {
+      this.numeroTelefone = new Telefone(numeroTelefone);
+      return;
+    }
+    this.numeroTelefone = null;
+  }
+
+  public String getNumeroTelefone() {
+    if (ObjectUtils.isNotEmpty(this.numeroTelefone)) {
+      return this.numeroTelefone.getNumeroTelefone();
+    }
+    return null;
+  }
+
   public void setEmail(String email) {
     this.email = new CorreioEletronico(email);
   }
 
   public String getEmail() {
     return this.email.getEmail();
+  }
+
+  public void setDataNascimentoString(String dataNascimento) {
+    this.dataNascimento = new DataNascimento(dataNascimento);
+  }
+
+  public void setDataNascimentoLocalDate(LocalDate dataNascimento) {
+    this.dataNascimento = new DataNascimento(dataNascimento);
+  }
+
+  public String getDataNascimentoString() {
+    return this.dataNascimento.getDataNascimentoString();
+  }
+
+  public LocalDate getDataNascimentoLocalDate() {
+    return this.dataNascimento.getDataNascimentoLocalDate();
   }
 }
 

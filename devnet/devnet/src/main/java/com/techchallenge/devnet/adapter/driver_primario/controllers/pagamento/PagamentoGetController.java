@@ -16,7 +16,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -35,17 +34,23 @@ import java.util.Optional;
 public final class PagamentoGetController implements IPagamentoControllerPort.PesquisarController,
   IPagamentoControllerPort.BuscarQrCodeController {
 
-  @Autowired
-  private IAdapterEntrada mapper;
+  private final IAdapterEntrada mapper;
 
-  @Autowired
-  private IPagamentoPesquisarServicePort servicePesquisar;
+  private final IPagamentoPesquisarServicePort servicePesquisar;
 
-  @Autowired
-  private IPagamentoBuscarQrCodeServicePort serviceBuscarQrCode;
+  private final IPagamentoBuscarQrCodeServicePort serviceBuscarQrCode;
 
-  @Autowired
-  private IGetPresenter presenter;
+  private final IGetPresenter presenter;
+
+  public PagamentoGetController(IAdapterEntrada mapper,
+                                IPagamentoPesquisarServicePort servicePesquisar,
+                                IPagamentoBuscarQrCodeServicePort serviceBuscarQrCode,
+                                IGetPresenter presenter) {
+    this.mapper = mapper;
+    this.servicePesquisar = servicePesquisar;
+    this.serviceBuscarQrCode = serviceBuscarQrCode;
+    this.presenter = presenter;
+  }
 
   @Operation(summary = "Pesquisar Pagamento", description = "Este recurso permite consultar por diversas propriedades com retorno paginado.")
   @ApiResponses(value = {

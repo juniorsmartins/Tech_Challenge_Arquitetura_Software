@@ -10,6 +10,10 @@ public final class MensagemPadrao {
 
   public static final String EMAIL_INVALIDO = "O Email, %s, é inválido.";
 
+  public static final String TELEFONE_INVALIDO = "O Telefone, %s, é inválido.";
+
+  public static final String DATA_NASCIMENTO_INVALIDA = "A data de nascimento, %s, é inválida.";
+
   public static final String MEDIA_NAO_SUPORTADA = "O recurso não suporta esse tipo de midia.";
 
   public static final String CLIENTE_NAO_ENCONTRADO = "O Cliente, com id %s, não foi encontrado!";

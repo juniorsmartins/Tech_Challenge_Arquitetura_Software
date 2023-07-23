@@ -13,6 +13,7 @@ import com.techchallenge.devnet.core.domain.models.enums.FormaPagamentoEnum;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDate;
 
 public final class CriadorDeObjetos {
 
@@ -25,7 +26,19 @@ public final class CriadorDeObjetos {
     return ClienteEntity.builder()
       .nome(faker.name().fullName())
       .cpf(cpfGenerator.cpf(false))
-      .email(faker.internet().emailAddress());
+      .numeroTelefone(faker.numerify("###########"))
+      .email(faker.internet().emailAddress())
+      .dataNascimentoLocalDate(LocalDate.now());
+  }
+
+  public static ClienteDtoRequest.ClienteDtoRequestBuilder gerarClienteDtoRequestBuilder() {
+
+    return ClienteDtoRequest.builder()
+      .nome(faker.name().fullName())
+      .cpf(cpfGenerator.cpf(false))
+      .numeroTelefone(faker.numerify("###########"))
+      .email(faker.internet().emailAddress())
+      .dataNascimentoString("1" + faker.numerify("#") + "/10/19" + faker.numerify("##"));
   }
 
   public static ProdutoEntity.ProdutoEntityBuilder gerarProdutoEntityBuilder() {
@@ -37,14 +50,6 @@ public final class CriadorDeObjetos {
       .categoria(CategoriaEnum.ACOMPANHAMENTO)
       .descricao(faker.lorem().characters(10, 250))
       .preco(BigDecimal.valueOf(preco).setScale(2, RoundingMode.HALF_UP));
-  }
-
-  public static ClienteDtoRequest.ClienteDtoRequestBuilder gerarClienteDtoRequestBuilder() {
-
-    return ClienteDtoRequest.builder()
-      .nome(faker.name().fullName())
-      .cpf(cpfGenerator.cpf(false))
-      .email(faker.internet().emailAddress());
   }
 
   public static ProdutoDtoRequest.ProdutoDtoRequestBuilder gerarProdutoDtoRequestBuilder() {

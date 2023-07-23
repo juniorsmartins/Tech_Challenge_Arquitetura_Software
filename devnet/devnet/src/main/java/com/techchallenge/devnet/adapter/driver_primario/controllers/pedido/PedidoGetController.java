@@ -16,7 +16,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -26,22 +25,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
-@Tag(name = "PedidoGetControllerAdapter", description = "Adaptador para padronizar a requisição às normalizações da API.")
+@Tag(name = "PedidoGetController", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/pedidos")
 public final class PedidoGetController implements IPedidoControllerPort.GetController {
 
-  @Autowired
-  private IAdapterEntrada mapper;
+  private final IAdapterEntrada mapper;
 
-  @Autowired
-  private IPedidoPesquisarServicePort servicePesquisar;
+  private final IPedidoPesquisarServicePort servicePesquisar;
 
-  @Autowired
-  private IPedidoListarOrdenadoServicePort serviceListar;
+  private final IPedidoListarOrdenadoServicePort serviceListar;
 
-  @Autowired
-  private IGetPresenter presenter;
+  private final IGetPresenter presenter;
+
+  public PedidoGetController(IAdapterEntrada mapper,
+                             IPedidoPesquisarServicePort servicePesquisar,
+                             IPedidoListarOrdenadoServicePort serviceListar,
+                             IGetPresenter presenter) {
+    this.mapper = mapper;
+    this.servicePesquisar = servicePesquisar;
+    this.serviceListar = serviceListar;
+    this.presenter = presenter;
+  }
 
   @Operation(summary = "Pesquisar Pedido", description = "Este recurso permite consultar Pedido por diversas propriedades com retorno paginado.")
   @ApiResponses(value = {

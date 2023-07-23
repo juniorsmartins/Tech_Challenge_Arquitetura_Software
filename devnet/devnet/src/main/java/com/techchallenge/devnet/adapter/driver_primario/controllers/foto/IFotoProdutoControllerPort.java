@@ -1,7 +1,6 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers.foto;
 
 import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.FotoProdutoDtoRequest;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.resposta.FotoProdutoDtoResponse;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +12,12 @@ public interface IFotoProdutoControllerPort {
 
   interface PutController {
     @PutMapping(path = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    ResponseEntity<FotoProdutoDtoResponse> inserirFotoNoProduto(Long produtoId, FotoProdutoDtoRequest fotoProdutoDtoRequest);
+    ResponseEntity<Object> inserirFotoNoProduto(Long produtoId, FotoProdutoDtoRequest fotoProdutoDtoRequest);
   }
 
   interface ConsultarPorIdController {
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<FotoProdutoDtoResponse> consultarPorId(Long id);
+    ResponseEntity<Object> consultarPorId(Long id);
   }
 
   interface ConsultarImagemPorIdController {
