@@ -7,7 +7,6 @@ import com.techchallenge.devnet.core.application.ports.saida.item_pedido.IItemPe
 import com.techchallenge.devnet.core.application.ports.saida.item_pedido.IItemPedidoDeletarItensRepositoryPort;
 import com.techchallenge.devnet.core.domain.base.exceptions.http_404.PedidoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.models.ItemPedidoModel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,14 +16,19 @@ import java.util.Optional;
 public class ItemPedidoDeleteRepository implements IItemPedidoApagarRepositoryPort,
   IItemPedidoDeletarItensRepositoryPort {
 
-  @Autowired
-  private IAdapterSaida mapper;
+  private final IAdapterSaida mapper;
 
-  @Autowired
-  private ItemPedidoRepositoryJpa jpa;
+  private final ItemPedidoRepositoryJpa jpa;
 
-  @Autowired
-  private PedidoRepositoryJpa pedidoJpa;
+  private final PedidoRepositoryJpa pedidoJpa;
+
+  public ItemPedidoDeleteRepository(IAdapterSaida mapper,
+                                    ItemPedidoRepositoryJpa jpa,
+                                    PedidoRepositoryJpa pedidoJpa) {
+    this.mapper = mapper;
+    this.jpa = jpa;
+    this.pedidoJpa = pedidoJpa;
+  }
 
   @Transactional
   @Override

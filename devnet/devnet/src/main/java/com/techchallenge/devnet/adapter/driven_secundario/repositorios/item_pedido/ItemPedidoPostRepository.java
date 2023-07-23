@@ -4,7 +4,6 @@ import com.techchallenge.devnet.adapter.driven_secundario.adapter_saida.IAdapter
 import com.techchallenge.devnet.adapter.driven_secundario.entities.ItemPedidoEntity;
 import com.techchallenge.devnet.core.application.ports.saida.item_pedido.IItemPedidoSalvarRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.ItemPedidoModel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,11 +12,15 @@ import java.util.Optional;
 @Repository
 public class ItemPedidoPostRepository implements IItemPedidoSalvarRepositoryPort {
 
-  @Autowired
-  private IAdapterSaida mapper;
+  private final IAdapterSaida mapper;
 
-  @Autowired
-  private ItemPedidoRepositoryJpa jpa;
+  private final ItemPedidoRepositoryJpa jpa;
+
+  public ItemPedidoPostRepository(IAdapterSaida mapper,
+                                  ItemPedidoRepositoryJpa jpa) {
+    this.mapper = mapper;
+    this.jpa = jpa;
+  }
 
   @Transactional
   @Override

@@ -1,7 +1,6 @@
 package com.techchallenge.devnet.adapter.driven_secundario.repositorios.pedido;
 
 import com.techchallenge.devnet.adapter.driven_secundario.adapter_saida.IAdapterSaida;
-import com.techchallenge.devnet.adapter.driven_secundario.repositorios.pedido.PedidoRepositoryJpa;
 import com.techchallenge.devnet.adapter.driver_primario.filtros.PedidoFiltroDto;
 import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoBuscarPorIdClienteRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoConsultarPorIdRepositoryPort;
@@ -10,7 +9,6 @@ import com.techchallenge.devnet.core.application.ports.saida.pedido.IPedidoPesqu
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import com.techchallenge.devnet.core.domain.objects.filtros.PedidoFiltro;
 import com.techchallenge.devnet.core.domain.objects.specification.PedidoSpecification;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
@@ -23,11 +21,15 @@ import java.util.Optional;
 public class PedidoGetRepository implements IPedidoPesquisarRepositoryPort, IPedidoConsultarPorIdRepositoryPort,
   IPedidoListarRepositoryPort, IPedidoBuscarPorIdClienteRepositoryPort {
 
-  @Autowired
-  private IAdapterSaida mapper;
+  private final IAdapterSaida mapper;
 
-  @Autowired
-  private PedidoRepositoryJpa jpa;
+  private final PedidoRepositoryJpa jpa;
+
+  public PedidoGetRepository(IAdapterSaida mapper,
+                             PedidoRepositoryJpa jpa) {
+    this.mapper = mapper;
+    this.jpa = jpa;
+  }
 
   @Transactional(readOnly = true)
   @Override

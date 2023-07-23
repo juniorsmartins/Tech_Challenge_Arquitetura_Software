@@ -4,7 +4,6 @@ import com.techchallenge.devnet.adapter.driven_secundario.adapter_saida.IAdapter
 import com.techchallenge.devnet.adapter.driven_secundario.entities.FotoProdutoEntity;
 import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoApagarRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.FotoProdutoModel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,11 +13,15 @@ import java.util.Optional;
 @Repository
 public class FotoProdutoDeleteRepository implements IFotoProdutoApagarRepositoryPort {
 
-  @Autowired
-  private IAdapterSaida mapper;
+  private final IAdapterSaida mapper;
 
-  @Autowired
-  private FotoProdutoRepositoryJpa jpa;
+  private final FotoProdutoRepositoryJpa jpa;
+
+  public FotoProdutoDeleteRepository(IAdapterSaida mapper,
+                                     FotoProdutoRepositoryJpa jpa) {
+    this.mapper = mapper;
+    this.jpa = jpa;
+  }
 
   @Transactional(isolation = Isolation.SERIALIZABLE)
   @Override

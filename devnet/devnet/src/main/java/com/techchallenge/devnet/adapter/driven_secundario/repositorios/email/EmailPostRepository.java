@@ -4,7 +4,6 @@ import com.techchallenge.devnet.adapter.driven_secundario.adapter_saida.IAdapter
 import com.techchallenge.devnet.adapter.driven_secundario.entities.EmailEntity;
 import com.techchallenge.devnet.core.application.ports.saida.email.IEmailSalvarRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.EmailModel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -12,11 +11,15 @@ import java.util.Optional;
 @Repository
 public class EmailPostRepository implements IEmailSalvarRepositoryPort {
 
-  @Autowired
-  private IAdapterSaida mapper;
+  private final IAdapterSaida mapper;
 
-  @Autowired
-  private EmailRepositoryJpa jpa;
+  private final EmailRepositoryJpa jpa;
+
+  public EmailPostRepository(IAdapterSaida mapper,
+                             EmailRepositoryJpa jpa) {
+    this.mapper = mapper;
+    this.jpa = jpa;
+  }
 
   @Override
   public EmailModel salvar(final EmailModel emailModel) {

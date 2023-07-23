@@ -7,7 +7,6 @@ import com.techchallenge.devnet.core.application.ports.saida.pagamento.IPagament
 import com.techchallenge.devnet.core.domain.models.PagamentoModel;
 import com.techchallenge.devnet.core.domain.objects.filtros.PagamentoFiltro;
 import com.techchallenge.devnet.core.domain.objects.specification.PagamentoSpecification;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
@@ -18,11 +17,15 @@ import java.util.Optional;
 @Repository
 public class PagamentoGetRepository implements IPagamentoPesquisarRepositoryPort, IPagamentoConsultarRepositoryPort {
 
-  @Autowired
-  private IAdapterSaida mapper;
+  private final IAdapterSaida mapper;
 
-  @Autowired
-  private PagamentoRepositoryJpa jpa;
+  private final PagamentoRepositoryJpa jpa;
+
+  public PagamentoGetRepository(IAdapterSaida mapper,
+                                PagamentoRepositoryJpa jpa) {
+    this.mapper = mapper;
+    this.jpa = jpa;
+  }
 
   @Transactional(readOnly = true)
   @Override

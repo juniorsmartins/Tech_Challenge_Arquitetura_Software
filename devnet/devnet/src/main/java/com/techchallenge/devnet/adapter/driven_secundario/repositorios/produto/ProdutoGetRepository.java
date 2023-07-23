@@ -7,7 +7,6 @@ import com.techchallenge.devnet.core.application.ports.saida.produto.IProdutoPes
 import com.techchallenge.devnet.core.domain.models.ProdutoModel;
 import com.techchallenge.devnet.core.domain.objects.filtros.ProdutoFiltro;
 import com.techchallenge.devnet.core.domain.objects.specification.ProdutoSpecification;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
@@ -18,11 +17,15 @@ import java.util.Optional;
 @Repository
 public class ProdutoGetRepository implements IProdutoConsultarPorIdRepositoryPort, IProdutoPesquisarRepositoryPort {
 
-  @Autowired
-  private IAdapterSaida mapper;
+  private final IAdapterSaida mapper;
 
-  @Autowired
-  private ProdutoRepositoryJpa jpa;
+  private final ProdutoRepositoryJpa jpa;
+
+  public ProdutoGetRepository(IAdapterSaida mapper,
+                              ProdutoRepositoryJpa jpa) {
+    this.mapper = mapper;
+    this.jpa = jpa;
+  }
 
   @Transactional(readOnly = true)
   @Override

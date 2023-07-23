@@ -8,7 +8,6 @@ import com.techchallenge.devnet.core.application.ports.saida.cliente.IClientePes
 import com.techchallenge.devnet.core.domain.models.ClienteModel;
 import com.techchallenge.devnet.core.domain.objects.filtros.ClienteFiltro;
 import com.techchallenge.devnet.core.domain.objects.specification.ClienteSpecification;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
@@ -20,11 +19,15 @@ import java.util.Optional;
 public class ClienteGetRepository implements IClientePesquisarRepositoryPort,
   IClienteConsultarPorIdRepositoryPort, IClienteConsultarPorCpfRepositoryPort {
 
-  @Autowired
-  private IAdapterSaida mapper;
+  private final IAdapterSaida mapper;
 
-  @Autowired
-  private ClienteRepositoryJpa jpa;
+  private final ClienteRepositoryJpa jpa;
+
+  public ClienteGetRepository(IAdapterSaida mapper,
+                              ClienteRepositoryJpa jpa) {
+    this.mapper = mapper;
+    this.jpa = jpa;
+  }
 
   @Transactional(readOnly = true)
   @Override

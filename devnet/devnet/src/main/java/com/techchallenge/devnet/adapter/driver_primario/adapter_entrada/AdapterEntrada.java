@@ -1,7 +1,6 @@
 package com.techchallenge.devnet.adapter.driver_primario.adapter_entrada;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +10,11 @@ import java.util.stream.Collectors;
 @Service
 public final class AdapterEntrada implements IAdapterEntrada {
 
-  @Autowired
-  private ModelMapper modelMapper;
+  private final ModelMapper modelMapper;
+
+  public AdapterEntrada(ModelMapper modelMapper) {
+    this.modelMapper = modelMapper;
+  }
 
   @Override
   public <O, D> D converterOrigemParaDestino(O origem, Class<D> destino) {

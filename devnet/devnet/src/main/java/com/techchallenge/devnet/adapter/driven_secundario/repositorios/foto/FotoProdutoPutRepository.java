@@ -17,11 +17,15 @@ import java.util.Optional;
 @Repository
 public class FotoProdutoPutRepository implements IFotoProdutoSalvarRepositoryPort {
 
-  @Autowired
-  private IAdapterSaida mapper;
+  private final IAdapterSaida mapper;
 
-  @Autowired
-  private FotoProdutoRepositoryJpa jpa;
+  private final FotoProdutoRepositoryJpa jpa;
+
+  public FotoProdutoPutRepository(IAdapterSaida mapper,
+                                  FotoProdutoRepositoryJpa jpa) {
+    this.mapper = mapper;
+    this.jpa = jpa;
+  }
 
   @Autowired
   private ProdutoRepositoryJpa produtoJpa;

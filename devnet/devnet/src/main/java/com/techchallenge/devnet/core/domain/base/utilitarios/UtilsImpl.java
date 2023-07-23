@@ -10,7 +10,6 @@ import com.techchallenge.devnet.core.domain.base.exceptions.http_404.ProdutoNaoE
 import com.techchallenge.devnet.core.domain.models.EmailModel;
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import org.apache.commons.lang3.ObjectUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,30 +17,36 @@ public final class UtilsImpl implements IUtils {
 
   private static final String EMAIL_ORIGEM = "techchallenge6@gmail.com";
 
-  @Autowired
-  private IClienteConsultarPorIdRepositoryPort clienteConsultarPorIdRepository;
+  private final IClienteConsultarPorIdRepositoryPort repositorioconsultarClientePorId;
 
-  @Autowired
-  private IClienteConsultarPorCpfRepositoryPort clienteConsultarPorCpfRepository;
+  private final IClienteConsultarPorCpfRepositoryPort repositorioConsultarClientePorCpf;
 
-  @Autowired
-  private IProdutoConsultarPorIdRepositoryPort produtoConsultarPorIdRepository;
+  private final IProdutoConsultarPorIdRepositoryPort repositorioConsultarProdutoPorId;
 
-  @Autowired
-  private IEmailEnviarServicePort emailEnviarService;
+  private final IEmailEnviarServicePort serviceEnviarEmail;
+
+  public UtilsImpl(IClienteConsultarPorIdRepositoryPort repositorioconsultarClientePorId,
+                   IClienteConsultarPorCpfRepositoryPort repositorioConsultarClientePorCpf,
+                   IProdutoConsultarPorIdRepositoryPort repositorioConsultarProdutoPorId,
+                   IEmailEnviarServicePort serviceEnviarEmail) {
+    this.repositorioconsultarClientePorId = repositorioconsultarClientePorId;
+    this.repositorioConsultarClientePorCpf = repositorioConsultarClientePorCpf;
+    this.repositorioConsultarProdutoPorId = repositorioConsultarProdutoPorId;
+    this.serviceEnviarEmail = serviceEnviarEmail;
+  }
 
   @Override
   public PedidoModel confirmarCliente(PedidoModel pedidoModel) {
 
     if (ObjectUtils.isNotEmpty(pedidoModel.getCliente()) && ObjectUtils.isNotEmpty(pedidoModel.getCliente().getId())) {
       var idCliente = pedidoModel.getCliente().getId();
-      var cliente = this.clienteConsultarPorIdRepository.consultarPorId(idCliente)
+      var cliente = this.repositorioconsultarClientePorId.consultarPorId(idCliente)
         .orElseThrow(() -> new ClienteNaoEncontradoException(idCliente));
       pedidoModel.setCliente(cliente);
 
     } else if (ObjectUtils.isNotEmpty(pedidoModel.getCliente()) && ObjectUtils.isNotEmpty(pedidoModel.getCliente().getCpf())) {
       var cpfCliente = pedidoModel.getCliente().getCpf();
-      var cliente = this.clienteConsultarPorCpfRepository.consultarPorCpf(cpfCliente)
+      var cliente = this.repositorioConsultarClientePorCpf.consultarPorCpf(cpfCliente)
         .orElseThrow(() ->
           new ClienteNaoEncontradoException(String.format(MensagemPadrao.CPF_NAO_ENCONTRADO, cpfCliente)));
       pedidoModel.setCliente(cliente);
@@ -55,7 +60,7 @@ public final class UtilsImpl implements IUtils {
 
     pedidoModel.getItensPedido().forEach(item -> {
       var idProduto = item.getProduto().getId();
-      var produto = this.produtoConsultarPorIdRepository.consultarPorId(idProduto)
+      var produto = this.repositorioConsultarProdutoPorId.consultarPorId(idProduto)
         .orElseThrow(() -> new ProdutoNaoEncontradoException(idProduto));
       item.setProduto(produto);
     });
@@ -80,7 +85,7 @@ public final class UtilsImpl implements IUtils {
         .pedido(pedidoModel)
         .build();
 
-      this.emailEnviarService.enviar(emailModel);
+      this.serviceEnviarEmail.enviar(emailModel);
     }
 
     return pedidoModel;
@@ -102,7 +107,7 @@ public final class UtilsImpl implements IUtils {
         .pedido(pedidoModel)
         .build();
 
-      this.emailEnviarService.enviar(emailModel);
+      this.serviceEnviarEmail.enviar(emailModel);
     }
 
     return pedidoModel;
@@ -124,7 +129,7 @@ public final class UtilsImpl implements IUtils {
         .pedido(pedidoModel)
         .build();
 
-      this.emailEnviarService.enviar(emailModel);
+      this.serviceEnviarEmail.enviar(emailModel);
     }
 
     return pedidoModel;
@@ -146,7 +151,7 @@ public final class UtilsImpl implements IUtils {
         .pedido(pedidoModel)
         .build();
 
-      this.emailEnviarService.enviar(emailModel);
+      this.serviceEnviarEmail.enviar(emailModel);
     }
 
     return pedidoModel;

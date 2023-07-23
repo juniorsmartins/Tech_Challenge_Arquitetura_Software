@@ -4,7 +4,6 @@ import com.techchallenge.devnet.adapter.driven_secundario.adapter_saida.IAdapter
 import com.techchallenge.devnet.adapter.driven_secundario.entities.PagamentoEntity;
 import com.techchallenge.devnet.core.application.ports.saida.pagamento.IPagamentoSalvarRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.PagamentoModel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,11 +12,15 @@ import java.util.Optional;
 @Repository
 public class PagamentoPostRepository implements IPagamentoSalvarRepositoryPort {
 
-  @Autowired
-  private IAdapterSaida mapper;
+  private final IAdapterSaida mapper;
 
-  @Autowired
-  private PagamentoRepositoryJpa jpa;
+  private final PagamentoRepositoryJpa jpa;
+
+  public PagamentoPostRepository(IAdapterSaida mapper,
+                                 PagamentoRepositoryJpa jpa) {
+    this.mapper = mapper;
+    this.jpa = jpa;
+  }
 
   @Transactional
   @Override

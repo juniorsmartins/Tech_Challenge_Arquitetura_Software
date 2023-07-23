@@ -4,7 +4,6 @@ import com.techchallenge.devnet.adapter.driven_secundario.adapter_saida.IAdapter
 import com.techchallenge.devnet.adapter.driven_secundario.entities.ProdutoEntity;
 import com.techchallenge.devnet.core.application.ports.saida.produto.IProdutoSalvarRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.ProdutoModel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,11 +12,15 @@ import java.util.Optional;
 @Repository
 public class ProdutoPostRepository implements IProdutoSalvarRepositoryPort {
 
-  @Autowired
-  private IAdapterSaida mapper;
+  private final IAdapterSaida mapper;
 
-  @Autowired
-  private ProdutoRepositoryJpa jpa;
+  private final ProdutoRepositoryJpa jpa;
+
+  public ProdutoPostRepository(IAdapterSaida mapper,
+                               ProdutoRepositoryJpa jpa) {
+    this.mapper = mapper;
+    this.jpa = jpa;
+  }
 
   @Transactional
   @Override
