@@ -11,21 +11,25 @@ import com.techchallenge.devnet.core.domain.base.utilitarios.IUtils;
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPedidoEnum;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
 public class CopaPutService implements ICopaPedidoProntoServicePort, ICopaPedidoFinalizadoServicePort {
 
-  @Autowired
-  private IUtils utils;
+  private final IUtils utils;
 
-  @Autowired
-  private IPedidoConsultarPorIdRepositoryPort pedidoGetRepository;
+  private final IPedidoConsultarPorIdRepositoryPort pedidoGetRepository;
 
-  @Autowired
-  private IPedidoSalvarRepositoryPort pedidoPostRepository;
+  private final IPedidoSalvarRepositoryPort pedidoPostRepository;
+
+  public CopaPutService(IUtils utils,
+                        IPedidoConsultarPorIdRepositoryPort pedidoGetRepository,
+                        IPedidoSalvarRepositoryPort pedidoPostRepository) {
+    this.utils = utils;
+    this.pedidoGetRepository = pedidoGetRepository;
+    this.pedidoPostRepository = pedidoPostRepository;
+  }
 
   @Override
   public PedidoModel confirmarPedidoPronto(final Long idPedido) {
