@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.core.domain.base.utilitarios;
 
 import com.techchallenge.devnet.core.application.exceptions.MensagemPadrao;
-import com.techchallenge.devnet.core.application.exceptions.http_404.ClienteNaoEncontradoException;
+import com.techchallenge.devnet.core.application.exceptions.http_404.ProdutoNaoEncontradoException;
 import com.techchallenge.devnet.core.application.ports.saida.produto.IProdutoConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import com.techchallenge.devnet.core.domain.models.ProdutoModel;
@@ -37,7 +37,7 @@ public final class UtilsProduto implements IUtilsProduto {
     return this.repositorio.consultarPorId(idProduto)
       .orElseThrow(() -> {
         log.info(String.format(MensagemPadrao.PRODUTO_NAO_ENCONTRADO, idProduto));
-        throw new ClienteNaoEncontradoException(idProduto);
+        throw new ProdutoNaoEncontradoException(idProduto);
       });
   }
 }

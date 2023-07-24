@@ -16,6 +16,8 @@ public final class MensagemPadrao {
 
   public static final String MEDIA_NAO_SUPORTADA = "O recurso não suporta esse tipo de midia.";
 
+  public static final String MEDIA_INCOMPATIVEL = "Tipo de midia incompatível.";
+
   public static final String CLIENTE_NAO_ENCONTRADO = "O Cliente, com id %s, não foi encontrado!";
 
   public static final String PRODUTO_NAO_ENCONTRADO = "O Produto, com id %s, não foi encontrado!";

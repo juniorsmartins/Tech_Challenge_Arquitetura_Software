@@ -1,8 +1,8 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers.foto;
 
-import com.techchallenge.devnet.core.application.ports.entrada.foto.IFotoProdutoBuscarImagemPorIdServicePort;
 import com.techchallenge.devnet.core.application.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.core.application.exceptions.http_404.FotoProdutoNaoEncontradoException;
+import com.techchallenge.devnet.core.application.ports.entrada.foto.IFotoProdutoBuscarImagemPorIdServicePort;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -40,18 +40,18 @@ public final class FotoProdutoArmazemController implements IFotoProdutoControlle
   public ResponseEntity<InputStreamResource> buscarImagemPorId(@PathVariable(name = "id") final Long id,
                                              @RequestHeader(name = "accept") final String acceptHeader) {
     try {
-    var imagemModel = this.service.consultarImagemPorId(id, acceptHeader);
+      var imagemModel = this.service.consultarImagemPorId(id, acceptHeader);
 
-    return ResponseEntity
-    .ok()
-    .contentType(imagemModel.getMediaTypeFoto())
-    .body(imagemModel.getImagem());
+      return ResponseEntity
+      .ok()
+      .contentType(imagemModel.getMediaTypeFoto())
+      .body(imagemModel.getImagem());
 
     } catch (FotoProdutoNaoEncontradoException fotoProdutoNaoEncontradoException) {
 
-    return ResponseEntity
-    .notFound()
-    .build();
+      return ResponseEntity
+      .notFound()
+      .build();
     }
   }
 }
