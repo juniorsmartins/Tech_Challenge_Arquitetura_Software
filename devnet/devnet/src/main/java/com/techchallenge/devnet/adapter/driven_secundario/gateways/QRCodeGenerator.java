@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.core.application.use_case.pagamento;
+package com.techchallenge.devnet.adapter.driven_secundario.gateways;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
@@ -7,6 +7,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.techchallenge.devnet.core.application.exceptions.ArmazemException;
 import com.techchallenge.devnet.core.application.exceptions.MensagemPadrao;
+import com.techchallenge.devnet.core.application.ports.saida.pagamento.IGatewayQRCodeGeneratorPort;
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 @Service
-public class QRCodeGenerator implements IQRCodeGenerator {
+public class QRCodeGenerator implements IGatewayQRCodeGeneratorPort {
 
   public static String localParaArmazenarQRCode = "C:\\Users\\junio\\OneDrive\\Documentos\\diretorio-devnet";
 //  public static String localParaArmazenarQRCode = "/app/armazem";

@@ -6,6 +6,7 @@ import com.techchallenge.devnet.core.application.ports.saida.pagamento.IPagament
 import com.techchallenge.devnet.core.application.ports.saida.pagamento.IPagamentoPesquisarRepositoryPort;
 import com.techchallenge.devnet.core.application.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.core.application.exceptions.http_404.PagamentoNaoEncontradoException;
+import com.techchallenge.devnet.core.application.ports.saida.pagamento.IGatewayQRCodeGeneratorPort;
 import com.techchallenge.devnet.core.domain.models.PagamentoModel;
 import com.techchallenge.devnet.core.domain.objects.filtros.PagamentoFiltro;
 import lombok.extern.slf4j.Slf4j;
@@ -20,13 +21,13 @@ import java.util.Optional;
 @Service
 public class PagamentoGetService implements IPagamentoPesquisarServicePort, IPagamentoBuscarQrCodeServicePort {
 
-  private final IQRCodeGenerator qrCodeGenerator;
+  private final IGatewayQRCodeGeneratorPort qrCodeGenerator;
 
   private final IPagamentoPesquisarRepositoryPort pagamentoPesquisarRepository;
 
   private final IPagamentoConsultarRepositoryPort pagamentoConsultarRepository;
 
-  public PagamentoGetService(IQRCodeGenerator qrCodeGenerator,
+  public PagamentoGetService(IGatewayQRCodeGeneratorPort qrCodeGenerator,
                              IPagamentoPesquisarRepositoryPort pagamentoPesquisarRepository,
                              IPagamentoConsultarRepositoryPort pagamentoConsultarRepository) {
     this.qrCodeGenerator = qrCodeGenerator;

@@ -3,6 +3,7 @@ package com.techchallenge.devnet.core.application.use_case.pagamento;
 import com.google.zxing.WriterException;
 import com.techchallenge.devnet.core.application.ports.entrada.pagamento.IPagamentoCadastrarServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.pagamento.IPagamentoSalvarRepositoryPort;
+import com.techchallenge.devnet.core.application.ports.saida.pagamento.IGatewayQRCodeGeneratorPort;
 import com.techchallenge.devnet.core.domain.models.PagamentoModel;
 import com.techchallenge.devnet.core.domain.models.PedidoModel;
 import com.techchallenge.devnet.core.domain.models.enums.StatusPagamentoEnum;
@@ -15,11 +16,11 @@ import java.util.Optional;
 @Service
 public class PagamentoPostService implements IPagamentoCadastrarServicePort {
 
-  private final IQRCodeGenerator qrCodeGenerator;
+  private final IGatewayQRCodeGeneratorPort qrCodeGenerator;
 
   private final IPagamentoSalvarRepositoryPort pagamentoSalvarRepository;
 
-  public PagamentoPostService(IQRCodeGenerator qrCodeGenerator,
+  public PagamentoPostService(IGatewayQRCodeGeneratorPort qrCodeGenerator,
                               IPagamentoSalvarRepositoryPort pagamentoSalvarRepository) {
     this.qrCodeGenerator = qrCodeGenerator;
     this.pagamentoSalvarRepository = pagamentoSalvarRepository;
