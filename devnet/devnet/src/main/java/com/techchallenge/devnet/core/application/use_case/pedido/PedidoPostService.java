@@ -44,7 +44,7 @@ public class PedidoPostService implements IPedidoCadastrarServicePort {
 
     return Optional.of(pedidoModel)
       .map(this.utilsCliente::checagemDeCliente)
-      .map(this.utilsProduto::confirmarProdutos)
+      .map(this.utilsProduto::confirmarItensDoPedido)
       .map(this::organizarPedidoParaRegistrar)
       .map(this.pedidoPostRepository::salvar)
       .map(this.pagamentoPostService::iniciarCobrancaDePagamento)

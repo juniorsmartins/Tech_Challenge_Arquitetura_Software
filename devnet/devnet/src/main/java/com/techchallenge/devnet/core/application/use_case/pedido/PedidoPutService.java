@@ -47,7 +47,7 @@ public class PedidoPutService implements IPedidoAtualizarServicePort {
 
     return Optional.of(pedidoModel)
       .map(this.utilsCliente::checagemDeCliente)
-      .map(this.utilsProduto::confirmarProdutos)
+      .map(this.utilsProduto::confirmarItensDoPedido)
       .map(model -> {
         model.setStatusPedido(StatusPedidoEnum.RECEBIDO);
         model.getItensPedido().forEach(item -> item.setPedido(model));

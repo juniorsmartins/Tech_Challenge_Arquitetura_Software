@@ -1,14 +1,15 @@
 package com.techchallenge.devnet.core.application.use_case.foto;
 
+import com.techchallenge.devnet.core.application.exceptions.http_404.ProdutoNaoEncontradoException;
 import com.techchallenge.devnet.core.application.ports.entrada.foto.IFotoProdutoAtualizarServicePort;
 import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoArmazemPort;
 import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoSalvarRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.produto.IProdutoConsultarPorIdRepositoryPort;
-import com.techchallenge.devnet.core.application.exceptions.http_404.ProdutoNaoEncontradoException;
 import com.techchallenge.devnet.core.domain.models.FotoProdutoArquivo;
 import com.techchallenge.devnet.core.domain.models.FotoProdutoModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -31,6 +32,7 @@ public class FotoProdutoPutService implements IFotoProdutoAtualizarServicePort {
     this.armazemFotoProdutoService = armazemFotoProdutoService;
   }
 
+  @Transactional
   @Override
   public FotoProdutoModel inserirFotoNoProduto(final Long id, final FotoProdutoArquivo fotoProdutoArquivo) throws IOException {
 
