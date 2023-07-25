@@ -1,7 +1,7 @@
-package com.techchallenge.devnet.adapter.driven_secundario.entities;
+package com.techchallenge.devnet.adapter.driven_secundario.daos;
 
 import com.techchallenge.devnet.core.domain.base.auditoria.AuditoriaDataJpa;
-import com.techchallenge.devnet.core.domain.models.enums.StatusEmailEnum;
+import com.techchallenge.devnet.core.domain.models.enums.StatusPagamentoEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -10,7 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,10 +21,9 @@ import lombok.Setter;
 import org.hibernate.envers.Audited;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "emails")
+@Table(name = "pagamentos")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,38 +31,24 @@ import java.time.LocalDateTime;
 @Setter
 @EqualsAndHashCode(of = {"id"})
 @Audited
-public final class EmailEntity extends AuditoriaDataJpa implements Serializable {
+public final class PagamentoDao extends AuditoriaDataJpa implements Serializable {
 
-  private static final long serialVersionUID = 1L;
+  public static final long serialVersionUID = 1L;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
   private Long id;
 
-  @Column(name = "owner_ref")
-  private String ownerRef;
-
-  @Column(name = "email_from")
-  private String emailFrom;
-
-  @Column(name = "email_to")
-  private String emailTo;
-
-  @Column(name = "subject")
-  private String subject;
-
-  @Column(name = "text", columnDefinition = "TEXT")
-  private String text;
-
-  @Column(name = "send_data_email")
-  private LocalDateTime sendDataEmail;
-
-  @Column(name = "status_email")
   @Enumerated(EnumType.STRING)
-  private StatusEmailEnum statusEmail;
+  @Column(name = "status_pagamento", nullable = false)
+  private StatusPagamentoEnum statusPagamento = StatusPagamentoEnum.ABERTO;
 
-  @ManyToOne
+  @OneToOne
   @JoinColumn(name = "pedido_id", referencedColumnName = "id", nullable = false)
-  private PedidoEntity pedido;
+  private PedidoDao pedido;
+
+  @Column(name = "nome_imagem_qrcode", nullable = true)
+  private String nomeImagemQRCode;
 }
 

@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.adapter.driven_secundario.entities;
+package com.techchallenge.devnet.adapter.driven_secundario.daos;
 
 import com.techchallenge.devnet.core.domain.base.auditoria.AuditoriaDataJpa;
 import jakarta.persistence.Column;
@@ -29,7 +29,7 @@ import java.io.Serializable;
 @Setter
 @EqualsAndHashCode(of = {"id"})
 @Audited
-public final class FotoProdutoEntity extends AuditoriaDataJpa implements Serializable {
+public final class FotoProdutoDao extends AuditoriaDataJpa implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
@@ -40,7 +40,7 @@ public final class FotoProdutoEntity extends AuditoriaDataJpa implements Seriali
 
   @MapsId
   @OneToOne(fetch = FetchType.LAZY)
-  private ProdutoEntity produto;
+  private ProdutoDao produto;
 
   @Column(name = "nome", nullable = false)
   private String nome;

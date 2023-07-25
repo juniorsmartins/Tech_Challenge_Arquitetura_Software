@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.core.domain.objects.specification;
 
-import com.techchallenge.devnet.adapter.driven_secundario.entities.ProdutoEntity;
+import com.techchallenge.devnet.adapter.driven_secundario.daos.ProdutoDao;
 import com.techchallenge.devnet.adapter.driver_primario.filtros.ProdutoFiltroDto;
 import jakarta.persistence.criteria.Predicate;
 import org.apache.commons.lang3.ObjectUtils;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public final class ProdutoSpecification {
 
-  public static Specification<ProdutoEntity> consultarDinamicamente(ProdutoFiltroDto filtro) {
+  public static Specification<ProdutoDao> consultarDinamicamente(ProdutoFiltroDto filtro) {
 
     return ((root, query, criteriaBuilder) -> {
 

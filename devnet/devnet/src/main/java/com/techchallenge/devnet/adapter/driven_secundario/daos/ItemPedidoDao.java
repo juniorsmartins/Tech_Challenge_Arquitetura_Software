@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.adapter.driven_secundario.entities;
+package com.techchallenge.devnet.adapter.driven_secundario.daos;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,7 +28,7 @@ import java.math.BigDecimal;
 @Setter
 @EqualsAndHashCode(of = {"id"})
 @Audited
-public final class ItemPedidoEntity implements Serializable {
+public final class ItemPedidoDao implements Serializable {
 
   public static final long serialVersionUID = 1L;
 
@@ -44,11 +44,11 @@ public final class ItemPedidoEntity implements Serializable {
 
   @ManyToOne
   @JoinColumn(name = "pedido_id", referencedColumnName = "id", nullable = false)
-  private PedidoEntity pedido;
+  private PedidoDao pedido;
 
   @ManyToOne
   @JoinColumn(name = "produto_id", referencedColumnName = "id", nullable = false)
-  private ProdutoEntity produto;
+  private ProdutoDao produto;
 
 //  public void calcularPrecoParcial() {
 //    var precoUnitario = this.produto.getPreco();

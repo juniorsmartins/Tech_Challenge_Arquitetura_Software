@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.core.domain.objects.specification;
 
-import com.techchallenge.devnet.adapter.driven_secundario.entities.PedidoEntity;
+import com.techchallenge.devnet.adapter.driven_secundario.daos.PedidoDao;
 import com.techchallenge.devnet.adapter.driver_primario.filtros.PedidoFiltroDto;
 import jakarta.persistence.criteria.Predicate;
 import org.apache.commons.lang3.ObjectUtils;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public final class PedidoSpecification {
 
-  public static Specification<PedidoEntity> consultarDinamicamente(PedidoFiltroDto filtro) {
+  public static Specification<PedidoDao> consultarDinamicamente(PedidoFiltroDto filtro) {
 
     return ((root, query, criteriaBuilder) -> {
 

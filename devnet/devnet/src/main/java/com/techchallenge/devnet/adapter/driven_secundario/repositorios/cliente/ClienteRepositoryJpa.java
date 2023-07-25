@@ -1,14 +1,14 @@
 package com.techchallenge.devnet.adapter.driven_secundario.repositorios.cliente;
 
-import com.techchallenge.devnet.adapter.driven_secundario.entities.ClienteEntity;
+import com.techchallenge.devnet.adapter.driven_secundario.daos.ClienteDao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import java.util.Optional;
 
-public interface ClienteRepositoryJpa extends JpaRepository<ClienteEntity, Long>,
-  JpaSpecificationExecutor<ClienteEntity> {
+public interface ClienteRepositoryJpa extends JpaRepository<ClienteDao, Long>,
+  JpaSpecificationExecutor<ClienteDao> {
 
-  Optional<ClienteEntity> findByCpf(String cpf);
+  Optional<ClienteDao> findByCpf(String cpf);
 }
 

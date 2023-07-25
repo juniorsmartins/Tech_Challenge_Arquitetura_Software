@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.adapter.driven_secundario.repositorios.produto;
 
 import com.techchallenge.devnet.adapter.driven_secundario.adapter_saida.IAdapterSaida;
-import com.techchallenge.devnet.adapter.driven_secundario.entities.ProdutoEntity;
+import com.techchallenge.devnet.adapter.driven_secundario.daos.ProdutoDao;
 import com.techchallenge.devnet.core.application.ports.saida.produto.IProdutoApagarRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.ProdutoModel;
 import org.springframework.stereotype.Repository;
@@ -29,7 +29,7 @@ public class ProdutoDeleteRepository implements IProdutoApagarRepositoryPort {
 
     Optional.of(produtoModel)
       .map(model -> {
-        var produtoEntity = this.mapper.converterOrigemParaDestino(model, ProdutoEntity.class);
+        var produtoEntity = this.mapper.converterOrigemParaDestino(model, ProdutoDao.class);
         this.jpa.delete(produtoEntity);
         return true;
       })

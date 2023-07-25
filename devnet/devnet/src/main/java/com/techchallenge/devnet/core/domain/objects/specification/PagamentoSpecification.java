@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.core.domain.objects.specification;
 
-import com.techchallenge.devnet.adapter.driven_secundario.entities.PagamentoEntity;
+import com.techchallenge.devnet.adapter.driven_secundario.daos.PagamentoDao;
 import com.techchallenge.devnet.adapter.driver_primario.filtros.PagamentoFiltroDto;
 import jakarta.persistence.criteria.Predicate;
 import org.apache.commons.lang3.ObjectUtils;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public final class PagamentoSpecification {
 
-  public static Specification<PagamentoEntity> consultarDinamicamente(PagamentoFiltroDto filtro) {
+  public static Specification<PagamentoDao> consultarDinamicamente(PagamentoFiltroDto filtro) {
     return ((root, query, criteriaBuilder) -> {
 
       var predicados = new ArrayList<Predicate>();

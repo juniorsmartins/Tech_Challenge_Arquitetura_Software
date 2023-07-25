@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.adapter.driven_secundario.repositorios.item_pedido;
 
 import com.techchallenge.devnet.adapter.driven_secundario.adapter_saida.IAdapterSaida;
-import com.techchallenge.devnet.adapter.driven_secundario.entities.ItemPedidoEntity;
+import com.techchallenge.devnet.adapter.driven_secundario.daos.ItemPedidoDao;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.pedido.PedidoRepositoryJpa;
 import com.techchallenge.devnet.core.application.ports.saida.item_pedido.IItemPedidoApagarRepositoryPort;
 import com.techchallenge.devnet.core.application.ports.saida.item_pedido.IItemPedidoDeletarItensRepositoryPort;
@@ -36,7 +36,7 @@ public class ItemPedidoDeleteRepository implements IItemPedidoApagarRepositoryPo
 
     Optional.of(itemPedidoModel)
       .map(model -> {
-        var itemPedidoEntity = this.mapper.converterOrigemParaDestino(model, ItemPedidoEntity.class);
+        var itemPedidoEntity = this.mapper.converterOrigemParaDestino(model, ItemPedidoDao.class);
         this.jpa.delete(itemPedidoEntity);
         return true;
       })

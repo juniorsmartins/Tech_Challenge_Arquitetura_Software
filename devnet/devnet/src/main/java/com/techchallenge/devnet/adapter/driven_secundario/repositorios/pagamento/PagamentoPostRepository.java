@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.adapter.driven_secundario.repositorios.pagamento;
 
 import com.techchallenge.devnet.adapter.driven_secundario.adapter_saida.IAdapterSaida;
-import com.techchallenge.devnet.adapter.driven_secundario.entities.PagamentoEntity;
+import com.techchallenge.devnet.adapter.driven_secundario.daos.PagamentoDao;
 import com.techchallenge.devnet.core.application.ports.saida.pagamento.IPagamentoSalvarRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.PagamentoModel;
 import org.springframework.stereotype.Repository;
@@ -27,7 +27,7 @@ public class PagamentoPostRepository implements IPagamentoSalvarRepositoryPort {
   public PagamentoModel salvar(final PagamentoModel pagamentoModel) {
 
     return Optional.of(pagamentoModel)
-      .map(model -> this.mapper.converterOrigemParaDestino(model, PagamentoEntity.class))
+      .map(model -> this.mapper.converterOrigemParaDestino(model, PagamentoDao.class))
       .map(this.jpa::save)
       .map(entity -> this.mapper.converterOrigemParaDestino(entity, PagamentoModel.class))
       .orElseThrow();

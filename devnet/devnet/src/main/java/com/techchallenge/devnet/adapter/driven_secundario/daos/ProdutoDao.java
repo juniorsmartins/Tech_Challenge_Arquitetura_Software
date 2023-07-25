@@ -1,8 +1,11 @@
-package com.techchallenge.devnet.adapter.driven_secundario.entities;
+package com.techchallenge.devnet.adapter.driven_secundario.daos;
 
 import com.techchallenge.devnet.core.domain.base.auditoria.AuditoriaDataJpa;
+import com.techchallenge.devnet.core.domain.models.enums.CategoriaEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,10 +19,10 @@ import lombok.Setter;
 import org.hibernate.envers.Audited;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.math.BigDecimal;
 
 @Entity
-@Table(name = "clientes")
+@Table(name = "produtos")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,7 +30,7 @@ import java.time.LocalDate;
 @Setter
 @EqualsAndHashCode(of = {"id"})
 @Audited
-public final class ClienteEntity extends AuditoriaDataJpa implements Serializable {
+public final class ProdutoDao extends AuditoriaDataJpa implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
@@ -36,19 +39,17 @@ public final class ClienteEntity extends AuditoriaDataJpa implements Serializabl
   @Column(name = "id")
   private Long id;
 
+  @Enumerated(EnumType.STRING)
+  @Column(name = "categoria", length = 50, nullable = false)
+  private CategoriaEnum categoria;
+
   @Column(name = "nome", length = 100, nullable = false)
   private String nome;
 
-  @Column(name = "cpf", length = 14, nullable = false, unique = true)
-  private String cpf;
+  @Column(name = "descricao", length = 250, nullable = false)
+  private String descricao;
 
-  @Column(name = "numero_telefone", length = 11, nullable = true)
-  private String numeroTelefone;
-
-  @Column(name = "email", length = 100, nullable = false)
-  private String email;
-
-  @Column(name = "data_nascimento", nullable = false)
-  private LocalDate dataNascimentoLocalDate;
+  @Column(name = "preco", nullable = false)
+  private BigDecimal preco;
 }
 

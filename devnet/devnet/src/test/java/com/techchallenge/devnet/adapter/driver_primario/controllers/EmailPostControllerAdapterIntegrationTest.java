@@ -1,8 +1,8 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
 import com.techchallenge.devnet.DevnetApplication;
-import com.techchallenge.devnet.adapter.driven_secundario.entities.PagamentoEntity;
-import com.techchallenge.devnet.adapter.driven_secundario.entities.PedidoEntity;
+import com.techchallenge.devnet.adapter.driven_secundario.daos.PagamentoDao;
+import com.techchallenge.devnet.adapter.driven_secundario.daos.PedidoDao;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.email.EmailRepositoryJpa;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.pagamento.PagamentoRepositoryJpa;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.pedido.PedidoRepositoryJpa;
@@ -57,11 +57,11 @@ class EmailPostControllerAdapterIntegrationTest {
   @Autowired
   private PagamentoRepositoryJpa pagamentoRepositoryJpa;
 
-  private PedidoEntity pedidoEntity;
+  private PedidoDao pedidoEntity;
 
   @BeforeEach
   void criadorDeCenarios() {
-    pedidoEntity = PedidoEntity.builder()
+    pedidoEntity = PedidoDao.builder()
       .codigo(UUID.randomUUID())
       .statusPedido(StatusPedidoEnum.RECEBIDO)
       .formaPagamento(FormaPagamentoEnum.PIX)
@@ -69,7 +69,7 @@ class EmailPostControllerAdapterIntegrationTest {
       .build();
     pedidoEntity = this.pedidoRepositoryJpa.save(pedidoEntity);
 
-    var pagamento = PagamentoEntity.builder()
+    var pagamento = PagamentoDao.builder()
       .statusPagamento(StatusPagamentoEnum.ABERTO)
       .pedido(pedidoEntity)
       .nomeImagemQRCode("Teste")

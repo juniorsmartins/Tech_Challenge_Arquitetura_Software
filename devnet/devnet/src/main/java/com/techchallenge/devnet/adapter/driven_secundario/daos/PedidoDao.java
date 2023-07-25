@@ -1,4 +1,4 @@
-package com.techchallenge.devnet.adapter.driven_secundario.entities;
+package com.techchallenge.devnet.adapter.driven_secundario.daos;
 
 import com.techchallenge.devnet.core.domain.base.auditoria.AuditoriaDataJpa;
 import com.techchallenge.devnet.core.domain.models.enums.FormaPagamentoEnum;
@@ -40,7 +40,7 @@ import java.util.UUID;
 @Setter
 @EqualsAndHashCode(of = {"id"})
 @Audited
-public final class PedidoEntity extends AuditoriaDataJpa implements Serializable {
+public final class PedidoDao extends AuditoriaDataJpa implements Serializable {
 
   public static final long serialVersionUID = 1L;
 
@@ -65,12 +65,12 @@ public final class PedidoEntity extends AuditoriaDataJpa implements Serializable
 
   @ManyToOne
   @JoinColumn(name = "cliente_id", referencedColumnName = "id", nullable = true)
-  private ClienteEntity cliente;
+  private ClienteDao cliente;
 
   @OneToMany(mappedBy = "pedido", cascade = {CascadeType.ALL})
-  private List<ItemPedidoEntity> itensPedido = new ArrayList<>();
+  private List<ItemPedidoDao> itensPedido = new ArrayList<>();
 
   @OneToOne(mappedBy = "pedido", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-  private PagamentoEntity pagamento;
+  private PagamentoDao pagamento;
 }
 

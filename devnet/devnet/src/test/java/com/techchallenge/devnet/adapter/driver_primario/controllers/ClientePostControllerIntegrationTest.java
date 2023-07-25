@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
 import com.techchallenge.devnet.DevnetApplication;
-import com.techchallenge.devnet.adapter.driven_secundario.entities.ClienteEntity;
+import com.techchallenge.devnet.adapter.driven_secundario.daos.ClienteDao;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.cliente.ClienteRepositoryJpa;
 import com.techchallenge.devnet.utils.CriadorDeObjetos;
 import com.techchallenge.devnet.utils.Utilitarios;
@@ -40,11 +40,11 @@ class ClientePostControllerIntegrationTest {
   @Autowired
   private ClienteRepositoryJpa clienteRepositoryJpa;
 
-  private ClienteEntity clienteEntity;
+  private ClienteDao clienteEntity;
 
   @BeforeEach
   void criadorDeCenarios() {
-    clienteEntity = CriadorDeObjetos.gerarClienteEntityBuilder()
+    clienteEntity = CriadorDeObjetos.gerarClienteDaoBuilder()
       .build();
     clienteEntity = this.clienteRepositoryJpa.save(clienteEntity);
   }

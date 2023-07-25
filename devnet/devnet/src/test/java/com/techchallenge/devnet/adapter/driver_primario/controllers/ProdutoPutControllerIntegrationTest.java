@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.adapter.driver_primario.controllers;
 
 import com.techchallenge.devnet.DevnetApplication;
-import com.techchallenge.devnet.adapter.driven_secundario.entities.ProdutoEntity;
+import com.techchallenge.devnet.adapter.driven_secundario.daos.ProdutoDao;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.produto.ProdutoRepositoryJpa;
 import com.techchallenge.devnet.utils.CriadorDeObjetos;
 import com.techchallenge.devnet.utils.Utilitarios;
@@ -40,11 +40,11 @@ class ProdutoPutControllerIntegrationTest {
   @Autowired
   private ProdutoRepositoryJpa produtoRepositoryJpa;
 
-  private ProdutoEntity produtoEntity;
+  private ProdutoDao produtoEntity;
 
   @BeforeEach
   void criadorDeCenarios() {
-    produtoEntity = CriadorDeObjetos.gerarProdutoEntityBuilder()
+    produtoEntity = CriadorDeObjetos.gerarProdutoDaoBuilder()
       .build();
     produtoEntity = this.produtoRepositoryJpa.save(produtoEntity);
   }

@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.adapter.driven_secundario.repositorios.foto;
 
 import com.techchallenge.devnet.adapter.driven_secundario.adapter_saida.IAdapterSaida;
-import com.techchallenge.devnet.adapter.driven_secundario.entities.FotoProdutoEntity;
+import com.techchallenge.devnet.adapter.driven_secundario.daos.FotoProdutoDao;
 import com.techchallenge.devnet.adapter.driven_secundario.repositorios.produto.ProdutoRepositoryJpa;
 import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoArmazemPort;
 import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoSalvarRepositoryPort;
@@ -47,7 +47,7 @@ public class FotoProdutoPutRepository implements IFotoProdutoSalvarRepositoryPor
     }
 
     var fotoProdutoModelSalvo = Optional.of(fotoProdutoModel)
-      .map(model -> this.mapper.converterOrigemParaDestino(model, FotoProdutoEntity.class))
+      .map(model -> this.mapper.converterOrigemParaDestino(model, FotoProdutoDao.class))
       .map(entity -> {
         var idProduto = entity.getProduto().getId();
         var produto = this.produtoJpa.findById(idProduto)

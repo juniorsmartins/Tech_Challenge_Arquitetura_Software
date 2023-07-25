@@ -1,12 +1,12 @@
 package com.techchallenge.devnet.adapter.driven_secundario.repositorios.item_pedido;
 
-import com.techchallenge.devnet.adapter.driven_secundario.entities.ItemPedidoEntity;
+import com.techchallenge.devnet.adapter.driven_secundario.daos.ItemPedidoDao;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface ItemPedidoRepositoryJpa extends JpaRepository<ItemPedidoEntity, Long> {
+public interface ItemPedidoRepositoryJpa extends JpaRepository<ItemPedidoDao, Long> {
 
-  List<ItemPedidoEntity> findByProdutoId(Long produtoId);
+  List<ItemPedidoDao> findByProdutoId(Long produtoId);
 }
 

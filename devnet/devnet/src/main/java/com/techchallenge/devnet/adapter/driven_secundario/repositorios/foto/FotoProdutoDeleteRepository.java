@@ -1,7 +1,7 @@
 package com.techchallenge.devnet.adapter.driven_secundario.repositorios.foto;
 
 import com.techchallenge.devnet.adapter.driven_secundario.adapter_saida.IAdapterSaida;
-import com.techchallenge.devnet.adapter.driven_secundario.entities.FotoProdutoEntity;
+import com.techchallenge.devnet.adapter.driven_secundario.daos.FotoProdutoDao;
 import com.techchallenge.devnet.core.application.ports.saida.foto.IFotoProdutoApagarRepositoryPort;
 import com.techchallenge.devnet.core.domain.models.FotoProdutoModel;
 import org.springframework.stereotype.Repository;
@@ -29,7 +29,7 @@ public class FotoProdutoDeleteRepository implements IFotoProdutoApagarRepository
 
     Optional.of(fotoProdutoModel)
       .map(model -> {
-        var fotoProdutoEntity = this.mapper.converterOrigemParaDestino(model, FotoProdutoEntity.class);
+        var fotoProdutoEntity = this.mapper.converterOrigemParaDestino(model, FotoProdutoDao.class);
         this.jpa.delete(fotoProdutoEntity);
         return true;
       })
