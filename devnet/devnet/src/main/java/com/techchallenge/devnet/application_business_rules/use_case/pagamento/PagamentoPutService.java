@@ -7,7 +7,7 @@ import com.techchallenge.devnet.application_business_rules.ports.saida.pedido.IP
 import com.techchallenge.devnet.application_business_rules.ports.saida.pedido.IPedidoSalvarRepositoryPort;
 import com.techchallenge.devnet.application_business_rules.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.application_business_rules.exceptions.http_404.PedidoNaoEncontradoException;
-import com.techchallenge.devnet.enterprise_business_rules.base.utilitarios.IUtilsEmail;
+import com.techchallenge.devnet.enterprise_business_rules.base.utilitarios.UtilsEmail;
 import com.techchallenge.devnet.enterprise_business_rules.models.PagamentoModel;
 import com.techchallenge.devnet.enterprise_business_rules.models.PedidoModel;
 import com.techchallenge.devnet.enterprise_business_rules.models.enums.StatusPagamentoEnum;
@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class PagamentoPutService implements IPagamentoAtualizarServicePort {
 
-  private final IUtilsEmail utilsEmail;
+  private final UtilsEmail utilsEmail;
 
   private final IPedidoSalvarRepositoryPort pedidoPostRepository;
 
@@ -28,7 +28,7 @@ public class PagamentoPutService implements IPagamentoAtualizarServicePort {
 
   private final IGatewayPagamentoPort gatewayPagamento;
 
-  public PagamentoPutService(IUtilsEmail utilsEmail,
+  public PagamentoPutService(UtilsEmail utilsEmail,
                              IPedidoSalvarRepositoryPort pedidoPostRepository,
                              IPedidoConsultarPorIdRepositoryPort pedidoGetRepository,
                              IGatewayPagamentoPort gatewayPagamento) {

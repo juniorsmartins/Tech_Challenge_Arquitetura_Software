@@ -7,8 +7,8 @@ import com.techchallenge.devnet.application_business_rules.ports.entrada.pedido.
 import com.techchallenge.devnet.application_business_rules.ports.saida.item_pedido.IItemPedidoDeletarItensRepositoryPort;
 import com.techchallenge.devnet.application_business_rules.ports.saida.pedido.IPedidoConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.application_business_rules.ports.saida.pedido.IPedidoSalvarRepositoryPort;
-import com.techchallenge.devnet.enterprise_business_rules.base.utilitarios.IUtilsCliente;
-import com.techchallenge.devnet.enterprise_business_rules.base.utilitarios.IUtilsProduto;
+import com.techchallenge.devnet.enterprise_business_rules.base.utilitarios.UtilsCliente;
+import com.techchallenge.devnet.enterprise_business_rules.base.utilitarios.UtilsProduto;
 import com.techchallenge.devnet.enterprise_business_rules.models.PedidoModel;
 import com.techchallenge.devnet.enterprise_business_rules.models.enums.StatusPedidoEnum;
 import lombok.extern.slf4j.Slf4j;
@@ -20,9 +20,9 @@ import java.util.Optional;
 @Service
 public class PedidoPutService implements IPedidoAtualizarServicePort {
 
-  private final IUtilsCliente utilsCliente;
+  private final UtilsCliente utilsCliente;
 
-  private final IUtilsProduto utilsProduto;
+  private final UtilsProduto utilsProduto;
 
   private final IPedidoConsultarPorIdRepositoryPort pedidoGetRepository;
 
@@ -30,8 +30,8 @@ public class PedidoPutService implements IPedidoAtualizarServicePort {
 
   private final IItemPedidoDeletarItensRepositoryPort itemPedidoDeleteRepository;
 
-  public PedidoPutService(IUtilsCliente utilsCliente,
-                          IUtilsProduto utilsProduto,
+  public PedidoPutService(UtilsCliente utilsCliente,
+                          UtilsProduto utilsProduto,
                           IPedidoConsultarPorIdRepositoryPort pedidoGetRepository,
                           IPedidoSalvarRepositoryPort pedidoPostRepository,
                           IItemPedidoDeletarItensRepositoryPort itemPedidoDeleteRepository) {

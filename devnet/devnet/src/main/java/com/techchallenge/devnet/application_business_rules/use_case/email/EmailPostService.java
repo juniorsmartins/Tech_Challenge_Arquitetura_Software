@@ -3,8 +3,8 @@ package com.techchallenge.devnet.application_business_rules.use_case.email;
 import com.techchallenge.devnet.application_business_rules.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.application_business_rules.ports.entrada.email.IEmailEnviarServicePort;
 import com.techchallenge.devnet.application_business_rules.ports.saida.email.IEmailSalvarRepositoryPort;
-import com.techchallenge.devnet.enterprise_business_rules.base.utilitarios.IUtilsCliente;
-import com.techchallenge.devnet.enterprise_business_rules.base.utilitarios.IUtilsPedido;
+import com.techchallenge.devnet.enterprise_business_rules.base.utilitarios.UtilsCliente;
+import com.techchallenge.devnet.enterprise_business_rules.base.utilitarios.UtilsPedido;
 import com.techchallenge.devnet.enterprise_business_rules.models.EmailModel;
 import com.techchallenge.devnet.enterprise_business_rules.models.enums.StatusEmailEnum;
 import lombok.extern.slf4j.Slf4j;
@@ -21,16 +21,16 @@ import java.util.Optional;
 @Service
 public class EmailPostService implements IEmailEnviarServicePort {
 
-  private final IUtilsCliente utilsCliente;
+  private final UtilsCliente utilsCliente;
 
-  private final IUtilsPedido utilsPedido;
+  private final UtilsPedido utilsPedido;
 
   private final JavaMailSender javaMailSender;
 
   private final IEmailSalvarRepositoryPort emailSalvarRepository;
 
-  public EmailPostService(IUtilsCliente utilsCliente,
-                          IUtilsPedido utilsPedido,
+  public EmailPostService(UtilsCliente utilsCliente,
+                          UtilsPedido utilsPedido,
                           JavaMailSender javaMailSender,
                           IEmailSalvarRepositoryPort emailSalvarRepository) {
     this.utilsCliente = utilsCliente;
