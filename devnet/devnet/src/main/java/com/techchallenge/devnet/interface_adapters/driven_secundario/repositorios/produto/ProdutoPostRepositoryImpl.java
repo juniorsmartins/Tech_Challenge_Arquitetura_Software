@@ -1,9 +1,8 @@
 package com.techchallenge.devnet.interface_adapters.driven_secundario.repositorios.produto;
 
-import com.techchallenge.devnet.frameworks_and_drivers.db.ProdutoRepositoryJpa;
 import com.techchallenge.devnet.interface_adapters.driven_secundario.adapter_saida.AdapterSaida;
 import com.techchallenge.devnet.interface_adapters.driven_secundario.daos.ProdutoDao;
-import com.techchallenge.devnet.application_business_rules.ports.saida.produto.IProdutoSalvarRepositoryPort;
+import com.techchallenge.devnet.application_business_rules.ports.saida.produto.ProdutoSalvarRepositoryPort;
 import com.techchallenge.devnet.enterprise_business_rules.models.ProdutoModel;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
-public class ProdutoPostRepositoryImpl implements IProdutoSalvarRepositoryPort {
+public class ProdutoPostRepositoryImpl implements ProdutoSalvarRepositoryPort {
 
   private final AdapterSaida mapper;
 

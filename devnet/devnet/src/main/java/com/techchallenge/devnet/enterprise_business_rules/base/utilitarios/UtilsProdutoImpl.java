@@ -2,7 +2,7 @@ package com.techchallenge.devnet.enterprise_business_rules.base.utilitarios;
 
 import com.techchallenge.devnet.application_business_rules.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.application_business_rules.exceptions.http_404.ProdutoNaoEncontradoException;
-import com.techchallenge.devnet.application_business_rules.ports.saida.produto.IProdutoConsultarPorIdRepositoryPort;
+import com.techchallenge.devnet.application_business_rules.ports.saida.produto.ProdutoConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.enterprise_business_rules.models.PedidoModel;
 import com.techchallenge.devnet.enterprise_business_rules.models.ProdutoModel;
 import lombok.extern.slf4j.Slf4j;
@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 @Service
 public final class UtilsProdutoImpl implements UtilsProduto {
 
-  private final IProdutoConsultarPorIdRepositoryPort repositorio;
+  private final ProdutoConsultarPorIdRepositoryPort repositorio;
 
-  public UtilsProdutoImpl(IProdutoConsultarPorIdRepositoryPort repositorioConsultarProdutoPorId) {
+  public UtilsProdutoImpl(ProdutoConsultarPorIdRepositoryPort repositorioConsultarProdutoPorId) {
     this.repositorio = repositorioConsultarProdutoPorId;
   }
 

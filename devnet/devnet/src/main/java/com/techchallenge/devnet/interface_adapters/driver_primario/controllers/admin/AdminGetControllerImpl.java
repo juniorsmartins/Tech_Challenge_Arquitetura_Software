@@ -1,11 +1,10 @@
 package com.techchallenge.devnet.interface_adapters.driver_primario.controllers.admin;
 
-import com.techchallenge.devnet.frameworks_and_drivers.web.AdminControllerPort;
 import com.techchallenge.devnet.interface_adapters.driver_primario.adapter_entrada.AdapterEntrada;
 import com.techchallenge.devnet.interface_adapters.driver_primario.dtos.resposta.IndicadorDtoResponse;
 import com.techchallenge.devnet.interface_adapters.driver_primario.filtros.ClienteFiltroDto;
 import com.techchallenge.devnet.interface_adapters.driver_primario.presenters.GetPresenter;
-import com.techchallenge.devnet.application_business_rules.ports.entrada.admin.IAdminBuscarIndicadoresServicePort;
+import com.techchallenge.devnet.application_business_rules.ports.entrada.admin.AdminBuscarIndicadoresServicePort;
 import com.techchallenge.devnet.application_business_rules.exceptions.RetornoDeErro;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -27,12 +26,12 @@ public final class AdminGetControllerImpl implements AdminControllerPort.GetCont
 
   private final AdapterEntrada mapper;
 
-  private final IAdminBuscarIndicadoresServicePort service;
+  private final AdminBuscarIndicadoresServicePort service;
 
   private final GetPresenter presenter;
 
   public AdminGetControllerImpl(AdapterEntrada mapper,
-                                IAdminBuscarIndicadoresServicePort service,
+                                AdminBuscarIndicadoresServicePort service,
                                 GetPresenter presenter) {
     this.mapper = mapper;
     this.service = service;

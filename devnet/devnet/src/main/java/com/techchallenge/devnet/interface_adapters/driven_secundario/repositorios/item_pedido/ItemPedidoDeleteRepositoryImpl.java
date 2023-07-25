@@ -1,11 +1,10 @@
 package com.techchallenge.devnet.interface_adapters.driven_secundario.repositorios.item_pedido;
 
-import com.techchallenge.devnet.frameworks_and_drivers.db.ItemPedidoRepositoryJpa;
 import com.techchallenge.devnet.interface_adapters.driven_secundario.adapter_saida.AdapterSaida;
 import com.techchallenge.devnet.interface_adapters.driven_secundario.daos.ItemPedidoDao;
-import com.techchallenge.devnet.frameworks_and_drivers.db.PedidoRepositoryJpa;
-import com.techchallenge.devnet.application_business_rules.ports.saida.item_pedido.IItemPedidoApagarRepositoryPort;
-import com.techchallenge.devnet.application_business_rules.ports.saida.item_pedido.IItemPedidoDeletarItensRepositoryPort;
+import com.techchallenge.devnet.interface_adapters.driven_secundario.repositorios.pedido.PedidoRepositoryJpa;
+import com.techchallenge.devnet.application_business_rules.ports.saida.item_pedido.ItemPedidoApagarRepositoryPort;
+import com.techchallenge.devnet.application_business_rules.ports.saida.item_pedido.ItemPedidoDeletarItensRepositoryPort;
 import com.techchallenge.devnet.application_business_rules.exceptions.http_404.PedidoNaoEncontradoException;
 import com.techchallenge.devnet.enterprise_business_rules.models.ItemPedidoModel;
 import org.springframework.stereotype.Repository;
@@ -14,8 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
-public class ItemPedidoDeleteRepositoryImpl implements IItemPedidoApagarRepositoryPort,
-  IItemPedidoDeletarItensRepositoryPort {
+public class ItemPedidoDeleteRepositoryImpl implements ItemPedidoApagarRepositoryPort,
+  ItemPedidoDeletarItensRepositoryPort {
 
   private final AdapterSaida mapper;
 

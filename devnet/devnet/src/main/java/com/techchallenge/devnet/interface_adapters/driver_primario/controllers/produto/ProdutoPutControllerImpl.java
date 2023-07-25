@@ -1,13 +1,12 @@
 package com.techchallenge.devnet.interface_adapters.driver_primario.controllers.produto;
 
-import com.techchallenge.devnet.frameworks_and_drivers.web.ProdutoControllerPort;
+import com.techchallenge.devnet.application_business_rules.exceptions.RetornoDeErro;
+import com.techchallenge.devnet.application_business_rules.ports.entrada.produto.ProdutoAtualizarServicePort;
+import com.techchallenge.devnet.enterprise_business_rules.models.ProdutoModel;
 import com.techchallenge.devnet.interface_adapters.driver_primario.adapter_entrada.AdapterEntrada;
 import com.techchallenge.devnet.interface_adapters.driver_primario.dtos.requisicao.ProdutoDtoRequest;
 import com.techchallenge.devnet.interface_adapters.driver_primario.dtos.resposta.ProdutoDtoResponse;
 import com.techchallenge.devnet.interface_adapters.driver_primario.presenters.PutPresenter;
-import com.techchallenge.devnet.application_business_rules.ports.entrada.produto.IProdutoAtualizarServicePort;
-import com.techchallenge.devnet.application_business_rules.exceptions.RetornoDeErro;
-import com.techchallenge.devnet.enterprise_business_rules.models.ProdutoModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -25,19 +24,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
-@Tag(name = "ProdutoPutController", description = "Adaptador para padronizar a requisição às normalizações da API.")
+@Tag(name = "ProdutoPutControllerImpl", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/produtos")
 public final class ProdutoPutControllerImpl implements ProdutoControllerPort.PutController {
 
   private final AdapterEntrada mapper;
 
-  private final IProdutoAtualizarServicePort service;
+  private final ProdutoAtualizarServicePort service;
 
   private final PutPresenter presenter;
 
   public ProdutoPutControllerImpl(AdapterEntrada mapper,
-                                  IProdutoAtualizarServicePort service,
+                                  ProdutoAtualizarServicePort service,
                                   PutPresenter presenter) {
     this.mapper = mapper;
     this.service = service;

@@ -1,10 +1,9 @@
 package com.techchallenge.devnet.interface_adapters.driven_secundario.repositorios.produto;
 
-import com.techchallenge.devnet.frameworks_and_drivers.db.ProdutoRepositoryJpa;
 import com.techchallenge.devnet.interface_adapters.driven_secundario.adapter_saida.AdapterSaida;
 import com.techchallenge.devnet.interface_adapters.driver_primario.filtros.ProdutoFiltroDto;
-import com.techchallenge.devnet.application_business_rules.ports.saida.produto.IProdutoConsultarPorIdRepositoryPort;
-import com.techchallenge.devnet.application_business_rules.ports.saida.produto.IProdutoPesquisarRepositoryPort;
+import com.techchallenge.devnet.application_business_rules.ports.saida.produto.ProdutoConsultarPorIdRepositoryPort;
+import com.techchallenge.devnet.application_business_rules.ports.saida.produto.ProdutoPesquisarRepositoryPort;
 import com.techchallenge.devnet.enterprise_business_rules.models.ProdutoModel;
 import com.techchallenge.devnet.enterprise_business_rules.objects.filtros.ProdutoFiltro;
 import com.techchallenge.devnet.enterprise_business_rules.objects.specification.ProdutoSpecification;
@@ -16,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
-public class ProdutoGetRepositoryImpl implements IProdutoConsultarPorIdRepositoryPort, IProdutoPesquisarRepositoryPort {
+public class ProdutoGetRepositoryImpl implements ProdutoConsultarPorIdRepositoryPort, ProdutoPesquisarRepositoryPort {
 
   private final AdapterSaida mapper;
 

@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.enterprise_business_rules.base.assertions_concern;
 
-import com.techchallenge.devnet.application_business_rules.ports.saida.cliente.IClienteConsultarPorCpfRepositoryPort;
+import com.techchallenge.devnet.application_business_rules.ports.saida.cliente.ClienteConsultarPorCpfRepositoryPort;
 import com.techchallenge.devnet.application_business_rules.exceptions.http_409.RegraClienteCpfUnicoException;
 import com.techchallenge.devnet.enterprise_business_rules.models.ClienteModel;
 import org.springframework.stereotype.Service;
@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 @Service
 public final class RegraClienteCpfUnico implements RegrasCliente {
 
-  private final IClienteConsultarPorCpfRepositoryPort repositorio;
+  private final ClienteConsultarPorCpfRepositoryPort repositorio;
 
-  public RegraClienteCpfUnico(IClienteConsultarPorCpfRepositoryPort repositorio) {
+  public RegraClienteCpfUnico(ClienteConsultarPorCpfRepositoryPort repositorio) {
     this.repositorio = repositorio;
   }
 

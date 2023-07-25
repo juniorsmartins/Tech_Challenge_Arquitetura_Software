@@ -2,7 +2,7 @@ package com.techchallenge.devnet.interface_adapters.driver_primario.controllers;
 
 import com.techchallenge.devnet.DevnetApplication;
 import com.techchallenge.devnet.interface_adapters.driven_secundario.daos.ProdutoDao;
-import com.techchallenge.devnet.frameworks_and_drivers.db.ProdutoRepositoryJpa;
+import com.techchallenge.devnet.interface_adapters.driven_secundario.repositorios.produto.ProdutoRepositoryJpa;
 import com.techchallenge.devnet.utils.CriadorDeObjetos;
 import com.techchallenge.devnet.utils.Utilitarios;
 import org.junit.jupiter.api.AfterEach;

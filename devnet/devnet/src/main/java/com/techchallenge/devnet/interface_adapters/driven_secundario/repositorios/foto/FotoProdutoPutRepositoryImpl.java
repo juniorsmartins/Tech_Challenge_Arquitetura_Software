@@ -1,11 +1,10 @@
 package com.techchallenge.devnet.interface_adapters.driven_secundario.repositorios.foto;
 
-import com.techchallenge.devnet.frameworks_and_drivers.db.FotoProdutoRepositoryJpa;
 import com.techchallenge.devnet.interface_adapters.driven_secundario.adapter_saida.AdapterSaida;
 import com.techchallenge.devnet.interface_adapters.driven_secundario.daos.FotoProdutoDao;
-import com.techchallenge.devnet.frameworks_and_drivers.db.ProdutoRepositoryJpa;
-import com.techchallenge.devnet.application_business_rules.ports.saida.foto.IFotoProdutoArmazemPort;
-import com.techchallenge.devnet.application_business_rules.ports.saida.foto.IFotoProdutoSalvarRepositoryPort;
+import com.techchallenge.devnet.interface_adapters.driven_secundario.repositorios.produto.ProdutoRepositoryJpa;
+import com.techchallenge.devnet.application_business_rules.ports.saida.foto.FotoProdutoArmazemPort;
+import com.techchallenge.devnet.application_business_rules.ports.saida.foto.FotoProdutoSalvarRepositoryPort;
 import com.techchallenge.devnet.application_business_rules.exceptions.http_404.ProdutoNaoEncontradoException;
 import com.techchallenge.devnet.enterprise_business_rules.models.FotoProdutoModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ import java.io.InputStream;
 import java.util.Optional;
 
 @Repository
-public class FotoProdutoPutRepositoryImpl implements IFotoProdutoSalvarRepositoryPort {
+public class FotoProdutoPutRepositoryImpl implements FotoProdutoSalvarRepositoryPort {
 
   private final AdapterSaida mapper;
 
@@ -32,7 +31,7 @@ public class FotoProdutoPutRepositoryImpl implements IFotoProdutoSalvarRepositor
   private ProdutoRepositoryJpa produtoJpa;
 
   @Autowired
-  private IFotoProdutoArmazemPort armazemFotoProdutoService;
+  private FotoProdutoArmazemPort armazemFotoProdutoService;
 
   @Transactional
   @Override
@@ -60,7 +59,7 @@ public class FotoProdutoPutRepositoryImpl implements IFotoProdutoSalvarRepositor
       .map(entity -> this.mapper.converterOrigemParaDestino(entity, FotoProdutoModel.class))
       .orElseThrow();
 
-    var novaFoto = IFotoProdutoArmazemPort.NovaFoto.builder()
+    var novaFoto = FotoProdutoArmazemPort.NovaFoto.builder()
       .nomeArquivo(fotoProdutoModelSalvo.getNome())
       .inputStream(dadosArquivo)
       .build();

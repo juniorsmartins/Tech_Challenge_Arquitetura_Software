@@ -1,11 +1,10 @@
 package com.techchallenge.devnet.interface_adapters.driver_primario.controllers.pedido;
 
-import com.techchallenge.devnet.frameworks_and_drivers.web.PedidoControllerPort;
 import com.techchallenge.devnet.interface_adapters.driver_primario.adapter_entrada.AdapterEntrada;
 import com.techchallenge.devnet.interface_adapters.driver_primario.dtos.requisicao.PedidoDtoRequest;
 import com.techchallenge.devnet.interface_adapters.driver_primario.dtos.resposta.PedidoDtoResponse;
 import com.techchallenge.devnet.interface_adapters.driver_primario.presenters.PostPresenter;
-import com.techchallenge.devnet.application_business_rules.ports.entrada.pedido.IPedidoCadastrarServicePort;
+import com.techchallenge.devnet.application_business_rules.ports.entrada.pedido.PedidoCadastrarServicePort;
 import com.techchallenge.devnet.application_business_rules.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.enterprise_business_rules.models.PedidoModel;
 import io.swagger.v3.oas.annotations.Operation;
@@ -31,12 +30,12 @@ public final class PedidoPostControllerImpl implements PedidoControllerPort.Post
 
   private final AdapterEntrada mapper;
 
-  private final IPedidoCadastrarServicePort service;
+  private final PedidoCadastrarServicePort service;
 
   private final PostPresenter presenter;
 
   public PedidoPostControllerImpl(AdapterEntrada mapper,
-                                  IPedidoCadastrarServicePort service,
+                                  PedidoCadastrarServicePort service,
                                   PostPresenter presenter) {
     this.mapper = mapper;
     this.service = service;

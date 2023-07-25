@@ -1,11 +1,10 @@
 package com.techchallenge.devnet.interface_adapters.driver_primario.controllers.foto;
 
-import com.techchallenge.devnet.frameworks_and_drivers.web.FotoProdutoControllerPort;
 import com.techchallenge.devnet.interface_adapters.driver_primario.adapter_entrada.AdapterEntrada;
 import com.techchallenge.devnet.interface_adapters.driver_primario.dtos.requisicao.FotoProdutoDtoRequest;
 import com.techchallenge.devnet.interface_adapters.driver_primario.dtos.resposta.FotoProdutoDtoResponse;
 import com.techchallenge.devnet.interface_adapters.driver_primario.presenters.PutPresenter;
-import com.techchallenge.devnet.application_business_rules.ports.entrada.foto.IFotoProdutoAtualizarServicePort;
+import com.techchallenge.devnet.application_business_rules.ports.entrada.foto.FotoProdutoAtualizarServicePort;
 import com.techchallenge.devnet.application_business_rules.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.enterprise_business_rules.models.FotoProdutoArquivo;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,19 +23,19 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.util.Optional;
 
-@Tag(name = "FotoProdutoPutController", description = "Adaptador para padronizar a requisição às normalizações da API.")
+@Tag(name = "FotoProdutoPutControllerImpl", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/fotos")
 public final class FotoProdutoPutControllerImpl implements FotoProdutoControllerPort.PutController {
 
   private final AdapterEntrada mapper;
 
-  private final IFotoProdutoAtualizarServicePort service;
+  private final FotoProdutoAtualizarServicePort service;
 
   private final PutPresenter presenter;
 
   public FotoProdutoPutControllerImpl(AdapterEntrada mapper,
-                                      IFotoProdutoAtualizarServicePort service,
+                                      FotoProdutoAtualizarServicePort service,
                                       PutPresenter presenter) {
     this.mapper = mapper;
     this.service = service;

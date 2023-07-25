@@ -1,16 +1,15 @@
 package com.techchallenge.devnet.interface_adapters.driven_secundario.repositorios.email;
 
-import com.techchallenge.devnet.frameworks_and_drivers.db.EmailRepositoryJpa;
 import com.techchallenge.devnet.interface_adapters.driven_secundario.adapter_saida.AdapterSaida;
 import com.techchallenge.devnet.interface_adapters.driven_secundario.daos.EmailDao;
-import com.techchallenge.devnet.application_business_rules.ports.saida.email.IEmailSalvarRepositoryPort;
+import com.techchallenge.devnet.application_business_rules.ports.saida.email.EmailSalvarRepositoryPort;
 import com.techchallenge.devnet.enterprise_business_rules.models.EmailModel;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public class EmailPostRepositoryImpl implements IEmailSalvarRepositoryPort {
+public class EmailPostRepositoryImpl implements EmailSalvarRepositoryPort {
 
   private final AdapterSaida mapper;
 

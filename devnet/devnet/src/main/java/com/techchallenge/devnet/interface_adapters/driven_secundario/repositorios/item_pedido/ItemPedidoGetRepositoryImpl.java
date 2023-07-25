@@ -1,9 +1,8 @@
 package com.techchallenge.devnet.interface_adapters.driven_secundario.repositorios.item_pedido;
 
-import com.techchallenge.devnet.frameworks_and_drivers.db.ItemPedidoRepositoryJpa;
 import com.techchallenge.devnet.interface_adapters.driven_secundario.adapter_saida.AdapterSaida;
-import com.techchallenge.devnet.application_business_rules.ports.saida.item_pedido.IItemPedidoBuscarPorIdProdutoRepositoryPort;
-import com.techchallenge.devnet.application_business_rules.ports.saida.item_pedido.IItemPedidoConsultarPorIdRepositoryPort;
+import com.techchallenge.devnet.application_business_rules.ports.saida.item_pedido.ItemPedidoBuscarPorIdProdutoRepositoryPort;
+import com.techchallenge.devnet.application_business_rules.ports.saida.item_pedido.ItemPedidoConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.enterprise_business_rules.models.ItemPedidoModel;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,8 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class ItemPedidoGetRepositoryImpl implements IItemPedidoConsultarPorIdRepositoryPort,
-  IItemPedidoBuscarPorIdProdutoRepositoryPort {
+public class ItemPedidoGetRepositoryImpl implements ItemPedidoConsultarPorIdRepositoryPort,
+  ItemPedidoBuscarPorIdProdutoRepositoryPort {
 
   private final AdapterSaida mapper;
 

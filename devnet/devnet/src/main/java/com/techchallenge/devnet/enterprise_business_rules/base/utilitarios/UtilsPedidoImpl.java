@@ -2,7 +2,7 @@ package com.techchallenge.devnet.enterprise_business_rules.base.utilitarios;
 
 import com.techchallenge.devnet.application_business_rules.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.application_business_rules.exceptions.http_404.PedidoNaoEncontradoException;
-import com.techchallenge.devnet.application_business_rules.ports.saida.pedido.IPedidoConsultarPorIdRepositoryPort;
+import com.techchallenge.devnet.application_business_rules.ports.saida.pedido.PedidoConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.enterprise_business_rules.models.PedidoModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 @Service
 public final class UtilsPedidoImpl implements UtilsPedido {
 
-  private final IPedidoConsultarPorIdRepositoryPort repositorioConsultarClientePorId;
+  private final PedidoConsultarPorIdRepositoryPort repositorioConsultarClientePorId;
 
-  public UtilsPedidoImpl(IPedidoConsultarPorIdRepositoryPort repositorioConsultarClientePorId) {
+  public UtilsPedidoImpl(PedidoConsultarPorIdRepositoryPort repositorioConsultarClientePorId) {
     this.repositorioConsultarClientePorId = repositorioConsultarClientePorId;
   }
 

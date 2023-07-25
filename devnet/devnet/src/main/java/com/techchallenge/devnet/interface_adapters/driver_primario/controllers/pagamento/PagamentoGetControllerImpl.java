@@ -1,12 +1,11 @@
 package com.techchallenge.devnet.interface_adapters.driver_primario.controllers.pagamento;
 
-import com.techchallenge.devnet.frameworks_and_drivers.web.PagamentoControllerPort;
 import com.techchallenge.devnet.interface_adapters.driver_primario.adapter_entrada.AdapterEntrada;
 import com.techchallenge.devnet.interface_adapters.driver_primario.dtos.resposta.PagamentoDtoResponse;
 import com.techchallenge.devnet.interface_adapters.driver_primario.filtros.PagamentoFiltroDto;
 import com.techchallenge.devnet.interface_adapters.driver_primario.presenters.GetPresenter;
-import com.techchallenge.devnet.application_business_rules.ports.entrada.pagamento.IPagamentoBuscarQrCodeServicePort;
-import com.techchallenge.devnet.application_business_rules.ports.entrada.pagamento.IPagamentoPesquisarServicePort;
+import com.techchallenge.devnet.application_business_rules.ports.entrada.pagamento.PagamentoBuscarQrCodeServicePort;
+import com.techchallenge.devnet.application_business_rules.ports.entrada.pagamento.PagamentoPesquisarServicePort;
 import com.techchallenge.devnet.application_business_rules.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.enterprise_business_rules.objects.filtros.PagamentoFiltro;
 import io.swagger.v3.oas.annotations.Operation;
@@ -37,15 +36,15 @@ public final class PagamentoGetControllerImpl implements PagamentoControllerPort
 
   private final AdapterEntrada mapper;
 
-  private final IPagamentoPesquisarServicePort servicePesquisar;
+  private final PagamentoPesquisarServicePort servicePesquisar;
 
-  private final IPagamentoBuscarQrCodeServicePort serviceBuscarQrCode;
+  private final PagamentoBuscarQrCodeServicePort serviceBuscarQrCode;
 
   private final GetPresenter presenter;
 
   public PagamentoGetControllerImpl(AdapterEntrada mapper,
-                                    IPagamentoPesquisarServicePort servicePesquisar,
-                                    IPagamentoBuscarQrCodeServicePort serviceBuscarQrCode,
+                                    PagamentoPesquisarServicePort servicePesquisar,
+                                    PagamentoBuscarQrCodeServicePort serviceBuscarQrCode,
                                     GetPresenter presenter) {
     this.mapper = mapper;
     this.servicePesquisar = servicePesquisar;

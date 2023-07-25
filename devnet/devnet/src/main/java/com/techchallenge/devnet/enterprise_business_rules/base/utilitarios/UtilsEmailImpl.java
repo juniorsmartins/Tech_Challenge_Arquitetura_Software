@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.enterprise_business_rules.base.utilitarios;
 
-import com.techchallenge.devnet.application_business_rules.ports.entrada.email.IEmailEnviarServicePort;
+import com.techchallenge.devnet.application_business_rules.ports.entrada.email.EmailEnviarServicePort;
 import com.techchallenge.devnet.enterprise_business_rules.models.EmailModel;
 import com.techchallenge.devnet.enterprise_business_rules.models.PedidoModel;
 import org.apache.commons.lang3.ObjectUtils;
@@ -11,9 +11,9 @@ public final class UtilsEmailImpl implements UtilsEmail {
 
   private static final String EMAIL_ORIGEM = "techchallenge6@gmail.com";
 
-  private final IEmailEnviarServicePort serviceEnviarEmail;
+  private final EmailEnviarServicePort serviceEnviarEmail;
 
-  public UtilsEmailImpl(IEmailEnviarServicePort serviceEnviarEmail) {
+  public UtilsEmailImpl(EmailEnviarServicePort serviceEnviarEmail) {
     this.serviceEnviarEmail = serviceEnviarEmail;
   }
 

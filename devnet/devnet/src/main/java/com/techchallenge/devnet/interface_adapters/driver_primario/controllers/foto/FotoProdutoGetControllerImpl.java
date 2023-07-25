@@ -1,11 +1,10 @@
 package com.techchallenge.devnet.interface_adapters.driver_primario.controllers.foto;
 
-import com.techchallenge.devnet.frameworks_and_drivers.web.FotoProdutoControllerPort;
+import com.techchallenge.devnet.application_business_rules.exceptions.RetornoDeErro;
+import com.techchallenge.devnet.application_business_rules.ports.entrada.foto.FotoProdutoConsultarPorIdServicePort;
 import com.techchallenge.devnet.interface_adapters.driver_primario.adapter_entrada.AdapterEntrada;
 import com.techchallenge.devnet.interface_adapters.driver_primario.dtos.resposta.FotoProdutoDtoResponse;
 import com.techchallenge.devnet.interface_adapters.driver_primario.presenters.GetPresenter;
-import com.techchallenge.devnet.application_business_rules.ports.entrada.foto.IFotoProdutoConsultarPorIdServicePort;
-import com.techchallenge.devnet.application_business_rules.exceptions.RetornoDeErro;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -20,19 +19,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
-@Tag(name = "FotoProdutoGetController", description = "Adaptador para padronizar a requisição às normalizações da API.")
+@Tag(name = "FotoProdutoGetControllerImpl", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/fotos")
 public final class FotoProdutoGetControllerImpl implements FotoProdutoControllerPort.ConsultarPorIdController {
 
   private final AdapterEntrada mapper;
 
-  private final IFotoProdutoConsultarPorIdServicePort service;
+  private final FotoProdutoConsultarPorIdServicePort service;
 
   private final GetPresenter presenter;
 
   public FotoProdutoGetControllerImpl(AdapterEntrada mapper,
-                                      IFotoProdutoConsultarPorIdServicePort service,
+                                      FotoProdutoConsultarPorIdServicePort service,
                                       GetPresenter presenter) {
     this.mapper = mapper;
     this.service = service;

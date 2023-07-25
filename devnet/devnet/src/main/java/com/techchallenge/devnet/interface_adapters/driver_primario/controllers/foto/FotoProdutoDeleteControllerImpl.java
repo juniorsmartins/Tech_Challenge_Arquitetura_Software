@@ -1,8 +1,7 @@
 package com.techchallenge.devnet.interface_adapters.driver_primario.controllers.foto;
 
-import com.techchallenge.devnet.frameworks_and_drivers.web.FotoProdutoControllerPort;
 import com.techchallenge.devnet.interface_adapters.driver_primario.presenters.DeletePresenter;
-import com.techchallenge.devnet.application_business_rules.ports.entrada.foto.IFotoProdutoApagarServicePort;
+import com.techchallenge.devnet.application_business_rules.ports.entrada.foto.FotoProdutoApagarServicePort;
 import com.techchallenge.devnet.application_business_rules.exceptions.RetornoDeErro;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -16,16 +15,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Tag(name = "FotoProdutoDeleteController", description = "Adaptador para padronizar a requisição às normalizações da API.")
+@Tag(name = "FotoProdutoDeleteControllerImpl", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/fotos")
 public final class FotoProdutoDeleteControllerImpl implements FotoProdutoControllerPort.DeleteController {
 
-  private final IFotoProdutoApagarServicePort service;
+  private final FotoProdutoApagarServicePort service;
 
   private final DeletePresenter presenter;
 
-  public FotoProdutoDeleteControllerImpl(IFotoProdutoApagarServicePort service,
+  public FotoProdutoDeleteControllerImpl(FotoProdutoApagarServicePort service,
                                          DeletePresenter presenter) {
     this.service = service;
     this.presenter = presenter;

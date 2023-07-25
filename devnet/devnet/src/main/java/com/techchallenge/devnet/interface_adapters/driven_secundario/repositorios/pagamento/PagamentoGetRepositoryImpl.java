@@ -1,10 +1,9 @@
 package com.techchallenge.devnet.interface_adapters.driven_secundario.repositorios.pagamento;
 
-import com.techchallenge.devnet.frameworks_and_drivers.db.PagamentoRepositoryJpa;
 import com.techchallenge.devnet.interface_adapters.driven_secundario.adapter_saida.AdapterSaida;
 import com.techchallenge.devnet.interface_adapters.driver_primario.filtros.PagamentoFiltroDto;
-import com.techchallenge.devnet.application_business_rules.ports.saida.pagamento.IPagamentoConsultarRepositoryPort;
-import com.techchallenge.devnet.application_business_rules.ports.saida.pagamento.IPagamentoPesquisarRepositoryPort;
+import com.techchallenge.devnet.application_business_rules.ports.saida.pagamento.PagamentoConsultarRepositoryPort;
+import com.techchallenge.devnet.application_business_rules.ports.saida.pagamento.PagamentoPesquisarRepositoryPort;
 import com.techchallenge.devnet.enterprise_business_rules.models.PagamentoModel;
 import com.techchallenge.devnet.enterprise_business_rules.objects.filtros.PagamentoFiltro;
 import com.techchallenge.devnet.enterprise_business_rules.objects.specification.PagamentoSpecification;
@@ -16,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
-public class PagamentoGetRepositoryImpl implements IPagamentoPesquisarRepositoryPort, IPagamentoConsultarRepositoryPort {
+public class PagamentoGetRepositoryImpl implements PagamentoPesquisarRepositoryPort, PagamentoConsultarRepositoryPort {
 
   private final AdapterSaida mapper;
 

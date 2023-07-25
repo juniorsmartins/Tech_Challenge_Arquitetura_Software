@@ -1,11 +1,10 @@
 package com.techchallenge.devnet.interface_adapters.driven_secundario.repositorios.cliente;
 
-import com.techchallenge.devnet.frameworks_and_drivers.db.ClienteRepositoryJpa;
 import com.techchallenge.devnet.interface_adapters.driven_secundario.adapter_saida.AdapterSaida;
 import com.techchallenge.devnet.interface_adapters.driver_primario.filtros.ClienteFiltroDto;
-import com.techchallenge.devnet.application_business_rules.ports.saida.cliente.IClienteConsultarPorCpfRepositoryPort;
-import com.techchallenge.devnet.application_business_rules.ports.saida.cliente.IClienteConsultarPorIdRepositoryPort;
-import com.techchallenge.devnet.application_business_rules.ports.saida.cliente.IClientePesquisarRepositoryPort;
+import com.techchallenge.devnet.application_business_rules.ports.saida.cliente.ClienteConsultarPorCpfRepositoryPort;
+import com.techchallenge.devnet.application_business_rules.ports.saida.cliente.ClienteConsultarPorIdRepositoryPort;
+import com.techchallenge.devnet.application_business_rules.ports.saida.cliente.ClientePesquisarRepositoryPort;
 import com.techchallenge.devnet.enterprise_business_rules.models.ClienteModel;
 import com.techchallenge.devnet.enterprise_business_rules.objects.filtros.ClienteFiltro;
 import com.techchallenge.devnet.enterprise_business_rules.objects.specification.ClienteSpecification;
@@ -17,8 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
-public class ClienteGetRepositoryImpl implements IClientePesquisarRepositoryPort,
-  IClienteConsultarPorIdRepositoryPort, IClienteConsultarPorCpfRepositoryPort {
+public class ClienteGetRepositoryImpl implements ClientePesquisarRepositoryPort,
+  ClienteConsultarPorIdRepositoryPort, ClienteConsultarPorCpfRepositoryPort {
 
   private final AdapterSaida mapper;
 

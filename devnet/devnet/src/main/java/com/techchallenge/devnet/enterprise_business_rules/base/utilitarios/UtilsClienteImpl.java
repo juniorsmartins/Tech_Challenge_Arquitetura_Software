@@ -2,8 +2,8 @@ package com.techchallenge.devnet.enterprise_business_rules.base.utilitarios;
 
 import com.techchallenge.devnet.application_business_rules.exceptions.MensagemPadrao;
 import com.techchallenge.devnet.application_business_rules.exceptions.http_404.ClienteNaoEncontradoException;
-import com.techchallenge.devnet.application_business_rules.ports.saida.cliente.IClienteConsultarPorCpfRepositoryPort;
-import com.techchallenge.devnet.application_business_rules.ports.saida.cliente.IClienteConsultarPorIdRepositoryPort;
+import com.techchallenge.devnet.application_business_rules.ports.saida.cliente.ClienteConsultarPorCpfRepositoryPort;
+import com.techchallenge.devnet.application_business_rules.ports.saida.cliente.ClienteConsultarPorIdRepositoryPort;
 import com.techchallenge.devnet.enterprise_business_rules.models.ClienteModel;
 import com.techchallenge.devnet.enterprise_business_rules.models.PedidoModel;
 import lombok.extern.slf4j.Slf4j;
@@ -14,12 +14,12 @@ import org.springframework.stereotype.Service;
 @Service
 public final class UtilsClienteImpl implements UtilsCliente {
 
-  private final IClienteConsultarPorIdRepositoryPort repositorioConsultarClientePorId;
+  private final ClienteConsultarPorIdRepositoryPort repositorioConsultarClientePorId;
 
-  private final IClienteConsultarPorCpfRepositoryPort repositorioConsultarClientePorCpf;
+  private final ClienteConsultarPorCpfRepositoryPort repositorioConsultarClientePorCpf;
 
-  public UtilsClienteImpl(IClienteConsultarPorIdRepositoryPort repositorioconsultarClientePorId,
-                          IClienteConsultarPorCpfRepositoryPort repositorioConsultarClientePorCpf) {
+  public UtilsClienteImpl(ClienteConsultarPorIdRepositoryPort repositorioconsultarClientePorId,
+                          ClienteConsultarPorCpfRepositoryPort repositorioConsultarClientePorCpf) {
     this.repositorioConsultarClientePorId = repositorioconsultarClientePorId;
     this.repositorioConsultarClientePorCpf = repositorioConsultarClientePorCpf;
   }

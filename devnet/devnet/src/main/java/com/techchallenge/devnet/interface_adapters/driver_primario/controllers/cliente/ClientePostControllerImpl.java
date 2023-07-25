@@ -1,13 +1,12 @@
 package com.techchallenge.devnet.interface_adapters.driver_primario.controllers.cliente;
 
-import com.techchallenge.devnet.frameworks_and_drivers.web.ClienteControllerPort;
+import com.techchallenge.devnet.application_business_rules.exceptions.RetornoDeErro;
+import com.techchallenge.devnet.application_business_rules.ports.entrada.cliente.ClienteCadastrarServicePort;
+import com.techchallenge.devnet.enterprise_business_rules.models.ClienteModel;
 import com.techchallenge.devnet.interface_adapters.driver_primario.adapter_entrada.AdapterEntrada;
 import com.techchallenge.devnet.interface_adapters.driver_primario.dtos.requisicao.ClienteDtoRequest;
 import com.techchallenge.devnet.interface_adapters.driver_primario.dtos.resposta.ClienteDtoResponse;
 import com.techchallenge.devnet.interface_adapters.driver_primario.presenters.PostPresenter;
-import com.techchallenge.devnet.application_business_rules.ports.entrada.cliente.IClienteCadastrarServicePort;
-import com.techchallenge.devnet.application_business_rules.exceptions.RetornoDeErro;
-import com.techchallenge.devnet.enterprise_business_rules.models.ClienteModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -23,19 +22,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
-@Tag(name = "ClientePostController", description = "Adaptador para padronizar a requisição às normalizações da API.")
+@Tag(name = "ClientePostControllerImpl", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/clientes")
 public final class ClientePostControllerImpl implements ClienteControllerPort.PostController {
 
   private final AdapterEntrada mapper;
 
-  private final IClienteCadastrarServicePort service;
+  private final ClienteCadastrarServicePort service;
 
   private final PostPresenter presenter;
 
   public ClientePostControllerImpl(AdapterEntrada mapper,
-                                   IClienteCadastrarServicePort service,
+                                   ClienteCadastrarServicePort service,
                                    PostPresenter presenter) {
     this.mapper = mapper;
     this.service = service;

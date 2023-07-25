@@ -1,11 +1,10 @@
 package com.techchallenge.devnet.interface_adapters.driver_primario.controllers.copa;
 
-import com.techchallenge.devnet.frameworks_and_drivers.web.CopaControllerPort;
 import com.techchallenge.devnet.interface_adapters.driver_primario.adapter_entrada.AdapterEntrada;
 import com.techchallenge.devnet.interface_adapters.driver_primario.dtos.resposta.PedidoDtoResponse;
 import com.techchallenge.devnet.interface_adapters.driver_primario.presenters.PutPresenter;
-import com.techchallenge.devnet.application_business_rules.ports.entrada.copa.ICopaPedidoFinalizadoServicePort;
-import com.techchallenge.devnet.application_business_rules.ports.entrada.copa.ICopaPedidoProntoServicePort;
+import com.techchallenge.devnet.application_business_rules.ports.entrada.copa.CopaPedidoFinalizadoServicePort;
+import com.techchallenge.devnet.application_business_rules.ports.entrada.copa.CopaPedidoProntoServicePort;
 import com.techchallenge.devnet.application_business_rules.exceptions.RetornoDeErro;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -28,15 +27,15 @@ public final class CopaPutControllerImpl implements CopaControllerPort.PutContro
 
   private final AdapterEntrada mapper;
 
-  private final ICopaPedidoProntoServicePort servicePronto;
+  private final CopaPedidoProntoServicePort servicePronto;
 
-  private final ICopaPedidoFinalizadoServicePort serviceFinalizado;
+  private final CopaPedidoFinalizadoServicePort serviceFinalizado;
 
   private final PutPresenter presenter;
 
   public CopaPutControllerImpl(AdapterEntrada mapper,
-                               ICopaPedidoProntoServicePort servicePronto,
-                               ICopaPedidoFinalizadoServicePort serviceFinalizado,
+                               CopaPedidoProntoServicePort servicePronto,
+                               CopaPedidoFinalizadoServicePort serviceFinalizado,
                                PutPresenter presenter) {
     this.mapper = mapper;
     this.servicePronto = servicePronto;

@@ -1,8 +1,7 @@
 package com.techchallenge.devnet.interface_adapters.driver_primario.controllers.pedido;
 
-import com.techchallenge.devnet.frameworks_and_drivers.web.PedidoControllerPort;
 import com.techchallenge.devnet.interface_adapters.driver_primario.presenters.DeletePresenter;
-import com.techchallenge.devnet.application_business_rules.ports.entrada.pedido.IPedidoApagarServicePort;
+import com.techchallenge.devnet.application_business_rules.ports.entrada.pedido.PedidoApagarServicePort;
 import com.techchallenge.devnet.application_business_rules.exceptions.RetornoDeErro;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -21,11 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/api/v1/pedidos")
 public final class PedidoDeleteControllerImpl implements PedidoControllerPort.DeleteController {
 
-  private final IPedidoApagarServicePort service;
+  private final PedidoApagarServicePort service;
 
   private final DeletePresenter presenter;
 
-  public PedidoDeleteControllerImpl(IPedidoApagarServicePort service,
+  public PedidoDeleteControllerImpl(PedidoApagarServicePort service,
                                     DeletePresenter presenter) {
     this.service = service;
     this.presenter = presenter;

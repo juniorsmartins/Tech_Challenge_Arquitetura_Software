@@ -1,9 +1,8 @@
 package com.techchallenge.devnet.interface_adapters.driven_secundario.repositorios.cliente;
 
-import com.techchallenge.devnet.frameworks_and_drivers.db.ClienteRepositoryJpa;
 import com.techchallenge.devnet.interface_adapters.driven_secundario.adapter_saida.AdapterSaida;
 import com.techchallenge.devnet.interface_adapters.driven_secundario.daos.ClienteDao;
-import com.techchallenge.devnet.application_business_rules.ports.saida.cliente.IClienteSalvarRepositoryPort;
+import com.techchallenge.devnet.application_business_rules.ports.saida.cliente.ClienteSalvarRepositoryPort;
 import com.techchallenge.devnet.enterprise_business_rules.models.ClienteModel;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
-public class ClientePostRepositoryImpl implements IClienteSalvarRepositoryPort {
+public class ClientePostRepositoryImpl implements ClienteSalvarRepositoryPort {
 
   private final AdapterSaida mapper;
 

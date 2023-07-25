@@ -1,12 +1,11 @@
 package com.techchallenge.devnet.interface_adapters.driver_primario.controllers.pedido;
 
-import com.techchallenge.devnet.frameworks_and_drivers.web.PedidoControllerPort;
 import com.techchallenge.devnet.interface_adapters.driver_primario.adapter_entrada.AdapterEntrada;
 import com.techchallenge.devnet.interface_adapters.driver_primario.dtos.resposta.PedidoDtoResponse;
 import com.techchallenge.devnet.interface_adapters.driver_primario.filtros.PedidoFiltroDto;
 import com.techchallenge.devnet.interface_adapters.driver_primario.presenters.GetPresenter;
-import com.techchallenge.devnet.application_business_rules.ports.entrada.pedido.IPedidoListarOrdenadoServicePort;
-import com.techchallenge.devnet.application_business_rules.ports.entrada.pedido.IPedidoPesquisarServicePort;
+import com.techchallenge.devnet.application_business_rules.ports.entrada.pedido.PedidoListarOrdenadoServicePort;
+import com.techchallenge.devnet.application_business_rules.ports.entrada.pedido.PedidoPesquisarServicePort;
 import com.techchallenge.devnet.application_business_rules.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.enterprise_business_rules.objects.filtros.PedidoFiltro;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,15 +32,15 @@ public final class PedidoGetControllerImpl implements PedidoControllerPort.GetCo
 
   private final AdapterEntrada mapper;
 
-  private final IPedidoPesquisarServicePort servicePesquisar;
+  private final PedidoPesquisarServicePort servicePesquisar;
 
-  private final IPedidoListarOrdenadoServicePort serviceListar;
+  private final PedidoListarOrdenadoServicePort serviceListar;
 
   private final GetPresenter presenter;
 
   public PedidoGetControllerImpl(AdapterEntrada mapper,
-                                 IPedidoPesquisarServicePort servicePesquisar,
-                                 IPedidoListarOrdenadoServicePort serviceListar,
+                                 PedidoPesquisarServicePort servicePesquisar,
+                                 PedidoListarOrdenadoServicePort serviceListar,
                                  GetPresenter presenter) {
     this.mapper = mapper;
     this.servicePesquisar = servicePesquisar;

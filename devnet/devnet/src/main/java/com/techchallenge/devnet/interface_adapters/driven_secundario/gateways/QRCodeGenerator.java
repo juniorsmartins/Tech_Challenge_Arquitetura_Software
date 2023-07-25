@@ -7,7 +7,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.techchallenge.devnet.application_business_rules.exceptions.ArmazemException;
 import com.techchallenge.devnet.application_business_rules.exceptions.MensagemPadrao;
-import com.techchallenge.devnet.application_business_rules.ports.saida.pagamento.IGatewayQRCodeGeneratorPort;
+import com.techchallenge.devnet.application_business_rules.ports.saida.pagamento.QRCodeGeneratorGatewayPort;
 import com.techchallenge.devnet.enterprise_business_rules.models.PedidoModel;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 @Service
-public class QRCodeGenerator implements IGatewayQRCodeGeneratorPort {
+public class QRCodeGenerator implements QRCodeGeneratorGatewayPort {
 
   public static String localParaArmazenarQRCode = "C:\\Users\\junio\\OneDrive\\Documentos\\diretorio-devnet";
 //  public static String localParaArmazenarQRCode = "/app/armazem";

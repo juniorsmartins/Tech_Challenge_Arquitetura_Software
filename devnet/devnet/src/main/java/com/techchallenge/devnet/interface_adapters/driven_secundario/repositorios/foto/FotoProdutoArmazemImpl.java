@@ -1,6 +1,6 @@
 package com.techchallenge.devnet.interface_adapters.driven_secundario.repositorios.foto;
 
-import com.techchallenge.devnet.application_business_rules.ports.saida.foto.IFotoProdutoArmazemPort;
+import com.techchallenge.devnet.application_business_rules.ports.saida.foto.FotoProdutoArmazemPort;
 import com.techchallenge.devnet.application_business_rules.exceptions.ArmazemException;
 import com.techchallenge.devnet.application_business_rules.exceptions.MensagemPadrao;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Service
-public class FotoProdutoArmazemImpl implements IFotoProdutoArmazemPort {
+public class FotoProdutoArmazemImpl implements FotoProdutoArmazemPort {
 
   private Path caminhoDoDiretorio = Paths.get("C:\\Users\\junio\\OneDrive\\Documentos\\diretorio-devnet");
 //  private Path caminhoDoDiretorio = Paths.get("/app/armazem");

@@ -2,8 +2,7 @@ package com.techchallenge.devnet.interface_adapters.driver_primario.controllers.
 
 import com.techchallenge.devnet.application_business_rules.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.application_business_rules.exceptions.http_404.FotoProdutoNaoEncontradoException;
-import com.techchallenge.devnet.application_business_rules.ports.entrada.foto.IFotoProdutoBuscarImagemPorIdServicePort;
-import com.techchallenge.devnet.frameworks_and_drivers.web.FotoProdutoControllerPort;
+import com.techchallenge.devnet.application_business_rules.ports.entrada.foto.FotoProdutoBuscarImagemPorIdServicePort;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -17,15 +16,15 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Tag(name = "FotoProdutoImagemController", description = "Adaptador para padronizar a requisição às normalizações da API.")
+@Tag(name = "FotoProdutoArmazemControllerImpl", description = "Adaptador para padronizar a requisição às normalizações da API.")
 @RestController
 @RequestMapping(path = "/api/v1/fotos")
 public final class FotoProdutoArmazemControllerImpl implements FotoProdutoControllerPort.ConsultarImagemPorIdController {
 
-  private final IFotoProdutoBuscarImagemPorIdServicePort service;
+  private final FotoProdutoBuscarImagemPorIdServicePort service;
 
-  public FotoProdutoArmazemControllerImpl(IFotoProdutoBuscarImagemPorIdServicePort serviceImagem) {
-    this.service = serviceImagem;
+  public FotoProdutoArmazemControllerImpl(FotoProdutoBuscarImagemPorIdServicePort service) {
+    this.service = service;
   }
 
   @Operation(summary = "Buscar ImagemPorId do FotoProduto", description = "Este recurso permite consultar Imagem do FotoProduto por diversas propriedades com retorno paginado.")

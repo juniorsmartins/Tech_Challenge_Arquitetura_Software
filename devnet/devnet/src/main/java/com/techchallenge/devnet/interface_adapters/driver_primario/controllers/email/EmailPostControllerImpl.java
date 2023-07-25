@@ -1,11 +1,10 @@
 package com.techchallenge.devnet.interface_adapters.driver_primario.controllers.email;
 
-import com.techchallenge.devnet.frameworks_and_drivers.web.EmailControllerPort;
 import com.techchallenge.devnet.interface_adapters.driver_primario.adapter_entrada.AdapterEntrada;
 import com.techchallenge.devnet.interface_adapters.driver_primario.dtos.requisicao.EmailDtoRequest;
 import com.techchallenge.devnet.interface_adapters.driver_primario.dtos.resposta.EmailDtoResponse;
 import com.techchallenge.devnet.interface_adapters.driver_primario.presenters.PostPresenter;
-import com.techchallenge.devnet.application_business_rules.ports.entrada.email.IEmailEnviarServicePort;
+import com.techchallenge.devnet.application_business_rules.ports.entrada.email.EmailEnviarServicePort;
 import com.techchallenge.devnet.application_business_rules.exceptions.RetornoDeErro;
 import com.techchallenge.devnet.enterprise_business_rules.models.EmailModel;
 import io.swagger.v3.oas.annotations.Operation;
@@ -31,12 +30,12 @@ public final class EmailPostControllerImpl implements EmailControllerPort.PostCo
 
   private final AdapterEntrada mapper;
 
-  private final IEmailEnviarServicePort service;
+  private final EmailEnviarServicePort service;
 
   private final PostPresenter presenter;
 
   public EmailPostControllerImpl(AdapterEntrada mapper,
-                                 IEmailEnviarServicePort service,
+                                 EmailEnviarServicePort service,
                                  PostPresenter presenter) {
     this.mapper = mapper;
     this.service = service;

@@ -1,12 +1,11 @@
 package com.techchallenge.devnet.interface_adapters.driven_secundario.repositorios.pedido;
 
-import com.techchallenge.devnet.frameworks_and_drivers.db.PedidoRepositoryJpa;
 import com.techchallenge.devnet.interface_adapters.driven_secundario.adapter_saida.AdapterSaida;
 import com.techchallenge.devnet.interface_adapters.driver_primario.filtros.PedidoFiltroDto;
-import com.techchallenge.devnet.application_business_rules.ports.saida.pedido.IPedidoBuscarPorIdClienteRepositoryPort;
-import com.techchallenge.devnet.application_business_rules.ports.saida.pedido.IPedidoConsultarPorIdRepositoryPort;
-import com.techchallenge.devnet.application_business_rules.ports.saida.pedido.IPedidoListarRepositoryPort;
-import com.techchallenge.devnet.application_business_rules.ports.saida.pedido.IPedidoPesquisarRepositoryPort;
+import com.techchallenge.devnet.application_business_rules.ports.saida.pedido.PedidoBuscarPorIdClienteRepositoryPort;
+import com.techchallenge.devnet.application_business_rules.ports.saida.pedido.PedidoConsultarPorIdRepositoryPort;
+import com.techchallenge.devnet.application_business_rules.ports.saida.pedido.PedidoListarRepositoryPort;
+import com.techchallenge.devnet.application_business_rules.ports.saida.pedido.PedidoPesquisarRepositoryPort;
 import com.techchallenge.devnet.enterprise_business_rules.models.PedidoModel;
 import com.techchallenge.devnet.enterprise_business_rules.objects.filtros.PedidoFiltro;
 import com.techchallenge.devnet.enterprise_business_rules.objects.specification.PedidoSpecification;
@@ -19,8 +18,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class PedidoGetRepositoryImpl implements IPedidoPesquisarRepositoryPort, IPedidoConsultarPorIdRepositoryPort,
-  IPedidoListarRepositoryPort, IPedidoBuscarPorIdClienteRepositoryPort {
+public class PedidoGetRepositoryImpl implements PedidoPesquisarRepositoryPort, PedidoConsultarPorIdRepositoryPort,
+  PedidoListarRepositoryPort, PedidoBuscarPorIdClienteRepositoryPort {
 
   private final AdapterSaida mapper;
 
