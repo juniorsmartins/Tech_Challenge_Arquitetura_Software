@@ -1,13 +1,13 @@
 package com.techchallenge.devnet.interface_adapters.driver_primario.controllers.pagamento;
 
+import com.techchallenge.devnet.application_business_rules.exceptions.RetornoDeErro;
+import com.techchallenge.devnet.application_business_rules.ports.entrada.pagamento.PagamentoBuscarQrCodeServicePort;
+import com.techchallenge.devnet.application_business_rules.ports.entrada.pagamento.PagamentoPesquisarServicePort;
+import com.techchallenge.devnet.enterprise_business_rules.objects.filtros.PagamentoFiltro;
 import com.techchallenge.devnet.interface_adapters.driver_primario.adapter_entrada.AdapterEntrada;
 import com.techchallenge.devnet.interface_adapters.driver_primario.dtos.resposta.PagamentoDtoResponse;
 import com.techchallenge.devnet.interface_adapters.driver_primario.filtros.PagamentoFiltroDto;
 import com.techchallenge.devnet.interface_adapters.driver_primario.presenters.GetPresenter;
-import com.techchallenge.devnet.application_business_rules.ports.entrada.pagamento.PagamentoBuscarQrCodeServicePort;
-import com.techchallenge.devnet.application_business_rules.ports.entrada.pagamento.PagamentoPesquisarServicePort;
-import com.techchallenge.devnet.application_business_rules.exceptions.RetornoDeErro;
-import com.techchallenge.devnet.enterprise_business_rules.objects.filtros.PagamentoFiltro;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -16,6 +16,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -64,7 +65,7 @@ public final class PagamentoGetControllerImpl implements PagamentoControllerPort
   @Override
   public ResponseEntity<Object> pesquisar(
     @Parameter(name = "PagamentoFiltro", description = "Estrutura de dados usada como filtro de pesquisa.", required = false)
-    final PagamentoFiltroDto filtroDto,
+    @Valid final PagamentoFiltroDto filtroDto,
     @PageableDefault(sort = "id", direction = Sort.Direction.DESC, page = 0, size = 10) final Pageable paginacao) {
 
     return Optional.of(filtroDto)

@@ -1,13 +1,13 @@
 package com.techchallenge.devnet.interface_adapters.driver_primario.controllers.pedido;
 
+import com.techchallenge.devnet.application_business_rules.exceptions.RetornoDeErro;
+import com.techchallenge.devnet.application_business_rules.ports.entrada.pedido.PedidoListarOrdenadoServicePort;
+import com.techchallenge.devnet.application_business_rules.ports.entrada.pedido.PedidoPesquisarServicePort;
+import com.techchallenge.devnet.enterprise_business_rules.objects.filtros.PedidoFiltro;
 import com.techchallenge.devnet.interface_adapters.driver_primario.adapter_entrada.AdapterEntrada;
 import com.techchallenge.devnet.interface_adapters.driver_primario.dtos.resposta.PedidoDtoResponse;
 import com.techchallenge.devnet.interface_adapters.driver_primario.filtros.PedidoFiltroDto;
 import com.techchallenge.devnet.interface_adapters.driver_primario.presenters.GetPresenter;
-import com.techchallenge.devnet.application_business_rules.ports.entrada.pedido.PedidoListarOrdenadoServicePort;
-import com.techchallenge.devnet.application_business_rules.ports.entrada.pedido.PedidoPesquisarServicePort;
-import com.techchallenge.devnet.application_business_rules.exceptions.RetornoDeErro;
-import com.techchallenge.devnet.enterprise_business_rules.objects.filtros.PedidoFiltro;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -16,6 +16,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -60,7 +61,7 @@ public final class PedidoGetControllerImpl implements PedidoControllerPort.GetCo
   @Override
   public ResponseEntity<Object> pesquisar(
     @Parameter(name = "PedidoFiltro", description = "Estrutura de dados usada como filtro de pesquisa.", required = false)
-    final PedidoFiltroDto filtroDto,
+    @Valid final PedidoFiltroDto filtroDto,
     @PageableDefault(sort = "id", direction = Sort.Direction.DESC, page = 0, size = 10) final Pageable paginacao) {
 
     return Optional.of(filtroDto)

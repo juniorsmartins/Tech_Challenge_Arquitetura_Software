@@ -15,6 +15,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -55,7 +56,7 @@ public final class ProdutoGetControllerImpl implements ProdutoControllerPort.Get
   @Override
   public ResponseEntity<Object> pesquisar(
     @Parameter(name = "ProdutoFiltroDto", description = "Estrutura de dados usada como filtro de pesquisa.", required = false)
-    final ProdutoFiltroDto filtroDto,
+    @Valid final ProdutoFiltroDto filtroDto,
     @PageableDefault(sort = "id", direction = Sort.Direction.DESC, page = 0, size = 10) final Pageable paginacao) {
 
     return Optional.of(filtroDto)
