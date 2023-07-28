@@ -1,8 +1,8 @@
 package com.techchallenge.devnet.application_business_rules.exceptions;
 
 import com.techchallenge.devnet.application_business_rules.exceptions.http_400.RequisicaoMalFormuladaException;
-import com.techchallenge.devnet.application_business_rules.exceptions.http_409.RegraDeNegocioVioladaException;
 import com.techchallenge.devnet.application_business_rules.exceptions.http_404.RecursoNaoEncontradoException;
+import com.techchallenge.devnet.application_business_rules.exceptions.http_409.RegraDeNegocioVioladaException;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpHeaders;
@@ -70,6 +70,19 @@ public final class TratadorDeExceptions extends ResponseEntityExceptionHandler {
       httpStatus, webRequest);
   }
 
+  @ExceptionHandler(value = NumberFormatException.class)
+  public ResponseEntity<Object> tratarNumberFormatException(NumberFormatException numberFormatException,
+                                                            WebRequest webRequest) {
+    var httpStatus = HttpStatus.BAD_REQUEST;
+    var tipoDeErroEnum = TipoDeErroEnum.REQUISICAO_MAL_FORMULADA;
+    var detalhe = numberFormatException.getMessage();
+
+    var retornoDeErro = this.criarMensagemParaRetornarErro(httpStatus, tipoDeErroEnum, detalhe)
+      .build();
+
+    return super.handleExceptionInternal(numberFormatException, retornoDeErro,
+      new HttpHeaders(), httpStatus, webRequest);
+  }
 
 
   // Sobrescrição de um método comum de ResponseEntityExceptionHandler. Captura exceção quando o tipo de mediaType
@@ -99,7 +112,7 @@ public final class TratadorDeExceptions extends ResponseEntityExceptionHandler {
   // de tratamento de exceção. Então, ao personalizá-lo, nós interferimos nas respostas de retorno de erro de vários
   // métodos do sistema (ResponseEntityExceptionHandler).
   @Override
-  protected  ResponseEntity<Object> handleExceptionInternal(Exception exception, Object body, HttpHeaders headers,
+  protected ResponseEntity<Object> handleExceptionInternal(Exception exception, Object body, HttpHeaders headers,
                                                             HttpStatusCode status, WebRequest webRequest) {
     if (body == null) {
       body = RetornoDeErro.builder()

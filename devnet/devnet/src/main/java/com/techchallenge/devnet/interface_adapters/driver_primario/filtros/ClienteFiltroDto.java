@@ -1,5 +1,6 @@
 package com.techchallenge.devnet.interface_adapters.driver_primario.filtros;
 
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
@@ -8,7 +9,7 @@ import org.hibernate.validator.constraints.Length;
 @Setter
 public final class ClienteFiltroDto {
 
-//  @Pattern(regexp = "^[0-9,]*$", message = "Permitido apenas números inteiros e vírgulas. Não são permitidos outros caracteres.")
+  @Pattern(regexp = "^[0-9,]*$", message = "Permitido apenas números inteiros e vírgulas. Não são permitidos outros caracteres.")
   private String id;
 
   @Length(max = 100)
