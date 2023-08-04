@@ -1,15 +1,15 @@
 package com.techchallenge.devnet.utils;
 
 import com.github.javafaker.Faker;
-import com.techchallenge.devnet.adapter.driven_secundario.entities.ClienteEntity;
-import com.techchallenge.devnet.adapter.driven_secundario.entities.ProdutoEntity;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ClienteDtoRequest;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.EmailDtoRequest;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ItemPedidoDtoRequest;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.PedidoDtoRequest;
-import com.techchallenge.devnet.adapter.driver_primario.dtos.requisicao.ProdutoDtoRequest;
-import com.techchallenge.devnet.core.domain.models.enums.CategoriaEnum;
-import com.techchallenge.devnet.core.domain.models.enums.FormaPagamentoEnum;
+import com.techchallenge.devnet.interface_adapters.driven_secundario.daos.ClienteDao;
+import com.techchallenge.devnet.interface_adapters.driven_secundario.daos.ProdutoDao;
+import com.techchallenge.devnet.interface_adapters.driver_primario.dtos.requisicao.ClienteDtoRequest;
+import com.techchallenge.devnet.interface_adapters.driver_primario.dtos.requisicao.EmailDtoRequest;
+import com.techchallenge.devnet.interface_adapters.driver_primario.dtos.requisicao.ItemPedidoDtoRequest;
+import com.techchallenge.devnet.interface_adapters.driver_primario.dtos.requisicao.PedidoDtoRequest;
+import com.techchallenge.devnet.interface_adapters.driver_primario.dtos.requisicao.ProdutoDtoRequest;
+import com.techchallenge.devnet.enterprise_business_rules.models.enums.CategoriaEnum;
+import com.techchallenge.devnet.enterprise_business_rules.models.enums.FormaPagamentoEnum;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -21,9 +21,9 @@ public final class CriadorDeObjetos {
 
   private static GeradorDeDocs cpfGenerator = new GeradorDeDocs();
 
-  public static ClienteEntity.ClienteEntityBuilder gerarClienteEntityBuilder() {
+  public static ClienteDao.ClienteDaoBuilder gerarClienteDaoBuilder() {
 
-    return ClienteEntity.builder()
+    return ClienteDao.builder()
       .nome(faker.name().fullName())
       .cpf(cpfGenerator.cpf(false))
       .numeroTelefone(faker.numerify("###########"))
@@ -41,11 +41,11 @@ public final class CriadorDeObjetos {
       .dataNascimentoString("1" + faker.numerify("#") + "/10/19" + faker.numerify("##"));
   }
 
-  public static ProdutoEntity.ProdutoEntityBuilder gerarProdutoEntityBuilder() {
+  public static ProdutoDao.ProdutoDaoBuilder gerarProdutoDaoBuilder() {
 
     var preco = (Math.random() + 1) * 12;
 
-    return ProdutoEntity.builder()
+    return ProdutoDao.builder()
       .nome(faker.food().fruit())
       .categoria(CategoriaEnum.ACOMPANHAMENTO)
       .descricao(faker.lorem().characters(10, 250))
