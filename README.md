@@ -2,16 +2,17 @@
 
 Nome: Tech-Challenge-DevNet;  
   
-Descrição: aplicação desenvolvida para compor nota no processo avaliativo da primeira fase da pós-graduação em Arquitetura de Software na Fiap/Alura. E visa construir simulacro de app para uma Lanchonete, nomeada DevNet.
+Descrição: aplicação desenvolvida para compor nota no processo avaliativo da primeira fase da pós-graduação em Arquitetura de Software na Fiap/Alura. E visa construir simulacro de aplicação para uma Lanchonete, nomeada DevNet. Portanto, esse projeto segue requisitos estabelecidos pelo processo avaliativo.
 
   
 ## Índice
   
 1. Documentação de Arquitetura do Projeto
-    1. Linguagem Ubíqua;
-    2. Linguagem Pictográfica (Domain Storytelling);
-    3. Domínio (Subdomínio Principal, Subdomínio Genérico e Subdomínio de Suporte);
-    4. Event Storming.
+    1. Arquitetura Ports And Adapters (Hexagonal);
+    2. Linguagem Ubíqua;
+    3. Linguagem Pictográfica (Domain Storytelling);
+    4. Domínio (Subdomínio Principal, Subdomínio Genérico e Subdomínio de Suporte);
+    5. Event Storming.
   
 2. Documentação de Desenvolvimento do Projeto;
     1. Tecnologias;
@@ -29,6 +30,23 @@ Descrição: aplicação desenvolvida para compor nota no processo avaliativo da
   
 ### Documentação de Arquitetura do Projeto
 
+#### Arquitetura Ports And Adapters:
+
+A Arquitetura Ports and Adapters, também conhecida como Arquitetura Hexagonal, é um padrão arquitetural que visa criar sistemas flexíveis e desacoplados, com foco na separação das camadas e na independência de frameworks e tecnologias externas.
+
+Essa arquitetura baseia-se no princípio da inversão de dependência, onde a lógica de negócio central do sistema é isolada em uma camada central. Essa camada contém as regras de negócio.
+
+A arquitetura é composta por três principais componentes:
+
+Ports (portas): São as interfaces que definem as interações entre as diferentes camadas do sistema. Elas representam os contratos e os serviços que podem ser fornecidos ou consumidos. As ports são definidas na camada central e são implementadas nas camadas externas.
+
+Adapters (adaptadores): São as implementações concretas das interfaces definidas pelas ports. Os adaptadores são responsáveis por conectar a camada central com as camadas externas, como a interface do usuário, serviços externos, persistência de dados, entre outros. Eles realizam a tradução e adaptação dos dados e chamadas entre as diferentes camadas.
+
+Core: É o núcleo central do sistema, onde se encontra a lógica de negócio e as regras do domínio. Essa camada é independente de frameworks externos e não possui dependências com tecnologias específicas.
+
+A Arquitetura Ports and Adapters busca promover a manutenibilidade, a testabilidade e a evolução independente das partes do sistema. Ela oferece uma estrutura flexível para o desenvolvimento de software, permitindo que as mudanças nas tecnologias e nos requisitos do sistema sejam incorporadas de forma mais fácil e modular.
+
+Neste projeto, em específico, também serão acrescidos alguns princípios da Clean Architecture. Como, por exemplo, Solid, entre outros. 
 
 #### Linguagem Ubíqua:
 
