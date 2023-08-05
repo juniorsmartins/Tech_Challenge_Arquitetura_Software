@@ -6,5 +6,7 @@ metadata:
     app: devnet-pod2
 spec:
   containers:
-    - name: devnet-app-container
+    - name: devnet-pod2
       image: eclipse-temurin:17.0.7_7-jdk-jammy
+      ports:
+        - containerPort: 3010

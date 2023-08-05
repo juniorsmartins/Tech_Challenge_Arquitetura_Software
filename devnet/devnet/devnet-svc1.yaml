@@ -5,8 +5,7 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: devnet-pod1
+    app: devnet-svc1
   ports:
     - port: 80
-
-
+      targetPort: 3000
