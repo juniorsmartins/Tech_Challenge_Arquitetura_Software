@@ -21,8 +21,8 @@ import java.nio.file.Path;
 @Service
 public class QRCodeGenerator implements QRCodeGeneratorGatewayPort {
 
-  public static String localParaArmazenarQRCode = "C:\\Users\\junio\\OneDrive\\Documentos\\diretorio-devnet";
-//  public static String localParaArmazenarQRCode = "/app/armazem";
+//  public static String localParaArmazenarQRCode = "C:\\Users\\junio\\OneDrive\\Documentos\\diretorio-devnet";
+  public static String localParaArmazenarQRCode = "/app/armazem";
 
   public static String sufixoDoNomeDaImagemDoQRCode = "-QRCODE.png";
 

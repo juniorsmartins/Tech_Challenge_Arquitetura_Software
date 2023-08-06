@@ -9,5 +9,5 @@ spec:
     - name: devnet-pod1-container
       image: 957817/devnet:0.0.2
       ports:
-        - containerPort: 8080
+        - containerPort: 80
 

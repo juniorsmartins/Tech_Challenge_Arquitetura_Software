@@ -3,8 +3,9 @@ kind: Service
 metadata:
   name: devnet-svc1
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: devnet-rotulo
   ports:
     - port: 8080
+      targetPort: 80
