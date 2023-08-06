@@ -30,3 +30,8 @@ Fase 2: em construção
     4. Como testar.
   
 4. Autoria.
+
+
+### Autoria
+
+[Junior Martins](https://www.linkedin.com/in/juniorsmartins/)
