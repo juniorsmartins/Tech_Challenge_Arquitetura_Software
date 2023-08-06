@@ -14,7 +14,7 @@
 
 	<groupId>com.tech-challenge</groupId>
 	<artifactId>devnet</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<name>devnet</name>
 	<description>Projeto de pós-graguação (pós-tech) em Arquitetura de Software (Fiap/Alura).</description>
 

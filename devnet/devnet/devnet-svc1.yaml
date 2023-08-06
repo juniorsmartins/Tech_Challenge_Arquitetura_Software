@@ -5,7 +5,6 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: devnet-svc1
+    app: devnet-rotulo
   ports:
-    - port: 80
-      targetPort: 3000
+    - port: 8080

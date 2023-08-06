@@ -3,10 +3,11 @@ kind: Pod
 metadata:
   name: devnet-pod1
   labels:
-    app: devnet-pod1
+    app: devnet-rotulo
 spec:
   containers:
-    - name: devnet-pod1
-      image: eclipse-temurin:17.0.7_7-jdk-jammy
+    - name: devnet-pod1-container
+      image: 957817/devnet:0.0.2
       ports:
-        - containerPort: 3000
+        - containerPort: 8080
+
