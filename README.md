@@ -12,11 +12,7 @@ Fase 2: em construção
 ## Índice
 
 1. Documentação de Arquitetura do Projeto
-    1. Arquitetura Ports And Adapters (Hexagonal);
-    2. Linguagem Ubíqua;
-    3. Linguagem Pictográfica (Domain Storytelling);
-    4. Domínio (Subdomínio Principal, Subdomínio Genérico e Subdomínio de Suporte);
-    5. Event Storming.
+    1. Arquitetura Limpa.
   
 2. Documentação de Desenvolvimento do Projeto;
     1. Tecnologias;
@@ -26,8 +22,7 @@ Fase 2: em construção
 3. Documentação de Utilização do Projeto;
     1. Documentação Swagger/OpenAPI;
     2. Arquivo de requisições do Postman;
-    3. Verbos, EndPoints e Jsons;
-    4. Como testar.
+    3. Como testar.
   
 4. Autoria.
 
