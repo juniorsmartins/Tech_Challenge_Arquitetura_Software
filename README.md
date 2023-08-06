@@ -6,7 +6,7 @@ Descrição: aplicação desenvolvida para compor nota no processo avaliativo da
 
 ## Documentação por fase do projeto
 
-Fase 1: [Clique aqui](https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/edit/master/README-FASE1.md)  
+Fase 1: [Clique aqui](https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/README-FASE1.md)  
 Fase 2: em construção
   
 ## Índice
