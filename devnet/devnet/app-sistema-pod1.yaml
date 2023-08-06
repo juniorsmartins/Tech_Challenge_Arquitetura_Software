@@ -1,13 +1,17 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: devnet-pod1
+  name: pod1
   labels:
-    app: devnet-rotulo
+    app: pod1
 spec:
   containers:
-    - name: devnet-pod1-container
+    - name: pod1-container
       image: 957817/devnet:0.0.2
       ports:
         - containerPort: 80
+      envFrom:
+        - configMapRef:
+            name: sistema-configmap
+
 
