@@ -147,7 +147,7 @@ ou
 11. DevTools;
 12. Zxing (2.0.0);
 13. PostgreSQL;
-14. JavaFaker (1.0.2);
+14. JavaFaker (1.0.2).
 
 #### Ferramentas:
 
