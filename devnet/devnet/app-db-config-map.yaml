@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: db-configmap
-data:
-  POSTGRES_ROOT_PASSWORD: postgres
-  POSTGRES_DATABASE: techchallenge
-  POSTGRES_PASSWORD: postgres
-
