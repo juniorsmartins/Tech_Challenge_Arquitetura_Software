@@ -26,6 +26,58 @@ Fase 2: em construção
   
 4. Autoria.
 
+### Documentação de Arquitetura do Projeto
+
+#### Arquitetura Limpa (Clean Architecture - Robert Martin):
+
+### Documentação de Desenvolvimento do Projeto
+
+#### Tecnologias:
+
+1. Java (17 LTS);
+2. Spring Boot (v3.1.0);
+3. Spring Mail;
+4. Spring Data JPA;
+5. Spring Doc;
+6. Bean Validation;
+7. Hibernate Envers;
+8. Model Mapper (v3.1.1);
+9. Commons Lang3;
+10. Lombok;
+11. DevTools;
+12. Zxing (2.0.0);
+13. PostgreSQL;
+14. JavaFaker (1.0.2).
+
+#### Ferramentas:
+
+1. Intellij Idea (programação);
+2. Maven (gerenciamento de dependências);
+3. Git (versionamento);
+4. GitHub (repositório);
+5. Postman (testes manuais);
+6. StarUML (Diagramas);
+7. Egon.io (Linguagem Pictográfica);
+8. Miro (Event Storming);
+9. ChatGPT (pesquisa);
+10. YouTube (pesquisa);
+11. Google (pesquisa).
+
+#### Diagramas
+
+##### Diagrama Entidade Relacionamento - DER
+
+##### Diagrama de Pacotes
+
+##### Diagrama de Classe
+
+### Documentação de Utilização do Projeto;
+
+#### Documentação
+
+#### Arquivo de requisições do Postman
+
+#### Verbos, EndPoints e Jsons
 
 ### Autoria
 
