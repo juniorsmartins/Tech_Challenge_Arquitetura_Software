@@ -26,11 +26,11 @@ Fase 2: em construção
   
 4. Autoria.
 
-### Documentação de Arquitetura do Projeto
+### Arquitetura do Projeto
 
 #### Arquitetura Limpa (Clean Architecture - Robert Martin):
 
-### Documentação de Desenvolvimento do Projeto
+### Desenvolvimento do Projeto
 
 #### Tecnologias:
 
@@ -71,7 +71,7 @@ Fase 2: em construção
 
 ##### Diagrama de Classe
 
-### Documentação de Utilização do Projeto;
+### Utilização do Projeto;
 
 #### Documentação
 
