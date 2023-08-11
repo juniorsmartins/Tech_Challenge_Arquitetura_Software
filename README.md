@@ -11,15 +11,15 @@ Fase 2: em construção
   
 ## Índice
 
-1. Arquitetura do Projeto
+1. Arquitetura
     1. Arquitetura Limpa.
   
-2. Desenvolvimento do Projeto;
+2. Desenvolvimento
     1. Tecnologias;
     2. Ferramentas;
     3. Diagramas.
   
-3. Utilização do Projeto;
+3. Utilização
     1. Documentação Swagger/OpenAPI;
     2. Arquivo de requisições do Postman;
     3. Como testar.
