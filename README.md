@@ -78,7 +78,8 @@ Fase 2: em construção
 #### Arquivo de requisições do Postman
 
 #### Verbos, EndPoints e Jsons
-
+  
+  
 ### Autoria
 
 [Junior Martins](https://www.linkedin.com/in/juniorsmartins/)
