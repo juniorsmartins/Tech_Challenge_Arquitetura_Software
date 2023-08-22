@@ -1,12 +1,27 @@
-FROM maven:3.8.3-openjdk-17-slim AS build
-WORKDIR /workspace
-COPY pom.xml .
-COPY src ./src
-RUN mvn clean package -DskipTests
+FROM amazoncorretto:17.0.8-al2023 as builder
 
-FROM eclipse-temurin:17.0.7_7-jdk-jammy
-WORKDIR /techchallenge
-COPY --from=build /workspace/target/devnet-0.0.2.jar devnet.jar
-VOLUME /app/armazem
-ENTRYPOINT ["java", "-jar", "/techchallenge/devnet.jar"]
+ARG WORKSPACE=techchallenge
+WORKDIR /$WORKSPACE
+
+COPY ./.mvn ./.mvn
+COPY ./mvnw ./
+COPY ./pom.xml ./
+RUN ./mvnw dependency:go-offline
+
+COPY ./src ./src
+RUN ./mvnw clean package -DskipTests
+
+
+FROM amazoncorretto:17.0.8-al2023
+
+ARG WORKSPACE=techchallenge
+WORKDIR /$WORKSPACE
+RUN mkdir ./logs
+
+COPY --from=builder /$WORKSPACE/target/*.jar devnet.jar
+
+ENV PORT 9001
+EXPOSE $PORT
+
+CMD ["java", "-jar", "devnet.jar"]
 
