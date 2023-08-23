@@ -1,6 +1,8 @@
+ARG WORKSPACE=techchallenge
+
 FROM amazoncorretto:17.0.8-al2023 as builder
 
-ARG WORKSPACE=techchallenge
+ARG WORKSPACE
 WORKDIR /$WORKSPACE
 
 COPY ./.mvn ./.mvn
@@ -14,7 +16,7 @@ RUN ./mvnw clean package -DskipTests
 
 FROM amazoncorretto:17.0.8-al2023
 
-ARG WORKSPACE=techchallenge
+ARG WORKSPACE
 WORKDIR /$WORKSPACE
 RUN mkdir ./logs
 
