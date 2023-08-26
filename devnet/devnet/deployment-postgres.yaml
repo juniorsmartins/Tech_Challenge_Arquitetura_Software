@@ -1,1 +1,25 @@
 apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: devnet-postgres
+spec: 
+  replicas: 1
+  selector: 
+    matchLabels: 
+      app: devnet-postgres
+  template: 
+    metadata: 
+      labels: 
+        app: devnet-postgres
+    spec: 
+      containers: 
+        - image: postgres:16beta3-alpine3.18
+          name: devnet-postgres
+          ports: 
+            - containerPort: 5432
+          env: 
+            - name: POSTGRES_PASSWORD
+              value: postgres
+            - name: POSTGRES_DB
+              value: techchallenge
+
