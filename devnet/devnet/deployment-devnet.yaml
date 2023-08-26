@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: devnet-app
+spec: 
+  replicas: 1
+  selector: 
+    matchLabels: 
+      app: devnet-app
+  template: 
+    metadata: 
+      labels: 
+        app: devnet-app
+    spec: 
+      containers: 
+        - name: devnet-app
+          image: 957817/devnet-app:v1
+          ports:
+            - containerPort: 9001
+          env:
+            - name: PORT
+              value: "9001"
+            - name: DB_HOST
+              value: devnet-postgres:5432
+            - name: DB_DATABASE
+              value: techchallenge
+            - name: DB_USERNAME
+              value: postgres
+            - name: DB_PASSWORD
+              value: postgres
+
