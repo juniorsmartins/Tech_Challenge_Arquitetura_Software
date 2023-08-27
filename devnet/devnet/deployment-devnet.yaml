@@ -28,4 +28,12 @@ spec:
               value: postgres
             - name: DB_PASSWORD
               value: postgres
+          volumeMounts:
+            - name: armazem
+              mountPath: /app/armazem
+      volumes:
+        - name: armazem
+          hostPath:
+            path: /app/armazem
+            type: DirectoryOrCreate
 

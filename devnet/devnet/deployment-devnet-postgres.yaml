@@ -23,10 +23,10 @@ spec:
             - name: POSTGRES_DB
               value: techchallenge
           volumeMounts:
-            - name: data-postgres
+            - name: pg-data
               mountPath: /var/lib/postgresql/data
       volumes:
-        - name: data-postgres
+        - name: pg-data
           hostPath:
             path: /var/lib/postgresql/data
             type: DirectoryOrCreate
