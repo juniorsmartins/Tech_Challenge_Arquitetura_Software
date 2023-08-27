@@ -1,8 +1,8 @@
 version: '3.9'
 
 services:
-  devnet_postgres16:
-    container_name: devnet_postgres16
+  devnetpostgres:
+    container_name: devnet-postgres
     image: postgres:16beta3-alpine3.18
     ports:
       - "5632:5432"
@@ -27,7 +27,7 @@ services:
     networks:
       - rede-devnet
     depends_on:
-      - devnet_postgres16
+      - devnet-postgres
     volumes:
       - armazem:/app/armazem
 
