@@ -2,13 +2,13 @@ version: '3.9'
 
 services:
   devnet-postgres:
-    container_name: devnet-postgres
+    container_name: dpostgres
     image: postgres:16beta3-alpine3.18
     ports:
       - "5632:5432"
     environment:
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: techchallenge
+      POSTGRES_DB: devnet
     volumes:
       - pg-data:/var/lib/postgresql/data
     restart: always
@@ -27,7 +27,7 @@ services:
     networks:
       - rede-devnet
     depends_on:
-      - devnet-postgres
+      - dpostgres
     volumes:
       - armazem:/app/armazem
 
