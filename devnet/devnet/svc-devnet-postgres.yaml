@@ -8,6 +8,6 @@ spec:
       protocol: TCP
       targetPort: 5432
   selector:
-    app: devnet-postgres
+    app: dpostgres
   type: ClusterIP
 

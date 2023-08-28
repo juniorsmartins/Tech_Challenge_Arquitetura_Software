@@ -6,15 +6,15 @@ spec:
   replicas: 1
   selector: 
     matchLabels: 
-      app: devnet-postgres
+      app: dpostgres
   template: 
     metadata: 
       labels: 
-        app: devnet-postgres
+        app: dpostgres
     spec: 
       containers: 
-        - image: postgres:16beta3-alpine3.18
-          name: devnet-postgres
+        - name: devnet-postgres
+          image: postgres:16beta3-alpine3.18
           ports: 
             - containerPort: 5432
           env: 
@@ -30,3 +30,4 @@ spec:
           hostPath:
             path: /var/lib/postgresql/data
             type: DirectoryOrCreate
+
