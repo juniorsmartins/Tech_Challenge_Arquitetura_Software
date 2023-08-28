@@ -13,15 +13,15 @@ spec:
         app: devnet-app
     spec: 
       containers: 
-        - name: devnet-app
-          image: 957817/devnet-app:v7
+        - name: devnet
+          image: 957817/devnet:latest
           ports:
             - containerPort: 9001
           env:
             - name: PORT
               value: "9001"
             - name: DB_HOST
-              value: dpostgres:5432
+              value: postgresdev:5432
             - name: DB_DATABASE
               value: devnet_app
             - name: DB_USERNAME

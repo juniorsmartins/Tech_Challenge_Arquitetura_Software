@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata: 
-  name: dpostgres
+  name: postgresdev
 spec: 
   replicas: 1
   selector: 
     matchLabels: 
-      app: dpostgres
+      app: postgres
   template: 
     metadata: 
       labels: 
-        app: dpostgres
+        app: postgres
     spec: 
       containers: 
-        - name: dpostgres
+        - name: postgresdev
           image: postgres:16beta3-alpine3.18
           ports: 
             - containerPort: 5432

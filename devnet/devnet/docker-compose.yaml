@@ -1,8 +1,8 @@
 version: '3.9'
 
 services:
-  dpostgres:
-    container_name: dpostgres
+  postgresdev:
+    container_name: postgresdev
     image: postgres:16beta3-alpine3.18
     ports:
       - "5632:5432"
@@ -25,7 +25,7 @@ services:
     # env_file: ./.env
     environment:
       PORT: 9001
-      DB_HOST: dpostgres:5432
+      DB_HOST: postgresdev:5432
       DB_DATABASE: devnet_app
       DB_USERNAME: postgres
       DB_PASSWORD: postgres
@@ -33,7 +33,7 @@ services:
     networks:
       - rede-devnet
     depends_on:
-      - dpostgres
+      - postgresdev
     volumes:
       - armazem:/app/armazem
 
