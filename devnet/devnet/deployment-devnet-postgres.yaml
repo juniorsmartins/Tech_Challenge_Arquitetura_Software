@@ -21,12 +21,12 @@ spec:
             - name: POSTGRES_PASSWORD
               value: postgres
             - name: POSTGRES_DB
-              value: devnet
+              value: devnet_app
           volumeMounts:
-            - name: pg-data
+            - name: data-postgres
               mountPath: /var/lib/postgresql/data
       volumes:
-        - name: pg-data
+        - name: data-postgres
           hostPath:
             path: /var/lib/postgresql/data
             type: DirectoryOrCreate

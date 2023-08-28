@@ -1,28 +1,34 @@
 version: '3.9'
 
 services:
-  devnet-postgres:
+  dpostgres:
     container_name: dpostgres
     image: postgres:16beta3-alpine3.18
     ports:
       - "5632:5432"
     environment:
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: devnet
+      POSTGRES_DB: devnet_app
     volumes:
-      - pg-data:/var/lib/postgresql/data
+      - data-postgres:/var/lib/postgresql/data
     restart: always
     networks:
       - rede-devnet
 
   devnet:
-    container_name: devnet
+    container_name: devnet-app
     build:
       context: ./
       dockerfile: Dockerfile
     ports:
       - "9001:9001"
-    env_file: ./.env
+    # env_file: ./.env
+    environment:
+      PORT: 9001
+      DB_HOST: dpostgres:5432
+      DB_DATABASE: devnet_app
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
     restart: always
     networks:
       - rede-devnet
@@ -32,8 +38,8 @@ services:
       - armazem:/app/armazem
 
 volumes:
-  pg-data:
-    name: pg-data
+  data-postgres:
+    name: data-postgres
   armazem:
     name: armazem
 
