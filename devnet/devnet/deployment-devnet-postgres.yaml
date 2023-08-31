@@ -27,7 +27,6 @@ spec:
               mountPath: /var/lib/postgresql/data
       volumes:
         - name: data-postgres
-          hostPath:
-            path: /var/lib/postgresql/data
-            type: DirectoryOrCreate
+          persistentVolumeClaim:
+            claimName: pvc-devnet-postgres
 
