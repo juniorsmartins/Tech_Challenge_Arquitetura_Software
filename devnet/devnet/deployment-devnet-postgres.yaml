@@ -19,9 +19,15 @@ spec:
             - containerPort: 5432
           env: 
             - name: POSTGRES_PASSWORD
-              value: postgres
+              valueFrom:
+                configMapKeyRef:
+                  name: config-devnet
+                  key: password
             - name: POSTGRES_DB
-              value: devnet_app
+              valueFrom:
+                configMapKeyRef:
+                  name: config-devnet
+                  key: database
           volumeMounts:
             - name: data-postgres
               mountPath: /var/lib/postgresql/data
