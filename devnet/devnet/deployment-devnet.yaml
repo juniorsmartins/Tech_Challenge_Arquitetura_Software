@@ -19,15 +19,30 @@ spec:
             - containerPort: 9001
           env:
             - name: PORT
-              value: "9001"
+              valueFrom:
+                configMapKeyRef:
+                  name: config-devnet
+                  key: port
             - name: DB_HOST
-              value: postgresdev:5432
+              valueFrom:
+                configMapKeyRef:
+                  name: config-devnet
+                  key: db_host
             - name: DB_DATABASE
-              value: devnet_app
+              valueFrom:
+                configMapKeyRef:
+                  name: config-devnet
+                  key: database
             - name: DB_USERNAME
-              value: postgres
+              valueFrom:
+                configMapKeyRef:
+                  name: config-devnet
+                  key: username
             - name: DB_PASSWORD
-              value: postgres
+              valueFrom:
+                configMapKeyRef:
+                  name: config-devnet
+                  key: password
           volumeMounts:
             - name: armazem
               mountPath: /app/armazem
