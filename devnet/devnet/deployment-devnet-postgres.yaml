@@ -1,25 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata: 
-  name: devnet-postgres
+  name: postgresdev
 spec: 
   replicas: 1
   selector: 
     matchLabels: 
-      app: devnet-postgres
+      app: postgresdev
   template: 
     metadata: 
       labels: 
-        app: devnet-postgres
+        app: postgresdev
     spec: 
-      containers: 
-        - image: postgres:16beta3-alpine3.18
-          name: devnet-postgres
+      containers:
+        - name: postgresdev
+          image: postgres:16beta3-alpine
           ports: 
             - containerPort: 5432
           env: 
             - name: POSTGRES_PASSWORD
               value: postgres
             - name: POSTGRES_DB
-              value: techchallenge
+              value: devnet_app
+          volumeMounts:
+            - name: data-postgres
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: data-postgres
+          persistentVolumeClaim:
+            claimName: pvc-devnet-postgres
 

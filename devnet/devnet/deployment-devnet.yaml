@@ -13,19 +13,27 @@ spec:
         app: devnet-app
     spec: 
       containers: 
-        - name: devnet-app
-          image: 957817/devnet-app:v1
+        - name: devnet
+          image: 957817/devnet:latest
           ports:
             - containerPort: 9001
           env:
             - name: PORT
               value: "9001"
             - name: DB_HOST
-              value: devnet-postgres:5432
+              value: postgresdev:5432
             - name: DB_DATABASE
-              value: techchallenge
+              value: devnet_app
             - name: DB_USERNAME
               value: postgres
             - name: DB_PASSWORD
               value: postgres
+          volumeMounts:
+            - name: armazem
+              mountPath: /app/armazem
+      volumes:
+        - name: armazem
+          hostPath:
+            path: /app/armazem
+            type: DirectoryOrCreate
 

@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: devnet-postgres
+  name: postgresdev
 spec:
   ports: 
     - port: 5432
       protocol: TCP
       targetPort: 5432
   selector:
-    app: devnet-postgres
+    app: postgresdev
   type: ClusterIP
 
