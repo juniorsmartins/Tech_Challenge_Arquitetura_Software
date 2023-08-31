@@ -1,9 +1,7 @@
-ARG WORKSPACE=techchallenge
-
 FROM amazoncorretto:17.0.8-al2023 AS builder
 
-ARG WORKSPACE
-WORKDIR /$WORKSPACE
+ARG DIR_TRABALHO=techchallenge
+WORKDIR /$DIR_TRABALHO
 
 COPY ./.mvn ./.mvn
 COPY ./mvnw ./
@@ -16,11 +14,11 @@ RUN ./mvnw clean package -DskipTests
 
 FROM amazoncorretto:17.0.8-al2023
 
-ARG WORKSPACE
-WORKDIR /$WORKSPACE
+ARG DIR_TRABALHO=techchallenge
+WORKDIR /$DIR_TRABALHO
 RUN mkdir ./logs
 
-COPY --from=builder /$WORKSPACE/target/*.jar devnet.jar
+COPY --from=builder /$DIR_TRABALHO/target/*.jar devnet.jar
 
 ENV PORT 9001
 EXPOSE $PORT

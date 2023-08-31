@@ -6,15 +6,15 @@ spec:
   replicas: 1
   selector: 
     matchLabels: 
-      app: postgres
+      app: postgresdev
   template: 
     metadata: 
       labels: 
-        app: postgres
+        app: postgresdev
     spec: 
-      containers: 
+      containers:
         - name: postgresdev
-          image: postgres:16beta3-alpine3.18
+          image: postgres:16beta3-alpine
           ports: 
             - containerPort: 5432
           env: 
