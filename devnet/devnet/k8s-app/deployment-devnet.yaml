@@ -13,8 +13,8 @@ spec:
         app: devnet-app
     spec: 
       containers: 
-        - name: devnet
-          image: 957817/devnet:latest
+        - name: devnet-app
+          image: 957817/devnet-app:latest
           ports:
             - containerPort: 9001
           env:
