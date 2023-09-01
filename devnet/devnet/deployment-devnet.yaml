@@ -35,13 +35,13 @@ spec:
                   key: database
             - name: DB_USERNAME
               valueFrom:
-                configMapKeyRef:
-                  name: config-devnet
+                secretKeyRef:
+                  name: secret-devnet
                   key: username
             - name: DB_PASSWORD
               valueFrom:
-                configMapKeyRef:
-                  name: config-devnet
+                secretKeyRef:
+                  name: secret-devnet
                   key: password
           volumeMounts:
             - name: armazem

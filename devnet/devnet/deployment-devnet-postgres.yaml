@@ -20,8 +20,8 @@ spec:
           env: 
             - name: POSTGRES_PASSWORD
               valueFrom:
-                configMapKeyRef:
-                  name: config-devnet
+                secretKeyRef:
+                  name: secret-devnet
                   key: password
             - name: POSTGRES_DB
               valueFrom:
