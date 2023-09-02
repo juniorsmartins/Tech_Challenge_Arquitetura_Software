@@ -59,6 +59,13 @@ spec:
             initialDelaySeconds: 10
             periodSeconds: 30
             timeoutSeconds: 10
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "200m"
+            limits:
+              memory: "512Mi"
+              cpu: "350m"
           volumeMounts:
             - name: armazem
               mountPath: /app/armazem
