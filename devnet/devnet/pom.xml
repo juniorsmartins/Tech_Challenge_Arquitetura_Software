@@ -97,6 +97,13 @@
 		</dependency>
 
 
+		<!-- MONITORAMENTO -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+
 		<!-- Integridade de Dados -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
