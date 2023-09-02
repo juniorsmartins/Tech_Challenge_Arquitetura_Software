@@ -61,11 +61,11 @@ spec:
             timeoutSeconds: 10
           resources:
             requests:
-              memory: "256Mi"
-              cpu: "200m"
-            limits:
               memory: "512Mi"
-              cpu: "350m"
+              cpu: "400m"
+            limits:
+              memory: "800Mi"
+              cpu: "500m"
           volumeMounts:
             - name: armazem
               mountPath: /app/armazem
