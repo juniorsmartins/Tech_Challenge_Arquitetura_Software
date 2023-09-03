@@ -107,13 +107,14 @@ PRODUTOS (como ficou - atual)
 
 #### Arquivo de requisições do Postman
 
-Disponibilizado o Script do Postman para os testes manuais. Esse Script pode ser baixado e importado no Posman. Nele estão definidos os endpoints e respectivos Jsons. Clique logo abaixo para ir até o Script. Porém, é necessário substituir parte do endpoint pela URL (http://127.0.0.1:56894) gerada pelo comando "minikube service devnet-app --url", por exemplo: http://127.0.0.1:56894/api/v1/clientes.
+Disponibilizado o Script do Postman para os testes manuais. Esse Script pode ser baixado e importado no Posman. Nele estão definidos os endpoints e respectivos Jsons. Clique logo abaixo para ir até o Script. Porém, é necessário substituir parte do endpoint pela URL gerada pelo comando "minikube service devnet-app --url", por exemplo: pegar a url tal http://127.0.0.1:56894 e colocar no endereço da requisição http://127.0.0.1:56894/api/v1/clientes.
 
 [Clique Aqui! Para ver o Script.](https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/TechChallenge%20Postman.postman_collection.json)  
 
 
 #### Documentação Swagger/OpenAPI
-  
+
+Você pode acessar a documentação via Swagger para melhor entendimento. Precisará pegar a url gerada pelo comando "minikube service devnet-app --url", por exemplo: http://127.0.0.1:56894 e acrescentar o sufixo /swagger-ui/index.html#/ . Ficaria dessa forma: http://127.0.0.1:56894/swagger-ui/index.html#/  
   
 ### Autoria
 
