@@ -107,6 +107,11 @@ PRODUTOS (como ficou - atual)
 
 #### Arquivo de requisições do Postman
 
+Disponibilizado o Script do Postman para os testes manuais. Esse Script pode ser baixado e importado no Posman. Nele estão definidos os endpoints e respectivos Jsons. Clique logo abaixo para ir até o Script. Porém, é necessário substituir parte do endpoint pela URL (http://127.0.0.1:56894) gerada pelo comando "minikube service devnet-app --url", por exemplo: http://127.0.0.1:56894/api/v1/clientes.
+
+[Clique Aqui! Para ver o Script.](https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/TechChallenge%20Postman.postman_collection.json)  
+
+
 #### Documentação Swagger/OpenAPI
   
   
