@@ -81,13 +81,33 @@ PRODUTOS (como ficou - atual)
 <img width=800 src=https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/Documentacao/DiagramaClasses-Produto-12-07-23.png>  
 
 
-### Utilização do Projeto;
+### Utilização
 
-#### Documentação
+#### Como testar
+
+```
+1. Clone o projeto;
+
+2. Certifique-se de ter ambiente de desenvolvimento instalado;
+
+3. Certifique-se de startar Docker e Minikube;
+
+4. Abra o projeto na IDE e depois abra o terminal no mesmo diretório do arquivo Dockerfile;
+
+5. Digite os seguintes comandos no terminal (no diretório do Dockerfile);
+> kubectl apply -f ./k8s-infra/.
+> kubectl apply -f ./k8s-database/.
+> kubectl apply -f ./k8s-app/.
+> kubectl get all
+> aguarde até todos os pods estarem criados
+> minikube service devnet-app --url
+
+6. Use a url gerada para fazer as requisições via Postman.
+```
 
 #### Arquivo de requisições do Postman
 
-#### Verbos, EndPoints e Jsons
+#### Documentação Swagger/OpenAPI
   
   
 ### Autoria
