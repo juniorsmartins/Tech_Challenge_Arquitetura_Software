@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-devnet
+data:
+  port: "9001"
+  db_host: postgresdev:5432
+  database: devnet_app
+  # username: postgres
+  # password: postgres
+

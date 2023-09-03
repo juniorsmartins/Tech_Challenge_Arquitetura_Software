@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: devnet-app
+spec: 
+  replicas: 1
+  selector: 
+    matchLabels: 
+      app: devnet-app
+  template: 
+    metadata: 
+      labels: 
+        app: devnet-app
+    spec: 
+      containers: 
+        - name: devnet-app
+          image: 957817/devnet-app:latest
+          ports:
+            - containerPort: 9001
+          env:
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: config-devnet
+                  key: port
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: config-devnet
+                  key: db_host
+            - name: DB_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: config-devnet
+                  key: database
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: secret-devnet
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: secret-devnet
+                  key: password
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 9001
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 20
+            timeoutSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 9001
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            timeoutSeconds: 10
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "400m"
+            limits:
+              memory: "800Mi"
+              cpu: "500m"
+          volumeMounts:
+            - name: armazem
+              mountPath: /app/armazem
+      volumes:
+        - name: armazem
+          hostPath:
+            path: /app/armazem
+            type: DirectoryOrCreate
+
