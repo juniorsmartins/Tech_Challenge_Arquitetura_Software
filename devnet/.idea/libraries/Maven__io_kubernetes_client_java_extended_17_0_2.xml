@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: io.kubernetes:client-java-extended:17.0.2">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/io/kubernetes/client-java-extended/17.0.2/client-java-extended-17.0.2.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/io/kubernetes/client-java-extended/17.0.2/client-java-extended-17.0.2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/io/kubernetes/client-java-extended/17.0.2/client-java-extended-17.0.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
