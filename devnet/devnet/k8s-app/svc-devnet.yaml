@@ -4,6 +4,8 @@ metadata:
   name: devnet-app
 spec:
   type: LoadBalancer
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
   ports: 
     - port: 9001
       protocol: TCP
