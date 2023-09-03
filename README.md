@@ -2,12 +2,15 @@
 
 Nome: Tech-Challenge-DevNet;  
   
-Descrição: aplicação desenvolvida para compor nota no processo avaliativo da primeira fase da pós-graduação em Arquitetura de Software na Fiap/Alura. E visa construir simulacro de aplicação para uma Lanchonete, nomeada DevNet. Portanto, esse projeto segue requisitos estabelecidos pelo processo avaliativo.
+Descrição: aplicação desenvolvida para compor nota no processo avaliativo da pós-graduação em Arquitetura de Software na Fiap/Alura. E visa construir simulacro de aplicação para uma Lanchonete, nomeada DevNet, para praticar conhecimentos relacionados a arquitetura. Portanto, esse projeto segue requisitos estabelecidos pelo processo avaliativo.
 
 ## Documentação por fase do projeto
 
 Fase 1: [Clique aqui](https://github.com/juniorsmartins/Tech_Challenge_Arquitetura_Software/blob/master/README-FASE1.md)  
 Fase 2: em construção
+Fase 3: em construção
+Fase 4: em construção
+Fase 5: em construção
   
 ## Índice
 
