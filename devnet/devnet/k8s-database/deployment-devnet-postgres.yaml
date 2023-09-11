@@ -36,3 +36,17 @@ spec:
           persistentVolumeClaim:
             claimName: pvc-devnet-postgres
 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgresdev
+spec:
+  ports: 
+    - port: 5432
+      protocol: TCP
+      targetPort: 5432
+  selector:
+    app: postgresdev
+  type: ClusterIP
+
